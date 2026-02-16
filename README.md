@@ -6,6 +6,8 @@
 
 2. We'll use [GunaUI](https://gunaui.com/) for our UI/UX, make sure this is also downloaded.
 
+3. Download [Visual Studio 2026 Community Edition](https://visualstudio.microsoft.com/downloads/), as it grabs .NET 10 automatically.
+
 ## Cautions/Things to consider:
 
 1. To ensure that your files will be safe, do ***NOT*** create the files in the cloned repository, create your files in a separate directory, and then just include these files *inside* the repository when you're going to push. In this way, you can still work with your files in its own directory without risking of having the files removed when the repository gets updated.
@@ -40,29 +42,6 @@
 4. Add a name to your project, and make sure it's distinguishable since we will be having our own set of tasks. To keep things clean, we can have a different project name and solution name as shown in the image. If you want it to have the same name, just check "Place solution and project in the same directory".
    
    <img width="774" height="748" alt="image" src="https://github.com/user-attachments/assets/f5222e7e-daca-4bd3-9013-f2af43d4d49c" />
-
-6. This is ***MOST*** crucial part. We need to *all* have the same .NET version, in this case just select .NET 10, if it doesn't exist, you can download it.
-   
-   <img width="580" height="209" alt="{E1FBD6F4-9265-48AF-AABE-3AAF4F3541C6}" src="https://github.com/user-attachments/assets/aa8d2f4f-af83-473c-b1a2-f2ad1211c63a" />
-
-# 4.1 Downloading .NET 10
-
-### If by any chance you downloaded Visual Studio 2026, you can safely disregard the guide below for downloading .NET 10.
-
-In case you do not have .NET 10 installed, follow this section. 
-> at most cases, if you have downloaded Visual Studio 2026, it should grab .NET 10 when you download Windows Forms App, but it can be heavier than 2022, although 2022 seems much worse in my experience.
-
-x.1 Click this [link](https://dotnet.microsoft.com/en-us/download) to proceed on .NET download site. It should look like this:
-
-  <img width="1824" height="907" alt="image" src="https://github.com/user-attachments/assets/e03a863a-44be-4194-a2ed-09a4c11dfabd" />
-
-x.2 Click the download button, and it should start immediately then wait for it to finish downloading.
-
-x.3 Launch the .exe file, it should look like this:
-
-  <img width="646" height="492" alt="{CEE8EFCC-8F96-4690-8E8C-2609111076C8}" src="https://github.com/user-attachments/assets/613f2000-d5e3-42d9-a128-ec52ab82b56a" />
-
-### Just proceed with the installation, wait for it to finish, relaunch Visual Studio, repeat the 4th step and this should appear now.
 
 5. Proceed with creating the Windows Forms.
    
