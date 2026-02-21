@@ -11,6 +11,7 @@ namespace customer_kiosk
     public partial class kiosk_product_detail : Form
     {
         private Guna.UI2.WinForms.Guna2TileButton selectedVariationButton = null;
+        private Product currentProduct = null;
 
         public kiosk_product_detail()
         {
@@ -19,12 +20,46 @@ namespace customer_kiosk
             SetupVariationButtons();
         }
 
+        // New constructor to accept a Product and display its details
+        public kiosk_product_detail(Product product) : this()
+        {
+            if (product == null) return;
+            currentProduct = product;
+            PopulateProductDetails();
+        }
+
         private void SetupVariationButtons()
         {
             // Setup variation button clicks
             selection1.Click += (s, e) => SelectVariation(selection1);
             guna2TileButton1.Click += (s, e) => SelectVariation(guna2TileButton1);
             guna2TileButton2.Click += (s, e) => SelectVariation(guna2TileButton2);
+        }
+
+        private void PopulateProductDetails()
+        {
+            try
+            {
+                // image
+                try { gpic1.Image = currentProduct.Image; } catch { }
+
+                // title / name
+                try { label10.Text = currentProduct.Name; } catch { }
+
+                // price
+                try { label11.Text = $"₱ {currentProduct.Price:N0}"; } catch { }
+
+                // brand and small title at top-right
+                try { label2.Text = currentProduct.Brand; } catch { }
+                try { label1.Text = currentProduct.Name; } catch { }
+
+                // description / specs (reuse existing labels)
+                try { label17.Text = $"{currentProduct.Year} · {currentProduct.Displacement}"; } catch { }
+
+                // Optionally populate some spec tiles if present
+                try { label26.Text = currentProduct.Category; } catch { }
+            }
+            catch { }
         }
 
         private void SelectVariation(Guna.UI2.WinForms.Guna2TileButton button)
@@ -60,7 +95,7 @@ namespace customer_kiosk
         private void SetupPurchaseOptionTiles()
         {
             // Setup On-Cash Payment tile
-            guna2ShadowPanel7.MouseEnter += (s, e) =>
+            guna2ShadowPanel7.MouseEnter += (object? s, EventArgs e) =>
             {
                 guna2ShadowPanel7.FillColor = Color.FromArgb(220, 255, 220);
                 guna2ShadowPanel7.ShadowDepth = 60;
@@ -68,7 +103,7 @@ namespace customer_kiosk
                 label12.ForeColor = Color.DarkGreen;
                 label13.ForeColor = Color.DarkGreen;
             };
-            guna2ShadowPanel7.MouseLeave += (s, e) =>
+            guna2ShadowPanel7.MouseLeave += (object? s, EventArgs e) =>
             {
                 guna2ShadowPanel7.FillColor = Color.FromArgb(240, 255, 240);
                 guna2ShadowPanel7.ShadowDepth = 50;
@@ -79,7 +114,7 @@ namespace customer_kiosk
             guna2ShadowPanel7.Click += OnCashPaymentTile_Click;
 
             // Setup Easy Financing tile
-            guna2ShadowPanel8.MouseEnter += (s, e) =>
+            guna2ShadowPanel8.MouseEnter += (object? s, EventArgs e) =>
             {
                 guna2ShadowPanel8.FillColor = Color.FromArgb(220, 240, 255);
                 guna2ShadowPanel8.ShadowDepth = 60;
@@ -87,7 +122,7 @@ namespace customer_kiosk
                 label9.ForeColor = Color.DarkBlue;
                 label8.ForeColor = Color.DarkBlue;
             };
-            guna2ShadowPanel8.MouseLeave += (s, e) =>
+            guna2ShadowPanel8.MouseLeave += (object? s, EventArgs e) =>
             {
                 guna2ShadowPanel8.FillColor = Color.FromArgb(240, 248, 255);
                 guna2ShadowPanel8.ShadowDepth = 50;
@@ -100,35 +135,33 @@ namespace customer_kiosk
 
         private void OnCashPaymentTile_Click(object sender, EventArgs e)
         {
-            // Handle On-Cash Payment selection
-            this.Hide();
-            ck_confirm_payment payment_Detail = new ck_confirm_payment();
-            payment_Detail.ShowDialog();
-            this.Show();
+            var payment = new ck_confirm_payment();
+            payment.Show();
+            this.Close();
         }
 
         private void EasyFinancingTile_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            loan_form_1 form_1 = new loan_form_1();
-            form_1.ShowDialog();
-            this.Show();
+            var loan1 = new loan_form_1(); 
+            loan1.Show();
+            this.Close();
         }
 
         private void payment_button_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ck_confirm_payment payment_Detail = new ck_confirm_payment();
-            payment_Detail.ShowDialog();
-            this.Show();
+            var success = new payment_confirmed_window();
+            success.Show();
+            this.Close();
         }
 
         private void return_button_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ck ck = new ck();
-            ck.ShowDialog();
-            this.Show();
+            var main = Application.OpenForms["ck"] as ck;
+            if (main != null)
+            {
+                main.Show();
+            }
+            this.Close();
         }
     }
 }

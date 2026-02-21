@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(kiosk_product_detail));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -40,11 +41,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             kiosk_prod = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             kiosk_prod_panel = new Guna.UI2.WinForms.Guna2Panel();
+            return_button = new Guna.UI2.WinForms.Guna2ImageButton();
             label2 = new Label();
             label1 = new Label();
             gpic1 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -103,7 +106,7 @@
             guna2ImageButton2 = new Guna.UI2.WinForms.Guna2ImageButton();
             payment_button = new Guna.UI2.WinForms.Guna2ImageButton();
             guna2ShadowPanel4 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            return_button = new Guna.UI2.WinForms.Guna2ImageButton();
+            guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             kiosk_prod_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gpic1).BeginInit();
             guna2ShadowPanel1.SuspendLayout();
@@ -142,12 +145,29 @@
             kiosk_prod_panel.Controls.Add(return_button);
             kiosk_prod_panel.Controls.Add(label2);
             kiosk_prod_panel.Controls.Add(label1);
-            kiosk_prod_panel.CustomizableEdges = customizableEdges10;
+            kiosk_prod_panel.Controls.Add(guna2Panel1);
+            kiosk_prod_panel.CustomizableEdges = customizableEdges12;
             kiosk_prod_panel.Location = new Point(0, 1);
             kiosk_prod_panel.Name = "kiosk_prod_panel";
-            kiosk_prod_panel.ShadowDecoration.CustomizableEdges = customizableEdges11;
+            kiosk_prod_panel.ShadowDecoration.CustomizableEdges = customizableEdges13;
             kiosk_prod_panel.Size = new Size(1279, 87);
             kiosk_prod_panel.TabIndex = 3;
+            // 
+            // return_button
+            // 
+            return_button.CheckedState.ImageSize = new Size(64, 64);
+            return_button.HoverState.ImageSize = new Size(64, 64);
+            return_button.Image = (Image)resources.GetObject("return_button.Image");
+            return_button.ImageOffset = new Point(0, 0);
+            return_button.ImageRotate = 0F;
+            return_button.ImageSize = new Size(48, 48);
+            return_button.Location = new Point(3, 3);
+            return_button.Name = "return_button";
+            return_button.PressedState.ImageSize = new Size(64, 64);
+            return_button.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            return_button.Size = new Size(90, 81);
+            return_button.TabIndex = 8;
+            return_button.Click += return_button_Click;
             // 
             // label2
             // 
@@ -615,7 +635,7 @@
             guna2ShadowPanel6.BackColor = Color.Transparent;
             guna2ShadowPanel6.Controls.Add(label5);
             guna2ShadowPanel6.FillColor = Color.LightSkyBlue;
-            guna2ShadowPanel6.Location = new Point(144, 10);
+            guna2ShadowPanel6.Location = new Point(172, 10);
             guna2ShadowPanel6.Name = "guna2ShadowPanel6";
             guna2ShadowPanel6.Radius = 8;
             guna2ShadowPanel6.ShadowColor = Color.White;
@@ -640,7 +660,7 @@
             guna2ShadowPanel5.BackColor = Color.Transparent;
             guna2ShadowPanel5.Controls.Add(label4);
             guna2ShadowPanel5.FillColor = Color.PaleGreen;
-            guna2ShadowPanel5.Location = new Point(26, 10);
+            guna2ShadowPanel5.Location = new Point(57, 10);
             guna2ShadowPanel5.Name = "guna2ShadowPanel5";
             guna2ShadowPanel5.Radius = 8;
             guna2ShadowPanel5.ShadowColor = Color.White;
@@ -674,7 +694,7 @@
             guna2TileButton2.FillColor = Color.Gainsboro;
             guna2TileButton2.Font = new Font("Segoe UI", 9F);
             guna2TileButton2.ForeColor = Color.DarkGray;
-            guna2TileButton2.Location = new Point(117, 145);
+            guna2TileButton2.Location = new Point(138, 145);
             guna2TileButton2.Name = "guna2TileButton2";
             guna2TileButton2.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2TileButton2.Size = new Size(94, 28);
@@ -695,12 +715,12 @@
             guna2TileButton1.FillColor = Color.Gainsboro;
             guna2TileButton1.Font = new Font("Segoe UI", 9F);
             guna2TileButton1.ForeColor = Color.DarkGray;
-            guna2TileButton1.Location = new Point(217, 145);
+            guna2TileButton1.Location = new Point(239, 145);
             guna2TileButton1.Name = "guna2TileButton1";
             guna2TileButton1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2TileButton1.Size = new Size(62, 28);
+            guna2TileButton1.Size = new Size(88, 28);
             guna2TileButton1.TabIndex = 24;
-            guna2TileButton1.Text = "Red";
+            guna2TileButton1.Text = "Candy Red";
             // 
             // selection1
             // 
@@ -716,12 +736,12 @@
             selection1.FillColor = Color.Gainsboro;
             selection1.Font = new Font("Segoe UI", 9F);
             selection1.ForeColor = Color.DarkGray;
-            selection1.Location = new Point(18, 145);
+            selection1.Location = new Point(38, 145);
             selection1.Name = "selection1";
             selection1.ShadowDecoration.CustomizableEdges = customizableEdges8;
             selection1.Size = new Size(93, 28);
             selection1.TabIndex = 23;
-            selection1.Text = "Matte Black";
+            selection1.Text = "Satin Black";
             // 
             // label3
             // 
@@ -729,7 +749,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(18, 126);
+            label3.Location = new Point(18, 124);
             label3.Name = "label3";
             label3.Size = new Size(126, 16);
             label3.TabIndex = 5;
@@ -741,7 +761,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Franklin Gothic Demi", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label11.ForeColor = Color.DarkGreen;
-            label11.Location = new Point(18, 80);
+            label11.Location = new Point(18, 85);
             label11.Name = "label11";
             label11.Size = new Size(144, 34);
             label11.TabIndex = 22;
@@ -753,7 +773,7 @@
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Franklin Gothic Demi", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.Black;
-            label10.Location = new Point(18, 54);
+            label10.Location = new Point(18, 57);
             label10.Name = "label10";
             label10.Size = new Size(175, 26);
             label10.TabIndex = 21;
@@ -798,9 +818,9 @@
             label14.ForeColor = Color.DodgerBlue;
             label14.Location = new Point(22, 18);
             label14.Name = "label14";
-            label14.Size = new Size(175, 23);
+            label14.Size = new Size(145, 23);
             label14.TabIndex = 35;
-            label14.Text = "💳 Easy Financing";
+            label14.Text = "Easy Financing";
             // 
             // label9
             // 
@@ -850,9 +870,9 @@
             label7.ForeColor = Color.ForestGreen;
             label7.Location = new Point(19, 18);
             label7.Name = "label7";
-            label7.Size = new Size(186, 23);
+            label7.Size = new Size(167, 23);
             label7.TabIndex = 28;
-            label7.Text = "✓ On-Cash Payment";
+            label7.Text = "On-Cash Payment";
             // 
             // label13
             // 
@@ -897,7 +917,7 @@
             guna2ImageButton2.ImageRotate = 0F;
             guna2ImageButton2.Location = new Point(0, 0);
             guna2ImageButton2.Name = "guna2ImageButton2";
-            guna2ImageButton2.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            guna2ImageButton2.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2ImageButton2.Size = new Size(64, 54);
             guna2ImageButton2.TabIndex = 0;
             // 
@@ -913,7 +933,7 @@
             payment_button.Name = "payment_button";
             payment_button.PressedState.Image = (Image)resources.GetObject("resource.Image");
             payment_button.PressedState.ImageSize = new Size(64, 64);
-            payment_button.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            payment_button.ShadowDecoration.CustomizableEdges = customizableEdges15;
             payment_button.Size = new Size(64, 78);
             payment_button.TabIndex = 37;
             payment_button.Click += payment_button_Click;
@@ -931,21 +951,14 @@
             guna2ShadowPanel4.Size = new Size(431, 235);
             guna2ShadowPanel4.TabIndex = 6;
             // 
-            // return_button
+            // guna2Panel1
             // 
-            return_button.CheckedState.ImageSize = new Size(64, 64);
-            return_button.HoverState.ImageSize = new Size(64, 64);
-            return_button.Image = (Image)resources.GetObject("return_button.Image");
-            return_button.ImageOffset = new Point(0, 0);
-            return_button.ImageRotate = 0F;
-            return_button.ImageSize = new Size(48, 48);
-            return_button.Location = new Point(3, 3);
-            return_button.Name = "return_button";
-            return_button.PressedState.ImageSize = new Size(64, 64);
-            return_button.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            return_button.Size = new Size(90, 81);
-            return_button.TabIndex = 8;
-            return_button.Click += return_button_Click;
+            guna2Panel1.CustomizableEdges = customizableEdges10;
+            guna2Panel1.Location = new Point(1047, 11);
+            guna2Panel1.Name = "guna2Panel1";
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges11;
+            guna2Panel1.Size = new Size(219, 64);
+            guna2Panel1.TabIndex = 8;
             // 
             // kiosk_product_detail
             // 
@@ -959,7 +972,7 @@
             Controls.Add(guna2ShadowPanel3);
             FormBorderStyle = FormBorderStyle.None;
             Name = "kiosk_product_detail";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "kiosk_product_detail";
             kiosk_prod_panel.ResumeLayout(false);
             kiosk_prod_panel.PerformLayout();
@@ -1064,5 +1077,6 @@
         private Label label20;
         private Label label35;
         private Guna.UI2.WinForms.Guna2ImageButton return_button;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
     }
 }

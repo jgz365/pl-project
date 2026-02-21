@@ -17,10 +17,13 @@ namespace customer_kiosk
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ck ck = new ck();
-            ck.ShowDialog();
-            this.Show();
+            var main = Application.OpenForms["ck"] as ck;
+            if (main != null)
+            {
+                main.Show();
+            }
+            this.Close();
         }
+
     }
 }

@@ -17,22 +17,22 @@ namespace customer_kiosk
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            loan_form_4 form_4 = new loan_form_4();
-            form_4.ShowDialog();
-            this.Show();
+            var loan4 = new loan_form_4();
+            loan4.Show();
+            this.Close();
         }
 
         private void button_loan_back_3_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            kiosk_product_detail product_detail = new kiosk_product_detail();
-            product_detail.ShowDialog();
-            this.Show();
+            var product = new kiosk_product_detail();
+            product.Show();
+            this.Close();
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
+            var back2 = new loan_form_2();
+            back2.Show();
             this.Close();
         }
     }
