@@ -16,14 +16,15 @@ namespace customer_kiosk
         }
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            payment_confirmed_window confirmed_window = new payment_confirmed_window();
-            confirmed_window.ShowDialog();
-            this.Show();
+            var confirm = new payment_confirmed_window();
+            confirm.Show();
+            this.Close();
         }
 
         private void ckg_back_Click(object sender, EventArgs e)
         {
+            var product = new kiosk_product_detail();
+            product.Show();
             this.Close();
         }
     }

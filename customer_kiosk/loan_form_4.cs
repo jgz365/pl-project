@@ -24,6 +24,9 @@ namespace customer_kiosk
             loanTerm12Button.Click += (s, e) => SelectLoanTerm(loanTerm12Button);
             loanTerm24Button.Click += (s, e) => SelectLoanTerm(loanTerm24Button);
             loanTerm36Button.Click += (s, e) => SelectLoanTerm(loanTerm36Button);
+
+            // ensure continue is disabled until a selection is made
+            try { continueButton.Enabled = false; } catch { }
         }
 
         private void SelectLoanTerm(Guna.UI2.WinForms.Guna2Button button)
@@ -34,6 +37,7 @@ namespace customer_kiosk
                 selectedLoanTermButton.FillColor = Color.LightGray;
                 selectedLoanTermButton.ForeColor = Color.DarkGray;
                 selectedLoanTermButton = null;
+                try { continueButton.Enabled = false; } catch { }
                 return;
             }
 
@@ -48,26 +52,27 @@ namespace customer_kiosk
             selectedLoanTermButton = button;
             selectedLoanTermButton.FillColor = Color.RoyalBlue;
             selectedLoanTermButton.ForeColor = Color.White;
+            try { continueButton.Enabled = true; } catch { }
         }
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            loan_form_5 form_5 = new loan_form_5();
-            form_5.ShowDialog();
-            this.Show();
+            var loan5 = new loan_form_5();
+            loan5.Show();
+            this.Close();
         }
 
         private void button_loan_back_4_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            kiosk_product_detail product_detail = new kiosk_product_detail();
-            product_detail.ShowDialog();
-            this.Show();
+            var product = new kiosk_product_detail();
+            product.Show();
+            this.Close();
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
+            var back3 = new loan_form_3();
+            back3.Show();
             this.Close();
         }
     }
