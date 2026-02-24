@@ -1,0 +1,342 @@
+[
+  {
+    "Name": "Juan Dela Cruz",
+    "QueueTicket": "LA-2026-0001",
+    "Location": "Quezon City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Honda ADV 160",
+      "Color": "Matte Black",
+      "EngineNo": "K1Z-998877"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 53400,
+      "CurrentBalance": 134118.08,
+      "MonthlyAmortization": 5364.72,
+      "NextDueDate": "Feb 1, 2026"
+    }
+  },
+  {
+    "Name": "Maria Garcia",
+    "QueueTicket": "LA-2026-0002",
+    "Location": "Caloocan City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Yamaha NMAX 155",
+      "Color": "Matte Blue",
+      "EngineNo": "YM2-447612"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 45570,
+      "CurrentBalance": 95400.00,
+      "MonthlyAmortization": 3797.50,
+      "NextDueDate": "Feb 5, 2026"
+    }
+  },
+  {
+    "Name": "Pedro Santos",
+    "QueueTicket": "LA-2026-0003",
+    "Location": "Marikina City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Honda Click 160",
+      "Color": "Pearl White",
+      "EngineNo": "HC1-003341"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 38900,
+      "CurrentBalance": 77800.00,
+      "MonthlyAmortization": 3241.67,
+      "NextDueDate": "Feb 10, 2026"
+    }
+  },
+  {
+    "Name": "Ana Reyes",
+    "QueueTicket": "LA-2026-0004",
+    "Location": "Pasig City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Suzuki Raider R150",
+      "Color": "Candy Red",
+      "EngineNo": "SR1-772209"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 42300,
+      "CurrentBalance": 84600.00,
+      "MonthlyAmortization": 3525.00,
+      "NextDueDate": "Feb 12, 2026"
+    }
+  },
+  {
+    "Name": "Carlos Mendoza",
+    "QueueTicket": "LA-2026-0005",
+    "Location": "Mandaluyong City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Kawasaki Ninja 400",
+      "Color": "Lime Green",
+      "EngineNo": "KN4-118854"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 89500,
+      "CurrentBalance": 268500.00,
+      "MonthlyAmortization": 7458.33,
+      "NextDueDate": "Feb 15, 2026"
+    }
+  },
+  {
+    "Name": "Sarah Smith",
+    "QueueTicket": "LA-2026-0006",
+    "Location": "Makati City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Yamaha Mio Gear 125",
+      "Color": "Matte Blue",
+      "EngineNo": "E3V-445566"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 32000,
+      "CurrentBalance": 64000.00,
+      "MonthlyAmortization": 2666.67,
+      "NextDueDate": "Feb 18, 2026"
+    }
+  },
+  {
+    "Name": "Roberto Cruz",
+    "QueueTicket": "LA-2026-0007",
+    "Location": "Taguig City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Honda Beat 125",
+      "Color": "Sporty Red",
+      "EngineNo": "HB1-229944"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 28500,
+      "CurrentBalance": 57000.00,
+      "MonthlyAmortization": 2375.00,
+      "NextDueDate": "Feb 20, 2026"
+    }
+  },
+  {
+    "Name": "Liza Bautista",
+    "QueueTicket": "LA-2026-0008",
+    "Location": "San Juan City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Suzuki Skydrive 125",
+      "Color": "Glossy White",
+      "EngineNo": "SS1-334421"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 30000,
+      "CurrentBalance": 72000.00,
+      "MonthlyAmortization": 2500.00,
+      "NextDueDate": "Feb 22, 2026"
+    }
+  },
+  {
+    "Name": "Emmanuel Torres",
+    "QueueTicket": "LA-2026-0009",
+    "Location": "Muntinlupa City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Kawasaki Barako II 175",
+      "Color": "Matte Black",
+      "EngineNo": "KB2-556677"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 35000,
+      "CurrentBalance": 105000.00,
+      "MonthlyAmortization": 2916.67,
+      "NextDueDate": "Feb 25, 2026"
+    }
+  },
+  {
+    "Name": "Grace Villanueva",
+    "QueueTicket": "LA-2026-0010",
+    "Location": "Valenzuela City",
+    "TransactionType": "MONTHLY",
+    "UnitDetails": {
+      "Model": "Honda PCX 160",
+      "Color": "Pearl Glittering White",
+      "EngineNo": "HP1-778832"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 48000,
+      "CurrentBalance": 144000.00,
+      "MonthlyAmortization": 4000.00,
+      "NextDueDate": "Mar 1, 2026"
+    }
+  },
+  {
+    "Name": "Juan Dela Cruz",
+    "QueueTicket": "LA-2026-0001",
+    "Location": "Quezon City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Honda ADV 160",
+      "Color": "Matte Black",
+      "EngineNo": "K1Z-998877"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 53400,
+      "CurrentBalance": 134118.08,
+      "MonthlyAmortization": 5364.72,
+      "NextDueDate": "Feb 1, 2026"
+    }
+  },
+  {
+    "Name": "Maria Garcia",
+    "QueueTicket": "LA-2026-0002",
+    "Location": "Caloocan City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Yamaha NMAX 155",
+      "Color": "Matte Blue",
+      "EngineNo": "YM2-447612"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 45570,
+      "CurrentBalance": 95400.00,
+      "MonthlyAmortization": 3797.50,
+      "NextDueDate": "Feb 5, 2026"
+    }
+  },
+  {
+    "Name": "Pedro Santos",
+    "QueueTicket": "LA-2026-0003",
+    "Location": "Marikina City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Honda Click 160",
+      "Color": "Pearl White",
+      "EngineNo": "HC1-003341"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 38900,
+      "CurrentBalance": 77800.00,
+      "MonthlyAmortization": 3241.67,
+      "NextDueDate": "Feb 10, 2026"
+    }
+  },
+  {
+    "Name": "Ana Reyes",
+    "QueueTicket": "LA-2026-0004",
+    "Location": "Pasig City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Suzuki Raider R150",
+      "Color": "Candy Red",
+      "EngineNo": "SR1-772209"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 42300,
+      "CurrentBalance": 84600.00,
+      "MonthlyAmortization": 3525.00,
+      "NextDueDate": "Feb 12, 2026"
+    }
+  },
+  {
+    "Name": "Carlos Mendoza",
+    "QueueTicket": "LA-2026-0005",
+    "Location": "Mandaluyong City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Kawasaki Ninja 400",
+      "Color": "Lime Green",
+      "EngineNo": "KN4-118854"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 89500,
+      "CurrentBalance": 268500.00,
+      "MonthlyAmortization": 7458.33,
+      "NextDueDate": "Feb 15, 2026"
+    }
+  },
+  {
+    "Name": "Sarah Smith",
+    "QueueTicket": "LA-2026-0006",
+    "Location": "Makati City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Yamaha Mio Gear 125",
+      "Color": "Matte Blue",
+      "EngineNo": "E3V-445566"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 32000,
+      "CurrentBalance": 64000.00,
+      "MonthlyAmortization": 2666.67,
+      "NextDueDate": "Feb 18, 2026"
+    }
+  },
+  {
+    "Name": "Roberto Cruz",
+    "QueueTicket": "LA-2026-0007",
+    "Location": "Taguig City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Honda Beat 125",
+      "Color": "Sporty Red",
+      "EngineNo": "HB1-229944"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 28500,
+      "CurrentBalance": 57000.00,
+      "MonthlyAmortization": 2375.00,
+      "NextDueDate": "Feb 20, 2026"
+    }
+  },
+  {
+    "Name": "Liza Bautista",
+    "QueueTicket": "LA-2026-0008",
+    "Location": "San Juan City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Suzuki Skydrive 125",
+      "Color": "Glossy White",
+      "EngineNo": "SS1-334421"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 30000,
+      "CurrentBalance": 72000.00,
+      "MonthlyAmortization": 2500.00,
+      "NextDueDate": "Feb 22, 2026"
+    }
+  },
+  {
+    "Name": "Emmanuel Torres",
+    "QueueTicket": "LA-2026-0009",
+    "Location": "Muntinlupa City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Kawasaki Barako II 175",
+      "Color": "Matte Black",
+      "EngineNo": "KB2-556677"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 35000,
+      "CurrentBalance": 105000.00,
+      "MonthlyAmortization": 2916.67,
+      "NextDueDate": "Feb 25, 2026"
+    }
+  },
+  {
+    "Name": "Grace Villanueva",
+    "QueueTicket": "LA-2026-0010",
+    "Location": "Valenzuela City",
+    "TransactionType": "ADVANCE",
+    "UnitDetails": {
+      "Model": "Honda PCX 160",
+      "Color": "Pearl Glittering White",
+      "EngineNo": "HP1-778832"
+    },
+    "FinancialStatus": {
+      "DownPaymentDue": 48000,
+      "CurrentBalance": 144000.00,
+      "MonthlyAmortization": 4000.00,
+      "NextDueDate": "Mar 1, 2026"
+    }
+  }
+]
