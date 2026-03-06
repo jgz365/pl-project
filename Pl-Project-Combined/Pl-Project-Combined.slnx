@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../../pl-project1/customer_kiosk/customer_kiosk.csproj" />
   <Project Path="Pl-Project-Combined/Pl-Project-Combined.csproj" />
 </Solution>
