@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,3 +74,34 @@ namespace customer_kiosk
 
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace customer_kiosk
+{
+    public partial class loan_form_6 : Form
+    {
+        public loan_form_6()
+        {
+            InitializeComponent();
+        }
+
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+            var main = Application.OpenForms["ck"] as ck;
+            if (main != null)
+            {
+                main.Show();
+            }
+            this.Close();
+        }
+
+    }
+}
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103

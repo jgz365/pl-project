@@ -229,12 +229,21 @@
             button_filter.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             button_filter.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             button_filter.FillColor = Color.FromArgb(5, 150, 105);
+<<<<<<< HEAD
             button_filter.Font = new Font("Franklin Gothic Medium", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button_filter.ForeColor = Color.White;
             button_filter.Location = new Point(0, 536);
             button_filter.Name = "button_filter";
             button_filter.ShadowDecoration.CustomizableEdges = customizableEdges8;
             button_filter.Size = new Size(221, 42);
+=======
+            button_filter.Font = new Font("Franklin Gothic Demi", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button_filter.ForeColor = Color.White;
+            button_filter.Location = new Point(3, 536);
+            button_filter.Name = "button_filter";
+            button_filter.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            button_filter.Size = new Size(215, 39);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             button_filter.TabIndex = 3;
             button_filter.Text = "Reset Filters";
             // 
@@ -242,11 +251,19 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
+<<<<<<< HEAD
             label4.Font = new Font("Franklin Gothic Medium", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.DarkGray;
             label4.Location = new Point(12, 62);
             label4.Name = "label4";
             label4.Size = new Size(121, 24);
+=======
+            label4.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.DarkGray;
+            label4.Location = new Point(12, 62);
+            label4.Name = "label4";
+            label4.Size = new Size(109, 21);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label4.TabIndex = 4;
             label4.Text = "PRICE RANGE";
             // 
@@ -254,11 +271,19 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
+<<<<<<< HEAD
             label3.Font = new Font("Franklin Gothic Medium", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
             label3.Location = new Point(44, 16);
             label3.Name = "label3";
             label3.Size = new Size(94, 34);
+=======
+            label3.Font = new Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(48, 18);
+            label3.Name = "label3";
+            label3.Size = new Size(77, 28);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label3.TabIndex = 3;
             label3.Text = "Filters";
             // 
@@ -268,9 +293,15 @@
             guna2CirclePictureBox3.BackgroundImageLayout = ImageLayout.None;
             guna2CirclePictureBox3.FillColor = Color.Transparent;
             guna2CirclePictureBox3.Image = (Image)resources.GetObject("guna2CirclePictureBox3.Image");
+<<<<<<< HEAD
             guna2CirclePictureBox3.ImageLocation = "C:\\Users\\Jonathan\\source\\repos\\pl-project\\customer_kiosk\\icons\\filter.png";
             guna2CirclePictureBox3.ImageRotate = 0F;
             guna2CirclePictureBox3.Location = new Point(12, 15);
+=======
+            guna2CirclePictureBox3.ImageLocation = "C:\\Users\\Jonathan\\source\\repos\\customer_kiosk\\icons\\filter.png";
+            guna2CirclePictureBox3.ImageRotate = 0F;
+            guna2CirclePictureBox3.Location = new Point(12, 13);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2CirclePictureBox3.Name = "guna2CirclePictureBox3";
             guna2CirclePictureBox3.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CirclePictureBox3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -299,11 +330,19 @@
             // 
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
+<<<<<<< HEAD
             label7.Font = new Font("Franklin Gothic Medium", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.DarkGray;
             label7.Location = new Point(4, 4);
             label7.Name = "label7";
             label7.Size = new Size(69, 24);
+=======
+            label7.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.DarkGray;
+            label7.Location = new Point(6, 8);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 21);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label7.TabIndex = 8;
             label7.Text = "BRAND";
             // 
@@ -495,11 +534,19 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
+<<<<<<< HEAD
             label8.Font = new Font("Franklin Gothic Medium", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.DarkGray;
             label8.Location = new Point(4, 4);
             label8.Name = "label8";
             label8.Size = new Size(97, 24);
+=======
+            label8.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.DarkGray;
+            label8.Location = new Point(6, 8);
+            label8.Name = "label8";
+            label8.Size = new Size(86, 21);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label8.TabIndex = 14;
             label8.Text = "CATEGORY";
             // 
@@ -575,7 +622,11 @@
             // 
             // button_view_test
             // 
+<<<<<<< HEAD
             button_view_test.BorderRadius = 12;
+=======
+            button_view_test.BorderRadius = 8;
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             button_view_test.CustomizableEdges = customizableEdges16;
             button_view_test.DisabledState.BorderColor = Color.DarkGray;
             button_view_test.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -587,7 +638,11 @@
             button_view_test.Location = new Point(231, 221);
             button_view_test.Name = "button_view_test";
             button_view_test.ShadowDecoration.CustomizableEdges = customizableEdges17;
+<<<<<<< HEAD
             button_view_test.Size = new Size(81, 36);
+=======
+            button_view_test.Size = new Size(82, 38);
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             button_view_test.TabIndex = 23;
             button_view_test.Text = "View";
             button_view_test.Click += button_view_test_Click;
@@ -681,6 +736,7 @@
             guna2ShadowPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gpic1).EndInit();
             ResumeLayout(false);
+<<<<<<< HEAD
         }
 
         #endregion
@@ -722,3 +778,46 @@
         private Guna.UI2.WinForms.Guna2ComboBox filterBox;
     }
 }
+=======
+        }
+
+        #endregion
+
+        private Guna.UI2.WinForms.Guna2BorderlessForm kiosk_main;
+        private Guna.UI2.WinForms.Guna2Panel ck_panel;
+        private Label label2;
+        private Label label1;
+        private System.Windows.Forms.Timer ck_kiosk_clock;
+        private Label ck_clock_label;
+        private Guna.UI2.WinForms.Guna2Button ckg_exit;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Label label4;
+        private Label label3;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox3;
+        private Label label7;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton1;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton6;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton7;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton8;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton9;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton10;
+        private Label label8;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton5;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton4;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton3;
+        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton2;
+        private Guna.UI2.WinForms.Guna2Button button_filter;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2PictureBox gpic1;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private Label label12;
+        private Guna.UI2.WinForms.Guna2Button button_view_test;
+        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
+        private Guna.UI2.WinForms.Guna2Panel filterPanel1;
+        private Guna.UI2.WinForms.Guna2Panel filterPanel2;
+        private Guna.UI2.WinForms.Guna2ComboBox filterBox;
+    }
+}
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103

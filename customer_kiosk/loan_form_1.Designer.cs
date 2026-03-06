@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+<<<<<<< HEAD
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -37,6 +38,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loan_form_1));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+=======
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loan_form_1));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             loan_1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             ckg_back = new Guna.UI2.WinForms.Guna2ImageButton();
@@ -77,10 +86,10 @@
             headerPanel.BackColor = Color.White;
             headerPanel.Controls.Add(ckg_back);
             headerPanel.Controls.Add(headerLabel);
-            headerPanel.CustomizableEdges = customizableEdges6;
+            headerPanel.CustomizableEdges = customizableEdges4;
             headerPanel.Location = new Point(0, 0);
             headerPanel.Name = "headerPanel";
-            headerPanel.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            headerPanel.ShadowDecoration.CustomizableEdges = customizableEdges5;
             headerPanel.Size = new Size(1279, 80);
             headerPanel.TabIndex = 4;
             // 
@@ -95,7 +104,7 @@
             ckg_back.Location = new Point(3, 3);
             ckg_back.Name = "ckg_back";
             ckg_back.PressedState.ImageSize = new Size(64, 64);
-            ckg_back.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            ckg_back.ShadowDecoration.CustomizableEdges = customizableEdges3;
             ckg_back.Size = new Size(78, 74);
             ckg_back.TabIndex = 7;
             ckg_back.Click += ckg_back_Click;
@@ -250,10 +259,10 @@
             contentPanel.Controls.Add(priceLabel);
             contentPanel.Controls.Add(productNameLabel);
             contentPanel.Controls.Add(confirmSelectionLabel);
-            contentPanel.CustomizableEdges = customizableEdges3;
+            contentPanel.CustomizableEdges = customizableEdges1;
             contentPanel.Location = new Point(300, 200);
             contentPanel.Name = "contentPanel";
-            contentPanel.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            contentPanel.ShadowDecoration.CustomizableEdges = customizableEdges2;
             contentPanel.Size = new Size(680, 350);
             contentPanel.TabIndex = 6;
             // 
@@ -276,7 +285,7 @@
             // continueButton
             // 
             continueButton.BorderRadius = 6;
-            continueButton.CustomizableEdges = customizableEdges3;
+            continueButton.CustomizableEdges = customizableEdges1;
             continueButton.DisabledState.BorderColor = Color.DarkGray;
             continueButton.DisabledState.CustomBorderColor = Color.DarkGray;
             continueButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -286,7 +295,7 @@
             continueButton.ForeColor = Color.White;
             continueButton.Location = new Point(530, 290);
             continueButton.Name = "continueButton";
-            continueButton.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            continueButton.ShadowDecoration.CustomizableEdges = customizableEdges1;
             continueButton.Size = new Size(120, 45);
             continueButton.TabIndex = 6;
             continueButton.Text = "Continue >";
@@ -339,6 +348,33 @@
             productNameLabel.Size = new Size(127, 19);
             productNameLabel.TabIndex = 2;
             productNameLabel.Text = "Sample Sample";
+<<<<<<< HEAD
+=======
+            // 
+            // productPanel
+            // 
+            productPanel.BackColor = Color.FromArgb(245, 245, 245);
+            productPanel.BorderColor = Color.LightGray;
+            productPanel.BorderThickness = 1;
+            productPanel.Controls.Add(productImage);
+            productPanel.CustomizableEdges = customizableEdges1;
+            productPanel.Location = new Point(30, 60);
+            productPanel.Name = "productPanel";
+            productPanel.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            productPanel.Size = new Size(100, 100);
+            productPanel.TabIndex = 1;
+            // 
+            // productImage
+            // 
+            productImage.BackColor = Color.White;
+            productImage.Dock = DockStyle.Fill;
+            productImage.Location = new Point(0, 0);
+            productImage.Name = "productImage";
+            productImage.Size = new Size(100, 100);
+            productImage.SizeMode = PictureBoxSizeMode.CenterImage;
+            productImage.TabIndex = 0;
+            productImage.TabStop = false;
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // 
             // confirmSelectionLabel
             // 
@@ -370,6 +406,7 @@
             contentPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)productLoanImage).EndInit();
             ResumeLayout(false);
+<<<<<<< HEAD
         }
 
         #endregion
@@ -396,6 +433,36 @@
         private Label colorLabel;
         private Label colorValueLabel;
         private Guna.UI2.WinForms.Guna2Button continueButton;
+=======
+        }
+
+        #endregion
+
+        private Guna.UI2.WinForms.Guna2BorderlessForm loan_1;
+        private Guna.UI2.WinForms.Guna2Panel headerPanel;
+        private Label headerLabel;
+        private Label step1Number;
+        private Label step1Label;
+        private Label step2Number;
+        private Label step2Label;
+        private Label step3Number;
+        private Label step3Label;
+        private Label step4Number;
+        private Label step4Label;
+        private Label step5Number;
+        private Label step5Label;
+
+        // Content Panel Controls
+        private Guna.UI2.WinForms.Guna2Panel contentPanel;
+        private Label confirmSelectionLabel;
+        private Guna.UI2.WinForms.Guna2Panel productPanel;
+        private PictureBox productImage;
+        private Label productNameLabel;
+        private Label priceLabel;
+        private Label colorLabel;
+        private Label colorValueLabel;
+        private Guna.UI2.WinForms.Guna2Button continueButton;
+>>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
         private Guna.UI2.WinForms.Guna2ImageButton ckg_back;
         private Guna.UI2.WinForms.Guna2PictureBox productLoanImage;
     }
