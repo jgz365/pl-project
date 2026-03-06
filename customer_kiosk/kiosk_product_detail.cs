@@ -130,5 +130,10 @@ namespace customer_kiosk
             ck.ShowDialog();
             this.Show();
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
