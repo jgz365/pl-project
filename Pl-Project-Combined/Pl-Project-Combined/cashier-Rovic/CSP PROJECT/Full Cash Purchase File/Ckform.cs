@@ -17,15 +17,48 @@
 
         private void ckg_exit_Click(object sender, EventArgs e)
         {
-            // Fire CloseRequested so POSCashier can restore the main view,
-            // then remove this control from its parent — same as AdvancePaymentForm
             CloseRequested?.Invoke(this, EventArgs.Empty);
             this.Parent?.Controls.Remove(this);
         }
 
+        // ─────────────────────────────────────────────────────────────────────
+        // View Product — loads kiosk_product_detail as a UserControl
+        // into the same parent container (pnlBackground in POSCashier)
+        // ─────────────────────────────────────────────────────────────────────
         private void button_view_test_Click(object sender, EventArgs e)
         {
-            // TODO: Hook up your CSP PROJECT product detail form here
+            if (this.Parent == null) return;
+
+            var parent = this.Parent;
+
+            // Remove any stale instance
+            for (int i = parent.Controls.Count - 1; i >= 0; i--)
+            {
+                if (parent.Controls[i] is kiosk_product_detail)
+                    parent.Controls.RemoveAt(i);
+            }
+
+            var productUC = new kiosk_product_detail
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(0)
+            };
+
+            // When the product detail wants to go back → restore this CkForm
+            productUC.CloseRequested += (s, args) =>
+            {
+                parent.Controls.Remove(productUC);
+                productUC.Dispose();
+                this.Visible = true;
+                this.BringToFront();
+                this.Focus();
+            };
+
+            this.Visible = false;
+            parent.Controls.Add(productUC);
+            productUC.BringToFront();
+            productUC.Focus();
         }
     }
 }
