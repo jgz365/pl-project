@@ -16,15 +16,16 @@ namespace customer_kiosk
         }
         private void ckg_back_Click(object sender, EventArgs e)
         {
+            var product = new kiosk_product_detail();
+            product.Show();
             this.Close();
         }
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            loan_form_2 form_2 = new loan_form_2();
-            form_2.ShowDialog();
-            this.Show();
+            var loan2 = new loan_form_2();
+            loan2.Show();
+            this.Close();
         }
     }
 }

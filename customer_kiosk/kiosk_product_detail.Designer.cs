@@ -730,7 +730,7 @@
             guna2TileButton1.ShadowDecoration.CustomizableEdges = customizableEdges22;
             guna2TileButton1.Size = new Size(71, 37);
             guna2TileButton1.TabIndex = 24;
-            guna2TileButton1.Text = "Red";
+            guna2TileButton1.Text = "Candy Red";
             // 
             // selection1
             // 
@@ -752,7 +752,7 @@
             selection1.ShadowDecoration.CustomizableEdges = customizableEdges24;
             selection1.Size = new Size(106, 37);
             selection1.TabIndex = 23;
-            selection1.Text = "Matte Black";
+            selection1.Text = "Satin Black";
             // 
             // label3
             // 
@@ -925,7 +925,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "kiosk_product_detail";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "kiosk_product_detail";
             kiosk_prod_panel.ResumeLayout(false);
             kiosk_prod_panel.PerformLayout();
@@ -1024,5 +1024,6 @@
         private Label label20;
         private Label label35;
         private Guna.UI2.WinForms.Guna2ImageButton return_button;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
     }
 }
