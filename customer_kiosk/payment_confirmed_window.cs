@@ -13,14 +13,36 @@ namespace customer_kiosk
         public payment_confirmed_window()
         {
             InitializeComponent();
+            SetQueueTicketNumber();
+        }
+
+        private void SetQueueTicketNumber()
+        {
+            try { queueNumber.Text = GenerateQueueTicketNumber(); } catch { }
+        }
+
+        private static string GenerateQueueTicketNumber()
+        {
+            const string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            char a = letters[Random.Shared.Next(letters.Length)];
+            char b = letters[Random.Shared.Next(letters.Length)];
+            char c = letters[Random.Shared.Next(letters.Length)];
+            char d = letters[Random.Shared.Next(letters.Length)];
+            int firstPair = Random.Shared.Next(10, 100);
+            int secondPair = Random.Shared.Next(10, 100);
+
+            return $"{a}{b}-{firstPair}-{c}{d}-{secondPair}";
         }
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ck ck = new ck();
-            ck.ShowDialog();
-            this.Show();
+            var main = Application.OpenForms["ck"] as ck;
+            if (main != null)
+            {
+                main.Show();
+            }
+            this.Close();
         }
     }
 }
