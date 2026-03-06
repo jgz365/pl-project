@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-<<<<<<< HEAD
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(kiosk_product_detail));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-=======
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(kiosk_product_detail));
@@ -45,27 +37,18 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-<<<<<<< HEAD
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-=======
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             kiosk_prod = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             kiosk_prod_panel = new Guna.UI2.WinForms.Guna2Panel();
             return_button = new Guna.UI2.WinForms.Guna2ImageButton();
             label2 = new Label();
             label1 = new Label();
-            guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            productImage = new Guna.UI2.WinForms.Guna2PictureBox();
+            gpic1 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             label17 = new Label();
             label16 = new Label();
@@ -98,6 +81,8 @@
             label20 = new Label();
             label15 = new Label();
             guna2ShadowPanel2 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            guna2ShadowPanel6 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            label5 = new Label();
             guna2ShadowPanel5 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             label4 = new Label();
             guna2TileButton2 = new Guna.UI2.WinForms.Guna2TileButton();
@@ -116,7 +101,7 @@
             payment_button = new Guna.UI2.WinForms.Guna2ImageButton();
             guna2ShadowPanel4 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             kiosk_prod_panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)productImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gpic1).BeginInit();
             guna2ShadowPanel1.SuspendLayout();
             guna2ShadowPanel17.SuspendLayout();
             guna2ShadowPanel16.SuspendLayout();
@@ -128,6 +113,7 @@
             guna2ShadowPanel10.SuspendLayout();
             guna2ShadowPanel9.SuspendLayout();
             guna2ShadowPanel2.SuspendLayout();
+            guna2ShadowPanel6.SuspendLayout();
             guna2ShadowPanel5.SuspendLayout();
             guna2ShadowPanel3.SuspendLayout();
             guna2ShadowPanel7.SuspendLayout();
@@ -151,22 +137,12 @@
             kiosk_prod_panel.Controls.Add(return_button);
             kiosk_prod_panel.Controls.Add(label2);
             kiosk_prod_panel.Controls.Add(label1);
-<<<<<<< HEAD
-            kiosk_prod_panel.Controls.Add(guna2Panel1);
-            kiosk_prod_panel.CustomizableEdges = customizableEdges19;
-=======
             kiosk_prod_panel.CustomizableEdges = customizableEdges15;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             kiosk_prod_panel.Location = new Point(0, 1);
             kiosk_prod_panel.Margin = new Padding(3, 4, 3, 4);
             kiosk_prod_panel.Name = "kiosk_prod_panel";
-<<<<<<< HEAD
-            kiosk_prod_panel.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            kiosk_prod_panel.Size = new Size(1279, 87);
-=======
             kiosk_prod_panel.ShadowDecoration.CustomizableEdges = customizableEdges16;
             kiosk_prod_panel.Size = new Size(1462, 116);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             kiosk_prod_panel.TabIndex = 3;
             // 
             // return_button
@@ -177,20 +153,12 @@
             return_button.ImageOffset = new Point(0, 0);
             return_button.ImageRotate = 0F;
             return_button.ImageSize = new Size(48, 48);
-<<<<<<< HEAD
-            return_button.Location = new Point(3, 3);
-            return_button.Name = "return_button";
-            return_button.PressedState.ImageSize = new Size(64, 64);
-            return_button.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            return_button.Size = new Size(90, 81);
-=======
             return_button.Location = new Point(3, 4);
             return_button.Margin = new Padding(3, 4, 3, 4);
             return_button.Name = "return_button";
             return_button.PressedState.ImageSize = new Size(64, 64);
             return_button.ShadowDecoration.CustomizableEdges = customizableEdges14;
             return_button.Size = new Size(103, 108);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             return_button.TabIndex = 8;
             return_button.Click += return_button_Click;
             // 
@@ -198,15 +166,11 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
             label2.Location = new Point(1277, 64);
             label2.Name = "label2";
-<<<<<<< HEAD
-            label2.Size = new Size(134, 20);
-=======
             label2.Size = new Size(162, 23);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label2.TabIndex = 4;
             label2.Text = "Sample Sample";
             // 
@@ -214,43 +178,16 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
             label1.Location = new Point(1206, 27);
             label1.Name = "label1";
-<<<<<<< HEAD
-            label1.Size = new Size(198, 29);
-=======
             label1.Size = new Size(245, 37);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label1.TabIndex = 4;
             label1.Text = "Sample Sample";
             // 
-            // guna2Panel1
+            // gpic1
             // 
-<<<<<<< HEAD
-            guna2Panel1.CustomizableEdges = customizableEdges17;
-            guna2Panel1.Location = new Point(1047, 11);
-            guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2Panel1.Size = new Size(219, 64);
-            guna2Panel1.TabIndex = 8;
-            // 
-            // productImage
-            // 
-            productImage.BorderRadius = 14;
-            productImage.CustomizableEdges = customizableEdges21;
-            productImage.Image = (Image)resources.GetObject("productImage.Image");
-            productImage.ImageLocation = "";
-            productImage.ImageRotate = 0F;
-            productImage.Location = new Point(18, 15);
-            productImage.Name = "productImage";
-            productImage.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            productImage.Size = new Size(396, 209);
-            productImage.SizeMode = PictureBoxSizeMode.Zoom;
-            productImage.TabIndex = 4;
-            productImage.TabStop = false;
-=======
             gpic1.BorderRadius = 14;
             gpic1.CustomizableEdges = customizableEdges17;
             gpic1.Image = (Image)resources.GetObject("gpic1.Image");
@@ -264,7 +201,6 @@
             gpic1.SizeMode = PictureBoxSizeMode.Zoom;
             gpic1.TabIndex = 4;
             gpic1.TabStop = false;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // 
             // guna2ShadowPanel1
             // 
@@ -295,15 +231,11 @@
             // 
             label17.AutoSize = true;
             label17.BackColor = Color.Transparent;
-            label17.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label17.Font = new Font("Franklin Gothic Demi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label17.ForeColor = SystemColors.ActiveCaptionText;
             label17.Location = new Point(43, 284);
             label17.Name = "label17";
-<<<<<<< HEAD
-            label17.Size = new Size(327, 16);
-=======
             label17.Size = new Size(420, 21);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label17.TabIndex = 38;
             label17.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
             // 
@@ -311,15 +243,11 @@
             // 
             label16.AutoSize = true;
             label16.BackColor = Color.White;
-            label16.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label16.ForeColor = Color.Black;
             label16.Location = new Point(24, 256);
             label16.Name = "label16";
-<<<<<<< HEAD
-            label16.Size = new Size(122, 20);
-=======
             label16.Size = new Size(139, 25);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label16.TabIndex = 38;
             label16.Text = "DESCRIPTION:";
             // 
@@ -342,15 +270,11 @@
             // 
             label35.AutoSize = true;
             label35.BackColor = Color.Transparent;
-            label35.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label35.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label35.ForeColor = Color.Black;
             label35.Location = new Point(14, 25);
             label35.Name = "label35";
-<<<<<<< HEAD
-            label35.Size = new Size(92, 13);
-=======
             label35.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label35.TabIndex = 47;
             label35.Text = "Lorem ipsum dolor";
             // 
@@ -358,15 +282,11 @@
             // 
             label26.AutoSize = true;
             label26.BackColor = Color.Transparent;
-            label26.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label26.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label26.ForeColor = Color.DimGray;
             label26.Location = new Point(14, 5);
             label26.Name = "label26";
-<<<<<<< HEAD
-            label26.Size = new Size(50, 13);
-=======
             label26.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label26.TabIndex = 23;
             label26.Text = "SAMPLE";
             // 
@@ -389,15 +309,11 @@
             // 
             label34.AutoSize = true;
             label34.BackColor = Color.Transparent;
-            label34.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label34.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label34.ForeColor = Color.Black;
             label34.Location = new Point(14, 25);
             label34.Name = "label34";
-<<<<<<< HEAD
-            label34.Size = new Size(92, 13);
-=======
             label34.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label34.TabIndex = 46;
             label34.Text = "Lorem ipsum dolor";
             // 
@@ -405,15 +321,11 @@
             // 
             label25.AutoSize = true;
             label25.BackColor = Color.Transparent;
-            label25.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label25.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label25.ForeColor = Color.DimGray;
             label25.Location = new Point(14, 5);
             label25.Name = "label25";
-<<<<<<< HEAD
-            label25.Size = new Size(50, 13);
-=======
             label25.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label25.TabIndex = 22;
             label25.Text = "SAMPLE";
             // 
@@ -436,15 +348,11 @@
             // 
             label33.AutoSize = true;
             label33.BackColor = Color.Transparent;
-            label33.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label33.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label33.ForeColor = Color.Black;
             label33.Location = new Point(16, 25);
             label33.Name = "label33";
-<<<<<<< HEAD
-            label33.Size = new Size(92, 13);
-=======
             label33.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label33.TabIndex = 45;
             label33.Text = "Lorem ipsum dolor";
             // 
@@ -452,15 +360,11 @@
             // 
             label24.AutoSize = true;
             label24.BackColor = Color.Transparent;
-            label24.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label24.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label24.ForeColor = Color.DimGray;
             label24.Location = new Point(16, 5);
             label24.Name = "label24";
-<<<<<<< HEAD
-            label24.Size = new Size(50, 13);
-=======
             label24.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label24.TabIndex = 22;
             label24.Text = "SAMPLE";
             // 
@@ -483,15 +387,11 @@
             // 
             label32.AutoSize = true;
             label32.BackColor = Color.Transparent;
-            label32.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label32.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label32.ForeColor = Color.Black;
             label32.Location = new Point(14, 25);
             label32.Name = "label32";
-<<<<<<< HEAD
-            label32.Size = new Size(92, 13);
-=======
             label32.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label32.TabIndex = 44;
             label32.Text = "Lorem ipsum dolor";
             // 
@@ -499,15 +399,11 @@
             // 
             label23.AutoSize = true;
             label23.BackColor = Color.Transparent;
-            label23.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label23.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label23.ForeColor = Color.DimGray;
             label23.Location = new Point(14, 5);
             label23.Name = "label23";
-<<<<<<< HEAD
-            label23.Size = new Size(50, 13);
-=======
             label23.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label23.TabIndex = 22;
             label23.Text = "SAMPLE";
             // 
@@ -530,15 +426,11 @@
             // 
             label31.AutoSize = true;
             label31.BackColor = Color.Transparent;
-            label31.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label31.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label31.ForeColor = Color.Black;
             label31.Location = new Point(14, 25);
             label31.Name = "label31";
-<<<<<<< HEAD
-            label31.Size = new Size(92, 13);
-=======
             label31.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label31.TabIndex = 43;
             label31.Text = "Lorem ipsum dolor";
             // 
@@ -546,15 +438,11 @@
             // 
             label22.AutoSize = true;
             label22.BackColor = Color.Transparent;
-            label22.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label22.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label22.ForeColor = Color.DimGray;
             label22.Location = new Point(14, 5);
             label22.Name = "label22";
-<<<<<<< HEAD
-            label22.Size = new Size(50, 13);
-=======
             label22.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label22.TabIndex = 22;
             label22.Text = "SAMPLE";
             // 
@@ -577,15 +465,11 @@
             // 
             label30.AutoSize = true;
             label30.BackColor = Color.Transparent;
-            label30.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label30.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label30.ForeColor = Color.Black;
             label30.Location = new Point(16, 25);
             label30.Name = "label30";
-<<<<<<< HEAD
-            label30.Size = new Size(92, 13);
-=======
             label30.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label30.TabIndex = 42;
             label30.Text = "Lorem ipsum dolor";
             // 
@@ -593,15 +477,11 @@
             // 
             label21.AutoSize = true;
             label21.BackColor = Color.Transparent;
-            label21.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label21.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label21.ForeColor = Color.DimGray;
             label21.Location = new Point(16, 5);
             label21.Name = "label21";
-<<<<<<< HEAD
-            label21.Size = new Size(50, 13);
-=======
             label21.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label21.TabIndex = 22;
             label21.Text = "SAMPLE";
             // 
@@ -624,15 +504,11 @@
             // 
             label27.AutoSize = true;
             label27.BackColor = Color.Transparent;
-            label27.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label27.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label27.ForeColor = Color.Black;
             label27.Location = new Point(16, 31);
             label27.Name = "label27";
-<<<<<<< HEAD
-            label27.Size = new Size(92, 13);
-=======
             label27.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label27.TabIndex = 39;
             label27.Text = "Lorem ipsum dolor";
             // 
@@ -640,15 +516,11 @@
             // 
             label18.AutoSize = true;
             label18.BackColor = Color.Transparent;
-            label18.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label18.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.DimGray;
             label18.Location = new Point(16, 7);
             label18.Name = "label18";
-<<<<<<< HEAD
-            label18.Size = new Size(50, 13);
-=======
             label18.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label18.TabIndex = 21;
             label18.Text = "SAMPLE";
             // 
@@ -671,15 +543,11 @@
             // 
             label28.AutoSize = true;
             label28.BackColor = Color.Transparent;
-            label28.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label28.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label28.ForeColor = Color.Black;
             label28.Location = new Point(14, 31);
             label28.Name = "label28";
-<<<<<<< HEAD
-            label28.Size = new Size(92, 13);
-=======
             label28.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label28.TabIndex = 40;
             label28.Text = "Lorem ipsum dolor";
             // 
@@ -687,15 +555,11 @@
             // 
             label19.AutoSize = true;
             label19.BackColor = Color.Transparent;
-            label19.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label19.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label19.ForeColor = Color.DimGray;
             label19.Location = new Point(14, 8);
             label19.Name = "label19";
-<<<<<<< HEAD
-            label19.Size = new Size(50, 13);
-=======
             label19.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label19.TabIndex = 22;
             label19.Text = "SAMPLE";
             // 
@@ -718,15 +582,11 @@
             // 
             label29.AutoSize = true;
             label29.BackColor = Color.Transparent;
-            label29.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label29.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label29.ForeColor = Color.Black;
             label29.Location = new Point(14, 31);
             label29.Name = "label29";
-<<<<<<< HEAD
-            label29.Size = new Size(92, 13);
-=======
             label29.Size = new Size(127, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label29.TabIndex = 41;
             label29.Text = "Lorem ipsum dolor";
             // 
@@ -734,15 +594,11 @@
             // 
             label20.AutoSize = true;
             label20.BackColor = Color.Transparent;
-            label20.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label20.Font = new Font("Franklin Gothic Demi", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label20.ForeColor = Color.DimGray;
             label20.Location = new Point(14, 7);
             label20.Name = "label20";
-<<<<<<< HEAD
-            label20.Size = new Size(50, 13);
-=======
             label20.Size = new Size(60, 18);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label20.TabIndex = 23;
             label20.Text = "SAMPLE";
             // 
@@ -750,21 +606,18 @@
             // 
             label15.AutoSize = true;
             label15.BackColor = Color.Transparent;
-            label15.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label15.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label15.ForeColor = Color.Black;
             label15.Location = new Point(24, 17);
             label15.Name = "label15";
-<<<<<<< HEAD
-            label15.Size = new Size(240, 20);
-=======
             label15.Size = new Size(273, 25);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label15.TabIndex = 37;
             label15.Text = "TECHNICAL SPECIFICATIONS:";
             // 
             // guna2ShadowPanel2
             // 
             guna2ShadowPanel2.BackColor = Color.Transparent;
+            guna2ShadowPanel2.Controls.Add(guna2ShadowPanel6);
             guna2ShadowPanel2.Controls.Add(guna2ShadowPanel5);
             guna2ShadowPanel2.Controls.Add(guna2TileButton2);
             guna2ShadowPanel2.Controls.Add(guna2TileButton1);
@@ -782,8 +635,6 @@
             guna2ShadowPanel2.Size = new Size(414, 255);
             guna2ShadowPanel2.TabIndex = 6;
             // 
-<<<<<<< HEAD
-=======
             // guna2ShadowPanel6
             // 
             guna2ShadowPanel6.BackColor = Color.Transparent;
@@ -810,42 +661,29 @@
             label5.TabIndex = 26;
             label5.Text = "UNITS IN STOCK";
             // 
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // guna2ShadowPanel5
             // 
             guna2ShadowPanel5.BackColor = Color.Transparent;
             guna2ShadowPanel5.Controls.Add(label4);
             guna2ShadowPanel5.FillColor = Color.PaleGreen;
-<<<<<<< HEAD
-            guna2ShadowPanel5.Location = new Point(14, 10);
-=======
             guna2ShadowPanel5.Location = new Point(30, 13);
             guna2ShadowPanel5.Margin = new Padding(3, 4, 3, 4);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2ShadowPanel5.Name = "guna2ShadowPanel5";
             guna2ShadowPanel5.Radius = 8;
             guna2ShadowPanel5.ShadowColor = Color.White;
             guna2ShadowPanel5.ShadowDepth = 35;
-<<<<<<< HEAD
-            guna2ShadowPanel5.Size = new Size(129, 41);
-=======
             guna2ShadowPanel5.Size = new Size(142, 55);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2ShadowPanel5.TabIndex = 8;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.ForestGreen;
             label4.Location = new Point(11, 13);
             label4.Name = "label4";
-<<<<<<< HEAD
-            label4.Size = new Size(107, 20);
-=======
             label4.Size = new Size(115, 23);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label4.TabIndex = 26;
             label4.Text = "AVAILABLE";
             label4.Click += label4_Click;
@@ -856,11 +694,7 @@
             guna2TileButton2.BorderRadius = 8;
             guna2TileButton2.BorderThickness = 2;
             guna2TileButton2.Cursor = Cursors.Hand;
-<<<<<<< HEAD
-            guna2TileButton2.CustomizableEdges = customizableEdges23;
-=======
             guna2TileButton2.CustomizableEdges = customizableEdges19;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2TileButton2.DisabledState.BorderColor = Color.DarkGray;
             guna2TileButton2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2TileButton2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -868,18 +702,11 @@
             guna2TileButton2.FillColor = Color.Gainsboro;
             guna2TileButton2.Font = new Font("Segoe UI", 9F);
             guna2TileButton2.ForeColor = Color.DarkGray;
-<<<<<<< HEAD
-            guna2TileButton2.Location = new Point(138, 145);
-            guna2TileButton2.Name = "guna2TileButton2";
-            guna2TileButton2.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2TileButton2.Size = new Size(94, 28);
-=======
             guna2TileButton2.Location = new Point(134, 193);
             guna2TileButton2.Margin = new Padding(3, 4, 3, 4);
             guna2TileButton2.Name = "guna2TileButton2";
             guna2TileButton2.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2TileButton2.Size = new Size(107, 37);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2TileButton2.TabIndex = 25;
             guna2TileButton2.Text = "Pearl White";
             // 
@@ -889,11 +716,7 @@
             guna2TileButton1.BorderRadius = 8;
             guna2TileButton1.BorderThickness = 2;
             guna2TileButton1.Cursor = Cursors.Hand;
-<<<<<<< HEAD
-            guna2TileButton1.CustomizableEdges = customizableEdges25;
-=======
             guna2TileButton1.CustomizableEdges = customizableEdges21;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2TileButton1.DisabledState.BorderColor = Color.DarkGray;
             guna2TileButton1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2TileButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -901,18 +724,11 @@
             guna2TileButton1.FillColor = Color.Gainsboro;
             guna2TileButton1.Font = new Font("Segoe UI", 9F);
             guna2TileButton1.ForeColor = Color.DarkGray;
-<<<<<<< HEAD
-            guna2TileButton1.Location = new Point(239, 145);
-            guna2TileButton1.Name = "guna2TileButton1";
-            guna2TileButton1.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2TileButton1.Size = new Size(88, 28);
-=======
             guna2TileButton1.Location = new Point(248, 193);
             guna2TileButton1.Margin = new Padding(3, 4, 3, 4);
             guna2TileButton1.Name = "guna2TileButton1";
             guna2TileButton1.ShadowDecoration.CustomizableEdges = customizableEdges22;
             guna2TileButton1.Size = new Size(71, 37);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2TileButton1.TabIndex = 24;
             guna2TileButton1.Text = "Candy Red";
             // 
@@ -922,11 +738,7 @@
             selection1.BorderRadius = 8;
             selection1.BorderThickness = 2;
             selection1.Cursor = Cursors.Hand;
-<<<<<<< HEAD
-            selection1.CustomizableEdges = customizableEdges27;
-=======
             selection1.CustomizableEdges = customizableEdges23;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             selection1.DisabledState.BorderColor = Color.DarkGray;
             selection1.DisabledState.CustomBorderColor = Color.DarkGray;
             selection1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -934,18 +746,11 @@
             selection1.FillColor = Color.Gainsboro;
             selection1.Font = new Font("Segoe UI", 9F);
             selection1.ForeColor = Color.DarkGray;
-<<<<<<< HEAD
-            selection1.Location = new Point(38, 145);
-            selection1.Name = "selection1";
-            selection1.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            selection1.Size = new Size(93, 28);
-=======
             selection1.Location = new Point(21, 193);
             selection1.Margin = new Padding(3, 4, 3, 4);
             selection1.Name = "selection1";
             selection1.ShadowDecoration.CustomizableEdges = customizableEdges24;
             selection1.Size = new Size(106, 37);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             selection1.TabIndex = 23;
             selection1.Text = "Satin Black";
             // 
@@ -953,17 +758,11 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-<<<<<<< HEAD
-            label3.Location = new Point(18, 124);
-            label3.Name = "label3";
-            label3.Size = new Size(150, 16);
-=======
             label3.Location = new Point(21, 168);
             label3.Name = "label3";
             label3.Size = new Size(160, 19);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label3.TabIndex = 5;
             label3.Text = "SELECT VARIATION";
             // 
@@ -971,17 +770,11 @@
             // 
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Font = new Font("Franklin Gothic Demi", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label11.ForeColor = Color.DarkGreen;
-<<<<<<< HEAD
-            label11.Location = new Point(18, 85);
-            label11.Name = "label11";
-            label11.Size = new Size(137, 31);
-=======
             label11.Location = new Point(21, 107);
             label11.Name = "label11";
             label11.Size = new Size(178, 39);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label11.TabIndex = 22;
             label11.Text = "₱ 999,999";
             // 
@@ -989,17 +782,11 @@
             // 
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Font = new Font("Franklin Gothic Demi", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.Black;
-<<<<<<< HEAD
-            label10.Location = new Point(18, 57);
-            label10.Name = "label10";
-            label10.Size = new Size(190, 25);
-=======
             label10.Location = new Point(21, 72);
             label10.Name = "label10";
             label10.Size = new Size(222, 34);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label10.TabIndex = 21;
             label10.Text = "SAMPLE SAMPLE";
             // 
@@ -1018,61 +805,6 @@
             guna2ShadowPanel3.Size = new Size(414, 239);
             guna2ShadowPanel3.TabIndex = 7;
             // 
-<<<<<<< HEAD
-            // guna2ShadowPanel8
-            // 
-            guna2ShadowPanel8.BackColor = Color.Transparent;
-            guna2ShadowPanel8.Controls.Add(label14);
-            guna2ShadowPanel8.Controls.Add(label9);
-            guna2ShadowPanel8.Controls.Add(label8);
-            guna2ShadowPanel8.Cursor = Cursors.Hand;
-            guna2ShadowPanel8.FillColor = Color.FromArgb(240, 248, 255);
-            guna2ShadowPanel8.Location = new Point(14, 178);
-            guna2ShadowPanel8.Name = "guna2ShadowPanel8";
-            guna2ShadowPanel8.Radius = 12;
-            guna2ShadowPanel8.ShadowColor = Color.FromArgb(200, 220, 255);
-            guna2ShadowPanel8.ShadowDepth = 50;
-            guna2ShadowPanel8.Size = new Size(330, 125);
-            guna2ShadowPanel8.TabIndex = 38;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.BackColor = Color.Transparent;
-            label14.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.DodgerBlue;
-            label14.Location = new Point(22, 18);
-            label14.Name = "label14";
-            label14.Size = new Size(147, 22);
-            label14.TabIndex = 35;
-            label14.Text = "Easy Financing";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.Gray;
-            label9.Location = new Point(32, 45);
-            label9.Name = "label9";
-            label9.Size = new Size(181, 17);
-            label9.TabIndex = 33;
-            label9.Text = "Fixed payment every month";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.Gray;
-            label8.Location = new Point(32, 65);
-            label8.Name = "label8";
-            label8.Size = new Size(112, 17);
-            label8.TabIndex = 36;
-            label8.Text = "Up to 60 months";
-            // 
-=======
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // guna2ShadowPanel7
             // 
             guna2ShadowPanel7.BackColor = Color.Transparent;
@@ -1094,33 +826,23 @@
             // 
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Font = new Font("Franklin Gothic Demi", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.ForestGreen;
             label7.Location = new Point(22, 24);
             label7.Name = "label7";
-<<<<<<< HEAD
-            label7.Size = new Size(172, 22);
-            label7.TabIndex = 28;
-            label7.Text = "On-Cash Payment";
-=======
             label7.Size = new Size(186, 28);
             label7.TabIndex = 28;
             label7.Text = "✓ Cash Payment";
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.BackColor = Color.Transparent;
-            label13.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.Font = new Font("Franklin Gothic Demi", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label13.ForeColor = Color.Gray;
             label13.Location = new Point(34, 80);
             label13.Name = "label13";
-<<<<<<< HEAD
-            label13.Size = new Size(120, 17);
-=======
             label13.Size = new Size(143, 21);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label13.TabIndex = 34;
             label13.Text = "Pay in full amount";
             // 
@@ -1128,15 +850,11 @@
             // 
             label12.AutoSize = true;
             label12.BackColor = Color.Transparent;
-            label12.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Font = new Font("Franklin Gothic Demi", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.Gray;
             label12.Location = new Point(34, 56);
             label12.Name = "label12";
-<<<<<<< HEAD
-            label12.Size = new Size(118, 17);
-=======
             label12.Size = new Size(142, 21);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label12.TabIndex = 32;
             label12.Text = "Instant ownership";
             // 
@@ -1144,15 +862,11 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Franklin Gothic Demi", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
             label6.Location = new Point(10, 16);
             label6.Name = "label6";
-<<<<<<< HEAD
-            label6.Size = new Size(189, 25);
-=======
             label6.Size = new Size(231, 34);
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             label6.TabIndex = 28;
             label6.Text = "Purchase Options:";
             // 
@@ -1163,11 +877,7 @@
             guna2ImageButton2.ImageRotate = 0F;
             guna2ImageButton2.Location = new Point(0, 0);
             guna2ImageButton2.Name = "guna2ImageButton2";
-<<<<<<< HEAD
-            guna2ImageButton2.ShadowDecoration.CustomizableEdges = customizableEdges29;
-=======
             guna2ImageButton2.ShadowDecoration.CustomizableEdges = customizableEdges25;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             guna2ImageButton2.Size = new Size(64, 54);
             guna2ImageButton2.TabIndex = 0;
             // 
@@ -1183,11 +893,7 @@
             payment_button.Name = "payment_button";
             payment_button.PressedState.Image = (Image)resources.GetObject("resource.Image");
             payment_button.PressedState.ImageSize = new Size(64, 64);
-<<<<<<< HEAD
-            payment_button.ShadowDecoration.CustomizableEdges = customizableEdges30;
-=======
             payment_button.ShadowDecoration.CustomizableEdges = customizableEdges26;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             payment_button.Size = new Size(64, 78);
             payment_button.TabIndex = 37;
             payment_button.Click += payment_button_Click;
@@ -1195,7 +901,7 @@
             // guna2ShadowPanel4
             // 
             guna2ShadowPanel4.BackColor = Color.Transparent;
-            guna2ShadowPanel4.Controls.Add(productImage);
+            guna2ShadowPanel4.Controls.Add(gpic1);
             guna2ShadowPanel4.FillColor = Color.White;
             guna2ShadowPanel4.Location = new Point(305, 125);
             guna2ShadowPanel4.Margin = new Padding(3, 4, 3, 4);
@@ -1223,7 +929,7 @@
             Text = "kiosk_product_detail";
             kiosk_prod_panel.ResumeLayout(false);
             kiosk_prod_panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)productImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gpic1).EndInit();
             guna2ShadowPanel1.ResumeLayout(false);
             guna2ShadowPanel1.PerformLayout();
             guna2ShadowPanel17.ResumeLayout(false);
@@ -1246,6 +952,8 @@
             guna2ShadowPanel9.PerformLayout();
             guna2ShadowPanel2.ResumeLayout(false);
             guna2ShadowPanel2.PerformLayout();
+            guna2ShadowPanel6.ResumeLayout(false);
+            guna2ShadowPanel6.PerformLayout();
             guna2ShadowPanel5.ResumeLayout(false);
             guna2ShadowPanel5.PerformLayout();
             guna2ShadowPanel3.ResumeLayout(false);
@@ -1254,74 +962,6 @@
             guna2ShadowPanel7.PerformLayout();
             guna2ShadowPanel4.ResumeLayout(false);
             ResumeLayout(false);
-<<<<<<< HEAD
-        }
-
-        #endregion
-
-        private Guna.UI2.WinForms.Guna2BorderlessForm kiosk_prod;
-        private Guna.UI2.WinForms.Guna2Button ckg_return;
-        private Guna.UI2.WinForms.Guna2Panel kiosk_prod_panel;
-        private Label label1;
-        private Label label2;
-        private Guna.UI2.WinForms.Guna2PictureBox productImage;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel3;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel2;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel4;
-        private Label label10;
-        private Label label11;
-        private Label label3;
-        private Guna.UI2.WinForms.Guna2TileButton selection1;
-        private Guna.UI2.WinForms.Guna2TileButton guna2TileButton2;
-        private Guna.UI2.WinForms.Guna2TileButton guna2TileButton1;
-        private Label label4;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel5;
-        private Label label6;
-        private Label label7;
-        private Label label13;
-        private Label label9;
-        private Label label12;
-        private Label label8;
-        private Label label14;
-        private Label label15;
-        private Guna.UI2.WinForms.Guna2ImageButton payment_button;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel7;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel8;
-        private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton2;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel10;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel9;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel17;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel16;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel15;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel14;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel13;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel12;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel11;
-        private Label label17;
-        private Label label16;
-        private Label label26;
-        private Label label34;
-        private Label label25;
-        private Label label33;
-        private Label label24;
-        private Label label32;
-        private Label label23;
-        private Label label31;
-        private Label label22;
-        private Label label30;
-        private Label label21;
-        private Label label27;
-        private Label label18;
-        private Label label28;
-        private Label label19;
-        private Label label29;
-        private Label label20;
-        private Label label35;
-        private Guna.UI2.WinForms.Guna2ImageButton return_button;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-    }
-=======
         }
 
         #endregion
@@ -1386,5 +1026,4 @@
         private Guna.UI2.WinForms.Guna2ImageButton return_button;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
     }
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
 }

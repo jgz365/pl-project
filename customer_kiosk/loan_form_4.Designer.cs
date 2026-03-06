@@ -29,16 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-<<<<<<< HEAD
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loan_form_4));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-=======
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loan_form_4));
@@ -47,7 +37,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             loan_4 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             button_loan_back_4 = new Guna.UI2.WinForms.Guna2ImageButton();
@@ -56,25 +45,15 @@
             backButton = new Guna.UI2.WinForms.Guna2Button();
             configureLoanLabel = new Label();
             continueButton = new Guna.UI2.WinForms.Guna2Button();
-<<<<<<< HEAD
-            loanTermB1 = new Guna.UI2.WinForms.Guna2Button();
-            loanTermB2 = new Guna.UI2.WinForms.Guna2Button();
-            loanTermB3 = new Guna.UI2.WinForms.Guna2Button();
-=======
             loanTerm12Button = new Guna.UI2.WinForms.Guna2Button();
             loanTerm24Button = new Guna.UI2.WinForms.Guna2Button();
             loanTerm36Button = new Guna.UI2.WinForms.Guna2Button();
             downPaymentMaxLabel = new Label();
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             monthlyPaymentLabel = new Label();
             monthlyPaymentValueLabel = new Label();
             preApprovedPanel = new Guna.UI2.WinForms.Guna2Panel();
             preApprovedCheckLabel = new Label();
             preApprovedTextLabel = new Label();
-<<<<<<< HEAD
-            downPaymentMaxLabel = new Label();
-=======
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             headerPanel.SuspendLayout();
             contentPanel.SuspendLayout();
             preApprovedPanel.SuspendLayout();
@@ -94,17 +73,10 @@
             headerPanel.BackColor = Color.White;
             headerPanel.Controls.Add(button_loan_back_4);
             headerPanel.Controls.Add(label1);
-<<<<<<< HEAD
-            headerPanel.CustomizableEdges = customizableEdges13;
-            headerPanel.Location = new Point(0, 0);
-            headerPanel.Name = "headerPanel";
-            headerPanel.ShadowDecoration.CustomizableEdges = customizableEdges14;
-=======
             headerPanel.CustomizableEdges = customizableEdges6;
             headerPanel.Location = new Point(0, 0);
             headerPanel.Name = "headerPanel";
             headerPanel.ShadowDecoration.CustomizableEdges = customizableEdges7;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             headerPanel.Size = new Size(1279, 80);
             headerPanel.TabIndex = 4;
             // 
@@ -119,11 +91,7 @@
             button_loan_back_4.Location = new Point(3, 3);
             button_loan_back_4.Name = "button_loan_back_4";
             button_loan_back_4.PressedState.ImageSize = new Size(64, 64);
-<<<<<<< HEAD
-            button_loan_back_4.ShadowDecoration.CustomizableEdges = customizableEdges12;
-=======
             button_loan_back_4.ShadowDecoration.CustomizableEdges = customizableEdges5;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             button_loan_back_4.Size = new Size(78, 74);
             button_loan_back_4.TabIndex = 25;
             button_loan_back_4.Click += button_loan_back_4_Click;
@@ -132,11 +100,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Franklin Gothic Demi", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
             label1.Location = new Point(87, 21);
             label1.Name = "label1";
-            label1.Size = new Size(230, 33);
+            label1.Size = new Size(234, 37);
             label1.TabIndex = 26;
             label1.Text = "Loan Application";
             // 
@@ -148,18 +116,6 @@
             contentPanel.Controls.Add(backButton);
             contentPanel.Controls.Add(configureLoanLabel);
             contentPanel.Controls.Add(continueButton);
-<<<<<<< HEAD
-            contentPanel.Controls.Add(loanTermB1);
-            contentPanel.Controls.Add(loanTermB2);
-            contentPanel.Controls.Add(loanTermB3);
-            contentPanel.Controls.Add(monthlyPaymentLabel);
-            contentPanel.Controls.Add(monthlyPaymentValueLabel);
-            contentPanel.Controls.Add(preApprovedPanel);
-            contentPanel.CustomizableEdges = customizableEdges11;
-            contentPanel.Location = new Point(250, 170);
-            contentPanel.Name = "contentPanel";
-            contentPanel.ShadowDecoration.CustomizableEdges = customizableEdges10;
-=======
             contentPanel.Controls.Add(loanTerm12Button);
             contentPanel.Controls.Add(loanTerm24Button);
             contentPanel.Controls.Add(loanTerm36Button);
@@ -170,7 +126,6 @@
             contentPanel.Location = new Point(250, 170);
             contentPanel.Name = "contentPanel";
             contentPanel.ShadowDecoration.CustomizableEdges = customizableEdges3;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             contentPanel.Size = new Size(780, 498);
             contentPanel.TabIndex = 6;
             // 
@@ -179,11 +134,7 @@
             backButton.BorderColor = Color.LightGray;
             backButton.BorderRadius = 6;
             backButton.BorderThickness = 1;
-<<<<<<< HEAD
-            backButton.CustomizableEdges = customizableEdges8;
-=======
             backButton.CustomizableEdges = customizableEdges1;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             backButton.DisabledState.BorderColor = Color.DarkGray;
             backButton.DisabledState.CustomBorderColor = Color.DarkGray;
             backButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -193,11 +144,7 @@
             backButton.ForeColor = Color.Black;
             backButton.Location = new Point(25, 442);
             backButton.Name = "backButton";
-<<<<<<< HEAD
-            backButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
-=======
             backButton.ShadowDecoration.CustomizableEdges = customizableEdges1;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             backButton.Size = new Size(100, 40);
             backButton.TabIndex = 5;
             backButton.Text = "Back";
@@ -218,11 +165,7 @@
             // continueButton
             // 
             continueButton.BorderRadius = 6;
-<<<<<<< HEAD
-            continueButton.CustomizableEdges = customizableEdges8;
-=======
             continueButton.CustomizableEdges = customizableEdges1;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             continueButton.DisabledState.BorderColor = Color.DarkGray;
             continueButton.DisabledState.CustomBorderColor = Color.DarkGray;
             continueButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -232,53 +175,12 @@
             continueButton.ForeColor = Color.White;
             continueButton.Location = new Point(635, 442);
             continueButton.Name = "continueButton";
-<<<<<<< HEAD
-            continueButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
-=======
             continueButton.ShadowDecoration.CustomizableEdges = customizableEdges1;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             continueButton.Size = new Size(120, 40);
             continueButton.TabIndex = 6;
             continueButton.Text = "Continue >";
             continueButton.Click += continueButton_Click;
             // 
-<<<<<<< HEAD
-            // loanTermB1
-            // 
-            loanTermB1.BorderRadius = 6;
-            loanTermB1.CustomizableEdges = customizableEdges9;
-            loanTermB1.DisabledState.BorderColor = Color.DarkGray;
-            loanTermB1.DisabledState.CustomBorderColor = Color.DarkGray;
-            loanTermB1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            loanTermB1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            loanTermB1.FillColor = Color.LightGray;
-            loanTermB1.Font = new Font("Arial", 10F, FontStyle.Bold);
-            loanTermB1.ForeColor = Color.DarkGray;
-            loanTermB1.Location = new Point(32, 125);
-            loanTermB1.Name = "loanTermB1";
-            loanTermB1.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            loanTermB1.Size = new Size(455, 74);
-            loanTermB1.TabIndex = 2;
-            loanTermB1.Text = "{price}/monthly for 6 months";
-            // 
-            // loanTermB2
-            // 
-            loanTermB2.BorderRadius = 6;
-            loanTermB2.CustomizableEdges = customizableEdges9;
-            loanTermB2.DisabledState.BorderColor = Color.DarkGray;
-            loanTermB2.DisabledState.CustomBorderColor = Color.DarkGray;
-            loanTermB2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            loanTermB2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            loanTermB2.FillColor = Color.LightGray;
-            loanTermB2.Font = new Font("Arial", 10F, FontStyle.Bold);
-            loanTermB2.ForeColor = Color.DarkGray;
-            loanTermB2.Location = new Point(32, 205);
-            loanTermB2.Name = "loanTermB2";
-            loanTermB2.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            loanTermB2.Size = new Size(455, 70);
-            loanTermB2.TabIndex = 3;
-            loanTermB2.Text = "{price}/monthly for 12 months";
-=======
             // loanTerm12Button
             // 
             loanTerm12Button.BorderRadius = 6;
@@ -297,27 +199,9 @@
             loanTerm12Button.Size = new Size(455, 74);
             loanTerm12Button.TabIndex = 2;
             loanTerm12Button.Text = "{price}/monthly for 6 months";
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // 
-            // loanTermB3
+            // loanTerm24Button
             // 
-<<<<<<< HEAD
-            loanTermB3.BorderRadius = 6;
-            loanTermB3.CustomizableEdges = customizableEdges9;
-            loanTermB3.DisabledState.BorderColor = Color.DarkGray;
-            loanTermB3.DisabledState.CustomBorderColor = Color.DarkGray;
-            loanTermB3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            loanTermB3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            loanTermB3.FillColor = Color.LightGray;
-            loanTermB3.Font = new Font("Arial", 10F, FontStyle.Bold);
-            loanTermB3.ForeColor = Color.DarkGray;
-            loanTermB3.Location = new Point(32, 281);
-            loanTermB3.Name = "loanTermB3";
-            loanTermB3.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            loanTermB3.Size = new Size(455, 66);
-            loanTermB3.TabIndex = 4;
-            loanTermB3.Text = "{price}/monthly for 24 months";
-=======
             loanTerm24Button.BorderRadius = 6;
             loanTerm24Button.CustomizableEdges = customizableEdges2;
             loanTerm24Button.DisabledState.BorderColor = Color.DarkGray;
@@ -363,7 +247,6 @@
             downPaymentMaxLabel.Size = new Size(32, 15);
             downPaymentMaxLabel.TabIndex = 9;
             downPaymentMaxLabel.Text = "90%";
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // 
             // monthlyPaymentLabel
             // 
@@ -397,17 +280,10 @@
             preApprovedPanel.Controls.Add(preApprovedCheckLabel);
             preApprovedPanel.Controls.Add(preApprovedTextLabel);
             preApprovedPanel.Controls.Add(downPaymentMaxLabel);
-<<<<<<< HEAD
-            preApprovedPanel.CustomizableEdges = customizableEdges10;
-            preApprovedPanel.Location = new Point(512, 156);
-            preApprovedPanel.Name = "preApprovedPanel";
-            preApprovedPanel.ShadowDecoration.CustomizableEdges = customizableEdges10;
-=======
             preApprovedPanel.CustomizableEdges = customizableEdges3;
             preApprovedPanel.Location = new Point(512, 156);
             preApprovedPanel.Name = "preApprovedPanel";
             preApprovedPanel.ShadowDecoration.CustomizableEdges = customizableEdges3;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             preApprovedPanel.Size = new Size(255, 70);
             preApprovedPanel.TabIndex = 12;
             // 
@@ -435,21 +311,6 @@
             preApprovedTextLabel.TabIndex = 1;
             preApprovedTextLabel.Text = "Based on reported income";
             // 
-<<<<<<< HEAD
-            // downPaymentMaxLabel
-            // 
-            downPaymentMaxLabel.AutoSize = true;
-            downPaymentMaxLabel.BackColor = Color.Transparent;
-            downPaymentMaxLabel.Font = new Font("Arial", 9F);
-            downPaymentMaxLabel.ForeColor = Color.Gray;
-            downPaymentMaxLabel.Location = new Point(211, 10);
-            downPaymentMaxLabel.Name = "downPaymentMaxLabel";
-            downPaymentMaxLabel.Size = new Size(32, 15);
-            downPaymentMaxLabel.TabIndex = 9;
-            downPaymentMaxLabel.Text = "90%";
-            // 
-=======
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // loan_form_4
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -478,15 +339,9 @@
 
         private Guna.UI2.WinForms.Guna2Panel contentPanel;
         private Label configureLoanLabel;
-<<<<<<< HEAD
-        private Guna.UI2.WinForms.Guna2Button loanTermB1;
-        private Guna.UI2.WinForms.Guna2Button loanTermB2;
-        private Guna.UI2.WinForms.Guna2Button loanTermB3;
-=======
         private Guna.UI2.WinForms.Guna2Button loanTerm12Button;
         private Guna.UI2.WinForms.Guna2Button loanTerm24Button;
         private Guna.UI2.WinForms.Guna2Button loanTerm36Button;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
         private Label downPaymentMaxLabel;
         private Label monthlyPaymentLabel;
         private Label monthlyPaymentValueLabel;
