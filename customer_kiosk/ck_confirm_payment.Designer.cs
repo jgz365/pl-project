@@ -29,20 +29,18 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ck_confirm_payment));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             kiosk_prod_panel = new Guna.UI2.WinForms.Guna2Panel();
             ckg_back = new Guna.UI2.WinForms.Guna2ImageButton();
             label10 = new Label();
@@ -58,13 +56,14 @@
             tinNumberCheckBox = new CheckBox();
             confirmButton = new Guna.UI2.WinForms.Guna2Button();
             guna2ShadowPanel3 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            purchaseImage = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2ShadowPanel2 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             instantOwnershipLabel = new Label();
             instantOwnershipText = new Label();
             purchaseSummaryLabel = new Label();
             productPanel = new Guna.UI2.WinForms.Guna2Panel();
+            productImage = new PictureBox();
             productNameLabel = new Label();
+            productDetailsLabel = new Label();
             unitPriceLabel = new Label();
             totalDueValue = new Label();
             unitPriceValue = new Label();
@@ -74,9 +73,9 @@
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             kiosk_prod_panel.SuspendLayout();
             guna2ShadowPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)purchaseImage).BeginInit();
             guna2ShadowPanel2.SuspendLayout();
             productPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)productImage).BeginInit();
             guna2ShadowPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,10 +85,10 @@
             kiosk_prod_panel.BorderColor = Color.Black;
             kiosk_prod_panel.Controls.Add(ckg_back);
             kiosk_prod_panel.Controls.Add(label10);
-            kiosk_prod_panel.CustomizableEdges = customizableEdges15;
+            kiosk_prod_panel.CustomizableEdges = customizableEdges2;
             kiosk_prod_panel.Location = new Point(-3, 1);
             kiosk_prod_panel.Name = "kiosk_prod_panel";
-            kiosk_prod_panel.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            kiosk_prod_panel.ShadowDecoration.CustomizableEdges = customizableEdges3;
             kiosk_prod_panel.Size = new Size(1279, 87);
             kiosk_prod_panel.TabIndex = 4;
             // 
@@ -101,7 +100,7 @@
             ckg_back.ImageSize = new Size(48, 48);
             ckg_back.Location = new Point(3, 3);
             ckg_back.Name = "ckg_back";
-            ckg_back.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            ckg_back.ShadowDecoration.CustomizableEdges = customizableEdges1;
             ckg_back.Size = new Size(90, 81);
             ckg_back.TabIndex = 0;
             ckg_back.Click += ckg_back_Click;
@@ -110,11 +109,11 @@
             // 
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Font = new Font("Franklin Gothic Demi", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.Black;
             label10.Location = new Point(129, 31);
             label10.Name = "label10";
-            label10.Size = new Size(358, 25);
+            label10.Size = new Size(325, 26);
             label10.TabIndex = 22;
             label10.Text = "CASH PURCHASE CONFIRMATION";
             // 
@@ -154,7 +153,7 @@
             // 
             fullNameTextBox.BackColor = Color.Transparent;
             fullNameTextBox.BorderRadius = 5;
-            fullNameTextBox.CustomizableEdges = customizableEdges17;
+            fullNameTextBox.CustomizableEdges = customizableEdges6;
             fullNameTextBox.DefaultText = "";
             fullNameTextBox.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             fullNameTextBox.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -169,7 +168,7 @@
             fullNameTextBox.Name = "fullNameTextBox";
             fullNameTextBox.PlaceholderText = "Juan Dela Cruz";
             fullNameTextBox.SelectedText = "";
-            fullNameTextBox.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            fullNameTextBox.ShadowDecoration.CustomizableEdges = customizableEdges7;
             fullNameTextBox.Size = new Size(370, 35);
             fullNameTextBox.TabIndex = 2;
             // 
@@ -189,7 +188,7 @@
             // 
             mobileNumberTextBox.BackColor = Color.Transparent;
             mobileNumberTextBox.BorderRadius = 5;
-            mobileNumberTextBox.CustomizableEdges = customizableEdges19;
+            mobileNumberTextBox.CustomizableEdges = customizableEdges8;
             mobileNumberTextBox.DefaultText = "";
             mobileNumberTextBox.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             mobileNumberTextBox.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -204,7 +203,7 @@
             mobileNumberTextBox.Name = "mobileNumberTextBox";
             mobileNumberTextBox.PlaceholderText = "0XXX XXX XXXX";
             mobileNumberTextBox.SelectedText = "";
-            mobileNumberTextBox.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            mobileNumberTextBox.ShadowDecoration.CustomizableEdges = customizableEdges9;
             mobileNumberTextBox.Size = new Size(370, 35);
             mobileNumberTextBox.TabIndex = 4;
             // 
@@ -262,17 +261,17 @@
             // confirmButton
             // 
             confirmButton.BorderRadius = 6;
-            confirmButton.CustomizableEdges = customizableEdges21;
+            confirmButton.CustomizableEdges = customizableEdges4;
             confirmButton.DisabledState.BorderColor = Color.DarkGray;
             confirmButton.DisabledState.CustomBorderColor = Color.DarkGray;
             confirmButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             confirmButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             confirmButton.FillColor = Color.FromArgb(22, 163, 74);
-            confirmButton.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            confirmButton.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             confirmButton.ForeColor = Color.White;
             confirmButton.Location = new Point(14, 317);
             confirmButton.Name = "confirmButton";
-            confirmButton.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            confirmButton.ShadowDecoration.CustomizableEdges = customizableEdges5;
             confirmButton.Size = new Size(370, 45);
             confirmButton.TabIndex = 9;
             confirmButton.Text = "Confirm and Get Queue Ticket";
@@ -281,7 +280,6 @@
             // guna2ShadowPanel3
             // 
             guna2ShadowPanel3.BackColor = Color.Transparent;
-            guna2ShadowPanel3.Controls.Add(purchaseImage);
             guna2ShadowPanel3.Controls.Add(guna2ShadowPanel2);
             guna2ShadowPanel3.Controls.Add(purchaseSummaryLabel);
             guna2ShadowPanel3.Controls.Add(productPanel);
@@ -299,21 +297,6 @@
             guna2ShadowPanel3.ShadowDepth = 35;
             guna2ShadowPanel3.Size = new Size(400, 503);
             guna2ShadowPanel3.TabIndex = 8;
-            // 
-            // purchaseImage
-            // 
-            purchaseImage.BorderRadius = 14;
-            purchaseImage.CustomizableEdges = customizableEdges23;
-            purchaseImage.Image = (Image)resources.GetObject("purchaseImage.Image");
-            purchaseImage.ImageLocation = "";
-            purchaseImage.ImageRotate = 0F;
-            purchaseImage.Location = new Point(18, 53);
-            purchaseImage.Name = "purchaseImage";
-            purchaseImage.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            purchaseImage.Size = new Size(171, 114);
-            purchaseImage.SizeMode = PictureBoxSizeMode.Zoom;
-            purchaseImage.TabIndex = 10;
-            purchaseImage.TabStop = false;
             // 
             // guna2ShadowPanel2
             // 
@@ -369,13 +352,25 @@
             // productPanel
             // 
             productPanel.BackColor = Color.WhiteSmoke;
+            productPanel.Controls.Add(productImage);
             productPanel.Controls.Add(productNameLabel);
-            productPanel.CustomizableEdges = customizableEdges25;
+            productPanel.Controls.Add(productDetailsLabel);
+            productPanel.CustomizableEdges = customizableEdges10;
             productPanel.Location = new Point(15, 50);
             productPanel.Name = "productPanel";
-            productPanel.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            productPanel.ShadowDecoration.CustomizableEdges = customizableEdges11;
             productPanel.Size = new Size(370, 120);
             productPanel.TabIndex = 1;
+            // 
+            // productImage
+            // 
+            productImage.BackColor = Color.White;
+            productImage.Location = new Point(15, 15);
+            productImage.Name = "productImage";
+            productImage.Size = new Size(70, 90);
+            productImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            productImage.TabIndex = 0;
+            productImage.TabStop = false;
             // 
             // productNameLabel
             // 
@@ -383,11 +378,23 @@
             productNameLabel.BackColor = Color.Transparent;
             productNameLabel.Font = new Font("Arial", 11F, FontStyle.Bold);
             productNameLabel.ForeColor = Color.Black;
-            productNameLabel.Location = new Point(180, 44);
+            productNameLabel.Location = new Point(95, 15);
             productNameLabel.Name = "productNameLabel";
             productNameLabel.Size = new Size(114, 18);
             productNameLabel.TabIndex = 1;
             productNameLabel.Text = "Honda ADV 160";
+            // 
+            // productDetailsLabel
+            // 
+            productDetailsLabel.AutoSize = true;
+            productDetailsLabel.BackColor = Color.Transparent;
+            productDetailsLabel.Font = new Font("Arial", 9F);
+            productDetailsLabel.ForeColor = Color.Gray;
+            productDetailsLabel.Location = new Point(95, 35);
+            productDetailsLabel.Name = "productDetailsLabel";
+            productDetailsLabel.Size = new Size(76, 15);
+            productDetailsLabel.TabIndex = 2;
+            productDetailsLabel.Text = "More Details";
             // 
             // unitPriceLabel
             // 
@@ -503,11 +510,11 @@
             kiosk_prod_panel.PerformLayout();
             guna2ShadowPanel3.ResumeLayout(false);
             guna2ShadowPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)purchaseImage).EndInit();
             guna2ShadowPanel2.ResumeLayout(false);
             guna2ShadowPanel2.PerformLayout();
             productPanel.ResumeLayout(false);
             productPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)productImage).EndInit();
             guna2ShadowPanel1.ResumeLayout(false);
             guna2ShadowPanel1.PerformLayout();
             ResumeLayout(false);
@@ -531,7 +538,9 @@
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel3;
         private Label purchaseSummaryLabel;
         private Guna.UI2.WinForms.Guna2Panel productPanel;
+        private PictureBox productImage;
         private Label productNameLabel;
+        private Label productDetailsLabel;
         private Label unitPriceLabel;
         private Label totalDueValue;
         private Label unitPriceValue;
@@ -542,6 +551,5 @@
         private Label instantOwnershipLabel;
         private Label instantOwnershipText;
         private Guna.UI2.WinForms.Guna2ImageButton ckg_back;
-        private Guna.UI2.WinForms.Guna2PictureBox purchaseImage;
     }
 }

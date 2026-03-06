@@ -29,23 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-<<<<<<< HEAD
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loan_form_1));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-=======
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loan_form_1));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             loan_1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             headerPanel = new Guna.UI2.WinForms.Guna2Panel();
             ckg_back = new Guna.UI2.WinForms.Guna2ImageButton();
@@ -61,16 +50,18 @@
             step5Label = new Label();
             step5Number = new Label();
             contentPanel = new Guna.UI2.WinForms.Guna2Panel();
-            productLoanImage = new Guna.UI2.WinForms.Guna2PictureBox();
             continueButton = new Guna.UI2.WinForms.Guna2Button();
             colorValueLabel = new Label();
             colorLabel = new Label();
             priceLabel = new Label();
             productNameLabel = new Label();
+            productPanel = new Guna.UI2.WinForms.Guna2Panel();
+            productImage = new PictureBox();
             confirmSelectionLabel = new Label();
             headerPanel.SuspendLayout();
             contentPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)productLoanImage).BeginInit();
+            productPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)productImage).BeginInit();
             SuspendLayout();
             // 
             // loan_1
@@ -113,11 +104,11 @@
             // 
             headerLabel.AutoSize = true;
             headerLabel.BackColor = Color.Transparent;
-            headerLabel.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            headerLabel.Font = new Font("Franklin Gothic Demi", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             headerLabel.ForeColor = Color.Black;
             headerLabel.Location = new Point(87, 23);
             headerLabel.Name = "headerLabel";
-            headerLabel.Size = new Size(230, 33);
+            headerLabel.Size = new Size(234, 37);
             headerLabel.TabIndex = 23;
             headerLabel.Text = "Loan Application";
             // 
@@ -252,12 +243,12 @@
             contentPanel.BackColor = Color.White;
             contentPanel.BorderColor = Color.LightGray;
             contentPanel.BorderThickness = 1;
-            contentPanel.Controls.Add(productLoanImage);
             contentPanel.Controls.Add(continueButton);
             contentPanel.Controls.Add(colorValueLabel);
             contentPanel.Controls.Add(colorLabel);
             contentPanel.Controls.Add(priceLabel);
             contentPanel.Controls.Add(productNameLabel);
+            contentPanel.Controls.Add(productPanel);
             contentPanel.Controls.Add(confirmSelectionLabel);
             contentPanel.CustomizableEdges = customizableEdges1;
             contentPanel.Location = new Point(300, 200);
@@ -265,22 +256,6 @@
             contentPanel.ShadowDecoration.CustomizableEdges = customizableEdges2;
             contentPanel.Size = new Size(680, 350);
             contentPanel.TabIndex = 6;
-            // 
-            // productLoanImage
-            // 
-            productLoanImage.AutoRoundedCorners = true;
-            productLoanImage.BorderRadius = 97;
-            productLoanImage.CustomizableEdges = customizableEdges1;
-            productLoanImage.Image = (Image)resources.GetObject("productLoanImage.Image");
-            productLoanImage.ImageLocation = "";
-            productLoanImage.ImageRotate = 0F;
-            productLoanImage.Location = new Point(30, 60);
-            productLoanImage.Name = "productLoanImage";
-            productLoanImage.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            productLoanImage.Size = new Size(282, 196);
-            productLoanImage.SizeMode = PictureBoxSizeMode.Zoom;
-            productLoanImage.TabIndex = 7;
-            productLoanImage.TabStop = false;
             // 
             // continueButton
             // 
@@ -307,7 +282,7 @@
             colorValueLabel.BackColor = Color.Transparent;
             colorValueLabel.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             colorValueLabel.ForeColor = Color.Black;
-            colorValueLabel.Location = new Point(375, 138);
+            colorValueLabel.Location = new Point(192, 128);
             colorValueLabel.Name = "colorValueLabel";
             colorValueLabel.Size = new Size(74, 15);
             colorValueLabel.TabIndex = 5;
@@ -319,7 +294,7 @@
             colorLabel.BackColor = Color.Transparent;
             colorLabel.Font = new Font("Arial", 9F);
             colorLabel.ForeColor = Color.Gray;
-            colorLabel.Location = new Point(333, 138);
+            colorLabel.Location = new Point(150, 128);
             colorLabel.Name = "colorLabel";
             colorLabel.Size = new Size(40, 15);
             colorLabel.TabIndex = 4;
@@ -331,7 +306,7 @@
             priceLabel.BackColor = Color.Transparent;
             priceLabel.Font = new Font("Arial", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             priceLabel.ForeColor = Color.ForestGreen;
-            priceLabel.Location = new Point(333, 101);
+            priceLabel.Location = new Point(150, 95);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new Size(94, 22);
             priceLabel.TabIndex = 3;
@@ -343,13 +318,11 @@
             productNameLabel.BackColor = Color.Transparent;
             productNameLabel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             productNameLabel.ForeColor = Color.Black;
-            productNameLabel.Location = new Point(333, 70);
+            productNameLabel.Location = new Point(150, 70);
             productNameLabel.Name = "productNameLabel";
             productNameLabel.Size = new Size(127, 19);
             productNameLabel.TabIndex = 2;
             productNameLabel.Text = "Sample Sample";
-<<<<<<< HEAD
-=======
             // 
             // productPanel
             // 
@@ -374,7 +347,6 @@
             productImage.SizeMode = PictureBoxSizeMode.CenterImage;
             productImage.TabIndex = 0;
             productImage.TabStop = false;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
             // 
             // confirmSelectionLabel
             // 
@@ -404,36 +376,9 @@
             headerPanel.PerformLayout();
             contentPanel.ResumeLayout(false);
             contentPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)productLoanImage).EndInit();
+            productPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)productImage).EndInit();
             ResumeLayout(false);
-<<<<<<< HEAD
-        }
-
-        #endregion
-
-        private Guna.UI2.WinForms.Guna2BorderlessForm loan_1;
-        private Guna.UI2.WinForms.Guna2Panel headerPanel;
-        private Label headerLabel;
-        private Label step1Number;
-        private Label step1Label;
-        private Label step2Number;
-        private Label step2Label;
-        private Label step3Number;
-        private Label step3Label;
-        private Label step4Number;
-        private Label step4Label;
-        private Label step5Number;
-        private Label step5Label;
-
-        // Content Panel Controls
-        private Guna.UI2.WinForms.Guna2Panel contentPanel;
-        private Label confirmSelectionLabel;
-        private Label productNameLabel;
-        private Label priceLabel;
-        private Label colorLabel;
-        private Label colorValueLabel;
-        private Guna.UI2.WinForms.Guna2Button continueButton;
-=======
         }
 
         #endregion
@@ -462,8 +407,6 @@
         private Label colorLabel;
         private Label colorValueLabel;
         private Guna.UI2.WinForms.Guna2Button continueButton;
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
         private Guna.UI2.WinForms.Guna2ImageButton ckg_back;
-        private Guna.UI2.WinForms.Guna2PictureBox productLoanImage;
     }
 }

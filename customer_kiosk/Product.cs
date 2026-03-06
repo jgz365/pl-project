@@ -8,10 +8,6 @@ namespace customer_kiosk
         public string Year { get; set; }
         public string Displacement { get; set; }
         public decimal Price { get; set; }
-<<<<<<< HEAD
-        public string ImagePath { get; set; }
-=======
         public Image Image { get; set; }
->>>>>>> 76e9872bf621d0cf86062814b6d214c8db3f7103
     }
 }
