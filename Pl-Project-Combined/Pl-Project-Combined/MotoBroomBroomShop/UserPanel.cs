@@ -18,7 +18,7 @@ namespace MotoDealerShop
             customerKiosk.Show();
 
             // 3. Hide this UserPanel screen
-            this.Hide();
+            this.Hide();    
         }
 
         private void guna2TileButton1_Click(object sender, EventArgs e)
