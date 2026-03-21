@@ -1,4 +1,5 @@
-using customer_kiosk;
+﻿using customer_kiosk;
+using Pl_Project_Combined.Assessor_Eddion;
 
 namespace MotoDealerShop
 {
@@ -18,7 +19,7 @@ namespace MotoDealerShop
             customerKiosk.Show();
 
             // 3. Hide this UserPanel screen
-            this.Hide();    
+            this.Hide();
         }
 
         private void guna2TileButton1_Click(object sender, EventArgs e)
@@ -40,6 +41,13 @@ namespace MotoDealerShop
         {
             UserPanel2 userPanel2 = new UserPanel2();
             userPanel2.Show();
+            this.Hide();
+        }
+
+        private void StaffAccessButton_Click(object sender, EventArgs e)
+        {
+            LoginUiForm loginuiForm = new LoginUiForm();
+            loginuiForm.Show();
             this.Hide();
         }
     }
