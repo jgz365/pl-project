@@ -1,48 +1,35 @@
-﻿namespace inventory_ni_Percie
+﻿// ═══════════════════════════════════════
+// FILE: Form2.Designer.cs
+// ═══════════════════════════════════════
+namespace inventory_ni_Percie
 {
-    partial class Form1
+    partial class Form2
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -59,12 +46,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlSidebar = new Guna.UI2.WinForms.Guna2Panel();
             guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
             userLogo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -76,7 +64,6 @@
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTimer = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnLogOut = new Guna.UI2.WinForms.Guna2Button();
-            btnUser = new Guna.UI2.WinForms.Guna2Button();
             btnSettings = new Guna.UI2.WinForms.Guna2Button();
             btnRepo = new Guna.UI2.WinForms.Guna2Button();
             btnCollec = new Guna.UI2.WinForms.Guna2Button();
@@ -87,27 +74,27 @@
             btnDashboard = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             labelMotoDealer = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            logo = new Guna.UI2.WinForms.Guna2PictureBox();
             pnlMainContainer = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             timer1 = new System.Windows.Forms.Timer(components);
             guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(components);
+            logo = new Guna.UI2.WinForms.Guna2PictureBox();
             pnlSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)userLogo).BeginInit();
             pnlLogOut.SuspendLayout();
             guna2Panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             pnlMainContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             SuspendLayout();
             // 
             // pnlSidebar
             // 
+            pnlSidebar.Controls.Add(logo);
             pnlSidebar.Controls.Add(guna2Shapes1);
             pnlSidebar.Controls.Add(userLogo);
             pnlSidebar.Controls.Add(guna2HtmlLabel2);
             pnlSidebar.Controls.Add(lblUsername);
             pnlSidebar.Controls.Add(pnlLogOut);
-            pnlSidebar.Controls.Add(btnUser);
             pnlSidebar.Controls.Add(btnSettings);
             pnlSidebar.Controls.Add(btnRepo);
             pnlSidebar.Controls.Add(btnCollec);
@@ -118,14 +105,13 @@
             pnlSidebar.Controls.Add(btnDashboard);
             pnlSidebar.Controls.Add(guna2HtmlLabel1);
             pnlSidebar.Controls.Add(labelMotoDealer);
-            pnlSidebar.Controls.Add(logo);
-            pnlSidebar.CustomizableEdges = customizableEdges30;
+            pnlSidebar.CustomizableEdges = customizableEdges28;
             pnlSidebar.Dock = DockStyle.Left;
             pnlSidebar.FillColor = Color.FromArgb(15, 23, 42);
             pnlSidebar.Location = new Point(0, 0);
             pnlSidebar.Margin = new Padding(3, 4, 3, 4);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.ShadowDecoration.CustomizableEdges = customizableEdges31;
+            pnlSidebar.ShadowDecoration.CustomizableEdges = customizableEdges29;
             pnlSidebar.Size = new Size(187, 881);
             pnlSidebar.TabIndex = 0;
             // 
@@ -139,7 +125,7 @@
             guna2Shapes1.Name = "guna2Shapes1";
             guna2Shapes1.PolygonSkip = 1;
             guna2Shapes1.Rotate = 0F;
-            guna2Shapes1.RoundedEdges = customizableEdges1;
+            guna2Shapes1.RoundedEdges = customizableEdges3;
             guna2Shapes1.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
             guna2Shapes1.Size = new Size(257, 13);
             guna2Shapes1.TabIndex = 16;
@@ -150,14 +136,13 @@
             // 
             userLogo.BackColor = Color.Transparent;
             userLogo.FillColor = Color.Transparent;
-            userLogo.Image = (Image)resources.GetObject("userLogo.Image");
             userLogo.ImageRotate = 0F;
-            userLogo.Location = new Point(12, 120);
+            userLogo.Location = new Point(14, 120);
             userLogo.Margin = new Padding(3, 4, 3, 4);
             userLogo.Name = "userLogo";
-            userLogo.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            userLogo.ShadowDecoration.CustomizableEdges = customizableEdges4;
             userLogo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            userLogo.Size = new Size(47, 49);
+            userLogo.Size = new Size(45, 49);
             userLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             userLogo.TabIndex = 15;
             userLogo.TabStop = false;
@@ -171,23 +156,22 @@
             guna2HtmlLabel2.Location = new Point(58, 148);
             guna2HtmlLabel2.Margin = new Padding(3, 4, 3, 4);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(80, 17);
+            guna2HtmlLabel2.Size = new Size(39, 17);
             guna2HtmlLabel2.TabIndex = 14;
-            guna2HtmlLabel2.Text = "System Admin";
-            guna2HtmlLabel2.Click += guna2HtmlLabel2_Click_1;
+            guna2HtmlLabel2.Text = "Admin";
+            guna2HtmlLabel2.Click += guna2HtmlLabel2_Click;
             // 
             // lblUsername
             // 
             lblUsername.BackColor = Color.Transparent;
             lblUsername.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             lblUsername.ForeColor = Color.White;
-            lblUsername.Location = new Point(60, 121);
+            lblUsername.Location = new Point(56, 127);
             lblUsername.Margin = new Padding(3, 4, 3, 4);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(101, 19);
+            lblUsername.Size = new Size(75, 19);
             lblUsername.TabIndex = 13;
-            lblUsername.Text = "Valirey De Leon";
-            lblUsername.Click += guna2HtmlLabel2_Click;
+            lblUsername.Text = "Admin User";
             // 
             // pnlLogOut
             // 
@@ -195,13 +179,13 @@
             pnlLogOut.Controls.Add(guna2Shapes2);
             pnlLogOut.Controls.Add(guna2Panel2);
             pnlLogOut.Controls.Add(btnLogOut);
-            pnlLogOut.CustomizableEdges = customizableEdges8;
+            pnlLogOut.CustomizableEdges = customizableEdges10;
             pnlLogOut.FillColor = Color.FromArgb(5, 25, 45);
             pnlLogOut.ForeColor = Color.MintCream;
             pnlLogOut.Location = new Point(0, 752);
             pnlLogOut.Margin = new Padding(3, 4, 3, 4);
             pnlLogOut.Name = "pnlLogOut";
-            pnlLogOut.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            pnlLogOut.ShadowDecoration.CustomizableEdges = customizableEdges11;
             pnlLogOut.Size = new Size(187, 129);
             pnlLogOut.TabIndex = 12;
             // 
@@ -215,7 +199,7 @@
             guna2Shapes2.Name = "guna2Shapes2";
             guna2Shapes2.PolygonSkip = 1;
             guna2Shapes2.Rotate = 0F;
-            guna2Shapes2.RoundedEdges = customizableEdges3;
+            guna2Shapes2.RoundedEdges = customizableEdges5;
             guna2Shapes2.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
             guna2Shapes2.Size = new Size(257, 13);
             guna2Shapes2.TabIndex = 17;
@@ -226,13 +210,13 @@
             // 
             guna2Panel2.Controls.Add(guna2HtmlLabel3);
             guna2Panel2.Controls.Add(lblTimer);
-            guna2Panel2.CustomizableEdges = customizableEdges4;
+            guna2Panel2.CustomizableEdges = customizableEdges6;
             guna2Panel2.FillColor = Color.FromArgb(5, 25, 45);
             guna2Panel2.ForeColor = SystemColors.ActiveCaption;
             guna2Panel2.Location = new Point(35, 87);
             guna2Panel2.Margin = new Padding(3, 4, 3, 4);
             guna2Panel2.Name = "guna2Panel2";
-            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges7;
             guna2Panel2.Size = new Size(120, 32);
             guna2Panel2.TabIndex = 0;
             guna2Panel2.Paint += guna2Panel2_Paint;
@@ -259,6 +243,7 @@
             lblTimer.Size = new Size(34, 19);
             lblTimer.TabIndex = 1;
             lblTimer.Text = "20:00";
+            lblTimer.Click += lblTimer_Click;
             // 
             // btnLogOut
             // 
@@ -266,7 +251,7 @@
             btnLogOut.BackColor = Color.Transparent;
             btnLogOut.BorderRadius = 8;
             btnLogOut.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            btnLogOut.CustomizableEdges = customizableEdges6;
+            btnLogOut.CustomizableEdges = customizableEdges8;
             btnLogOut.DisabledState.BorderColor = Color.DarkGray;
             btnLogOut.DisabledState.CustomBorderColor = Color.DarkGray;
             btnLogOut.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -277,38 +262,11 @@
             btnLogOut.Location = new Point(24, 32);
             btnLogOut.Margin = new Padding(3, 4, 3, 4);
             btnLogOut.Name = "btnLogOut";
-            btnLogOut.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            btnLogOut.ShadowDecoration.CustomizableEdges = customizableEdges9;
             btnLogOut.Size = new Size(137, 43);
             btnLogOut.TabIndex = 0;
             btnLogOut.Text = "Logout";
             btnLogOut.Click += btnLogout_Click;
-            // 
-            // btnUser
-            // 
-            btnUser.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            btnUser.CheckedState.FillColor = Color.FromArgb(19, 45, 49);
-            btnUser.CheckedState.ForeColor = Color.FromArgb(34, 197, 94);
-            btnUser.Cursor = Cursors.Hand;
-            btnUser.CustomizableEdges = customizableEdges10;
-            btnUser.DisabledState.BorderColor = Color.DarkGray;
-            btnUser.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnUser.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnUser.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnUser.FillColor = Color.FromArgb(15, 23, 42);
-            btnUser.Font = new Font("Segoe UI", 9.5F);
-            btnUser.ForeColor = Color.FromArgb(148, 163, 184);
-            btnUser.HoverState.FillColor = Color.FromArgb(30, 41, 59);
-            btnUser.ImageSize = new Size(18, 18);
-            btnUser.Location = new Point(2, 587);
-            btnUser.Margin = new Padding(6, 3, 6, 3);
-            btnUser.Name = "btnUser";
-            btnUser.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            btnUser.Size = new Size(181, 53);
-            btnUser.TabIndex = 11;
-            btnUser.Text = "Users";
-            btnUser.TextAlign = HorizontalAlignment.Left;
-            btnUser.TextOffset = new Point(8, 0);
-            btnUser.Click += btnUser_Click;
             // 
             // btnSettings
             // 
@@ -326,7 +284,7 @@
             btnSettings.ForeColor = Color.FromArgb(148, 163, 184);
             btnSettings.HoverState.FillColor = Color.FromArgb(30, 41, 59);
             btnSettings.ImageSize = new Size(18, 18);
-            btnSettings.Location = new Point(2, 640);
+            btnSettings.Location = new Point(2, 587);
             btnSettings.Margin = new Padding(6, 3, 6, 3);
             btnSettings.Name = "btnSettings";
             btnSettings.ShadowDecoration.CustomizableEdges = customizableEdges13;
@@ -551,42 +509,25 @@
             labelMotoDealer.TabIndex = 1;
             labelMotoDealer.Text = "MotoDealer";
             // 
-            // logo
-            // 
-            logo.BackColor = Color.FromArgb(15, 23, 42);
-            logo.CustomizableEdges = customizableEdges28;
-            logo.FillColor = Color.LightGray;
-            logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.ImageRotate = 0F;
-            logo.Location = new Point(3, 18);
-            logo.Margin = new Padding(3, 4, 3, 4);
-            logo.Name = "logo";
-            logo.ShadowDecoration.CustomizableEdges = customizableEdges29;
-            logo.Size = new Size(61, 65);
-            logo.SizeMode = PictureBoxSizeMode.CenterImage;
-            logo.TabIndex = 0;
-            logo.TabStop = false;
-            logo.Click += logo_Click;
-            // 
             // pnlMainContainer
             // 
             pnlMainContainer.Controls.Add(guna2Panel1);
-            pnlMainContainer.CustomizableEdges = customizableEdges34;
+            pnlMainContainer.CustomizableEdges = customizableEdges32;
             pnlMainContainer.Dock = DockStyle.Fill;
             pnlMainContainer.Location = new Point(0, 0);
             pnlMainContainer.Margin = new Padding(3, 4, 3, 4);
             pnlMainContainer.Name = "pnlMainContainer";
-            pnlMainContainer.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            pnlMainContainer.ShadowDecoration.CustomizableEdges = customizableEdges33;
             pnlMainContainer.Size = new Size(1239, 881);
             pnlMainContainer.TabIndex = 1;
             // 
             // guna2Panel1
             // 
-            guna2Panel1.CustomizableEdges = customizableEdges32;
+            guna2Panel1.CustomizableEdges = customizableEdges30;
             guna2Panel1.Location = new Point(192, 4);
             guna2Panel1.Margin = new Padding(3, 4, 3, 4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges31;
             guna2Panel1.Size = new Size(1043, 877);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.Paint += guna2Panel1_Paint;
@@ -601,7 +542,24 @@
             // 
             guna2Elipse1.TargetControl = this;
             // 
-            // Form1
+            // logo
+            // 
+            logo.BackColor = Color.FromArgb(15, 23, 42);
+            logo.CustomizableEdges = customizableEdges1;
+            logo.FillColor = Color.LightGray;
+            logo.Image = (Image)resources.GetObject("logo.Image");
+            logo.ImageRotate = 0F;
+            logo.Location = new Point(-16, 31);
+            logo.Margin = new Padding(3, 4, 3, 4);
+            logo.Name = "logo";
+            logo.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            logo.Size = new Size(61, 65);
+            logo.SizeMode = PictureBoxSizeMode.CenterImage;
+            logo.TabIndex = 17;
+            logo.TabStop = false;
+            logo.Click += logo_Click_1;
+            // 
+            // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -611,9 +569,9 @@
             ForeColor = Color.FromArgb(148, 163, 184);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
-            Name = "Form1";
+            Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Form2";
             WindowState = FormWindowState.Maximized;
             pnlSidebar.ResumeLayout(false);
             pnlSidebar.PerformLayout();
@@ -621,18 +579,15 @@
             pnlLogOut.ResumeLayout(false);
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             pnlMainContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-
-
         private Guna.UI2.WinForms.Guna2Panel pnlSidebar;
         private Guna.UI2.WinForms.Guna2HtmlLabel labelMotoDealer;
-        private Guna.UI2.WinForms.Guna2PictureBox logo;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2Button btnDashboard;
         private Guna.UI2.WinForms.Guna2Button btnInventory;
@@ -642,7 +597,7 @@
         private Guna.UI2.WinForms.Guna2Button btnCollec;
         private Guna.UI2.WinForms.Guna2Button btnRepo;
         private Guna.UI2.WinForms.Guna2Button btnSettings;
-        private Guna.UI2.WinForms.Guna2Button btnUser;
+        // btnUser intentionally absent
         private Guna.UI2.WinForms.Guna2Panel pnlLogOut;
         private Guna.UI2.WinForms.Guna2Panel pnlMainContainer;
         private Guna.UI2.WinForms.Guna2Button btnLogOut;
@@ -657,5 +612,6 @@
         private Guna.UI2.WinForms.Guna2Shapes guna2Shapes2;
         private Guna.UI2.WinForms.Guna2Shapes guna2Shapes1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
+        private Guna.UI2.WinForms.Guna2PictureBox logo;
     }
 }

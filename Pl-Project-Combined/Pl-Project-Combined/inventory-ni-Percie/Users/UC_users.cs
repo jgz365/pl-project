@@ -1,8 +1,12 @@
-﻿using System;
+﻿// ═══════════════════════════════════════
+// FILE: UC_users.cs
+// Users are now loaded from the database via DatabaseManager.
+// No hardcoded user data anywhere.
+// ═══════════════════════════════════════
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
 
 namespace inventory_ni_Percie
 {
@@ -12,35 +16,71 @@ namespace inventory_ni_Percie
         private string _filterStatus = "All";
         private bool _showingArchive = false;
 
-        private class UserRecord
-        {
-            public string Id { get; set; } = "";
-            public string Name { get; set; } = "";
-            public string Username { get; set; } = "";
-            public string Role { get; set; } = "";
-            public string Status { get; set; } = "";
-            public string Login { get; set; } = "";
-        }
-
-        private List<UserRecord> _activeUsers = new List<UserRecord>
-        {
-            new UserRecord { Id="001", Name="System Admin",  Username="@admin",   Role="Super Admin", Status="Active",   Login="Just now"   },
-            new UserRecord { Id="002", Name="Maria Santos",  Username="@maria.s", Role="Assessor",    Status="Active",   Login="2 hrs ago"  },
-            new UserRecord { Id="003", Name="Juan Cruz",     Username="@juan.c",  Role="POS Cashier", Status="Active",   Login="1 hr ago"   },
-            new UserRecord { Id="004", Name="Pedro Mendoza", Username="@pedro.m", Role="Inventory",   Status="Inactive", Login="5 days ago" },
-        };
-
-        private List<UserRecord> _archivedUsers = new List<UserRecord>();
+        // ── In-memory cache loaded from DB ───────────────────────────────────
+        private List<UserModel> _activeUsers = new();
+        private List<UserModel> _archivedUsers = new();
 
         public UC_Users()
         {
             InitializeComponent();
+        }
+
+        // ════════════════════════════════════════════════════════════════════
+        //  LOAD — fires once when the control appears on screen
+        // ════════════════════════════════════════════════════════════════════
+        private void UC_Users_Load(object sender, EventArgs e)
+        {
+            RefreshFromDatabase();
+        }
+
+        // ════════════════════════════════════════════════════════════════════
+        //  REFRESH FROM DATABASE
+        // ════════════════════════════════════════════════════════════════════
+        private void RefreshFromDatabase()
+        {
+            try
+            {
+                var all = DatabaseManager.GetAllUsers();
+
+                _activeUsers.Clear();
+                _archivedUsers.Clear();
+
+                foreach (var u in all)
+                {
+                    // Treat Inactive/Suspended as archived for display purposes;
+                    // adjust this logic if you add a real is_archived column later.
+                    if (u.Status.Equals("Active", StringComparison.OrdinalIgnoreCase))
+                        _activeUsers.Add(u);
+                    else
+                        _archivedUsers.Add(u);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load users from database:\n{ex.Message}",
+                    "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             UpdateSummaryCards();
             PopulateUserCards();
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  POPULATE
+        //  FORMAT last_login for display
+        // ════════════════════════════════════════════════════════════════════
+        private static string FormatLastLogin(DateTime? dt)
+        {
+            if (dt == null) return "Never";
+            var diff = DateTime.Now - dt.Value;
+            if (diff.TotalMinutes < 2) return "Just now";
+            if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes} min ago";
+            if (diff.TotalHours < 24) return $"{(int)diff.TotalHours} hr{((int)diff.TotalHours == 1 ? "" : "s")} ago";
+            if (diff.TotalDays < 7) return $"{(int)diff.TotalDays} day{((int)diff.TotalDays == 1 ? "" : "s")} ago";
+            return dt.Value.ToString("MMM dd, yyyy");
+        }
+
+        // ════════════════════════════════════════════════════════════════════
+        //  POPULATE CARDS
         // ════════════════════════════════════════════════════════════════════
         private void PopulateUserCards()
         {
@@ -58,7 +98,7 @@ namespace inventory_ni_Percie
                     bool roleOk = _filterRole == "All" || u.Role == _filterRole;
                     bool statusOk = _filterStatus == "All" || u.Status == _filterStatus;
                     bool searchOk = string.IsNullOrEmpty(search)
-                        || u.Name.ToLower().Contains(search)
+                        || u.FullName.ToLower().Contains(search)
                         || u.Username.ToLower().Contains(search)
                         || u.Role.ToLower().Contains(search);
                     if (!roleOk || !statusOk || !searchOk) continue;
@@ -70,7 +110,14 @@ namespace inventory_ni_Percie
                     Height = 83,
                     Margin = new Padding(0)
                 };
-                card.SetUserData(u.Id, u.Name, u.Username, u.Role, u.Status, u.Login);
+
+                card.SetUserData(
+                    u.Id.ToString(),
+                    u.FullName,
+                    u.Username,
+                    u.Role,
+                    u.Status,
+                    FormatLastLogin(u.LastLogin));
 
                 if (_showingArchive)
                 {
@@ -94,12 +141,11 @@ namespace inventory_ni_Percie
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  EDIT — opens FormEditUser with blur overlay
+        //  EDIT — opens FormEditUser, saves to DB on confirm
         // ════════════════════════════════════════════════════════════════════
         private void HandleEdit(UC_UserCard? card)
         {
             if (card == null) return;
-
             Form? mainForm = this.FindForm();
 
             var overlay = new FormBlurOverlay(mainForm ?? new Form());
@@ -115,22 +161,31 @@ namespace inventory_ni_Percie
 
             if (dlg.IsUpdated)
             {
-                // Update the record in the active list
-                var record = _activeUsers.Find(u => u.Id == card.UserID);
-                if (record != null)
+                if (!int.TryParse(card.UserID, out int uid)) return;
+
+                var updated = new UserModel
                 {
-                    record.Name = dlg.EditedFullName;
-                    record.Username = dlg.EditedUsername;
-                    record.Role = dlg.EditedRole;
-                    record.Status = dlg.EditedStatus;
-                }
-                UpdateSummaryCards();
-                PopulateUserCards();
+                    Id = uid,
+                    FullName = dlg.EditedFullName,
+                    Username = dlg.EditedUsername.TrimStart('@'),
+                    Role = dlg.EditedRole,
+                    Status = dlg.EditedStatus
+                };
+
+                bool ok = DatabaseManager.UpdateUser(
+                    updated,
+                    string.IsNullOrWhiteSpace(dlg.EditedPassword) ? null : dlg.EditedPassword);
+
+                if (!ok)
+                    MessageBox.Show("Failed to update user in database.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                RefreshFromDatabase();
             }
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  ADD USER — opens FormAddUser with blur overlay
+        //  ADD USER — saves to DB
         // ════════════════════════════════════════════════════════════════════
         private void btnAddUser_Click(object sender, EventArgs e)
         {
@@ -148,26 +203,33 @@ namespace inventory_ni_Percie
 
             if (dlg.IsAdded)
             {
-                // Generate a new ID
-                string newId = (_activeUsers.Count + _archivedUsers.Count + 1).ToString("D3");
-
-                _activeUsers.Add(new UserRecord
+                // Check for duplicate username
+                if (DatabaseManager.UserExists(dlg.NewUsername.TrimStart('@')))
                 {
-                    Id = newId,
-                    Name = dlg.NewFullName,
-                    Username = "@" + dlg.NewUsername.TrimStart('@'),
-                    Role = dlg.NewRole,
-                    Status = dlg.NewStatus,
-                    Login = "Just now"
-                });
+                    MessageBox.Show("That username already exists. Please choose a different one.",
+                        "Duplicate Username", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                UpdateSummaryCards();
-                PopulateUserCards();
+                var newUser = new UserModel
+                {
+                    FullName = dlg.NewFullName,
+                    Username = dlg.NewUsername.TrimStart('@'),
+                    Role = dlg.NewRole,
+                    Status = dlg.NewStatus
+                };
+
+                bool ok = DatabaseManager.AddUser(newUser, dlg.NewPassword);
+                if (!ok)
+                    MessageBox.Show("Failed to add user to database.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                RefreshFromDatabase();
             }
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  ARCHIVE — overlay + amber modal → move to archived list
+        //  ARCHIVE — sets status to Inactive in DB
         // ════════════════════════════════════════════════════════════════════
         private void HandleArchiveClick(UC_UserCard? card)
         {
@@ -186,19 +248,28 @@ namespace inventory_ni_Percie
 
             if (modal.IsConfirmed)
             {
-                var record = _activeUsers.Find(u => u.Id == card.UserID);
-                if (record != null)
+                if (!int.TryParse(card.UserID, out int uid)) return;
+
+                var user = _activeUsers.Find(u => u.Id == uid);
+                if (user != null)
                 {
-                    _activeUsers.Remove(record);
-                    _archivedUsers.Add(record);
-                    UpdateSummaryCards();
-                    PopulateUserCards();
+                    var updated = new UserModel
+                    {
+                        Id = user.Id,
+                        FullName = user.FullName,
+                        Username = user.Username,
+                        Role = user.Role,
+                        Status = "Inactive"   // Archive = set Inactive
+                    };
+                    DatabaseManager.UpdateUser(updated, null);
                 }
+
+                RefreshFromDatabase();
             }
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  PERMANENT DELETE — overlay + red modal → remove forever
+        //  PERMANENT DELETE — removes from DB entirely
         // ════════════════════════════════════════════════════════════════════
         private void HandlePermanentDelete(UC_UserCard? card)
         {
@@ -217,31 +288,39 @@ namespace inventory_ni_Percie
 
             if (modal.IsConfirmed)
             {
-                var record = _archivedUsers.Find(u => u.Id == card.UserID);
-                if (record != null)
-                {
-                    _archivedUsers.Remove(record);
-                    PopulateUserCards();
-                }
+                if (int.TryParse(card.UserID, out int uid))
+                    DatabaseManager.DeleteUser(uid);
+
+                RefreshFromDatabase();
             }
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  RESTORE
+        //  RESTORE — sets status back to Active in DB
         // ════════════════════════════════════════════════════════════════════
         private void HandleRestore(UC_UserCard? card)
         {
             if (card == null) return;
-            var record = _archivedUsers.Find(u => u.Id == card.UserID);
-            if (record == null) return;
+            if (!int.TryParse(card.UserID, out int uid)) return;
 
-            if (MessageBox.Show($"Restore {record.Name}?", "Restore User",
+            if (MessageBox.Show($"Restore {card.FullName}?", "Restore User",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                _archivedUsers.Remove(record);
-                _activeUsers.Add(record);
-                UpdateSummaryCards();
-                PopulateUserCards();
+                var user = _archivedUsers.Find(u => u.Id == uid);
+                if (user != null)
+                {
+                    var updated = new UserModel
+                    {
+                        Id = user.Id,
+                        FullName = user.FullName,
+                        Username = user.Username,
+                        Role = user.Role,
+                        Status = "Active"
+                    };
+                    DatabaseManager.UpdateUser(updated, null);
+                }
+
+                RefreshFromDatabase();
             }
         }
 
@@ -253,9 +332,9 @@ namespace inventory_ni_Percie
             int total = _activeUsers.Count, admin = 0, staff = 0, cashier = 0;
             foreach (var u in _activeUsers)
             {
-                if (u.Role is "Super Admin" or "Admin") admin++;
-                if (u.Role is "Assessor" or "Inventory" or "POS Cashier") staff++;
-                if (u.Role == "POS Cashier") cashier++;
+                if (u.Role is "SuperAdmin" or "Admin") admin++;
+                if (u.Role is "Assessor" or "Inventory" or "POSCashier") staff++;
+                if (u.Role == "POSCashier") cashier++;
             }
             lblTotalUsersVal.Text = total.ToString();
             lblAdminVal.Text = admin.ToString();
@@ -309,10 +388,13 @@ namespace inventory_ni_Percie
 
             cms.Items.Add(new ToolStripLabel("  BY ROLE")
             { Font = new Font("Segoe UI", 7.5f, FontStyle.Bold), ForeColor = Color.FromArgb(148, 163, 184) });
-            foreach (var role in new[] { "All", "Super Admin", "Assessor", "POS Cashier", "Inventory" })
+
+            // Role names match EXACTLY what's stored in the DB ENUM
+            foreach (var role in new[] { "All", "SuperAdmin", "Admin", "Assessor", "POSCashier", "Inventory" })
             {
                 string r = role; bool marked = (r == _filterRole);
-                var item = new ToolStripMenuItem(r == "All" ? "  All Roles" : "  " + r)
+                string label = r == "All" ? "  All Roles" : "  " + r;
+                var item = new ToolStripMenuItem(label)
                 {
                     Font = marked ? new Font("Segoe UI", 9f, FontStyle.Bold) : new Font("Segoe UI", 9f),
                     BackColor = marked ? Color.FromArgb(239, 246, 255) : Color.White
@@ -325,7 +407,8 @@ namespace inventory_ni_Percie
 
             cms.Items.Add(new ToolStripLabel("  BY STATUS")
             { Font = new Font("Segoe UI", 7.5f, FontStyle.Bold), ForeColor = Color.FromArgb(148, 163, 184) });
-            foreach (var status in new[] { "All", "Active", "Inactive" })
+
+            foreach (var status in new[] { "All", "Active", "Inactive", "Suspended" })
             {
                 string st = status; bool marked = (st == _filterStatus);
                 var item = new ToolStripMenuItem(st == "All" ? "  All Statuses" : "  " + st)
@@ -340,7 +423,13 @@ namespace inventory_ni_Percie
             cms.Items.Add(new ToolStripSeparator());
             var clear = new ToolStripMenuItem("  Clear All Filters")
             { ForeColor = Color.FromArgb(220, 38, 38), Font = new Font("Segoe UI", 9f, FontStyle.Bold) };
-            clear.Click += (_, __) => { _filterRole = "All"; _filterStatus = "All"; txt_Search.Text = ""; PopulateUserCards(); };
+            clear.Click += (_, __) =>
+            {
+                _filterRole = "All";
+                _filterStatus = "All";
+                txt_Search.Text = "";
+                PopulateUserCards();
+            };
             cms.Items.Add(clear);
             cms.Show(btnFilter, new Point(0, btnFilter.Height + 4));
         }
@@ -354,7 +443,5 @@ namespace inventory_ni_Percie
                 if (c is UC_UserCard uc)
                     uc.Width = flpUserList.ClientSize.Width - 4;
         }
-
-        private void UC_Users_Load(object sender, EventArgs e) { }
     }
 }

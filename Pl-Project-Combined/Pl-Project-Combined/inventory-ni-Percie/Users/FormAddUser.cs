@@ -1,28 +1,32 @@
-﻿using System;
+﻿// ═══════════════════════════════════════
+// FILE: FormAddUser.cs
+// Fix: cmbRole shows display names ("Super Admin") but saves DB values ("SuperAdmin")
+// ═══════════════════════════════════════
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 
 namespace inventory_ni_Percie
 {
-    /// <summary>
-    /// Add New User modal — add as a Windows Form (FormBorderStyle.None).
-    ///
-    /// Usage in UC_Users:
-    ///   var overlay = new FormBlurOverlay(mainForm);
-    ///   overlay.Show(mainForm);
-    ///   using var dlg = new FormAddUser();
-    ///   dlg.ShowDialog(mainForm);
-    ///   overlay.Close(); overlay.Dispose();
-    ///   if (dlg.IsAdded) { /* use dlg.NewFullName etc. */ }
-    /// </summary>
     public partial class FormAddUser : Form
     {
+        // ── Maps display label → DB ENUM value ───────────────────────────────
+        private static readonly Dictionary<string, string> RoleMap = new()
+        {
+            { "Super Admin",  "SuperAdmin"  },
+            { "Admin",        "Admin"       },
+            { "Assessor",     "Assessor"    },
+            { "POS Cashier",  "POSCashier"  },
+            { "Inventory",    "Inventory"   },
+        };
+
         // ── Output properties ─────────────────────────────────────────────────
         public bool IsAdded { get; private set; }
         public string NewFullName { get; private set; } = "";
         public string NewUsername { get; private set; } = "";
-        public string NewRole { get; private set; } = "";
+        public string NewRole { get; private set; } = "";   // DB value
         public string NewStatus { get; private set; } = "";
         public string NewPassword { get; private set; } = "";
 
@@ -46,7 +50,7 @@ namespace inventory_ni_Percie
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  USERNAME VALIDATION INDICATOR
+        //  USERNAME INDICATOR
         // ════════════════════════════════════════════════════════════════════
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
@@ -67,6 +71,12 @@ namespace inventory_ni_Percie
             if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 MessageBox.Show("Username is required.", "Validation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (cmbRole.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a role.", "Validation",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
@@ -92,10 +102,13 @@ namespace inventory_ni_Percie
         {
             if (!Validate_Fields()) return;
 
+            string displayRole = cmbRole.SelectedItem?.ToString() ?? "";
+
             NewFullName = txtFullName.Text.Trim();
-            NewUsername = txtUsername.Text.Trim();
-            NewRole = cmbRole.SelectedItem?.ToString() ?? "";
-            NewStatus = cmbStatus.SelectedItem?.ToString() ?? "";
+            NewUsername = txtUsername.Text.Trim().TrimStart('@');
+            // Convert display label → DB ENUM value
+            NewRole = RoleMap.TryGetValue(displayRole, out string? dbRole) ? dbRole : displayRole;
+            NewStatus = cmbStatus.SelectedItem?.ToString() ?? "Active";
             NewPassword = txtPassword.Text;
             IsAdded = true;
 

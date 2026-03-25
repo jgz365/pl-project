@@ -1,4 +1,10 @@
-﻿using System;
+﻿// ═══════════════════════════════════════
+// FILE: FormEditUser.cs
+// Fix: cmbRole shows display names ("Super Admin") but saves DB values ("SuperAdmin")
+//      SetUserData maps DB value → display label so the dropdown pre-selects correctly
+// ═══════════════════════════════════════
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
@@ -7,22 +13,35 @@ namespace inventory_ni_Percie
 {
     public partial class FormEditUser : Form
     {
-        // ── Precise heights based on actual content layout ────────────────────
-        // Collapsed: titlebar(60) + divider(1) + FullName(76) + Username(84) +
-        //            RoleStatus(112) + Checkbox(52) + Buttons(70) + padding(30)
+        // ── Display label ↔ DB ENUM value ────────────────────────────────────
+        private static readonly Dictionary<string, string> RoleToDb = new()
+        {
+            { "Super Admin",  "SuperAdmin"  },
+            { "Admin",        "Admin"       },
+            { "Assessor",     "Assessor"    },
+            { "POS Cashier",  "POSCashier"  },
+            { "Inventory",    "Inventory"   },
+        };
+
+        private static readonly Dictionary<string, string> DbToRole = new()
+        {
+            { "SuperAdmin",  "Super Admin"  },
+            { "Admin",       "Admin"        },
+            { "Assessor",    "Assessor"     },
+            { "POSCashier",  "POS Cashier"  },
+            { "Inventory",   "Inventory"    },
+        };
+
+        // ── Heights ───────────────────────────────────────────────────────────
         private const int COLLAPSED_HEIGHT = 505;
-
-        // Expanded adds: Password(74) + ConfirmPassword(74) + ShowPwd(52) = 200
         private const int EXPANDED_HEIGHT = 705;
-
-        // Y position of the buttons panel (absolute, not docked)
         private const int BUTTONS_Y_COLLAPSED = 430;
         private const int BUTTONS_Y_EXPANDED = 630;
 
         public bool IsUpdated { get; private set; }
         public string EditedFullName { get; private set; } = "";
         public string EditedUsername { get; private set; } = "";
-        public string EditedRole { get; private set; } = "";
+        public string EditedRole { get; private set; } = "";   // DB value
         public string EditedStatus { get; private set; } = "";
         public string EditedPassword { get; private set; } = "";
 
@@ -32,20 +51,24 @@ namespace inventory_ni_Percie
         public FormEditUser()
         {
             InitializeComponent();
-
-            // Start collapsed — password section hidden, buttons at collapsed position
             pnlPasswordSection.Visible = false;
             pnlButtons.Location = new Point(0, BUTTONS_Y_COLLAPSED);
             this.ClientSize = new Size(460, COLLAPSED_HEIGHT);
         }
 
+        // ════════════════════════════════════════════════════════════════════
+        //  SET DATA — called by UC_Users before ShowDialog
+        //  role parameter is the DB value (e.g. "POSCashier")
+        // ════════════════════════════════════════════════════════════════════
         public void SetUserData(string id, string fullName, string username,
                                 string role, string status)
         {
             txtFullName.Text = fullName;
             txtUsername.Text = username.TrimStart('@');
 
-            cmbRole.SelectedItem = role;
+            // Convert DB value → display label for the combo
+            string displayRole = DbToRole.TryGetValue(role, out string? dr) ? dr : role;
+            cmbRole.SelectedItem = displayRole;
             if (cmbRole.SelectedIndex < 0) cmbRole.SelectedIndex = 0;
 
             cmbStatus.SelectedItem = status;
@@ -53,17 +76,15 @@ namespace inventory_ni_Percie
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  CHANGE PASSWORD TOGGLE — expand/collapse form height
+        //  CHANGE PASSWORD TOGGLE
         // ════════════════════════════════════════════════════════════════════
         private void chkChangePassword_CheckedChanged(object sender, EventArgs e)
         {
             bool expanding = chkChangePassword.Checked;
-
             pnlPasswordSection.Visible = expanding;
             pnlButtons.Location = new Point(0, expanding ? BUTTONS_Y_EXPANDED : BUTTONS_Y_COLLAPSED);
             this.ClientSize = new Size(460, expanding ? EXPANDED_HEIGHT : COLLAPSED_HEIGHT);
 
-            // Re-centre on screen after resize
             int x = (Screen.PrimaryScreen!.WorkingArea.Width - this.Width) / 2;
             int y = (Screen.PrimaryScreen!.WorkingArea.Height - this.Height) / 2;
             this.Location = new Point(x, y);
@@ -80,7 +101,7 @@ namespace inventory_ni_Percie
         }
 
         // ════════════════════════════════════════════════════════════════════
-        //  USERNAME CHECK INDICATOR
+        //  USERNAME INDICATOR
         // ════════════════════════════════════════════════════════════════════
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
@@ -101,6 +122,12 @@ namespace inventory_ni_Percie
             if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 MessageBox.Show("Username is required.", "Validation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (cmbRole.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a role.", "Validation",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
@@ -129,9 +156,12 @@ namespace inventory_ni_Percie
         {
             if (!ValidateFields()) return;
 
+            string displayRole = cmbRole.SelectedItem?.ToString() ?? "";
+
             EditedFullName = txtFullName.Text.Trim();
-            EditedUsername = txtUsername.Text.Trim();
-            EditedRole = cmbRole.SelectedItem?.ToString() ?? "";
+            EditedUsername = txtUsername.Text.Trim().TrimStart('@');
+            // Convert display label → DB ENUM value
+            EditedRole = RoleToDb.TryGetValue(displayRole, out string? dbRole) ? dbRole : displayRole;
             EditedStatus = cmbStatus.SelectedItem?.ToString() ?? "";
             EditedPassword = chkChangePassword.Checked ? txtPassword.Text : "";
             IsUpdated = true;
