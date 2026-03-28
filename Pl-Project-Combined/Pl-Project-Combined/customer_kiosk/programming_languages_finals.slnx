@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 <Solution>
   <Project Path="customer_kiosk/customer_kiosk.csproj" />
 </Solution>
+=======
+<Solution>
+  <Project Path="customer_kiosk/customer_kiosk.csproj" />
+</Solution>
+>>>>>>> 8103f024413860c46c3315782101728e2c33bdf1
