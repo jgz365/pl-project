@@ -13,7 +13,7 @@ namespace MotoDealerShop
         private void CustomerKioskButton_Click(object sender, EventArgs e)
         {
             // 1. Create the new screen (from ck.cs)
-            ck customerKiosk = new ck();
+            main_menu customerKiosk = new main_menu();
 
             // 2. Show the new screen
             customerKiosk.Show();

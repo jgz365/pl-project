@@ -261,8 +261,8 @@
             // 
             // PaymentConfigurationForm2
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(248, 250, 252);
             Controls.Add(pnlBackground);
             Margin = new Padding(3, 4, 3, 4);
