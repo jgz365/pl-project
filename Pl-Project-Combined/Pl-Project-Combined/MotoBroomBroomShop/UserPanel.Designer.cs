@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             StaffAccessButton = new Guna.UI2.WinForms.Guna2TileButton();
@@ -75,17 +75,17 @@
             // 
             guna2Panel1.BackColor = Color.FromArgb(15, 23, 42);
             guna2Panel1.Controls.Add(StaffAccessButton);
-            guna2Panel1.CustomizableEdges = customizableEdges27;
+            guna2Panel1.CustomizableEdges = customizableEdges13;
             guna2Panel1.Location = new Point(-17, 980);
             guna2Panel1.Margin = new Padding(3, 4, 3, 4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2Panel1.Size = new Size(1746, 97);
             guna2Panel1.TabIndex = 0;
             // 
             // StaffAccessButton
             // 
-            StaffAccessButton.CustomizableEdges = customizableEdges25;
+            StaffAccessButton.CustomizableEdges = customizableEdges11;
             StaffAccessButton.DisabledState.BorderColor = Color.DarkGray;
             StaffAccessButton.DisabledState.CustomBorderColor = Color.DarkGray;
             StaffAccessButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -96,16 +96,17 @@
             StaffAccessButton.Location = new Point(1572, 25);
             StaffAccessButton.Margin = new Padding(3, 4, 3, 4);
             StaffAccessButton.Name = "StaffAccessButton";
-            StaffAccessButton.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            StaffAccessButton.ShadowDecoration.CustomizableEdges = customizableEdges12;
             StaffAccessButton.Size = new Size(146, 45);
             StaffAccessButton.TabIndex = 0;
             StaffAccessButton.Text = "Staff Access";
+            StaffAccessButton.Click += StaffAccessButton_Click;
             // 
             // CustomerKioskButton
             // 
             CustomerKioskButton.BackColor = Color.Transparent;
             CustomerKioskButton.BorderRadius = 25;
-            CustomerKioskButton.CustomizableEdges = customizableEdges23;
+            CustomerKioskButton.CustomizableEdges = customizableEdges9;
             CustomerKioskButton.DisabledState.BorderColor = Color.DarkGray;
             CustomerKioskButton.DisabledState.CustomBorderColor = Color.DarkGray;
             CustomerKioskButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -116,7 +117,7 @@
             CustomerKioskButton.Location = new Point(239, 220);
             CustomerKioskButton.Margin = new Padding(3, 4, 3, 4);
             CustomerKioskButton.Name = "CustomerKioskButton";
-            CustomerKioskButton.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            CustomerKioskButton.ShadowDecoration.CustomizableEdges = customizableEdges10;
             CustomerKioskButton.Size = new Size(627, 473);
             CustomerKioskButton.TabIndex = 1;
             CustomerKioskButton.Click += CustomerKioskButton_Click;
@@ -125,7 +126,7 @@
             // 
             MyAccountButton.BackColor = Color.Transparent;
             MyAccountButton.BorderRadius = 25;
-            MyAccountButton.CustomizableEdges = customizableEdges21;
+            MyAccountButton.CustomizableEdges = customizableEdges7;
             MyAccountButton.DisabledState.BorderColor = Color.DarkGray;
             MyAccountButton.DisabledState.CustomBorderColor = Color.DarkGray;
             MyAccountButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -137,7 +138,7 @@
             MyAccountButton.Margin = new Padding(3, 4, 3, 4);
             MyAccountButton.Name = "MyAccountButton";
             MyAccountButton.RightToLeft = RightToLeft.Yes;
-            MyAccountButton.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            MyAccountButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
             MyAccountButton.Size = new Size(610, 473);
             MyAccountButton.TabIndex = 2;
             MyAccountButton.Click += MyAccountButton_Click;
@@ -146,12 +147,12 @@
             // 
             MotoDealerShopLogo.BackColor = Color.Transparent;
             MotoDealerShopLogo.BorderRadius = 8;
-            MotoDealerShopLogo.CustomizableEdges = customizableEdges19;
+            MotoDealerShopLogo.CustomizableEdges = customizableEdges5;
             MotoDealerShopLogo.ImageRotate = 0F;
             MotoDealerShopLogo.Location = new Point(27, 29);
             MotoDealerShopLogo.Margin = new Padding(3, 4, 3, 4);
             MotoDealerShopLogo.Name = "MotoDealerShopLogo";
-            MotoDealerShopLogo.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            MotoDealerShopLogo.ShadowDecoration.CustomizableEdges = customizableEdges6;
             MotoDealerShopLogo.Size = new Size(51, 60);
             MotoDealerShopLogo.TabIndex = 3;
             MotoDealerShopLogo.TabStop = false;
@@ -161,12 +162,12 @@
             // 
             CustomerKioskLogo.BackColor = Color.FromArgb(41, 93, 224);
             CustomerKioskLogo.BorderRadius = 8;
-            CustomerKioskLogo.CustomizableEdges = customizableEdges17;
+            CustomerKioskLogo.CustomizableEdges = customizableEdges3;
             CustomerKioskLogo.ImageRotate = 0F;
             CustomerKioskLogo.Location = new Point(302, 257);
             CustomerKioskLogo.Margin = new Padding(3, 4, 3, 4);
             CustomerKioskLogo.Name = "CustomerKioskLogo";
-            CustomerKioskLogo.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            CustomerKioskLogo.ShadowDecoration.CustomizableEdges = customizableEdges4;
             CustomerKioskLogo.Size = new Size(63, 73);
             CustomerKioskLogo.TabIndex = 4;
             CustomerKioskLogo.TabStop = false;
@@ -175,12 +176,12 @@
             // 
             MyAccountLogo.BackColor = Color.FromArgb(79, 69, 218);
             MyAccountLogo.BorderRadius = 8;
-            MyAccountLogo.CustomizableEdges = customizableEdges15;
+            MyAccountLogo.CustomizableEdges = customizableEdges1;
             MyAccountLogo.ImageRotate = 0F;
             MyAccountLogo.Location = new Point(905, 257);
             MyAccountLogo.Margin = new Padding(3, 4, 3, 4);
             MyAccountLogo.Name = "MyAccountLogo";
-            MyAccountLogo.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            MyAccountLogo.ShadowDecoration.CustomizableEdges = customizableEdges2;
             MyAccountLogo.Size = new Size(63, 73);
             MyAccountLogo.TabIndex = 5;
             MyAccountLogo.TabStop = false;
@@ -240,7 +241,7 @@
             design1.BackColor = Color.Transparent;
             design1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             design1.ForeColor = Color.DimGray;
-            design1.Location = new Point(920, 156);
+            design1.Location = new Point(935, 156);
             design1.Name = "design1";
             design1.Size = new Size(579, 20);
             design1.TabIndex = 10;
@@ -252,7 +253,7 @@
             design2.BackColor = Color.Transparent;
             design2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             design2.ForeColor = Color.DimGray;
-            design2.Location = new Point(334, 156);
+            design2.Location = new Point(198, 156);
             design2.Name = "design2";
             design2.Size = new Size(579, 20);
             design2.TabIndex = 11;

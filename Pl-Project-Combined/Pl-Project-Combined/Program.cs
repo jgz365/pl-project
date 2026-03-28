@@ -1,17 +1,43 @@
+// ═══════════════════════════════════════
+// FILE: Program.cs
+// PURPOSE: App entry point — init DB first, then open LoginUiForm
+// ═══════════════════════════════════════
+using inventory_ni_Percie;
+using System;
+using System.Windows.Forms;
+
 namespace Pl_Project_Combined
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             ApplicationConfiguration.Initialize();
-            Application.Run(new MotoDealerShop.UserPanel());
+
+            // ── STEP 1: Initialize the database BEFORE showing any form ──
+            // This creates the DB, tables, and seeds superadmin + admin
+            // if they don't exist yet. Shows a user-friendly error if
+            // XAMPP/MySQL is not running.
+            try
+            {
+                DatabaseManager.Initialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Could not connect to the database.\n\n" +
+                    $"Make sure XAMPP is running and MySQL is started.\n\n" +
+                    $"Error: {ex.Message}",
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return; // Exit — no point opening the app without a DB
+            }
+
+            // ── STEP 2: Open the login form ──
+            Application.Run(new Pl_Project_Combined.Assessor_Eddion.LoginUiForm());
         }
     }
 }

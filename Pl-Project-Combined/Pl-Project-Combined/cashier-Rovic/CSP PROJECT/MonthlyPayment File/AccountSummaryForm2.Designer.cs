@@ -448,8 +448,8 @@ namespace POSCashierSystem
             // 
             // AccountSummaryForm2
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(242, 245, 250);
             Controls.Add(pnlBackground);
             Name = "AccountSummaryForm2";

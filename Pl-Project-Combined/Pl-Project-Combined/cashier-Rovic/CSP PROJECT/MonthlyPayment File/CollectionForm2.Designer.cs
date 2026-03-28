@@ -461,8 +461,8 @@
             btnProcess.Click += BtnProcess_Click;
 
             // ─── CollectionForm2 ──────────────────────────────────────────────
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             BackColor = System.Drawing.Color.FromArgb(241, 245, 249);
             Controls.Add(pnlRoot);
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
