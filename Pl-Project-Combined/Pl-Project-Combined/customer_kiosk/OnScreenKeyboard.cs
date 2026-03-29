@@ -9,21 +9,48 @@ namespace customer_kiosk
 {
     internal sealed class OnScreenKeyboard : Guna2Panel
     {
+        private enum KeyboardMode
+        {
+            Full,
+            Numeric
+        }
+
         private readonly TableLayoutPanel layout;
         private readonly System.Windows.Forms.Timer backspaceHoldTimer;
         private readonly List<Guna2Button> characterKeys = new();
+        private Guna2TextBox? targetTextBox;
         private Guna2Button? capsLockKey;
         private Guna2Button? backspaceKey;
         private bool isCapsLockEnabled;
         private bool isBackspacePressed;
         private int backspaceHoldTicks;
+        private KeyboardMode currentMode = KeyboardMode.Full;
 
         private const int BackspaceInitialDelayTicks = 2;
 
         public event EventHandler? CloseRequested;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Guna2TextBox? TargetTextBox { get; set; }
+        public Guna2TextBox? TargetTextBox
+        {
+            get => targetTextBox;
+            set
+            {
+                targetTextBox = value;
+
+                var nextMode = ShouldUseNumericMode(value)
+                    ? KeyboardMode.Numeric
+                    : KeyboardMode.Full;
+
+                if (nextMode == currentMode)
+                {
+                    return;
+                }
+
+                currentMode = nextMode;
+                BuildKeys();
+            }
+        }
 
         public OnScreenKeyboard()
         {
@@ -36,20 +63,8 @@ namespace customer_kiosk
             layout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 11,
-                RowCount = 6,
                 BackColor = Color.Transparent
             };
-
-            for (int col = 0; col < 11; col++)
-            {
-                layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / 11f));
-            }
-
-            for (int row = 0; row < 6; row++)
-            {
-                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / 6f));
-            }
 
             Controls.Add(layout);
 
@@ -61,6 +76,30 @@ namespace customer_kiosk
 
         private void BuildKeys()
         {
+            layout.SuspendLayout();
+            layout.Controls.Clear();
+            characterKeys.Clear();
+            capsLockKey = null;
+            backspaceKey = null;
+            isCapsLockEnabled = false;
+
+            if (currentMode == KeyboardMode.Numeric)
+            {
+                BuildNumericKeys();
+            }
+            else
+            {
+                BuildFullKeys();
+            }
+
+            layout.ResumeLayout();
+            UpdateCharacterKeyLabels();
+        }
+
+        private void BuildFullKeys()
+        {
+            ConfigureGrid(11, 6);
+
             AddCharacterRow("!@#$%^&*()", 0);
             AddNumberRow(1);
 
@@ -76,6 +115,12 @@ namespace customer_kiosk
             AddCharacterRow("ASDFGHJKL", 3, 1);
             AddCharacterRow("ZXCVBNM", 4, 1);
 
+            var commaKey = CreateCharacterKey(",", ",", "<");
+            layout.Controls.Add(commaKey, 8, 4);
+
+            var periodKey = CreateCharacterKey(".", ".", ">");
+            layout.Controls.Add(periodKey, 9, 4);
+
             var capsLock = CreateActionKey("Caps", ToggleCapsLock);
             layout.Controls.Add(capsLock, 0, 3);
             capsLockKey = capsLock;
@@ -90,9 +135,130 @@ namespace customer_kiosk
             var done = CreateActionKey("Done", RequestClose);
             done.FillColor = Color.FromArgb(59, 130, 246);
             layout.Controls.Add(done, 10, 2);
-            layout.SetRowSpan(done, 4);
+        }
 
-            UpdateCharacterKeyLabels();
+        private void BuildNumericKeys()
+        {
+            ConfigureGrid(4, 4);
+
+            AddNumericKey("7", 0, 0);
+            AddNumericKey("8", 1, 0);
+            AddNumericKey("9", 2, 0);
+
+            var backspace = CreateActionKey("⌫", Backspace);
+            backspace.MouseDown += BackspaceTop_MouseDown;
+            backspace.MouseUp += BackspaceTop_MouseUp;
+            backspace.MouseCaptureChanged += BackspaceTop_MouseCaptureChanged;
+            backspaceKey = backspace;
+            layout.Controls.Add(backspace, 3, 0);
+
+            AddNumericKey("4", 0, 1);
+            AddNumericKey("5", 1, 1);
+            AddNumericKey("6", 2, 1);
+
+            var clear = CreateActionKey("Clear", ClearText);
+            layout.Controls.Add(clear, 3, 1);
+
+            AddNumericKey("1", 0, 2);
+            AddNumericKey("2", 1, 2);
+            AddNumericKey("3", 2, 2);
+
+            var done = CreateActionKey("Done", RequestClose);
+            done.FillColor = Color.FromArgb(59, 130, 246);
+            layout.Controls.Add(done, 3, 2);
+
+            var zero = CreateCharacterKey("0");
+            layout.Controls.Add(zero, 0, 3);
+            layout.SetColumnSpan(zero, 3);
+
+            var close = CreateActionKey("Close", RequestClose);
+            layout.Controls.Add(close, 3, 3);
+        }
+
+        private void ConfigureGrid(int columnCount, int rowCount)
+        {
+            layout.ColumnStyles.Clear();
+            layout.RowStyles.Clear();
+            layout.ColumnCount = columnCount;
+            layout.RowCount = rowCount;
+
+            for (int col = 0; col < columnCount; col++)
+            {
+                layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / columnCount));
+            }
+
+            for (int row = 0; row < rowCount; row++)
+            {
+                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / rowCount));
+            }
+        }
+
+        private void AddNumericKey(string text, int column, int row)
+        {
+            var key = CreateCharacterKey(text);
+            layout.Controls.Add(key, column, row);
+        }
+
+        private static bool ShouldUseNumericMode(Guna2TextBox? textBox)
+        {
+            if (textBox == null)
+            {
+                return false;
+            }
+
+            if (textBox.Tag is string tag)
+            {
+                if (string.Equals(tag, "numeric", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                if (string.Equals(tag, "text", StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+            }
+
+            string name = textBox.Name?.ToLowerInvariant() ?? string.Empty;
+            string[] numericHints =
+            {
+                "mobile", "phone", "pin", "otp", "number", "years",
+                "income", "amount", "price", "percent", "qty", "quantity"
+            };
+
+            foreach (var hint in numericHints)
+            {
+                if (name.Contains(hint, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            string sample = !string.IsNullOrWhiteSpace(textBox.PlaceholderText)
+                ? textBox.PlaceholderText
+                : textBox.Text;
+
+            if (string.IsNullOrWhiteSpace(sample))
+            {
+                return false;
+            }
+
+            foreach (char c in sample)
+            {
+                if (char.IsDigit(c))
+                {
+                    continue;
+                }
+
+                if (" +-().,/%".Contains(c, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                return false;
+            }
+
+            return true;
         }
 
         private void AddNumberRow(int row)
@@ -148,11 +314,11 @@ namespace customer_kiosk
             return new Guna2Button
             {
                 Dock = DockStyle.Fill,
-                Margin = new Padding(4),
+                Margin = new Padding(2),
                 BorderRadius = 8,
                 FillColor = Color.FromArgb(30, 41, 59),
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI", 13F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 14F, FontStyle.Bold),
                 TabStop = false
             };
         }
@@ -200,7 +366,7 @@ namespace customer_kiosk
                 if (keyData.Item1.Length == 1 && keyData.Item2.Length == 1 &&
                     char.IsDigit(keyData.Item1[0]) && !char.IsLetterOrDigit(keyData.Item2[0]))
                 {
-                    key.Text = $"{keyData.Item2}\n{keyData.Item1}";
+                    key.Text = $"{EscapeMnemonic(keyData.Item2)}\n{EscapeMnemonic(keyData.Item1)}";
                     continue;
                 }
 
@@ -208,13 +374,13 @@ namespace customer_kiosk
                 char character = value[0];
                 if (!char.IsLetter(character))
                 {
-                    key.Text = value;
+                    key.Text = EscapeMnemonic(value);
                     continue;
                 }
 
-                key.Text = isCapsLockEnabled
+                key.Text = EscapeMnemonic(isCapsLockEnabled
                     ? value.ToUpperInvariant()
-                    : value.ToLowerInvariant();
+                    : value.ToLowerInvariant());
             }
 
             if (capsLockKey != null)
@@ -223,6 +389,11 @@ namespace customer_kiosk
                     ? Color.FromArgb(59, 130, 246)
                     : Color.FromArgb(30, 41, 59);
             }
+            }
+
+        private static string EscapeMnemonic(string value)
+        {
+            return value.Replace("&", "&&");
         }
 
         private void InsertSpace()

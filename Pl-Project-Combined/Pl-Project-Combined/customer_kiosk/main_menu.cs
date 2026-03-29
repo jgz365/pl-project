@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace customer_kiosk
 {
     public partial class main_menu : Form
@@ -5,10 +7,11 @@ namespace customer_kiosk
         // Web catalog host.
         private Microsoft.Web.WebView2.WinForms.WebView2? webCatalog;
         private redirect_application? redirectApplicationView;
+        private Button? hiddenAssessorSwitchButton;
 
         // One-time guards.
         private bool webCatalogInitialized;
-        private bool resolutionScaled;
+        private ResponsiveScaler? responsiveScaler;
 
         // Baseline design resolution used by manual scaling.
         private const float BaseWidth = 1920f;
@@ -18,10 +21,20 @@ namespace customer_kiosk
         private const int WebCatalogCornerRadius = 8;
         private const string ClockFormat = "dddd, MMMM dd, yyyy 'at' hh:mm tt";
 
+        private sealed class SelectedProductPayload
+        {
+            public string Title { get; init; } = string.Empty;
+            public string Sub { get; init; } = string.Empty;
+            public string Price { get; init; } = string.Empty;
+            public string ImageUrl { get; init; } = string.Empty;
+        }
+
         public main_menu()
         {
             InitializeComponent();
             ConfigureFormRenderingStyles();
+            EnsureHiddenAssessorSwitchButton();
+            Resize += MainMenu_ResizeForResponsiveScaling;
         }
 
         #region Form lifecycle
@@ -79,6 +92,74 @@ namespace customer_kiosk
             UpdateStyles();
         }
 
+        private void EnsureHiddenAssessorSwitchButton()
+        {
+            if (hiddenAssessorSwitchButton != null)
+            {
+                return;
+            }
+
+            hiddenAssessorSwitchButton = new Button
+            {
+                Name = "hidden_assessor_switch_button",
+                Size = new Size(18, 18),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.Transparent,
+                ForeColor = Color.Transparent,
+                Text = string.Empty,
+                TabStop = false,
+                UseVisualStyleBackColor = false,
+                Cursor = Cursors.Default
+            };
+
+            hiddenAssessorSwitchButton.FlatAppearance.BorderSize = 0;
+            hiddenAssessorSwitchButton.Click += HiddenAssessorSwitchButton_Click;
+
+            Controls.Add(hiddenAssessorSwitchButton);
+            PositionHiddenAssessorSwitchButton();
+            hiddenAssessorSwitchButton.BringToFront();
+
+            Resize -= MainMenu_ResizeForHiddenSwitch;
+            Resize += MainMenu_ResizeForHiddenSwitch;
+        }
+
+        private void MainMenu_ResizeForHiddenSwitch(object? sender, EventArgs e)
+        {
+            PositionHiddenAssessorSwitchButton();
+        }
+
+        private void PositionHiddenAssessorSwitchButton()
+        {
+            if (hiddenAssessorSwitchButton == null)
+            {
+                return;
+            }
+
+            hiddenAssessorSwitchButton.Location = new Point(ClientSize.Width - hiddenAssessorSwitchButton.Width - 8, 8);
+            hiddenAssessorSwitchButton.BringToFront();
+        }
+
+        private void HiddenAssessorSwitchButton_Click(object? sender, EventArgs e)
+        {
+            var assessorLogin = new Pl_Project_Combined.Assessor_Eddion.LoginUiForm
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            assessorLogin.FormClosed += (_, __) =>
+            {
+                if (!IsDisposed)
+                {
+                    Show();
+                    BringToFront();
+                }
+            };
+
+            Hide();
+            assessorLogin.Show();
+        }
+
         // Keeps the header clock text in one place.
         private void UpdateClock()
         {
@@ -91,63 +172,13 @@ namespace customer_kiosk
 
         private void ApplyResolutionScaling()
         {
-            if (resolutionScaled) return;
-
-            var screenBounds = Screen.FromControl(this).Bounds;
-            float scaleX = screenBounds.Width / BaseWidth;
-            float scaleY = screenBounds.Height / BaseHeight;
-
-            if (Math.Abs(scaleX - 1f) < 0.01f && Math.Abs(scaleY - 1f) < 0.01f)
-            {
-                resolutionScaled = true;
-                return;
-            }
-
-            SuspendLayout();
-            ScaleControlsRecursive(main_menu_gunapanel, scaleX, scaleY);
-            ResumeLayout(true);
-
-            resolutionScaled = true;
+            responsiveScaler ??= new ResponsiveScaler(main_menu_gunapanel, new Size((int)BaseWidth, (int)BaseHeight));
+            responsiveScaler.Apply(main_menu_gunapanel.ClientSize);
         }
 
-        private void ScaleControlsRecursive(Control parent, float scaleX, float scaleY)
+        private void MainMenu_ResizeForResponsiveScaling(object? sender, EventArgs e)
         {
-            foreach (Control control in parent.Controls)
-            {
-                if (control.Dock == DockStyle.None)
-                {
-                    control.Left = (int)Math.Round(control.Left * scaleX);
-                    control.Top = (int)Math.Round(control.Top * scaleY);
-                    control.Width = Math.Max(1, (int)Math.Round(control.Width * scaleX));
-                    control.Height = Math.Max(1, (int)Math.Round(control.Height * scaleY));
-                }
-
-                var scaledMargin = new Padding(
-                    (int)Math.Round(control.Margin.Left * scaleX),
-                    (int)Math.Round(control.Margin.Top * scaleY),
-                    (int)Math.Round(control.Margin.Right * scaleX),
-                    (int)Math.Round(control.Margin.Bottom * scaleY));
-                control.Margin = scaledMargin;
-
-                var scaledPadding = new Padding(
-                    (int)Math.Round(control.Padding.Left * scaleX),
-                    (int)Math.Round(control.Padding.Top * scaleY),
-                    (int)Math.Round(control.Padding.Right * scaleX),
-                    (int)Math.Round(control.Padding.Bottom * scaleY));
-                control.Padding = scaledPadding;
-
-                if (control.Font != null)
-                {
-                    float fontScale = Math.Min(scaleX, scaleY);
-                    float newSize = Math.Max(6f, control.Font.Size * fontScale);
-                    control.Font = new Font(control.Font.FontFamily, newSize, control.Font.Style);
-                }
-
-                if (control.HasChildren)
-                {
-                    ScaleControlsRecursive(control, scaleX, scaleY);
-                }
-            }
+            responsiveScaler?.Apply(main_menu_gunapanel.ClientSize);
         }
 
         #endregion
@@ -162,9 +193,9 @@ namespace customer_kiosk
             webCatalog.Resize += (s, e) => ApplyWebCatalogRoundedCorners();
 
             doubleBufferedFlowLayoutPanel1.Visible = false;
+            main_form_gSsidebar.Visible = false;
             main_menu_gunapanel.Controls.Add(webCatalog);
             webCatalog.BringToFront();
-            main_form_gSsidebar.BringToFront();
             main_menu_gunagradpanel.BringToFront();
 
             // Keep the start overlay on top while preloading happens in the background.
@@ -180,14 +211,18 @@ namespace customer_kiosk
 
         private Microsoft.Web.WebView2.WinForms.WebView2 CreateWebCatalogControl()
         {
+            int left = main_form_gSsidebar.Left;
+            int top = doubleBufferedFlowLayoutPanel1.Top;
+            int right = doubleBufferedFlowLayoutPanel1.Right;
+            int width = Math.Max(1, right - left);
+
             return new Microsoft.Web.WebView2.WinForms.WebView2
             {
                 DefaultBackgroundColor = Color.White,
                 Name = "main_menu_webview_catalog",
 
-                // Replace only the old product area (flow panel) while preserving header/sidebar.
-                Location = doubleBufferedFlowLayoutPanel1.Location,
-                Size = doubleBufferedFlowLayoutPanel1.Size,
+                Location = new Point(left, top),
+                Size = new Size(width, doubleBufferedFlowLayoutPanel1.Height),
                 Anchor = doubleBufferedFlowLayoutPanel1.Anchor
             };
         }
@@ -204,15 +239,66 @@ namespace customer_kiosk
 
         private void WebCatalog_WebMessageReceived(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
         {
-            if (!string.Equals(e.TryGetWebMessageAsString(), "open_redirect_application", StringComparison.Ordinal))
+            string message = e.TryGetWebMessageAsString();
+
+            if (string.Equals(message, "open_redirect_application", StringComparison.Ordinal))
+            {
+                ShowRedirectApplication();
+                return;
+            }
+
+            if (!TryParseOpenRedirectPayload(message, out SelectedProductPayload? selectedProduct))
             {
                 return;
             }
 
-            ShowRedirectApplication();
+            ShowRedirectApplication(selectedProduct);
         }
 
-        private void ShowRedirectApplication()
+        private static bool TryParseOpenRedirectPayload(string message, out SelectedProductPayload? payload)
+        {
+            payload = null;
+
+            if (string.IsNullOrWhiteSpace(message) || !message.TrimStart().StartsWith('{'))
+            {
+                return false;
+            }
+
+            try
+            {
+                using var json = JsonDocument.Parse(message);
+                var root = json.RootElement;
+
+                if (!root.TryGetProperty("action", out var actionElement) ||
+                    !string.Equals(actionElement.GetString(), "open_redirect_application", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+
+                if (!root.TryGetProperty("product", out var productElement) ||
+                    productElement.ValueKind != JsonValueKind.Object)
+                {
+                    payload = new SelectedProductPayload();
+                    return true;
+                }
+
+                payload = new SelectedProductPayload
+                {
+                    Title = productElement.TryGetProperty("title", out var title) ? title.GetString() ?? string.Empty : string.Empty,
+                    Sub = productElement.TryGetProperty("sub", out var sub) ? sub.GetString() ?? string.Empty : string.Empty,
+                    Price = productElement.TryGetProperty("price", out var price) ? price.GetString() ?? string.Empty : string.Empty,
+                    ImageUrl = productElement.TryGetProperty("imageUrl", out var imageUrl) ? imageUrl.GetString() ?? string.Empty : string.Empty
+                };
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void ShowRedirectApplication(SelectedProductPayload? selectedProduct = null)
         {
             if (redirectApplicationView == null || redirectApplicationView.IsDisposed)
             {
@@ -222,6 +308,15 @@ namespace customer_kiosk
                 };
 
                 main_menu_gunapanel.Controls.Add(redirectApplicationView);
+            }
+
+            if (selectedProduct != null)
+            {
+                redirectApplicationView.SetSelectedProduct(
+                    selectedProduct.Title,
+                    selectedProduct.Sub,
+                    selectedProduct.Price,
+                    selectedProduct.ImageUrl);
             }
 
             redirectApplicationView.BringToFront();
@@ -256,5 +351,6 @@ namespace customer_kiosk
         }
 
         #endregion
+
     }
 }

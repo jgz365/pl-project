@@ -246,7 +246,7 @@ namespace customer_kiosk
             // summaryPanel
             // 
             summaryPanel.BackColor = Color.FromArgb(11, 52, 120);
-            summaryPanel.BorderRadius = 12;
+            summaryPanel.BorderRadius = 26;
             summaryPanel.Controls.Add(summaryMonthlyPanel);
             summaryPanel.Controls.Add(summaryTotalValue);
             summaryPanel.Controls.Add(summaryTotalText);
@@ -740,7 +740,7 @@ namespace customer_kiosk
             productImagePanel.Location = new Point(12, 12);
             productImagePanel.Name = "productImagePanel";
             productImagePanel.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            productImagePanel.Size = new Size(140, 72);
+            productImagePanel.Size = new Size(134, 72);
             productImagePanel.TabIndex = 0;
             // 
             // leftFormPanel
@@ -785,7 +785,7 @@ namespace customer_kiosk
             btnNext.ShadowDecoration.CustomizableEdges = customizableEdges20;
             btnNext.Size = new Size(104, 36);
             btnNext.TabIndex = 16;
-            btnNext.Text = "Next  >";
+            btnNext.Text = "Next";
             // 
             // btnBack
             // 
@@ -801,7 +801,7 @@ namespace customer_kiosk
             btnBack.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnBack.Size = new Size(180, 36);
             btnBack.TabIndex = 15;
-            btnBack.Text = "<   Back to Inventory";
+            btnBack.Text = "Back to Inventory";
             // 
             // cbProvince
             // 

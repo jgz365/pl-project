@@ -37,7 +37,11 @@ namespace Pl_Project_Combined
             }
 
             // ── STEP 2: Open the login form ──
-            Application.Run(new Pl_Project_Combined.Assessor_Eddion.LoginUiForm());
+            //Application.Run(new Pl_Project_Combined.Assessor_Eddion.LoginUiForm());
+
+            // Temporarily launch the customer kiosk start screen (hosted in main_menu)
+            // Comment out the line above to revert back to the original LoginUiForm.
+            Application.Run(new customer_kiosk.main_menu());
         }
     }
 }
