@@ -28,86 +28,119 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            label2 = new Label();
-            label1 = new Label();
-            guna2GradientPanel1.SuspendLayout();
-            guna2Panel1.SuspendLayout();
+            gkStartBackground = new Guna.UI2.WinForms.Guna2GradientPanel();
+            pictureBox4 = new PictureBox();
+            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            gkTouchToStart = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            pictureBox2 = new PictureBox();
+            gkStartBackground.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            guna2ShadowPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
-            // guna2GradientPanel1
+            // gkStartBackground
             // 
-            guna2GradientPanel1.Controls.Add(guna2Panel1);
-            guna2GradientPanel1.Controls.Add(label1);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges3;
-            guna2GradientPanel1.FillColor = Color.FromArgb(64, 64, 64);
-            guna2GradientPanel1.FillColor2 = Color.FromArgb(128, 128, 255);
-            guna2GradientPanel1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            guna2GradientPanel1.Location = new Point(0, 0);
-            guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2GradientPanel1.Size = new Size(1920, 1080);
-            guna2GradientPanel1.TabIndex = 0;
+            gkStartBackground.Controls.Add(pictureBox4);
+            gkStartBackground.Controls.Add(guna2HtmlLabel2);
+            gkStartBackground.Controls.Add(guna2ShadowPanel1);
+            gkStartBackground.CustomizableEdges = customizableEdges1;
+            gkStartBackground.Dock = DockStyle.Fill;
+            gkStartBackground.FillColor = Color.Gainsboro;
+            gkStartBackground.FillColor2 = Color.Blue;
+            gkStartBackground.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
+            gkStartBackground.Location = new Point(0, 0);
+            gkStartBackground.Name = "gkStartBackground";
+            gkStartBackground.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            gkStartBackground.Size = new Size(1920, 1080);
+            gkStartBackground.TabIndex = 0;
             // 
-            // guna2Panel1
+            // pictureBox4
             // 
-            guna2Panel1.Controls.Add(label2);
-            guna2Panel1.CustomizableEdges = customizableEdges1;
-            guna2Panel1.Location = new Point(0, 719);
-            guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(1920, 361);
-            guna2Panel1.TabIndex = 1;
+            pictureBox4.BackColor = Color.Transparent;
+            pictureBox4.ImageLocation = "C:\\Users\\Jonathan\\source\\repos\\pl-project\\Pl-Project-Combined\\Pl-Project-Combined\\customer_kiosk\\images\\guy.png";
+            pictureBox4.Location = new Point(0, 0);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(1920, 740);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 9;
+            pictureBox4.TabStop = false;
             // 
-            // label2
+            // guna2HtmlLabel2
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Poppins SemiBold", 75F, FontStyle.Bold);
-            label2.ForeColor = Color.Black;
-            label2.Location = new Point(544, 162);
-            label2.Name = "label2";
-            label2.Size = new Size(787, 177);
-            label2.TabIndex = 2;
-            label2.Text = "Touch to Start";
+            guna2HtmlLabel2.BackColor = Color.Transparent;
+            guna2HtmlLabel2.Font = new Font("Crete Round", 66.74999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel2.ForeColor = Color.White;
+            guna2HtmlLabel2.Location = new Point(679, 733);
+            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            guna2HtmlLabel2.Size = new Size(506, 115);
+            guna2HtmlLabel2.TabIndex = 8;
+            guna2HtmlLabel2.Text = "AsensoMoto";
             // 
-            // label1
+            // guna2ShadowPanel1
             // 
-            label1.AutoSize = true;
-            label1.BackColor = SystemColors.ActiveCaption;
-            label1.Font = new Font("Poppins SemiBold", 48F, FontStyle.Bold);
-            label1.ForeColor = Color.Cornsilk;
-            label1.Location = new Point(3, 603);
-            label1.Name = "label1";
-            label1.Size = new Size(879, 113);
-            label1.TabIndex = 0;
-            label1.Text = "Welcome to AsensoMoto!";
+            guna2ShadowPanel1.BackColor = Color.Transparent;
+            guna2ShadowPanel1.Controls.Add(gkTouchToStart);
+            guna2ShadowPanel1.Controls.Add(pictureBox2);
+            guna2ShadowPanel1.FillColor = Color.White;
+            guna2ShadowPanel1.Location = new Point(-9, 854);
+            guna2ShadowPanel1.Name = "guna2ShadowPanel1";
+            guna2ShadowPanel1.Radius = 26;
+            guna2ShadowPanel1.ShadowColor = Color.Black;
+            guna2ShadowPanel1.ShadowDepth = 200;
+            guna2ShadowPanel1.Size = new Size(1939, 273);
+            guna2ShadowPanel1.TabIndex = 5;
+            // 
+            // gkTouchToStart
+            // 
+            gkTouchToStart.BackColor = Color.Transparent;
+            gkTouchToStart.Font = new Font("Crete Round", 71.99999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gkTouchToStart.ForeColor = Color.Black;
+            gkTouchToStart.Location = new Point(587, 53);
+            gkTouchToStart.Name = "gkTouchToStart";
+            gkTouchToStart.Size = new Size(1001, 124);
+            gkTouchToStart.TabIndex = 1;
+            gkTouchToStart.Text = "Tap anywhere to begin";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.ImageLocation = "C:\\Users\\Jonathan\\source\\repos\\pl-project\\Pl-Project-Combined\\Pl-Project-Combined\\customer_kiosk\\images\\tap.png";
+            pictureBox2.Location = new Point(379, 21);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(191, 187);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 4;
+            pictureBox2.TabStop = false;
             // 
             // start_screen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(guna2GradientPanel1);
+            BackColor = Color.White;
+            Controls.Add(gkStartBackground);
             DoubleBuffered = true;
             Name = "start_screen";
             Size = new Size(1920, 1080);
-            guna2GradientPanel1.ResumeLayout(false);
-            guna2GradientPanel1.PerformLayout();
-            guna2Panel1.ResumeLayout(false);
-            guna2Panel1.PerformLayout();
+            gkStartBackground.ResumeLayout(false);
+            gkStartBackground.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            guna2ShadowPanel1.ResumeLayout(false);
+            guna2ShadowPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Label label2;
-        private Label label1;
+        private Guna.UI2.WinForms.Guna2GradientPanel gkStartBackground;
+        private Guna.UI2.WinForms.Guna2HtmlLabel gkTouchToStart;
+        private PictureBox pictureBox2;
+        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private PictureBox pictureBox4;
     }
 }
