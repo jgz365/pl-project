@@ -66,6 +66,8 @@ namespace customer_kiosk
         private string financialGrossIncome = string.Empty;
         private string financialOtherIncome = string.Empty;
         private string financialTotalObligations = string.Empty;
+        private string currentProductImageUrl = string.Empty;
+        private Image? currentProductImage;
 
         private ResponsiveScaler? responsiveScaler;
         private const float BaseWidth = 1920f;
@@ -96,6 +98,7 @@ namespace customer_kiosk
 
             onScreenKeyboard.CloseRequested += OnScreenKeyboard_CloseRequested;
             mainContainer.Controls.Add(onScreenKeyboard);
+            UpdateOnScreenKeyboardLayout();
 
             RegisterTextBoxHandlers(this);
             RegisterNumericInputGuards(this);
@@ -104,6 +107,7 @@ namespace customer_kiosk
             RegisterOutsideClickHandlers(this);
             btnNext.Click += BtnNext_Click;
             btnBack.Click += BtnBack_Click;
+            Disposed += RedirectApplication_Disposed;
         }
 
         public void SetSelectedProduct(string? title, string? sub, string? price, string? imageUrl)
@@ -121,7 +125,8 @@ namespace customer_kiosk
                 productPrice.Text = price;
             }
 
-            _ = LoadSelectedProductImageAsync(imageUrl);
+            currentProductImageUrl = imageUrl ?? string.Empty;
+            _ = LoadSelectedProductImageAsync(currentProductImageUrl);
             ApplyLoanCalculations();
         }
 
@@ -158,10 +163,27 @@ namespace customer_kiosk
 
                 BeginInvoke(new Action(() =>
                 {
+                    if (IsDisposed)
+                    {
+                        imageCopy.Dispose();
+                        return;
+                    }
+
                     var oldImage = productImagePanel.BackgroundImage;
                     productImagePanel.BackgroundImage = imageCopy;
                     productImagePanel.BackgroundImageLayout = ImageLayout.Zoom;
-                    oldImage?.Dispose();
+
+                    if (currentProductImage != null && !ReferenceEquals(currentProductImage, imageCopy))
+                    {
+                        currentProductImage.Dispose();
+                    }
+
+                    currentProductImage = imageCopy;
+
+                    if (oldImage != null && !ReferenceEquals(oldImage, currentProductImage))
+                    {
+                        oldImage.Dispose();
+                    }
                 }));
             }
             catch
@@ -963,6 +985,7 @@ namespace customer_kiosk
 
             UpdateStepHeader();
             UpdateNavigationButtons();
+            ApplyCurrentStepResponsiveLayout();
         }
 
         private void HideFormFields()
@@ -1154,6 +1177,9 @@ namespace customer_kiosk
         {
             base.OnLoad(e);
             ApplyResolutionScaling();
+            ApplyCurrentStepResponsiveLayout();
+            UpdateOnScreenKeyboardLayout();
+            EnsureProductImageVisible();
         }
 
         private void ApplyResolutionScaling()
@@ -1165,7 +1191,156 @@ namespace customer_kiosk
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
+
+            if (!IsResponsiveLayoutReady())
+            {
+                return;
+            }
+
             ApplyResolutionScaling();
+            ApplyCurrentStepResponsiveLayout();
+            UpdateOnScreenKeyboardLayout();
+            EnsureProductImageVisible();
+        }
+
+        private void EnsureProductImageVisible()
+        {
+            if (productImagePanel == null)
+            {
+                return;
+            }
+
+            productImagePanel.BackgroundImageLayout = ImageLayout.Zoom;
+
+            if (productImagePanel.BackgroundImage == null)
+            {
+                if (currentProductImage != null)
+                {
+                    productImagePanel.BackgroundImage = currentProductImage;
+                }
+                else if (!string.IsNullOrWhiteSpace(currentProductImageUrl))
+                {
+                    _ = LoadSelectedProductImageAsync(currentProductImageUrl);
+                }
+            }
+        }
+
+        private void RedirectApplication_Disposed(object? sender, EventArgs e)
+        {
+            currentProductImage?.Dispose();
+            currentProductImage = null;
+        }
+
+        private bool IsResponsiveLayoutReady()
+        {
+            return !IsDisposed
+                && mainContainer != null
+                && leftFormPanel != null
+                && validationMessageLabel != null
+                && onScreenKeyboard != null;
+        }
+
+        private void ApplyCurrentStepResponsiveLayout()
+        {
+            if (!IsResponsiveLayoutReady() || leftFormPanel.ClientSize.Width <= 0)
+            {
+                return;
+            }
+
+            int panelWidth = Math.Max(320, leftFormPanel.ClientSize.Width);
+            int margin = 16;
+            int gap = 20;
+            int fullWidth = Math.Max(220, panelWidth - (margin * 2));
+            int halfWidth = Math.Max(120, (fullWidth - gap) / 2);
+            int secondColumnLeft = margin + halfWidth + gap;
+
+            switch (currentStep)
+            {
+                case WizardStep.Personal:
+                    txtEmail.Location = new Point(margin, txtEmail.Top);
+                    txtEmail.Width = halfWidth;
+                    lblEmail.Location = new Point(margin, lblEmail.Top);
+
+                    txtMobile.Location = new Point(secondColumnLeft, txtMobile.Top);
+                    txtMobile.Width = halfWidth;
+                    lblMobile.Location = new Point(secondColumnLeft, lblMobile.Top);
+
+                    cbCity.Location = new Point(margin, cbCity.Top);
+                    cbCity.Width = halfWidth;
+                    lblCity.Location = new Point(margin, lblCity.Top);
+
+                    cbProvince.Location = new Point(secondColumnLeft, cbProvince.Top);
+                    cbProvince.Width = halfWidth;
+                    lblProvince.Location = new Point(secondColumnLeft, lblProvince.Top);
+
+                    txtFullName.Width = fullWidth;
+                    txtAddress.Width = fullWidth;
+                    dtpDob.Width = fullWidth;
+                    break;
+
+                case WizardStep.Employment:
+                    txtEmail.Location = new Point(margin, txtEmail.Top);
+                    txtEmail.Width = fullWidth;
+                    txtMobile.Location = new Point(margin, txtMobile.Top);
+                    txtMobile.Width = fullWidth;
+                    txtDob.Location = new Point(margin, txtDob.Top);
+                    txtDob.Width = fullWidth;
+                    employmentStatusPanel.Location = new Point(margin, employmentStatusPanel.Top);
+                    employmentStatusPanel.Width = fullWidth;
+                    break;
+
+                case WizardStep.Financial:
+                    txtFullName.Location = new Point(margin, txtFullName.Top);
+                    txtFullName.Width = fullWidth;
+                    txtEmail.Location = new Point(margin, txtEmail.Top);
+                    txtEmail.Width = fullWidth;
+                    txtDob.Location = new Point(margin, txtDob.Top);
+                    txtDob.Width = fullWidth;
+                    financialLoansPanel.Location = new Point(margin, financialLoansPanel.Top);
+                    financialLoansPanel.Width = fullWidth;
+                    break;
+
+                case WizardStep.Loan:
+                    loanChecklistPanel.Location = new Point(margin, loanChecklistPanel.Top);
+                    loanChecklistPanel.Width = fullWidth;
+                    loanTermsPanel.Location = new Point(margin, loanTermsPanel.Top);
+                    loanTermsPanel.Width = fullWidth;
+
+                    int checklistInnerWidth = Math.Max(220, loanChecklistPanel.ClientSize.Width - 44);
+                    chkDocValidId.Width = checklistInnerWidth;
+                    chkDocProofAddress.Width = checklistInnerWidth;
+                    chkDocEmploymentCert.Width = checklistInnerWidth;
+                    chkDocPayslips.Width = checklistInnerWidth;
+                    chkDocProofIncome.Width = checklistInnerWidth;
+
+                    docRequiredProgress.Width = Math.Max(180, loanChecklistPanel.ClientSize.Width - 190);
+                    docRequiredCount.Location = new Point(Math.Max(22, loanChecklistPanel.ClientSize.Width - 145), docRequiredCount.Top);
+
+                    termsSubtitle.Location = new Point(50, termsSubtitle.Top);
+                    termsSubtitle.MaximumSize = new Size(Math.Max(200, loanTermsPanel.ClientSize.Width - 72), 0);
+                    break;
+            }
+
+            validationMessageLabel.Width = fullWidth;
+        }
+
+        private void UpdateOnScreenKeyboardLayout()
+        {
+            if (!IsResponsiveLayoutReady())
+            {
+                return;
+            }
+
+            int width = Math.Max(320, mainContainer.ClientSize.Width - 40);
+            int height = Math.Max(220, Math.Min(420, (int)Math.Round(mainContainer.ClientSize.Height * 0.32f)));
+            int left = Math.Max(10, (mainContainer.ClientSize.Width - width) / 2);
+            int top = Math.Max(10, mainContainer.ClientSize.Height - height - 16);
+
+            onScreenKeyboard.Bounds = new Rectangle(left, top, width, height);
+            if (onScreenKeyboard.Visible)
+            {
+                onScreenKeyboard.BringToFront();
+            }
         }
     }
 }

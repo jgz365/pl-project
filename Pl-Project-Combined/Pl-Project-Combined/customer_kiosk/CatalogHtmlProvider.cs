@@ -380,7 +380,7 @@ namespace customer_kiosk
         } : null
       };
 
-      window.chrome?.webview?.postMessage(JSON.stringify(payload));
+      window.chrome?.webview?.postMessage(payload);
     }
     function hideModal(){ document.getElementById('overlay').style.display='none'; }
     function applyNow(){ openApplication(current); }
