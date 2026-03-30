@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Net.Http;
 using System.Windows.Forms;
 
 namespace inventory_ni_Percie
 {
     public partial class UC_MotorcycleCard : UserControl
     {
+        private static readonly HttpClient ImageHttpClient = new();
+
         public UC_MotorcycleCard()
         {
             InitializeComponent();
@@ -13,7 +17,7 @@ namespace inventory_ni_Percie
         public event EventHandler? OnCardClick;
 
         // The "Automation" Method
-        public void SetMotorcycleData(string model, string yearType, string price, string stock, Image bikeImg, string status)
+        public void SetMotorcycleData(string model, string yearType, string price, string stock, Image? bikeImg, string status)
         {
             lblModel.Text = model;       // e.g. "Suzuki Raider R150"
             lblSubInfo.Text = yearType;      // e.g. "2024 • Underbone"
@@ -34,6 +38,49 @@ namespace inventory_ni_Percie
             else if (status == "AVAILABLE")
             {
                 chipStatus.FillColor = Color.FromArgb(187, 247, 208); // Light Green
+            }
+        }
+
+        public async void SetImageFromUrl(string? imageUrl)
+        {
+            if (string.IsNullOrWhiteSpace(imageUrl))
+            {
+                return;
+            }
+
+            try
+            {
+                byte[] bytes = await ImageHttpClient.GetByteArrayAsync(imageUrl.Trim());
+                using var ms = new MemoryStream(bytes);
+                using var source = Image.FromStream(ms);
+                var imageCopy = new Bitmap(source);
+
+                if (IsDisposed)
+                {
+                    imageCopy.Dispose();
+                    return;
+                }
+
+                BeginInvoke(new Action(() =>
+                {
+                    if (IsDisposed)
+                    {
+                        imageCopy.Dispose();
+                        return;
+                    }
+
+                    var old = pictureBoxMoto.Image;
+                    pictureBoxMoto.Image = imageCopy;
+                    pictureBoxMoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    if (old != null && !ReferenceEquals(old, imageCopy))
+                    {
+                        old.Dispose();
+                    }
+                }));
+            }
+            catch
+            {
+                // Keep designer/default image if URL loading fails.
             }
         }
 

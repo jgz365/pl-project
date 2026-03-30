@@ -36,6 +36,31 @@ namespace inventory_ni_Percie
             public string[] Features { get; set; } = Array.Empty<string>();
         }
 
+        public sealed class ProductInput
+        {
+            public string Title { get; set; } = string.Empty;
+            public string ModelYear { get; set; } = string.Empty;
+            public string Category { get; set; } = string.Empty;
+            public string ImageUrl { get; set; } = string.Empty;
+            public decimal Price { get; set; }
+            public int Stock { get; set; }
+            public string Description { get; set; } = string.Empty;
+            public string MaxPower { get; set; } = string.Empty;
+            public string MaxTorque { get; set; } = string.Empty;
+            public string Transmission { get; set; } = string.Empty;
+            public string FuelSystem { get; set; } = string.Empty;
+            public string Cooling { get; set; } = string.Empty;
+            public string FuelCapacity { get; set; } = string.Empty;
+            public string SeatHeight { get; set; } = string.Empty;
+            public string CurbWeight { get; set; } = string.Empty;
+            public string GroundClearance { get; set; } = string.Empty;
+            public string Wheelbase { get; set; } = string.Empty;
+            public string BrakeSystem { get; set; } = string.Empty;
+            public string Suspension { get; set; } = string.Empty;
+            public string Colors { get; set; } = string.Empty;
+            public string Features { get; set; } = string.Empty;
+        }
+
         // ── Config ────────────────────────────────────────────────────────
         public const string DATABASE_NAME = "rovic_inventory_db";
         private const string SERVER = "127.0.0.1";
@@ -922,6 +947,65 @@ namespace inventory_ni_Percie
             }
 
             return list;
+        }
+
+        public static bool AddProduct(ProductInput input)
+        {
+            try
+            {
+                string title = input.Title.Trim();
+                if (string.IsNullOrWhiteSpace(title))
+                {
+                    return false;
+                }
+
+                string modelYear = string.IsNullOrWhiteSpace(input.ModelYear) ? DateTime.Now.Year.ToString() : input.ModelYear.Trim();
+                string category = string.IsNullOrWhiteSpace(input.Category) ? "Uncategorized" : input.Category.Trim();
+                string imageUrl = string.IsNullOrWhiteSpace(input.ImageUrl) ? BuildDefaultImageUrl(title) : input.ImageUrl.Trim();
+
+                using var conn = GetConnection();
+                const string sql = @"
+                    INSERT INTO products
+                    (title, model_year, category, image_url, price, stock, description,
+                     max_power, max_torque, transmission, fuel_system, cooling,
+                     fuel_capacity, seat_height, curb_weight, ground_clearance,
+                     wheelbase, brake_system, suspension, colors, features, is_active)
+                    VALUES
+                    (@title, @modelYear, @category, @imageUrl, @price, @stock, @description,
+                     @maxPower, @maxTorque, @transmission, @fuelSystem, @cooling,
+                     @fuelCapacity, @seatHeight, @curbWeight, @groundClearance,
+                     @wheelbase, @brakeSystem, @suspension, @colors, @features, 1);";
+
+                using var cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@title", title);
+                cmd.Parameters.AddWithValue("@modelYear", modelYear);
+                cmd.Parameters.AddWithValue("@category", category);
+                cmd.Parameters.AddWithValue("@imageUrl", imageUrl);
+                cmd.Parameters.AddWithValue("@price", input.Price);
+                cmd.Parameters.AddWithValue("@stock", input.Stock);
+                cmd.Parameters.AddWithValue("@description", input.Description.Trim());
+                cmd.Parameters.AddWithValue("@maxPower", input.MaxPower.Trim());
+                cmd.Parameters.AddWithValue("@maxTorque", input.MaxTorque.Trim());
+                cmd.Parameters.AddWithValue("@transmission", input.Transmission.Trim());
+                cmd.Parameters.AddWithValue("@fuelSystem", input.FuelSystem.Trim());
+                cmd.Parameters.AddWithValue("@cooling", input.Cooling.Trim());
+                cmd.Parameters.AddWithValue("@fuelCapacity", input.FuelCapacity.Trim());
+                cmd.Parameters.AddWithValue("@seatHeight", input.SeatHeight.Trim());
+                cmd.Parameters.AddWithValue("@curbWeight", input.CurbWeight.Trim());
+                cmd.Parameters.AddWithValue("@groundClearance", input.GroundClearance.Trim());
+                cmd.Parameters.AddWithValue("@wheelbase", input.Wheelbase.Trim());
+                cmd.Parameters.AddWithValue("@brakeSystem", input.BrakeSystem.Trim());
+                cmd.Parameters.AddWithValue("@suspension", input.Suspension.Trim());
+                cmd.Parameters.AddWithValue("@colors", input.Colors.Trim());
+                cmd.Parameters.AddWithValue("@features", input.Features.Trim());
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[DatabaseManager] AddProduct error: {ex.Message}");
+                return false;
+            }
         }
 
         private static string[] SplitPipeList(string value)

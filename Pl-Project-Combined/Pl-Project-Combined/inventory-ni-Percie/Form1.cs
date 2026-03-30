@@ -141,15 +141,14 @@ namespace inventory_ni_Percie
         private void btnLogout_Click(object sender, EventArgs e)
         {
             // 1. Confirmation Dialog
-            DialogResult result = MessageBox.Show("Are you sure you want to exit the application?",
-                                                  "Exit Confirmation",
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?",
+                                                  "Logout Confirmation",
                                                   MessageBoxButtons.YesNo,
                                                   MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                // 2. Completely close the entire application
-                Application.Exit();
+                PerformLogout();
             }
         }
 
@@ -184,9 +183,23 @@ namespace inventory_ni_Percie
         // 2. Create the missing method to resolve the error
         private void PerformLogout()
         {
-            // Clear the inventory view and restart to the login screen
             pnlMainContainer.Controls.Clear();
-            Application.Exit();
+
+            var loginForm = new Pl_Project_Combined.Assessor_Eddion.LoginUiForm
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            loginForm.FormClosed += (_, __) =>
+            {
+                if (!IsDisposed)
+                {
+                    Close();
+                }
+            };
+
+            Hide();
+            loginForm.Show();
         }
 
         private void guna2Panel2_Paint(object sender, PaintEventArgs e)
