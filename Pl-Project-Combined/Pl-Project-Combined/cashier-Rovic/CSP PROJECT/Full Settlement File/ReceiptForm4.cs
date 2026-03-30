@@ -6,61 +6,253 @@ using POSCashierSystem;
 
 namespace CSP_PROJECT.POSCashier.FullSettlement_File
 {
-    /// <summary>
-    /// ReceiptForm4 — Official Receipt Modal for the Full Settlement flow.
-    /// Accepts CollectionResult4 from CollectionForm4.
-    ///
-    /// Same structure and logic as ReceiptForm3, with these differences:
-    ///   • Transaction type = "SETTLEMENT"
-    ///   • Breakdown shows: Outstanding Principal Balance + Early Settlement Rebate
-    ///   • Loan Status panel shows Remaining Balance = ₱0 and
-    ///     "🎉 Loan fully settled — account closed" instead of a next due date
-    ///   • Theme colour: purple (109, 40, 217) instead of teal
-    /// </summary>
     public partial class ReceiptForm4 : UserControl
     {
-        private readonly CollectionResult4 _result;
+        // ── DESIGN DIMENSIONS ─────────────────────────────────────────────────
+        private const int DESIGN_CARD_WIDTH = 455;
+        private const int DESIGN_CARD_HEIGHT = 630;  // slightly taller: extra rebate row
+        private const int DESIGN_HEADER_HEIGHT = 58;
+        private const int DESIGN_FOOTER_HEIGHT = 75;
+        private const int DESIGN_BODY_HEIGHT = 497;  // 630 - 58 - 75
 
+        private const int PADDING_HORIZONTAL = 20;
+        private const int PADDING_VERTICAL = 30;
+
+        private readonly System.Collections.Generic.Dictionary<Control, (int x, int y, int w, int h)> OriginalDimensions = new();
+
+        private readonly CollectionResult4 _result;
         public event EventHandler ResetRequested = delegate { };
 
-        // ─────────────────────────────────────────────────────────────────────
         public ReceiptForm4(CollectionResult4 result)
         {
             _result = result ?? throw new ArgumentNullException(nameof(result));
 
             if (_result.Customer == null)
                 throw new ArgumentException("CollectionResult4.Customer cannot be null.", nameof(result));
-
             if (_result.TotalDue < 0)
                 throw new ArgumentException("CollectionResult4.TotalDue cannot be negative.", nameof(result));
-
             if (_result.AmountReceived < _result.TotalDue)
                 throw new ArgumentException("AmountReceived cannot be less than TotalDue.", nameof(result));
 
             InitializeComponent();
         }
 
-        // ─────────────────────────────────────────────────────────────────────
         private void ReceiptForm4_Load(object sender, EventArgs e)
         {
+            CaptureOriginalDimensions();
             PopulateReceipt();
             CaptureAndBlurBackground();
-            CenterModal();
+            ApplyResponsiveLayout();
         }
 
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (IsHandleCreated)
-            {
-                pnlOverlay.Size = this.Size;
-                CenterModal();
-            }
+            if (IsHandleCreated && OriginalDimensions.Count > 0)
+                ApplyResponsiveLayout();
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Blur background — identical to ReceiptForm3
-        // ─────────────────────────────────────────────────────────────────────
+        // ─── Capture Original Dimensions ─────────────────────────────────────
+
+        private void CaptureOriginalDimensions()
+        {
+            StoreOriginal(pnlModalCard, 166, 30, DESIGN_CARD_WIDTH, DESIGN_CARD_HEIGHT);
+            StoreOriginal(pnlHeader, 0, 0, DESIGN_CARD_WIDTH, DESIGN_HEADER_HEIGHT);
+            StoreOriginal(pnlBody, 0, DESIGN_HEADER_HEIGHT, DESIGN_CARD_WIDTH, DESIGN_BODY_HEIGHT);
+            StoreOriginal(pnlFooter, 0, DESIGN_HEADER_HEIGHT + DESIGN_BODY_HEIGHT, DESIGN_CARD_WIDTH, DESIGN_FOOTER_HEIGHT);
+
+            // Header children
+            StoreOriginal(pnlCheckmarkSquare, 18, 14, 37, 32);
+            StoreOriginal(lblCheckmark, 18, 14, 37, 32);
+            StoreOriginal(lblHeaderTitle, 63, 10, 298, 20);
+            StoreOriginal(lblHeaderSubtitle, 65, 32, 245, 15);
+            StoreOriginal(btnClose, 411, 15, 32, 27);
+
+            // Receipt card (relative to pnlBody) — taller for the rebate row
+            StoreOriginal(pnlReceiptCard, 28, 14, 399, 408);
+
+            // Receipt card children (relative to pnlReceiptCard)
+            StoreOriginal(lblCompanyName, 0, 15, 399, 26);
+            StoreOriginal(lblOfficialReceipt, 0, 42, 399, 12);
+            StoreOriginal(lblReceiptNumber, 0, 56, 399, 14);
+            StoreOriginal(sep1, 21, 76, 357, 2);
+            StoreOriginal(lblCustomerKey, 21, 86, 105, 20);
+            StoreOriginal(lblCustomerValue, 175, 86, 203, 20);
+            StoreOriginal(lblDateTimeKey, 21, 106, 105, 21);
+            StoreOriginal(lblDateTimeValue, 122, 107, 256, 20);
+            StoreOriginal(lblTransactionKey, 21, 129, 105, 20);
+            StoreOriginal(lblTransactionValue, 175, 129, 203, 20);
+            StoreOriginal(sep2, 21, 156, 357, 2);
+            // Two breakdown rows
+            StoreOriginal(lblBreakdownItemKey, 21, 166, 220, 16);
+            StoreOriginal(lblBreakdownItemValue, 245, 166, 133, 16);
+            StoreOriginal(lblBreakdownRebateKey, 21, 184, 220, 16);
+            StoreOriginal(lblBreakdownRebateValue, 245, 184, 133, 16);
+            StoreOriginal(sep3, 0, 210, 399, 1);
+            StoreOriginal(lblTotalPaidKey, 21, 220, 105, 26);
+            StoreOriginal(lblTotalPaidValue, 140, 219, 238, 27);
+            StoreOriginal(lblTenderedKey, 21, 252, 131, 15);
+            StoreOriginal(lblTenderedValue, 245, 252, 133, 15);
+            StoreOriginal(lblChangeKey, 21, 270, 131, 15);
+            StoreOriginal(lblChangeValue, 245, 270, 133, 15);
+
+            // Loan status panel (relative to pnlReceiptCard)
+            StoreOriginal(pnlLoanStatus, 21, 300, 371, 75);
+
+            // Loan status children (relative to pnlLoanStatus)
+            StoreOriginal(lblLoanStatusTitle, 12, 8, 175, 11);
+            StoreOriginal(lblRemainingBalanceKey, 12, 24, 140, 16);
+            StoreOriginal(lblRemainingBalanceValue, 210, 24, 150, 16);
+            StoreOriginal(lblSettledNote, 12, 48, 340, 16);
+
+            // Action buttons panel (relative to pnlBody)
+            StoreOriginal(pnlActionButtons, 28, 437, 399, 84);
+
+            // Button children (relative to pnlActionButtons)
+            StoreOriginal(btnPrint, 0, 0, 194, 33);
+            StoreOriginal(btnEmail, 205, 0, 194, 33);
+            StoreOriginal(btnSavePDF, 0, 42, 194, 33);
+            StoreOriginal(btnSMS, 205, 42, 194, 33);
+
+            // Start New button (relative to pnlFooter)
+            StoreOriginal(btnStartNew, 21, 18, 413, 39);
+        }
+
+        private void StoreOriginal(Control ctrl, int x, int y, int w, int h)
+        {
+            if (ctrl != null)
+                OriginalDimensions[ctrl] = (x, y, w, h);
+        }
+
+        // ─── Responsive Layout ────────────────────────────────────────────────
+
+        private void ApplyResponsiveLayout()
+        {
+            if (!IsHandleCreated || OriginalDimensions.Count == 0) return;
+
+            pnlOverlay.Size = this.Size;
+            pnlOverlay.Location = new Point(0, 0);
+
+            int availableWidth = Math.Max(100, this.Width - PADDING_HORIZONTAL * 2);
+            int availableHeight = Math.Max(100, this.Height - PADDING_VERTICAL * 2);
+
+            float scaleFactorW = availableWidth / (float)DESIGN_CARD_WIDTH;
+            float scaleFactorH = availableHeight / (float)DESIGN_CARD_HEIGHT;
+            float uniformScale = Math.Min(scaleFactorW, scaleFactorH);
+
+            int scaledCardW = ScaleValue(DESIGN_CARD_WIDTH, uniformScale);
+            int scaledCardH = ScaleValue(DESIGN_CARD_HEIGHT, uniformScale);
+            int scaledHeaderH = ScaleValue(DESIGN_HEADER_HEIGHT, uniformScale);
+            int scaledFooterH = ScaleValue(DESIGN_FOOTER_HEIGHT, uniformScale);
+            int scaledBodyH = scaledCardH - scaledHeaderH - scaledFooterH;
+
+            int cardLeftX = (this.Width - scaledCardW) / 2;
+            int cardTopY = (this.Height - scaledCardH) / 2;
+            if (cardTopY < 10) cardTopY = 10;
+
+            pnlModalCard.Location = new Point(Math.Max(0, cardLeftX), Math.Max(0, cardTopY));
+            pnlModalCard.Size = new Size(scaledCardW, scaledCardH);
+
+            // Header
+            pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Size = new Size(scaledCardW, scaledHeaderH);
+
+            ApplyScaledControl(pnlCheckmarkSquare, 18, 14, 37, 32, uniformScale);
+            ApplyScaledControl(lblCheckmark, 18, 14, 37, 32, uniformScale);
+            ApplyScaledControl(lblHeaderTitle, 63, 10, 298, 20, uniformScale);
+            ApplyScaledControl(lblHeaderSubtitle, 65, 32, 245, 15, uniformScale);
+
+            int btnCloseScaledW = ScaleValue(32, uniformScale);
+            int btnCloseScaledH = ScaleValue(27, uniformScale);
+            int rightMargin = ScaleValue(12, uniformScale);
+            btnClose.Size = new Size(btnCloseScaledW, btnCloseScaledH);
+            btnClose.Location = new Point(scaledCardW - btnCloseScaledW - rightMargin, ScaleValue(15, uniformScale));
+
+            // Body
+            pnlBody.Location = new Point(0, scaledHeaderH);
+            pnlBody.Size = new Size(scaledCardW, scaledBodyH);
+            pnlBody.AutoScroll = true;
+
+            // Receipt card
+            ApplyScaledControl(pnlReceiptCard, 28, 14, 399, 408, uniformScale);
+
+            ApplyScaledChild(lblCompanyName, 0, 15, 399, 26, uniformScale);
+            ApplyScaledChild(lblOfficialReceipt, 0, 42, 399, 12, uniformScale);
+            ApplyScaledChild(lblReceiptNumber, 0, 56, 399, 14, uniformScale);
+            ApplyScaledChild(sep1, 21, 76, 357, 2, uniformScale);
+            ApplyScaledChild(lblCustomerKey, 21, 86, 105, 20, uniformScale);
+            ApplyScaledChild(lblCustomerValue, 175, 86, 203, 20, uniformScale);
+            ApplyScaledChild(lblDateTimeKey, 21, 106, 105, 21, uniformScale);
+            ApplyScaledChild(lblDateTimeValue, 122, 107, 256, 20, uniformScale);
+            ApplyScaledChild(lblTransactionKey, 21, 129, 105, 20, uniformScale);
+            ApplyScaledChild(lblTransactionValue, 175, 129, 203, 20, uniformScale);
+            ApplyScaledChild(sep2, 21, 156, 357, 2, uniformScale);
+            ApplyScaledChild(lblBreakdownItemKey, 21, 166, 220, 16, uniformScale);
+            ApplyScaledChild(lblBreakdownItemValue, 245, 166, 133, 16, uniformScale);
+            ApplyScaledChild(lblBreakdownRebateKey, 21, 184, 220, 16, uniformScale);
+            ApplyScaledChild(lblBreakdownRebateValue, 245, 184, 133, 16, uniformScale);
+            ApplyScaledChild(sep3, 0, 210, 399, 1, uniformScale);
+            ApplyScaledChild(lblTotalPaidKey, 21, 220, 105, 26, uniformScale);
+            ApplyScaledChild(lblTotalPaidValue, 140, 219, 238, 27, uniformScale);
+            ApplyScaledChild(lblTenderedKey, 21, 252, 131, 15, uniformScale);
+            ApplyScaledChild(lblTenderedValue, 245, 252, 133, 15, uniformScale);
+            ApplyScaledChild(lblChangeKey, 21, 270, 131, 15, uniformScale);
+            ApplyScaledChild(lblChangeValue, 245, 270, 133, 15, uniformScale);
+
+            // Loan status panel
+            if (pnlLoanStatus != null)
+            {
+                ApplyScaledChild(pnlLoanStatus, 21, 300, 371, 75, uniformScale);
+
+                ApplyScaledNested(lblLoanStatusTitle, pnlLoanStatus, 12, 8, 175, 11, uniformScale);
+                ApplyScaledNested(lblRemainingBalanceKey, pnlLoanStatus, 12, 24, 140, 16, uniformScale);
+                ApplyScaledNested(lblRemainingBalanceValue, pnlLoanStatus, 210, 24, 150, 16, uniformScale);
+                ApplyScaledNested(lblSettledNote, pnlLoanStatus, 12, 48, 340, 16, uniformScale);
+            }
+
+            // Action buttons panel
+            ApplyScaledControl(pnlActionButtons, 28, 437, 399, 84, uniformScale);
+
+            ApplyScaledNested(btnPrint, pnlActionButtons, 0, 0, 194, 33, uniformScale);
+            ApplyScaledNested(btnEmail, pnlActionButtons, 205, 0, 194, 33, uniformScale);
+            ApplyScaledNested(btnSavePDF, pnlActionButtons, 0, 42, 194, 33, uniformScale);
+            ApplyScaledNested(btnSMS, pnlActionButtons, 205, 42, 194, 33, uniformScale);
+
+            // Footer
+            pnlFooter.Location = new Point(0, scaledHeaderH + scaledBodyH);
+            pnlFooter.Size = new Size(scaledCardW, scaledFooterH);
+
+            ApplyScaledNested(btnStartNew, pnlFooter, 21, 18, 413, 39, uniformScale);
+        }
+
+        // ─── Scaling Helpers ──────────────────────────────────────────────────
+
+        private static int ScaleValue(int originalValue, float scaleFactor)
+            => Math.Max(1, (int)Math.Round(originalValue * scaleFactor));
+
+        private static void ApplyScaledControl(Control control, int designX, int designY, int designW, int designH, float scale)
+        {
+            if (control == null) return;
+            control.Location = new Point(ScaleValue(designX, scale), ScaleValue(designY, scale));
+            control.Size = new Size(ScaleValue(designW, scale), ScaleValue(designH, scale));
+        }
+
+        private static void ApplyScaledChild(Control control, int designX, int designY, int designW, int designH, float scale)
+        {
+            if (control == null) return;
+            control.Location = new Point(ScaleValue(designX, scale), ScaleValue(designY, scale));
+            control.Size = new Size(ScaleValue(designW, scale), ScaleValue(designH, scale));
+        }
+
+        private static void ApplyScaledNested(Control control, Control parentPanel, int designX, int designY, int designW, int designH, float scale)
+        {
+            if (control == null || parentPanel == null) return;
+            control.Location = new Point(ScaleValue(designX, scale), ScaleValue(designY, scale));
+            control.Size = new Size(ScaleValue(designW, scale), ScaleValue(designH, scale));
+        }
+
+        // ─── Blur Background ──────────────────────────────────────────────────
+
         private void CaptureAndBlurBackground()
         {
             try
@@ -100,14 +292,14 @@ namespace CSP_PROJECT.POSCashier.FullSettlement_File
         private static Bitmap BoxBlur(Bitmap source, int radius)
         {
             int w = source.Width, h = source.Height;
-            int smallW = Math.Max(1, w / (radius * 2));
-            int smallH = Math.Max(1, h / (radius * 2));
+            int sw = Math.Max(1, w / (radius * 2));
+            int sh = Math.Max(1, h / (radius * 2));
 
-            var small = new Bitmap(smallW, smallH, PixelFormat.Format32bppArgb);
+            var small = new Bitmap(sw, sh, PixelFormat.Format32bppArgb);
             using (var g = Graphics.FromImage(small))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
-                g.DrawImage(source, 0, 0, smallW, smallH);
+                g.DrawImage(source, 0, 0, sw, sh);
             }
 
             var blurred = new Bitmap(w, h, PixelFormat.Format32bppArgb);
@@ -121,36 +313,23 @@ namespace CSP_PROJECT.POSCashier.FullSettlement_File
             return blurred;
         }
 
-        private void CenterModal()
-        {
-            int x = Math.Max(0, (this.Width - pnlModalCard.Width) / 2);
-            int y = Math.Max(10, (int)(this.Height * 0.04));
-            pnlModalCard.Location = new Point(x, y);
-        }
+        // ─── Data Population ──────────────────────────────────────────────────
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Populate receipt
-        // ─────────────────────────────────────────────────────────────────────
         private void PopulateReceipt()
         {
             DateTime processedAt = _result.ProcessedAt;
 
-            // Receipt number: year + full HHmmss timestamp
             lblReceiptNumber.Text = $"OR-{processedAt:yyyy}-{processedAt:HHmmss}";
-
             lblCustomerValue.Text = _result.Customer?.Name ?? "—";
             lblDateTimeValue.Text = processedAt.ToString("M/d/yyyy, h:mm:ss tt");
             lblTransactionValue.Text = "SETTLEMENT";
 
-            // Breakdown — Principal Balance row
             lblBreakdownItemKey.Text = "Outstanding Principal Balance";
             lblBreakdownItemValue.Text = $"₱{_result.OutstandingBalance:N2}";
 
-            // Breakdown — Rebate row
             lblBreakdownRebateKey.Text = $"Early Settlement Rebate ({_result.RebatePercent:0.##}%)";
             lblBreakdownRebateValue.Text = $"-₱{_result.RebateAmount:N3}";
 
-            // Hide rebate row if rebate percent is 0
             bool hasRebate = _result.RebatePercent > 0m;
             lblBreakdownRebateKey.Visible = hasRebate;
             lblBreakdownRebateValue.Visible = hasRebate;
@@ -162,24 +341,14 @@ namespace CSP_PROJECT.POSCashier.FullSettlement_File
             PopulateLoanStatus();
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Loan Status — Full Settlement means balance = ₱0, loan is closed
-        // ─────────────────────────────────────────────────────────────────────
         private void PopulateLoanStatus()
         {
-            // After full settlement, remaining balance is always ₱0
             lblRemainingBalanceValue.Text = "₱0";
-
-            // lblSettledNote is already set in Designer:
-            // "🎉  Loan fully settled — account closed"
-            // No need to compute a next due date.
-
             pnlLoanStatus.Visible = true;
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Navigation — identical to ReceiptForm3
-        // ─────────────────────────────────────────────────────────────────────
+        // ─── Navigation ───────────────────────────────────────────────────────
+
         private void ReturnToPoscashier()
         {
             try
@@ -207,39 +376,27 @@ namespace CSP_PROJECT.POSCashier.FullSettlement_File
             }
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Button events — identical to ReceiptForm3
-        // ─────────────────────────────────────────────────────────────────────
         private void BtnClose_Click(object sender, EventArgs e) => ReturnToPoscashier();
         private void BtnStartNew_Click(object sender, EventArgs e) => ReturnToPoscashier();
 
         private void BtnPrint_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Print functionality not yet implemented.\n\n" +
-                            "Future: integrate with a thermal printer driver or\n" +
-                            "send to default Windows printer.",
-                            "Print Receipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            => MessageBox.Show(
+                "Print functionality not yet implemented.\n\nFuture: integrate with a thermal printer driver or send to default Windows printer.",
+                "Print Receipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         private void BtnEmail_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"Email functionality not yet implemented.\n\n" +
-                            $"Future: email receipt to {_result.Customer?.Name ?? "customer"}",
-                            "Email Receipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            => MessageBox.Show(
+                $"Email functionality not yet implemented.\n\nFuture: email receipt to {_result.Customer?.Name ?? "customer"}",
+                "Email Receipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         private void BtnSavePDF_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Save PDF functionality not yet implemented.\n\n" +
-                            "Future: generate PDF and prompt Save As dialog.",
-                            "Save PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            => MessageBox.Show(
+                "Save PDF functionality not yet implemented.\n\nFuture: generate PDF and prompt Save As dialog.",
+                "Save PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         private void BtnSMS_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("SMS functionality not yet implemented.\n\n" +
-                            "Future: send receipt via SMS gateway.",
-                            "Send SMS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            => MessageBox.Show(
+                "SMS functionality not yet implemented.\n\nFuture: send receipt via SMS gateway.",
+                "Send SMS", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 }

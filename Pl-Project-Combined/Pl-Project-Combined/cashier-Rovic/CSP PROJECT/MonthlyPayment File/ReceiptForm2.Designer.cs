@@ -103,10 +103,12 @@
             pnlOverlay.CustomizableEdges = customizableEdges26;
             pnlOverlay.Dock = DockStyle.Fill;
             pnlOverlay.Location = new Point(0, 0);
+            pnlOverlay.Margin = new Padding(3, 2, 3, 2);
             pnlOverlay.Name = "pnlOverlay";
             pnlOverlay.ShadowDecoration.CustomizableEdges = customizableEdges27;
-            pnlOverlay.Size = new Size(900, 918);
+            pnlOverlay.Size = new Size(788, 688);
             pnlOverlay.TabIndex = 0;
+
             // 
             // pnlModalCard
             // 
@@ -117,14 +119,15 @@
             pnlModalCard.Controls.Add(pnlFooter);
             pnlModalCard.CustomizableEdges = customizableEdges24;
             pnlModalCard.FillColor = Color.White;
-            pnlModalCard.Location = new Point(190, 40);
+            pnlModalCard.Location = new Point(166, 30);
+            pnlModalCard.Margin = new Padding(3, 2, 3, 2);
             pnlModalCard.Name = "pnlModalCard";
             pnlModalCard.ShadowDecoration.BorderRadius = 16;
             pnlModalCard.ShadowDecoration.Color = Color.FromArgb(80, 0, 0, 0);
             pnlModalCard.ShadowDecoration.CustomizableEdges = customizableEdges25;
             pnlModalCard.ShadowDecoration.Enabled = true;
             pnlModalCard.ShadowDecoration.Shadow = new Padding(0, 10, 32, 32);
-            pnlModalCard.Size = new Size(520, 814);
+            pnlModalCard.Size = new Size(455, 610);
             pnlModalCard.TabIndex = 0;
             // 
             // pnlHeader
@@ -137,9 +140,10 @@
             pnlHeader.CustomizableEdges = customizableEdges5;
             pnlHeader.FillColor = Color.FromArgb(15, 23, 42);
             pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Margin = new Padding(3, 2, 3, 2);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            pnlHeader.Size = new Size(520, 78);
+            pnlHeader.Size = new Size(455, 58);
             pnlHeader.TabIndex = 0;
             // 
             // pnlCheckmarkSquare
@@ -148,10 +152,11 @@
             pnlCheckmarkSquare.Controls.Add(lblCheckmark);
             pnlCheckmarkSquare.CustomizableEdges = customizableEdges1;
             pnlCheckmarkSquare.FillColor = Color.FromArgb(16, 185, 129);
-            pnlCheckmarkSquare.Location = new Point(20, 18);
+            pnlCheckmarkSquare.Location = new Point(18, 14);
+            pnlCheckmarkSquare.Margin = new Padding(3, 2, 3, 2);
             pnlCheckmarkSquare.Name = "pnlCheckmarkSquare";
             pnlCheckmarkSquare.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            pnlCheckmarkSquare.Size = new Size(42, 42);
+            pnlCheckmarkSquare.Size = new Size(37, 32);
             pnlCheckmarkSquare.TabIndex = 0;
             // 
             // lblCheckmark
@@ -161,7 +166,7 @@
             lblCheckmark.ForeColor = Color.White;
             lblCheckmark.Location = new Point(0, 0);
             lblCheckmark.Name = "lblCheckmark";
-            lblCheckmark.Size = new Size(42, 42);
+            lblCheckmark.Size = new Size(37, 32);
             lblCheckmark.TabIndex = 0;
             lblCheckmark.Text = "✓";
             lblCheckmark.TextAlign = ContentAlignment.MiddleCenter;
@@ -171,9 +176,9 @@
             lblHeaderTitle.BackColor = Color.Transparent;
             lblHeaderTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblHeaderTitle.ForeColor = Color.White;
-            lblHeaderTitle.Location = new Point(72, 14);
+            lblHeaderTitle.Location = new Point(63, 10);
             lblHeaderTitle.Name = "lblHeaderTitle";
-            lblHeaderTitle.Size = new Size(340, 26);
+            lblHeaderTitle.Size = new Size(298, 20);
             lblHeaderTitle.TabIndex = 1;
             lblHeaderTitle.Text = "Transaction Complete";
             // 
@@ -182,9 +187,9 @@
             lblHeaderSubtitle.BackColor = Color.Transparent;
             lblHeaderSubtitle.Font = new Font("Segoe UI", 8.5F);
             lblHeaderSubtitle.ForeColor = Color.FromArgb(148, 163, 184);
-            lblHeaderSubtitle.Location = new Point(74, 42);
+            lblHeaderSubtitle.Location = new Point(65, 32);
             lblHeaderSubtitle.Name = "lblHeaderSubtitle";
-            lblHeaderSubtitle.Size = new Size(280, 20);
+            lblHeaderSubtitle.Size = new Size(245, 15);
             lblHeaderSubtitle.TabIndex = 2;
             lblHeaderSubtitle.Text = "Payment successfully recorded";
             // 
@@ -201,11 +206,12 @@
             btnClose.HoverState.BorderColor = Color.Transparent;
             btnClose.HoverState.FillColor = Color.FromArgb(30, 41, 59);
             btnClose.HoverState.ForeColor = Color.White;
-            btnClose.Location = new Point(470, 20);
+            btnClose.Location = new Point(411, 15);
+            btnClose.Margin = new Padding(3, 2, 3, 2);
             btnClose.Name = "btnClose";
             btnClose.PressedColor = Color.FromArgb(51, 65, 85);
             btnClose.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnClose.Size = new Size(36, 36);
+            btnClose.Size = new Size(32, 27);
             btnClose.TabIndex = 3;
             btnClose.Text = "✕";
             btnClose.Click += BtnClose_Click;
@@ -217,10 +223,11 @@
             pnlBody.Controls.Add(pnlReceiptCard);
             pnlBody.Controls.Add(pnlActionButtons);
             pnlBody.CustomizableEdges = customizableEdges19;
-            pnlBody.Location = new Point(0, 78);
+            pnlBody.Location = new Point(0, 58);
+            pnlBody.Margin = new Padding(3, 2, 3, 2);
             pnlBody.Name = "pnlBody";
             pnlBody.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            pnlBody.Size = new Size(520, 636);
+            pnlBody.Size = new Size(455, 477);
             pnlBody.TabIndex = 1;
             // 
             // pnlReceiptCard
@@ -252,13 +259,14 @@
             pnlReceiptCard.Controls.Add(pnlLoanStatus);
             pnlReceiptCard.CustomizableEdges = customizableEdges9;
             pnlReceiptCard.FillColor = Color.White;
-            pnlReceiptCard.Location = new Point(32, 24);
+            pnlReceiptCard.Location = new Point(28, 14);
+            pnlReceiptCard.Margin = new Padding(3, 2, 3, 2);
             pnlReceiptCard.Name = "pnlReceiptCard";
             pnlReceiptCard.ShadowDecoration.Color = Color.FromArgb(16, 148, 163, 184);
             pnlReceiptCard.ShadowDecoration.CustomizableEdges = customizableEdges10;
             pnlReceiptCard.ShadowDecoration.Enabled = true;
             pnlReceiptCard.ShadowDecoration.Shadow = new Padding(0, 2, 6, 6);
-            pnlReceiptCard.Size = new Size(456, 517);
+            pnlReceiptCard.Size = new Size(399, 388);
             pnlReceiptCard.TabIndex = 0;
             // 
             // lblCompanyName
@@ -266,9 +274,9 @@
             lblCompanyName.BackColor = Color.Transparent;
             lblCompanyName.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
             lblCompanyName.ForeColor = Color.FromArgb(30, 41, 59);
-            lblCompanyName.Location = new Point(0, 20);
+            lblCompanyName.Location = new Point(0, 15);
             lblCompanyName.Name = "lblCompanyName";
-            lblCompanyName.Size = new Size(456, 34);
+            lblCompanyName.Size = new Size(399, 26);
             lblCompanyName.TabIndex = 0;
             lblCompanyName.Text = "MOTO DEALER PRO";
             lblCompanyName.TextAlign = ContentAlignment.MiddleCenter;
@@ -278,9 +286,9 @@
             lblOfficialReceipt.BackColor = Color.Transparent;
             lblOfficialReceipt.Font = new Font("Segoe UI", 7.5F, FontStyle.Bold);
             lblOfficialReceipt.ForeColor = Color.FromArgb(100, 116, 139);
-            lblOfficialReceipt.Location = new Point(0, 56);
+            lblOfficialReceipt.Location = new Point(0, 42);
             lblOfficialReceipt.Name = "lblOfficialReceipt";
-            lblOfficialReceipt.Size = new Size(456, 16);
+            lblOfficialReceipt.Size = new Size(399, 12);
             lblOfficialReceipt.TabIndex = 1;
             lblOfficialReceipt.Text = "OFFICIAL RECEIPT";
             lblOfficialReceipt.TextAlign = ContentAlignment.MiddleCenter;
@@ -290,9 +298,9 @@
             lblReceiptNumber.BackColor = Color.Transparent;
             lblReceiptNumber.Font = new Font("Courier New", 9F);
             lblReceiptNumber.ForeColor = Color.FromArgb(148, 163, 184);
-            lblReceiptNumber.Location = new Point(0, 74);
+            lblReceiptNumber.Location = new Point(0, 56);
             lblReceiptNumber.Name = "lblReceiptNumber";
-            lblReceiptNumber.Size = new Size(456, 18);
+            lblReceiptNumber.Size = new Size(399, 14);
             lblReceiptNumber.TabIndex = 2;
             lblReceiptNumber.Text = "OR-2026-000000";
             lblReceiptNumber.TextAlign = ContentAlignment.MiddleCenter;
@@ -301,9 +309,10 @@
             // 
             sep1.FillColor = Color.FromArgb(226, 232, 240);
             sep1.FillStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            sep1.Location = new Point(24, 102);
+            sep1.Location = new Point(21, 76);
+            sep1.Margin = new Padding(3, 2, 3, 2);
             sep1.Name = "sep1";
-            sep1.Size = new Size(408, 2);
+            sep1.Size = new Size(357, 2);
             sep1.TabIndex = 3;
             // 
             // lblCustomerKey
@@ -311,20 +320,21 @@
             lblCustomerKey.BackColor = Color.Transparent;
             lblCustomerKey.Font = new Font("Segoe UI", 9F);
             lblCustomerKey.ForeColor = Color.FromArgb(100, 116, 139);
-            lblCustomerKey.Location = new Point(24, 114);
+            lblCustomerKey.Location = new Point(21, 86);
             lblCustomerKey.Name = "lblCustomerKey";
-            lblCustomerKey.Size = new Size(120, 26);
+            lblCustomerKey.Size = new Size(105, 20);
             lblCustomerKey.TabIndex = 4;
             lblCustomerKey.Text = "Customer";
+            
             // 
             // lblCustomerValue
             // 
             lblCustomerValue.BackColor = Color.Transparent;
             lblCustomerValue.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblCustomerValue.ForeColor = Color.FromArgb(30, 41, 59);
-            lblCustomerValue.Location = new Point(200, 114);
+            lblCustomerValue.Location = new Point(175, 86);
             lblCustomerValue.Name = "lblCustomerValue";
-            lblCustomerValue.Size = new Size(232, 26);
+            lblCustomerValue.Size = new Size(203, 20);
             lblCustomerValue.TabIndex = 5;
             lblCustomerValue.Text = "—";
             lblCustomerValue.TextAlign = ContentAlignment.MiddleRight;
@@ -334,9 +344,9 @@
             lblDateTimeKey.BackColor = Color.Transparent;
             lblDateTimeKey.Font = new Font("Segoe UI", 9F);
             lblDateTimeKey.ForeColor = Color.FromArgb(100, 116, 139);
-            lblDateTimeKey.Location = new Point(24, 143);
+            lblDateTimeKey.Location = new Point(21, 106);
             lblDateTimeKey.Name = "lblDateTimeKey";
-            lblDateTimeKey.Size = new Size(120, 26);
+            lblDateTimeKey.Size = new Size(105, 21);
             lblDateTimeKey.TabIndex = 6;
             lblDateTimeKey.Text = "Date/Time";
             // 
@@ -345,9 +355,9 @@
             lblDateTimeValue.BackColor = Color.Transparent;
             lblDateTimeValue.Font = new Font("Segoe UI", 9F);
             lblDateTimeValue.ForeColor = Color.FromArgb(71, 85, 105);
-            lblDateTimeValue.Location = new Point(140, 143);
+            lblDateTimeValue.Location = new Point(122, 107);
             lblDateTimeValue.Name = "lblDateTimeValue";
-            lblDateTimeValue.Size = new Size(292, 26);
+            lblDateTimeValue.Size = new Size(256, 20);
             lblDateTimeValue.TabIndex = 7;
             lblDateTimeValue.Text = "—";
             lblDateTimeValue.TextAlign = ContentAlignment.MiddleRight;
@@ -357,9 +367,9 @@
             lblTransactionKey.BackColor = Color.Transparent;
             lblTransactionKey.Font = new Font("Segoe UI", 9F);
             lblTransactionKey.ForeColor = Color.FromArgb(100, 116, 139);
-            lblTransactionKey.Location = new Point(24, 172);
+            lblTransactionKey.Location = new Point(21, 129);
             lblTransactionKey.Name = "lblTransactionKey";
-            lblTransactionKey.Size = new Size(120, 26);
+            lblTransactionKey.Size = new Size(105, 20);
             lblTransactionKey.TabIndex = 8;
             lblTransactionKey.Text = "Transaction";
             // 
@@ -368,9 +378,9 @@
             lblTransactionValue.BackColor = Color.Transparent;
             lblTransactionValue.Font = new Font("Segoe UI", 9F);
             lblTransactionValue.ForeColor = Color.FromArgb(71, 85, 105);
-            lblTransactionValue.Location = new Point(200, 172);
+            lblTransactionValue.Location = new Point(175, 129);
             lblTransactionValue.Name = "lblTransactionValue";
-            lblTransactionValue.Size = new Size(232, 26);
+            lblTransactionValue.Size = new Size(203, 20);
             lblTransactionValue.TabIndex = 9;
             lblTransactionValue.Text = "MONTHLY PAYMENT";
             lblTransactionValue.TextAlign = ContentAlignment.MiddleRight;
@@ -379,9 +389,10 @@
             // 
             sep2.FillColor = Color.FromArgb(226, 232, 240);
             sep2.FillStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            sep2.Location = new Point(24, 208);
+            sep2.Location = new Point(21, 156);
+            sep2.Margin = new Padding(3, 2, 3, 2);
             sep2.Name = "sep2";
-            sep2.Size = new Size(408, 2);
+            sep2.Size = new Size(357, 2);
             sep2.TabIndex = 10;
             // 
             // lblBreakdownItemKey
@@ -389,9 +400,9 @@
             lblBreakdownItemKey.BackColor = Color.Transparent;
             lblBreakdownItemKey.Font = new Font("Segoe UI", 8.5F);
             lblBreakdownItemKey.ForeColor = Color.FromArgb(100, 116, 139);
-            lblBreakdownItemKey.Location = new Point(24, 222);
+            lblBreakdownItemKey.Location = new Point(21, 166);
             lblBreakdownItemKey.Name = "lblBreakdownItemKey";
-            lblBreakdownItemKey.Size = new Size(220, 22);
+            lblBreakdownItemKey.Size = new Size(192, 16);
             lblBreakdownItemKey.TabIndex = 11;
             lblBreakdownItemKey.Text = "Monthly Amortization";
             // 
@@ -400,9 +411,9 @@
             lblBreakdownItemValue.BackColor = Color.Transparent;
             lblBreakdownItemValue.Font = new Font("Segoe UI", 8.5F);
             lblBreakdownItemValue.ForeColor = Color.FromArgb(100, 116, 139);
-            lblBreakdownItemValue.Location = new Point(280, 222);
+            lblBreakdownItemValue.Location = new Point(245, 166);
             lblBreakdownItemValue.Name = "lblBreakdownItemValue";
-            lblBreakdownItemValue.Size = new Size(152, 22);
+            lblBreakdownItemValue.Size = new Size(133, 16);
             lblBreakdownItemValue.TabIndex = 12;
             lblBreakdownItemValue.Text = "₱0.00";
             lblBreakdownItemValue.TextAlign = ContentAlignment.MiddleRight;
@@ -410,9 +421,10 @@
             // sep3
             // 
             sep3.FillColor = Color.FromArgb(241, 245, 249);
-            sep3.Location = new Point(0, 256);
+            sep3.Location = new Point(0, 192);
+            sep3.Margin = new Padding(3, 2, 3, 2);
             sep3.Name = "sep3";
-            sep3.Size = new Size(456, 1);
+            sep3.Size = new Size(399, 1);
             sep3.TabIndex = 13;
             // 
             // lblTotalPaidKey
@@ -420,9 +432,9 @@
             lblTotalPaidKey.BackColor = Color.Transparent;
             lblTotalPaidKey.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             lblTotalPaidKey.ForeColor = Color.FromArgb(30, 41, 59);
-            lblTotalPaidKey.Location = new Point(24, 270);
+            lblTotalPaidKey.Location = new Point(21, 202);
             lblTotalPaidKey.Name = "lblTotalPaidKey";
-            lblTotalPaidKey.Size = new Size(120, 34);
+            lblTotalPaidKey.Size = new Size(105, 26);
             lblTotalPaidKey.TabIndex = 14;
             lblTotalPaidKey.Text = "Total Paid";
             // 
@@ -431,9 +443,9 @@
             lblTotalPaidValue.BackColor = Color.Transparent;
             lblTotalPaidValue.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblTotalPaidValue.ForeColor = Color.FromArgb(30, 41, 59);
-            lblTotalPaidValue.Location = new Point(160, 268);
+            lblTotalPaidValue.Location = new Point(140, 201);
             lblTotalPaidValue.Name = "lblTotalPaidValue";
-            lblTotalPaidValue.Size = new Size(272, 36);
+            lblTotalPaidValue.Size = new Size(238, 27);
             lblTotalPaidValue.TabIndex = 15;
             lblTotalPaidValue.Text = "₱0.00";
             lblTotalPaidValue.TextAlign = ContentAlignment.MiddleRight;
@@ -443,9 +455,9 @@
             lblTenderedKey.BackColor = Color.Transparent;
             lblTenderedKey.Font = new Font("Segoe UI", 8.5F);
             lblTenderedKey.ForeColor = Color.FromArgb(148, 163, 184);
-            lblTenderedKey.Location = new Point(24, 312);
+            lblTenderedKey.Location = new Point(21, 234);
             lblTenderedKey.Name = "lblTenderedKey";
-            lblTenderedKey.Size = new Size(150, 20);
+            lblTenderedKey.Size = new Size(131, 15);
             lblTenderedKey.TabIndex = 16;
             lblTenderedKey.Text = "Amount Tendered";
             // 
@@ -454,9 +466,9 @@
             lblTenderedValue.BackColor = Color.Transparent;
             lblTenderedValue.Font = new Font("Segoe UI", 8.5F);
             lblTenderedValue.ForeColor = Color.FromArgb(148, 163, 184);
-            lblTenderedValue.Location = new Point(280, 312);
+            lblTenderedValue.Location = new Point(245, 234);
             lblTenderedValue.Name = "lblTenderedValue";
-            lblTenderedValue.Size = new Size(152, 20);
+            lblTenderedValue.Size = new Size(133, 15);
             lblTenderedValue.TabIndex = 17;
             lblTenderedValue.Text = "₱0.00";
             lblTenderedValue.TextAlign = ContentAlignment.MiddleRight;
@@ -466,9 +478,9 @@
             lblChangeKey.BackColor = Color.Transparent;
             lblChangeKey.Font = new Font("Segoe UI", 8.5F);
             lblChangeKey.ForeColor = Color.FromArgb(148, 163, 184);
-            lblChangeKey.Location = new Point(24, 336);
+            lblChangeKey.Location = new Point(21, 252);
             lblChangeKey.Name = "lblChangeKey";
-            lblChangeKey.Size = new Size(150, 20);
+            lblChangeKey.Size = new Size(131, 15);
             lblChangeKey.TabIndex = 18;
             lblChangeKey.Text = "Change";
             // 
@@ -477,9 +489,9 @@
             lblChangeValue.BackColor = Color.Transparent;
             lblChangeValue.Font = new Font("Segoe UI", 8.5F);
             lblChangeValue.ForeColor = Color.FromArgb(148, 163, 184);
-            lblChangeValue.Location = new Point(280, 336);
+            lblChangeValue.Location = new Point(245, 252);
             lblChangeValue.Name = "lblChangeValue";
-            lblChangeValue.Size = new Size(152, 20);
+            lblChangeValue.Size = new Size(133, 15);
             lblChangeValue.TabIndex = 19;
             lblChangeValue.Text = "₱0.00";
             lblChangeValue.TextAlign = ContentAlignment.MiddleRight;
@@ -497,14 +509,15 @@
             pnlLoanStatus.Controls.Add(lblNextDueValue);
             pnlLoanStatus.CustomizableEdges = customizableEdges7;
             pnlLoanStatus.FillColor = Color.FromArgb(238, 242, 255);
-            pnlLoanStatus.Location = new Point(24, 376);
+            pnlLoanStatus.Location = new Point(21, 282);
+            pnlLoanStatus.Margin = new Padding(3, 2, 3, 2);
             pnlLoanStatus.Name = "pnlLoanStatus";
             pnlLoanStatus.ShadowDecoration.Color = Color.FromArgb(20, 99, 102, 241);
             pnlLoanStatus.ShadowDecoration.CustomizableEdges = customizableEdges8;
             pnlLoanStatus.ShadowDecoration.Depth = 6;
             pnlLoanStatus.ShadowDecoration.Enabled = true;
             pnlLoanStatus.ShadowDecoration.Shadow = new Padding(0, 2, 6, 6);
-            pnlLoanStatus.Size = new Size(424, 100);
+            pnlLoanStatus.Size = new Size(371, 75);
             pnlLoanStatus.TabIndex = 20;
             // 
             // lblLoanStatusTitle
@@ -512,9 +525,9 @@
             lblLoanStatusTitle.BackColor = Color.Transparent;
             lblLoanStatusTitle.Font = new Font("Segoe UI", 7.5F, FontStyle.Bold);
             lblLoanStatusTitle.ForeColor = Color.FromArgb(99, 102, 241);
-            lblLoanStatusTitle.Location = new Point(14, 10);
+            lblLoanStatusTitle.Location = new Point(12, 8);
             lblLoanStatusTitle.Name = "lblLoanStatusTitle";
-            lblLoanStatusTitle.Size = new Size(200, 15);
+            lblLoanStatusTitle.Size = new Size(175, 11);
             lblLoanStatusTitle.TabIndex = 0;
             lblLoanStatusTitle.Text = "UPDATED LOAN STATUS";
             // 
@@ -523,9 +536,9 @@
             lblRemainingBalanceKey.BackColor = Color.Transparent;
             lblRemainingBalanceKey.Font = new Font("Segoe UI", 9F);
             lblRemainingBalanceKey.ForeColor = Color.FromArgb(71, 85, 105);
-            lblRemainingBalanceKey.Location = new Point(14, 32);
+            lblRemainingBalanceKey.Location = new Point(12, 24);
             lblRemainingBalanceKey.Name = "lblRemainingBalanceKey";
-            lblRemainingBalanceKey.Size = new Size(160, 22);
+            lblRemainingBalanceKey.Size = new Size(140, 16);
             lblRemainingBalanceKey.TabIndex = 1;
             lblRemainingBalanceKey.Text = "Remaining Balance";
             // 
@@ -534,9 +547,9 @@
             lblRemainingBalanceValue.BackColor = Color.Transparent;
             lblRemainingBalanceValue.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblRemainingBalanceValue.ForeColor = Color.FromArgb(30, 41, 59);
-            lblRemainingBalanceValue.Location = new Point(240, 32);
+            lblRemainingBalanceValue.Location = new Point(210, 24);
             lblRemainingBalanceValue.Name = "lblRemainingBalanceValue";
-            lblRemainingBalanceValue.Size = new Size(172, 22);
+            lblRemainingBalanceValue.Size = new Size(150, 16);
             lblRemainingBalanceValue.TabIndex = 2;
             lblRemainingBalanceValue.Text = "₱0";
             lblRemainingBalanceValue.TextAlign = ContentAlignment.MiddleRight;
@@ -546,9 +559,9 @@
             lblNextDueKey.BackColor = Color.Transparent;
             lblNextDueKey.Font = new Font("Segoe UI", 9F);
             lblNextDueKey.ForeColor = Color.FromArgb(71, 85, 105);
-            lblNextDueKey.Location = new Point(14, 60);
+            lblNextDueKey.Location = new Point(12, 45);
             lblNextDueKey.Name = "lblNextDueKey";
-            lblNextDueKey.Size = new Size(160, 22);
+            lblNextDueKey.Size = new Size(140, 16);
             lblNextDueKey.TabIndex = 3;
             lblNextDueKey.Text = "Next Payment Due";
             // 
@@ -557,9 +570,9 @@
             lblNextDueValue.BackColor = Color.Transparent;
             lblNextDueValue.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblNextDueValue.ForeColor = Color.FromArgb(37, 99, 235);
-            lblNextDueValue.Location = new Point(240, 60);
+            lblNextDueValue.Location = new Point(210, 45);
             lblNextDueValue.Name = "lblNextDueValue";
-            lblNextDueValue.Size = new Size(172, 22);
+            lblNextDueValue.Size = new Size(150, 16);
             lblNextDueValue.TabIndex = 4;
             lblNextDueValue.Text = "—";
             lblNextDueValue.TextAlign = ContentAlignment.MiddleRight;
@@ -571,9 +584,10 @@
             pnlActionButtons.Controls.Add(btnEmail);
             pnlActionButtons.Controls.Add(btnSavePDF);
             pnlActionButtons.Controls.Add(btnSMS);
-            pnlActionButtons.Location = new Point(32, 556);
+            pnlActionButtons.Location = new Point(28, 417);
+            pnlActionButtons.Margin = new Padding(3, 2, 3, 2);
             pnlActionButtons.Name = "pnlActionButtons";
-            pnlActionButtons.Size = new Size(456, 112);
+            pnlActionButtons.Size = new Size(399, 84);
             pnlActionButtons.TabIndex = 1;
             // 
             // btnPrint
@@ -589,9 +603,10 @@
             btnPrint.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnPrint.HoverState.FillColor = Color.FromArgb(248, 250, 252);
             btnPrint.Location = new Point(0, 0);
+            btnPrint.Margin = new Padding(3, 2, 3, 2);
             btnPrint.Name = "btnPrint";
             btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btnPrint.Size = new Size(222, 44);
+            btnPrint.Size = new Size(194, 33);
             btnPrint.TabIndex = 0;
             btnPrint.Text = "🖨  Print";
             btnPrint.Click += BtnPrint_Click;
@@ -608,10 +623,11 @@
             btnEmail.ForeColor = Color.FromArgb(71, 85, 105);
             btnEmail.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnEmail.HoverState.FillColor = Color.FromArgb(248, 250, 252);
-            btnEmail.Location = new Point(234, 0);
+            btnEmail.Location = new Point(205, 0);
+            btnEmail.Margin = new Padding(3, 2, 3, 2);
             btnEmail.Name = "btnEmail";
             btnEmail.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            btnEmail.Size = new Size(222, 44);
+            btnEmail.Size = new Size(194, 33);
             btnEmail.TabIndex = 1;
             btnEmail.Text = "📧  Email";
             btnEmail.Click += BtnEmail_Click;
@@ -628,10 +644,11 @@
             btnSavePDF.ForeColor = Color.FromArgb(71, 85, 105);
             btnSavePDF.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnSavePDF.HoverState.FillColor = Color.FromArgb(248, 250, 252);
-            btnSavePDF.Location = new Point(0, 56);
+            btnSavePDF.Location = new Point(0, 42);
+            btnSavePDF.Margin = new Padding(3, 2, 3, 2);
             btnSavePDF.Name = "btnSavePDF";
             btnSavePDF.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            btnSavePDF.Size = new Size(222, 44);
+            btnSavePDF.Size = new Size(194, 33);
             btnSavePDF.TabIndex = 2;
             btnSavePDF.Text = "💾  Save PDF";
             btnSavePDF.Click += BtnSavePDF_Click;
@@ -648,10 +665,11 @@
             btnSMS.ForeColor = Color.FromArgb(71, 85, 105);
             btnSMS.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnSMS.HoverState.FillColor = Color.FromArgb(248, 250, 252);
-            btnSMS.Location = new Point(234, 56);
+            btnSMS.Location = new Point(205, 42);
+            btnSMS.Margin = new Padding(3, 2, 3, 2);
             btnSMS.Name = "btnSMS";
             btnSMS.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            btnSMS.Size = new Size(222, 44);
+            btnSMS.Size = new Size(194, 33);
             btnSMS.TabIndex = 3;
             btnSMS.Text = "📱  SMS";
             btnSMS.Click += BtnSMS_Click;
@@ -664,10 +682,11 @@
             pnlFooter.Controls.Add(btnStartNew);
             pnlFooter.CustomizableEdges = customizableEdges5;
             pnlFooter.FillColor = Color.White;
-            pnlFooter.Location = new Point(0, 714);
+            pnlFooter.Location = new Point(0, 536);
+            pnlFooter.Margin = new Padding(3, 2, 3, 2);
             pnlFooter.Name = "pnlFooter";
             pnlFooter.ShadowDecoration.CustomizableEdges = customizableEdges23;
-            pnlFooter.Size = new Size(520, 100);
+            pnlFooter.Size = new Size(455, 75);
             pnlFooter.TabIndex = 2;
             // 
             // btnStartNew
@@ -683,26 +702,28 @@
             btnStartNew.HoverState.BorderColor = Color.Transparent;
             btnStartNew.HoverState.FillColor = Color.FromArgb(30, 41, 59);
             btnStartNew.HoverState.ForeColor = Color.White;
-            btnStartNew.Location = new Point(24, 24);
+            btnStartNew.Location = new Point(21, 18);
+            btnStartNew.Margin = new Padding(3, 2, 3, 2);
             btnStartNew.Name = "btnStartNew";
             btnStartNew.PressedColor = Color.FromArgb(51, 65, 85);
             btnStartNew.ShadowDecoration.Color = Color.FromArgb(40, 15, 23, 42);
             btnStartNew.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnStartNew.ShadowDecoration.Enabled = true;
             btnStartNew.ShadowDecoration.Shadow = new Padding(0, 4, 10, 10);
-            btnStartNew.Size = new Size(472, 52);
+            btnStartNew.Size = new Size(413, 39);
             btnStartNew.TabIndex = 0;
             btnStartNew.Text = "Start New Transaction";
             btnStartNew.Click += BtnStartNew_Click;
             // 
             // ReceiptForm2
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
             Controls.Add(pnlOverlay);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ReceiptForm2";
-            Size = new Size(900, 918);
+            Size = new Size(788, 688);
             Load += ReceiptForm2_Load;
             pnlOverlay.ResumeLayout(false);
             pnlModalCard.ResumeLayout(false);

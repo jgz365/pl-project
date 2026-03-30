@@ -562,7 +562,7 @@
             txnNoteText.TabIndex = 1;
             txnNoteText.Text = "Upon confirmation, a queue ticket will be generated. The customer must proceed to the cashier for payment to release the unit.";
             // 
-            // guna2ShadowPanel1
+            // guna2ShadowPanel1 (Customer Info panel)
             // 
             guna2ShadowPanel1.BackColor = Color.Transparent;
             guna2ShadowPanel1.Controls.Add(customerInfoLabel);
@@ -744,8 +744,7 @@
             // 
             // ck_confirm_payment
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;   // manual responsive layout takes over
             BackColor = Color.FromArgb(241, 245, 249);
             Controls.Add(kiosk_prod_panel);
             Controls.Add(pnlSummary);

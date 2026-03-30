@@ -8,7 +8,6 @@ namespace CSP_PROJECT
     /// <summary>
     /// CollectionForm5 — Cashier payment collection screen for the kiosk full-cash flow.
     /// Receives customer name, charges breakdown, and total from ck_confirm_payment.
-    /// Same UX pattern as CollectionForm4 (Full Settlement).
     /// </summary>
     public partial class CollectionForm5 : UserControl
     {
@@ -21,12 +20,38 @@ namespace CSP_PROJECT
 
         public event EventHandler BackRequested = delegate { };
 
+        // ── Designer reference dimensions (96 DPI) ────────────────────────────
+        // Form:         1021 × 750
+        // pnlSidebar:   x=0,   y=0, w=366, h=750
+        // pnlRight:     x=366, y=0, w=655, h=750   (1021-366 = 655)
+        //   Content block inside pnlRight: x=90, w=480 (ref 683 assumed, but actual is 655)
+        //   We derive content centre from the ref proportions instead.
+        private const float REF_W = 1021f;
+        private const float REF_H = 750f;
+        private const float REF_SIDEBAR_W = 366f;
+        private const float REF_RIGHT_W = 655f;   // 1021 - 366
+
+        // Sidebar interior reference (relative to sidebar 366 × 750)
+        private const float SB_REF_W = 366f;
+        private const float SB_REF_H = 750f;
+
+        // Right-panel content block reference (relative to pnlRight 655 × 750)
+        // In the designer the block sits at x=90 inside a 683-wide panel.
+        // We keep the same proportional margin: 90/683 ≈ 13.2 %
+        private const float RT_REF_W = 683f;   // original designer width used for proportions
+        private const float RT_REF_H = 750f;
+        private const float RT_CONTENT_X_REF = 90f;    // left edge of content block
+        private const float RT_CONTENT_W_REF = 480f;   // content block width
+
+        // ─────────────────────────────────────────────────────────────────────
         public CollectionForm5()
         {
             InitializeComponent();
         }
 
-        // ── Called by ck_confirm_payment before adding to parent ──────────────
+        // ─────────────────────────────────────────────────────────────────────
+        // Called by ck_confirm_payment before adding to parent
+        // ─────────────────────────────────────────────────────────────────────
         public void SetData(string customerName, string mobileNumber,
                             List<(string Label, decimal Amount)> charges,
                             decimal totalDue)
@@ -37,11 +62,13 @@ namespace CSP_PROJECT
             _totalDue = totalDue;
         }
 
-        // ── Load ─────────────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────
+        // Lifecycle
+        // ─────────────────────────────────────────────────────────────────────
         private void CollectionForm5_Load(object sender, EventArgs e)
         {
             PopulateSidebar();
-            ResizePanels();
+            ApplyResponsiveLayout();
             ResetPaymentState();
             txtAmountReceived.Focus();
         }
@@ -49,119 +76,252 @@ namespace CSP_PROJECT
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (IsHandleCreated) ResizePanels();
+            if (IsHandleCreated) ApplyResponsiveLayout();
         }
 
-        // ── Responsive layout ─────────────────────────────────────────────────
-        private void ResizePanels()
+        // ─────────────────────────────────────────────────────────────────────
+        // Round-scale helper
+        // ─────────────────────────────────────────────────────────────────────
+        private static int S(float refVal, float scale) => (int)Math.Round(refVal * scale);
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Master responsive layout
+        // ─────────────────────────────────────────────────────────────────────
+        private void ApplyResponsiveLayout()
         {
-            pnlRoot.Size = this.Size;
-            pnlSidebar.Height = this.Height;
+            if (ClientSize.Width < 400 || ClientSize.Height < 200) return;
 
-            pnlRight.Location = new Point(pnlSidebar.Right, 0);
-            pnlRight.Size = new Size(Math.Max(0, Width - pnlSidebar.Width), Height);
+            float formW = ClientSize.Width;
+            float formH = ClientSize.Height;
 
-            int contentW = Math.Min(560, pnlRight.Width - 80);
-            int contentX = Math.Max(0, (pnlRight.Width - contentW) / 2);
+            // Uniform scale factor — preserves aspect ratio of the full form
+            float sc = Math.Min(formW / REF_W, formH / REF_H);
 
-            lblAmountReceivedTitle.Location = new Point(contentX, 60);
-            lblAmountReceivedTitle.Width = contentW;
+            // ── Root panel fills the whole UserControl ────────────────────────
+            pnlRoot.SetBounds(0, 0, (int)formW, (int)formH);
 
-            pnlAmountInput.Location = new Point(contentX, 88);
-            pnlAmountInput.Width = contentW;
-            txtAmountReceived.Width = pnlAmountInput.Width - 60;
+            // ── Sidebar ───────────────────────────────────────────────────────
+            int sidebarW = S(REF_SIDEBAR_W, sc);
+            int sidebarH = (int)formH;
+            pnlSidebar.SetBounds(0, 0, sidebarW, sidebarH);
 
-            int btnW = (contentW - 3 * 12) / 4;
-            btnAdd100.Location = new Point(contentX, 200);
-            btnAdd500.Location = new Point(contentX + btnW + 12, 200);
-            btnAdd1000.Location = new Point(contentX + (btnW + 12) * 2, 200);
-            btnExact.Location = new Point(contentX + (btnW + 12) * 3, 200);
-            btnAdd100.Width = btnAdd500.Width = btnAdd1000.Width = btnExact.Width = btnW;
+            // ── Right panel ───────────────────────────────────────────────────
+            int rightX = sidebarW;
+            int rightW = (int)formW - sidebarW;
+            int rightH = (int)formH;
+            pnlRight.SetBounds(rightX, 0, rightW, rightH);
 
-            pnlChangeDue.Location = new Point(contentX, 295);
-            pnlChangeDue.Width = contentW;
-            lblChangeDueValue.Location = new Point(pnlChangeDue.Width - 240, 14);
-            lblChangeDueValue.Width = 216;
-
-            btnProcess.Location = new Point(contentX, 415);
-            btnProcess.Width = contentW;
+            // ── Scale each section independently ──────────────────────────────
+            ScaleSidebarInterior(sidebarW, sidebarH);
+            ScaleRightInterior(rightW, rightH);
         }
 
-        // ── Populate sidebar with customer name + charges ─────────────────────
-        private void PopulateSidebar()
+        // ─────────────────────────────────────────────────────────────────────
+        // Sidebar interior   (designer reference: 366 × 750)
+        // ─────────────────────────────────────────────────────────────────────
+        private void ScaleSidebarInterior(int panelW, int panelH)
         {
-            // Avatar
-            string initials = GetInitials(_customerName);
-            btnAvatar.Text = initials;
-            btnAvatar.FillColor = GetAvatarBg(_customerName);
-            btnAvatar.ForeColor = GetAvatarFg(_customerName);
-            btnAvatar.HoverState.FillColor = btnAvatar.FillColor;
-            btnAvatar.HoverState.ForeColor = btnAvatar.ForeColor;
-            btnAvatar.PressedColor = btnAvatar.FillColor;
-            btnAvatar.Location = new Point((pnlSidebar.Width - btnAvatar.Width) / 2, 76);
+            float sc = Math.Min(panelW / SB_REF_W, panelH / SB_REF_H);
 
-            lblCustomerName.Text = _customerName;
-            lblCustomerSubtitle.Text = string.IsNullOrWhiteSpace(_mobileNumber)
-                ? "Full Cash Purchase"
-                : _mobileNumber;
+            // ── Back button — ref (14, 20, 150, 38) ───────────────────────────
+            btnBack.SetBounds(S(14f, sc), S(20f, sc), S(150f, sc), S(38f, sc));
 
-            // Build charges rows dynamically
-            BuildChargesRows();
+            // ── Avatar — ref (119, 76, 90, 90); keep it square and centred ────
+            int avatarSize = Math.Max(48, S(90f, sc));
+            int avatarX = (panelW - avatarSize) / 2;
+            int avatarY = S(76f, sc);
+            btnAvatar.SetBounds(avatarX, avatarY, avatarSize, avatarSize);
+            btnAvatar.BorderRadius = avatarSize / 2;
+
+            // ── Customer name — ref (14, 178, 310, 30), text centered ──────────
+            int labelPadX = S(14f, sc);
+            int labelW = panelW - labelPadX * 2;
+            lblCustomerName.SetBounds(labelPadX, S(178f, sc), labelW, S(30f, sc));
+
+            // ── Customer subtitle — ref (14, 210, 310, 24) ────────────────────
+            lblCustomerSubtitle.SetBounds(labelPadX, S(210f, sc), labelW, S(24f, sc));
+
+            // ── Breakdown card — ref (18, 248, 345, 400) ─────────────────────
+            int cardPadX = S(18f, sc);
+            int cardY = S(248f, sc);
+            int cardW = panelW - cardPadX * 2;
+            // Height: fills remaining sidebar space with a small bottom margin
+            int cardH = Math.Max(100, panelH - cardY - S(12f, sc));
+            pnlBreakdownCard.SetBounds(cardPadX, cardY, cardW, cardH);
+
+            // Scale interior of breakdown card
+            ScaleBreakdownCardInterior(cardW, cardH);
         }
 
-        private void BuildChargesRows()
+        // ─────────────────────────────────────────────────────────────────────
+        // pnlBreakdownCard interior   (designer reference: 345 × 400)
+        // ─────────────────────────────────────────────────────────────────────
+        private void ScaleBreakdownCardInterior(int cardW, int cardH)
         {
-            // Clear existing dynamic rows (keep title + separator + total)
-            pnlBreakdownCard.Controls.Clear();
-            pnlBreakdownCard.Controls.Add(lblBreakdownTitle);
-            pnlBreakdownCard.Controls.Add(sep1);
+            const float refCW = 345f;
+            const float refCH = 400f;
+            float sc = Math.Min(cardW / refCW, cardH / refCH);
 
-            int y = 56;
-            const int rowH = 28;
+            // ── "CHARGES BREAKDOWN" title — ref (18, 16, 266, 22) ─────────────
+            int padX = S(18f, sc);
+            lblBreakdownTitle.SetBounds(padX, S(16f, sc), cardW - padX * 2, S(22f, sc));
+
+            // ── sep1 — ref (0, 46, 345, 1) ────────────────────────────────────
+            sep1.SetBounds(0, S(46f, sc), cardW, 1);
+
+            // Dynamic charge rows + total are rebuilt inside BuildChargesRows
+            // We pass the scale factor so it can position them correctly
+            RebuildChargesRows(cardW, sc);
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Dynamic charges rows — rebuilds and positions all rows
+        // ─────────────────────────────────────────────────────────────────────
+        private void RebuildChargesRows(int cardW, float sc)
+        {
+            // Remove all dynamic controls (keep the static ones: title, sep1)
+            var toRemove = new List<Control>();
+            foreach (Control c in pnlBreakdownCard.Controls)
+            {
+                if (c != lblBreakdownTitle && c != sep1)
+                    toRemove.Add(c);
+            }
+            foreach (Control c in toRemove)
+                pnlBreakdownCard.Controls.Remove(c);
+
+            // Row geometry — ref: first row at y=56, rowH=28
+            int padX = S(18f, sc);
+            int y = S(56f, sc);
+            int rowH = Math.Max(20, S(28f, sc));
+            int valX = S(200f, sc);
+            int valW = cardW - valX - padX;
 
             foreach (var (label, amount) in _charges)
             {
                 var key = new Label
                 {
-                    BackColor = System.Drawing.Color.Transparent,
-                    Font = new System.Drawing.Font("Segoe UI", 9F),
-                    ForeColor = System.Drawing.Color.FromArgb(71, 85, 105),
-                    Location = new Point(18, y),
-                    Size = new System.Drawing.Size(190, 24),
+                    BackColor = Color.Transparent,
+                    Font = new Font("Segoe UI", 9F),
+                    ForeColor = Color.FromArgb(71, 85, 105),
+                    Location = new Point(padX, y),
+                    Size = new Size(valX - padX - 4, rowH),
                     Text = label
                 };
                 var val = new Label
                 {
-                    BackColor = System.Drawing.Color.Transparent,
-                    Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold),
-                    ForeColor = System.Drawing.Color.FromArgb(30, 41, 59),
-                    Location = new Point(200, y),
-                    Size = new System.Drawing.Size(120, 24),
+                    BackColor = Color.Transparent,
+                    Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(30, 41, 59),
+                    Location = new Point(valX, y),
+                    Size = new Size(valW, rowH),
                     Text = $"₱{amount:N2}",
-                    TextAlign = System.Drawing.ContentAlignment.TopRight
+                    TextAlign = ContentAlignment.TopRight
                 };
                 pnlBreakdownCard.Controls.Add(key);
                 pnlBreakdownCard.Controls.Add(val);
                 y += rowH;
             }
 
-            // Separator before total
-            sep2.Location = new Point(0, y + 4);
-            sep2.Size = new System.Drawing.Size(302, 1);
+            // ── sep2 — ref sits 4px below last row ────────────────────────────
+            int sep2Y = y + S(4f, sc);
+            sep2.SetBounds(0, sep2Y, cardW, 1);
             pnlBreakdownCard.Controls.Add(sep2);
 
-            // Total Due row
-            lblTotalDueKey.Location = new Point(18, y + 14);
-            lblTotalDueValue.Location = new Point(18, y + 38);
-            lblTotalDueValue.Text = $"₱{_totalDue:N0}";
+            // ── "Total Due" key — ref 14px below sep ──────────────────────────
+            int totKeyY = sep2Y + S(14f, sc);
+            lblTotalDueKey.SetBounds(padX, totKeyY, S(190f, sc), S(24f, sc));
             pnlBreakdownCard.Controls.Add(lblTotalDueKey);
-            pnlBreakdownCard.Controls.Add(lblTotalDueValue);
 
-            // Resize card to fit content
-            pnlBreakdownCard.Height = y + 80;
+            // ── Total Due value — ref 38px below sep ──────────────────────────
+            int totValY = sep2Y + S(38f, sc);
+            lblTotalDueValue.SetBounds(padX, totValY, cardW - padX * 2, S(30f, sc));
+            pnlBreakdownCard.Controls.Add(lblTotalDueValue);
         }
 
-        // ── Payment state ─────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────
+        // Right panel interior   (designer reference content block: x=90, w=480 inside 683)
+        // ─────────────────────────────────────────────────────────────────────
+        private void ScaleRightInterior(int panelW, int panelH)
+        {
+            // Scale from designer's right-panel reference (683 × 750)
+            float sc = Math.Min(panelW / RT_REF_W, panelH / RT_REF_H);
+
+            // Content block: scale width and centre horizontally inside pnlRight
+            int contentW = S(RT_CONTENT_W_REF, sc);
+            int contentX = Math.Max(0, (panelW - contentW) / 2);
+
+            // ── "AMOUNT RECEIVED" label — ref (90, 60, 480, 22) ───────────────
+            lblAmountReceivedTitle.SetBounds(contentX, S(60f, sc), contentW, S(22f, sc));
+
+            // ── Amount input panel — ref (90, 88, 480, 90) ────────────────────
+            int inputH = S(90f, sc);
+            pnlAmountInput.SetBounds(contentX, S(88f, sc), contentW, inputH);
+
+            // Controls inside pnlAmountInput — ref: 480 × 90
+            float inpSc = Math.Min(contentW / 480f, inputH / 90f);
+            int pesoW = S(30f, inpSc);
+            int pesoH = S(48f, inpSc);
+            int pesoY = (inputH - pesoH) / 2;
+            lblPesoSign.SetBounds(S(14f, inpSc), pesoY, pesoW, pesoH);
+            int txtX = S(48f, inpSc);
+            int txtH = S(70f, inpSc);
+            int txtY = (inputH - txtH) / 2;
+            txtAmountReceived.SetBounds(txtX, txtY, contentW - txtX - S(4f, inpSc), txtH);
+
+            // ── Quick-add buttons — ref row at y=200, each 65 tall ────────────
+            // 100(108) gap(12) 500(108) gap(12) 1000(108) gap(12) Exact(120) = 480
+            int btnY = S(200f, sc);
+            int btnH = S(65f, sc);
+            int btn3W = S(108f, sc);
+            int btnExactW = S(120f, sc);
+            int btnGap = S(12f, sc);
+
+            btnAdd100.SetBounds(contentX, btnY, btn3W, btnH);
+            btnAdd500.SetBounds(contentX + btn3W + btnGap, btnY, btn3W, btnH);
+            btnAdd1000.SetBounds(contentX + (btn3W + btnGap) * 2, btnY, btn3W, btnH);
+            btnExact.SetBounds(contentX + (btn3W + btnGap) * 3, btnY, btnExactW, btnH);
+
+            // ── Change Due panel — ref (90, 295, 480, 90) ─────────────────────
+            int changePnlH = S(90f, sc);
+            pnlChangeDue.SetBounds(contentX, S(295f, sc), contentW, changePnlH);
+
+            // Controls inside pnlChangeDue — ref: 480 × 90
+            float chgSc = Math.Min(contentW / 480f, changePnlH / 90f);
+            lblChangeDueTitle.SetBounds(S(24f, chgSc), S(28f, chgSc), S(160f, chgSc), S(28f, chgSc));
+            // Value label right-aligned: ref right margin = 480-(220+240)=20px
+            int chgValW = S(240f, chgSc);
+            int chgValX = contentW - chgValW - S(20f, chgSc);
+            lblChangeDueValue.SetBounds(chgValX, S(14f, chgSc), chgValW, S(62f, chgSc));
+
+            // ── Process button — ref (90, 415, 480, 75) ───────────────────────
+            btnProcess.SetBounds(contentX, S(415f, sc), contentW, S(75f, sc));
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Populate sidebar with customer info + initial charges
+        // ─────────────────────────────────────────────────────────────────────
+        private void PopulateSidebar()
+        {
+            // Avatar
+            btnAvatar.Text = GetInitials(_customerName);
+            btnAvatar.FillColor = GetAvatarBg(_customerName);
+            btnAvatar.ForeColor = GetAvatarFg(_customerName);
+            btnAvatar.HoverState.FillColor = btnAvatar.FillColor;
+            btnAvatar.HoverState.ForeColor = btnAvatar.ForeColor;
+            btnAvatar.PressedColor = btnAvatar.FillColor;
+
+            lblCustomerName.Text = _customerName;
+            lblCustomerSubtitle.Text = string.IsNullOrWhiteSpace(_mobileNumber)
+                ? "Full Cash Purchase"
+                : _mobileNumber;
+
+            // Total amount text — layout will position it after resize
+            lblTotalDueValue.Text = $"₱{_totalDue:N0}";
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Payment state
+        // ─────────────────────────────────────────────────────────────────────
         private void ResetPaymentState()
         {
             _amountReceived = 0m;
@@ -177,27 +337,29 @@ namespace CSP_PROJECT
             if (_amountReceived <= 0m)
             {
                 lblChangeDueValue.Text = "₱0";
-                lblChangeDueValue.ForeColor = System.Drawing.Color.FromArgb(71, 85, 105);
+                lblChangeDueValue.ForeColor = Color.FromArgb(71, 85, 105);
             }
             else if (paid)
             {
                 lblChangeDueValue.Text = $"₱{change:N0}";
-                lblChangeDueValue.ForeColor = System.Drawing.Color.FromArgb(5, 150, 105); // green
+                lblChangeDueValue.ForeColor = Color.FromArgb(5, 150, 105);
             }
             else
             {
                 decimal shortage = _totalDue - _amountReceived;
                 lblChangeDueValue.Text = $"-₱{shortage:N0}";
-                lblChangeDueValue.ForeColor = System.Drawing.Color.FromArgb(248, 113, 113); // red
+                lblChangeDueValue.ForeColor = Color.FromArgb(248, 113, 113);
             }
 
             btnProcess.Enabled = paid;
             btnProcess.FillColor = paid
-                ? System.Drawing.Color.FromArgb(5, 150, 105)   // teal when ready
-                : System.Drawing.Color.FromArgb(167, 243, 208); // light teal disabled
+                ? Color.FromArgb(5, 150, 105)
+                : Color.FromArgb(167, 243, 208);
         }
 
-        // ── Amount buttons ────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────
+        // Amount button handlers
+        // ─────────────────────────────────────────────────────────────────────
         private void TxtAmountReceived_TextChanged(object sender, EventArgs e)
         {
             _amountReceived = decimal.TryParse(txtAmountReceived.Text, out decimal v) ? v : 0m;
@@ -206,7 +368,7 @@ namespace CSP_PROJECT
 
         private void BtnAdd100_Click(object sender, EventArgs e) => AddAmount(100m);
         private void BtnAdd500_Click(object sender, EventArgs e) => AddAmount(500m);
-        private void BtnAdd1000_Click(object sender, EventArgs e) => AddAmount(1000m);
+        private void BtnAdd1000_Click(object sender, EventArgs e) => AddAmount(1_000m);
 
         private void AddAmount(decimal amount)
         {
@@ -228,7 +390,9 @@ namespace CSP_PROJECT
             RefreshCalculation();
         }
 
-        // ── Process transaction ───────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────
+        // Process transaction
+        // ─────────────────────────────────────────────────────────────────────
         private void BtnProcess_Click(object sender, EventArgs e)
         {
             if (_amountReceived < _totalDue) return;
@@ -263,35 +427,44 @@ namespace CSP_PROJECT
             receiptScreen.BringToFront();
         }
 
-        // ── Back button ───────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────
+        // Back button
+        // ─────────────────────────────────────────────────────────────────────
         private void BtnBack_Click(object sender, EventArgs e)
         {
             BackRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        // ── Avatar helpers (same palette as CollectionForm4) ──────────────────
-        private static readonly System.Drawing.Color[] _bgPalette =
+        // ─────────────────────────────────────────────────────────────────────
+        // Avatar colour helpers
+        // ─────────────────────────────────────────────────────────────────────
+        private static readonly Color[] _bgPalette =
         {
-            System.Drawing.Color.FromArgb(219, 234, 254),
-            System.Drawing.Color.FromArgb(209, 250, 229),
-            System.Drawing.Color.FromArgb(254, 243, 199),
-            System.Drawing.Color.FromArgb(237, 233, 254),
-            System.Drawing.Color.FromArgb(255, 228, 230),
+            Color.FromArgb(219, 234, 254),
+            Color.FromArgb(209, 250, 229),
+            Color.FromArgb(254, 243, 199),
+            Color.FromArgb(237, 233, 254),
+            Color.FromArgb(255, 228, 230),
         };
-        private static readonly System.Drawing.Color[] _fgPalette =
+        private static readonly Color[] _fgPalette =
         {
-            System.Drawing.Color.FromArgb(37,  99, 235),
-            System.Drawing.Color.FromArgb(5,  150, 105),
-            System.Drawing.Color.FromArgb(217, 119,   6),
-            System.Drawing.Color.FromArgb(109,  40, 217),
-            System.Drawing.Color.FromArgb(225,  29,  72),
+            Color.FromArgb(37,  99, 235),
+            Color.FromArgb(5,  150, 105),
+            Color.FromArgb(217, 119,   6),
+            Color.FromArgb(109,  40, 217),
+            Color.FromArgb(225,  29,  72),
         };
-        private static System.Drawing.Color GetAvatarBg(string name)
-            => string.IsNullOrWhiteSpace(name) ? _bgPalette[0]
+
+        private static Color GetAvatarBg(string name)
+            => string.IsNullOrWhiteSpace(name)
+               ? _bgPalette[0]
                : _bgPalette[char.ToUpper(name[0]) % _bgPalette.Length];
-        private static System.Drawing.Color GetAvatarFg(string name)
-            => string.IsNullOrWhiteSpace(name) ? _fgPalette[0]
+
+        private static Color GetAvatarFg(string name)
+            => string.IsNullOrWhiteSpace(name)
+               ? _fgPalette[0]
                : _fgPalette[char.ToUpper(name[0]) % _fgPalette.Length];
+
         private static string GetInitials(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return "?";

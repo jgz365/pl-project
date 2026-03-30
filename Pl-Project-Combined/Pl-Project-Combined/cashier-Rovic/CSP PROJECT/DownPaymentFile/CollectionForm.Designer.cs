@@ -129,7 +129,7 @@
             btnBackToConfig.Size = new Size(150, 38);
             btnBackToConfig.TabIndex = 0;
             btnBackToConfig.Text = "← Back to Config";
-            btnBackToConfig.Click += BtnBackToConfig_Click;
+            btnBackToConfig.Click += btnBackToConfig_Click;
 
             // ── btnAvatar ────────────────────────────────────────────────────────
             // WHY Guna2Button instead of Guna2Panel + Label:

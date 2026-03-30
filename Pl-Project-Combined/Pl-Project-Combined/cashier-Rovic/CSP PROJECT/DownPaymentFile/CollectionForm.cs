@@ -13,6 +13,18 @@ namespace POSCashierSystem
         public event EventHandler BackRequested = delegate { };
         public event EventHandler<CollectionResult> TransactionComplete = delegate { };
 
+        // ── Designer reference dimensions (96 DPI) ────────────────────────────
+        private const float REF_W = 1021f;
+        private const float REF_H = 750f;
+        private const float REF_SIDEBAR_W = 366f;
+
+        private const float SB_REF_W = 366f;
+        private const float SB_REF_H = 750f;
+
+        private const float RT_REF_W = 683f;
+        private const float RT_REF_H = 750f;
+        private const float RT_CONTENT_W_REF = 480f;
+
         public CollectionForm(CustomerSummary customer, decimal totalDue)
         {
             _customer = customer ?? throw new ArgumentNullException(nameof(customer));
@@ -23,7 +35,7 @@ namespace POSCashierSystem
         private void CollectionForm_Load(object sender, EventArgs e)
         {
             PopulateSidebar();
-            ResizePanels();
+            ApplyResponsiveLayout();
             ResetPaymentState();
             txtAmountReceived.Focus();
         }
@@ -31,63 +43,147 @@ namespace POSCashierSystem
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (IsHandleCreated) ResizePanels();
+            if (IsHandleCreated) ApplyResponsiveLayout();
         }
 
-        private void ResizePanels()
+        // ─────────────────────────────────────────────────────────────────────
+        private static int S(float refVal, float scale) => (int)Math.Round(refVal * scale);
+
+        // ─────────────────────────────────────────────────────────────────────
+        private void ApplyResponsiveLayout()
         {
-            pnlRoot.Size = this.Size;
-            pnlSidebar.Height = this.Height;
+            if (ClientSize.Width < 400 || ClientSize.Height < 200) return;
 
-            pnlRight.Location = new Point(pnlSidebar.Right, 0);
-            pnlRight.Size = new Size(Math.Max(0, Width - pnlSidebar.Width), Height);
+            float formW = ClientSize.Width;
+            float formH = ClientSize.Height;
+            float sc = Math.Min(formW / REF_W, formH / REF_H);
 
-            int contentW = Math.Min(560, pnlRight.Width - 80);
-            int contentX = Math.Max(0, (pnlRight.Width - contentW) / 2);
+            pnlRoot.SetBounds(0, 0, (int)formW, (int)formH);
 
-            lblAmountReceivedTitle.Location = new Point(contentX, 60);
-            lblAmountReceivedTitle.Width = contentW;
+            int sidebarW = S(REF_SIDEBAR_W, sc);
+            int sidebarH = (int)formH;
+            pnlSidebar.SetBounds(0, 0, sidebarW, sidebarH);
 
-            pnlAmountInput.Location = new Point(contentX, 88);
-            pnlAmountInput.Width = contentW;
-            txtAmountReceived.Width = pnlAmountInput.Width - 60;
+            int rightW = (int)formW - sidebarW;
+            int rightH = (int)formH;
+            pnlRight.SetBounds(sidebarW, 0, rightW, rightH);
 
-            int btnW = (contentW - 3 * 12) / 4;
-            btnAdd100.Location = new Point(contentX, 192);
-            btnAdd500.Location = new Point(contentX + btnW + 12, 192);
-            btnAdd1000.Location = new Point(contentX + (btnW + 12) * 2, 192);
-            btnExact.Location = new Point(contentX + (btnW + 12) * 3, 192);
-            btnAdd100.Width = btnAdd500.Width = btnAdd1000.Width = btnExact.Width = btnW;
-
-            pnlChangeDue.Location = new Point(contentX, 264);
-            pnlChangeDue.Width = contentW;
-            lblChangeDueValue.Location = new Point(pnlChangeDue.Width - 240, 14);
-            lblChangeDueValue.Width = 216;
-
-            btnProcess.Location = new Point(contentX, 354);
-            btnProcess.Width = contentW;
+            ScaleSidebarInterior(sidebarW, sidebarH);
+            ScaleRightInterior(rightW, rightH);
         }
 
+        // ─────────────────────────────────────────────────────────────────────
+        // Sidebar interior  (ref: 366 × 750)
+        // ─────────────────────────────────────────────────────────────────────
+        private void ScaleSidebarInterior(int panelW, int panelH)
+        {
+            float sc = Math.Min(panelW / SB_REF_W, panelH / SB_REF_H);
+
+            btnBackToConfig.SetBounds(S(12f, sc), S(15f, sc), S(131f, sc), S(28f, sc));
+
+            int avatarSize = Math.Max(48, S(90f, sc));
+            btnAvatar.SetBounds((panelW - avatarSize) / 2, S(76f, sc), avatarSize, avatarSize);
+            btnAvatar.BorderRadius = avatarSize / 2;
+
+            int labelPadX = S(14f, sc);
+            int labelW = panelW - labelPadX * 2;
+            lblCustomerName.SetBounds(labelPadX, S(178f, sc), labelW, S(30f, sc));
+
+            int cardPadX = S(18f, sc);
+            int cardY = S(220f, sc);
+            int cardW = panelW - cardPadX * 2;
+            int cardH = Math.Max(100, panelH - cardY - S(12f, sc));
+            pnlBreakdownCard.SetBounds(cardPadX, cardY, cardW, cardH);
+
+            ScaleBreakdownCardInterior(cardW, cardH);
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Breakdown card interior  (ref: 345 × 200)
+        // ─────────────────────────────────────────────────────────────────────
+        private void ScaleBreakdownCardInterior(int cardW, int cardH)
+        {
+            const float refCW = 345f;
+            const float refCH = 200f;
+            float sc = Math.Min(cardW / refCW, cardH / refCH);
+
+            int padX = S(18f, sc);
+            lblBreakdownTitle.SetBounds(padX, S(16f, sc), cardW - padX * 2, S(22f, sc));
+            sep1.SetBounds(0, S(46f, sc), cardW, 1);
+
+            int rowY = S(60f, sc);
+            int rowH = Math.Max(20, S(28f, sc));
+            int valX = S(180f, sc);
+            int valW = cardW - valX - padX;
+
+            lblBreakdownKey.SetBounds(padX, rowY, valX - padX - 4, rowH);
+            lblBreakdownValue.SetBounds(valX, rowY, valW, rowH);
+
+            int sep2Y = rowY + rowH + S(4f, sc);
+            sep2.SetBounds(0, sep2Y, cardW, 1);
+
+            int totKeyY = sep2Y + S(14f, sc);
+            lblTotalDueKey.SetBounds(padX, totKeyY, S(190f, sc), S(24f, sc));
+
+            int totValY = totKeyY + S(28f, sc);
+            lblTotalDueValue.SetBounds(padX, totValY, cardW - padX * 2, S(30f, sc));
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Right panel interior  (ref content block w=480 inside 683)
+        // ─────────────────────────────────────────────────────────────────────
+        private void ScaleRightInterior(int panelW, int panelH)
+        {
+            float sc = Math.Min(panelW / RT_REF_W, panelH / RT_REF_H);
+
+            int contentW = S(RT_CONTENT_W_REF, sc);
+            int contentX = Math.Max(0, (panelW - contentW) / 2);
+
+            lblAmountReceivedTitle.SetBounds(contentX, S(60f, sc), contentW, S(22f, sc));
+
+            int inputH = S(90f, sc);
+            pnlAmountInput.SetBounds(contentX, S(88f, sc), contentW, inputH);
+
+            float inpSc = Math.Min(contentW / 480f, inputH / 90f);
+            int pesoH = S(48f, inpSc);
+            lblPesoSign.SetBounds(S(14f, inpSc), (inputH - pesoH) / 2, S(30f, inpSc), pesoH);
+            int txtX = S(48f, inpSc);
+            int txtH = S(70f, inpSc);
+            txtAmountReceived.SetBounds(txtX, (inputH - txtH) / 2, contentW - txtX - S(4f, inpSc), txtH);
+
+            int btnY = S(200f, sc);
+            int btnH = S(65f, sc);
+            int btn3W = S(108f, sc);
+            int btnExW = S(120f, sc);
+            int btnGap = S(12f, sc);
+
+            btnAdd100.SetBounds(contentX, btnY, btn3W, btnH);
+            btnAdd500.SetBounds(contentX + btn3W + btnGap, btnY, btn3W, btnH);
+            btnAdd1000.SetBounds(contentX + (btn3W + btnGap) * 2, btnY, btn3W, btnH);
+            btnExact.SetBounds(contentX + (btn3W + btnGap) * 3, btnY, btnExW, btnH);
+
+            int changePnlH = S(90f, sc);
+            pnlChangeDue.SetBounds(contentX, S(295f, sc), contentW, changePnlH);
+
+            float chgSc = Math.Min(contentW / 480f, changePnlH / 90f);
+            int chgValW = S(240f, chgSc);
+            lblChangeDueTitle.SetBounds(S(24f, chgSc), S(28f, chgSc), S(160f, chgSc), S(28f, chgSc));
+            lblChangeDueValue.SetBounds(contentW - chgValW - S(20f, chgSc), S(14f, chgSc), chgValW, S(62f, chgSc));
+
+            btnProcess.SetBounds(contentX, S(415f, sc), contentW, S(75f, sc));
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
         private void PopulateSidebar()
         {
-            // ── Avatar ──────────────────────────────────────────────────────────
-            // btnAvatar is a Guna2Button styled as a circle. It renders its own
-            // text clipped inside its own rounded shape, so there is no rectangular
-            // child label that can bleed outside the circle corners.
             btnAvatar.Text = GetInitials(_customer.Name);
             btnAvatar.FillColor = GetAvatarBg(_customer.Name);
             btnAvatar.ForeColor = GetAvatarFg(_customer.Name);
-            // Keep HoverState/PressedColor in sync so no color flash on hover
             btnAvatar.HoverState.FillColor = btnAvatar.FillColor;
             btnAvatar.HoverState.ForeColor = btnAvatar.ForeColor;
             btnAvatar.PressedColor = btnAvatar.FillColor;
 
-            // Center horizontally in the sidebar
-            btnAvatar.Location = new Point((pnlSidebar.Width - btnAvatar.Width) / 2, 76);
-
             lblCustomerName.Text = _customer.Name;
-            lblQueueTicket.Text = _customer.QueueTicket;
-
             lblBreakdownValue.Text = $"₱{_totalDue:N2}";
             lblTotalDueValue.Text = $"₱{_totalDue:N0}";
         }
@@ -124,16 +220,12 @@ namespace POSCashierSystem
             btnProcess.Enabled = paid;
             btnProcess.FillColor = paid
                 ? Color.FromArgb(5, 150, 105)
-                : Color.FromArgb(110, 175, 155);
+                : Color.FromArgb(167, 243, 208);
         }
 
         private void TxtAmountReceived_TextChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(txtAmountReceived.Text, out decimal val))
-                _amountReceived = val;
-            else
-                _amountReceived = 0m;
-
+            _amountReceived = decimal.TryParse(txtAmountReceived.Text, out decimal val) ? val : 0m;
             RefreshCalculation();
         }
 
@@ -165,14 +257,12 @@ namespace POSCashierSystem
         {
             if (_amountReceived < _totalDue) return;
 
-            decimal change = _amountReceived - _totalDue;
-
             var result = new CollectionResult
             {
                 Customer = _customer,
                 TotalDue = _totalDue,
                 AmountReceived = _amountReceived,
-                ChangeDue = change,
+                ChangeDue = _amountReceived - _totalDue,
                 ProcessedAt = DateTime.Now
             };
 
@@ -196,11 +286,12 @@ namespace POSCashierSystem
             receiptScreen.BringToFront();
         }
 
-        private void BtnBackToConfig_Click(object sender, EventArgs e)
+        private void BtnBack_Click(object sender, EventArgs e)
         {
             BackRequested?.Invoke(this, EventArgs.Empty);
         }
 
+        // ─────────────────────────────────────────────────────────────────────
         private static readonly Color[] _bgPalette =
         {
             Color.FromArgb(219, 234, 254),
@@ -219,15 +310,15 @@ namespace POSCashierSystem
         };
 
         private static Color GetAvatarBg(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name)) return _bgPalette[0];
-            return _bgPalette[char.ToUpper(name[0]) % _bgPalette.Length];
-        }
+            => string.IsNullOrWhiteSpace(name)
+               ? _bgPalette[0]
+               : _bgPalette[char.ToUpper(name[0]) % _bgPalette.Length];
+
         private static Color GetAvatarFg(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name)) return _fgPalette[0];
-            return _fgPalette[char.ToUpper(name[0]) % _fgPalette.Length];
-        }
+            => string.IsNullOrWhiteSpace(name)
+               ? _fgPalette[0]
+               : _fgPalette[char.ToUpper(name[0]) % _fgPalette.Length];
+
         private static string GetInitials(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return "?";
@@ -235,6 +326,11 @@ namespace POSCashierSystem
             return p.Length >= 2
                 ? $"{p[0][0]}{p[1][0]}".ToUpper()
                 : name.Substring(0, Math.Min(2, name.Length)).ToUpper();
+        }
+
+        private void btnBackToConfig_Click(object sender, EventArgs e)
+        {
+            BackRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -82,10 +82,9 @@
             pnlRoot.Controls.Add(pnlRight);
             pnlRoot.CustomizableEdges = customizableEdges25;
             pnlRoot.Location = new Point(0, 0);
-            pnlRoot.Margin = new Padding(3, 4, 3, 4);
             pnlRoot.Name = "pnlRoot";
             pnlRoot.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            pnlRoot.Size = new Size(1021, 750);
+            pnlRoot.Size = new Size(893, 562);
             pnlRoot.TabIndex = 0;
             // 
             // pnlSidebar
@@ -104,7 +103,7 @@
             pnlSidebar.Margin = new Padding(0);
             pnlSidebar.Name = "pnlSidebar";
             pnlSidebar.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            pnlSidebar.Size = new Size(366, 750);
+            pnlSidebar.Size = new Size(348, 562);
             pnlSidebar.TabIndex = 0;
             // 
             // btnBack
@@ -119,12 +118,11 @@
             btnBack.HoverState.BorderColor = Color.Transparent;
             btnBack.HoverState.FillColor = Color.FromArgb(241, 245, 249);
             btnBack.HoverState.ForeColor = Color.FromArgb(15, 23, 42);
-            btnBack.Location = new Point(14, 20);
-            btnBack.Margin = new Padding(3, 4, 3, 4);
+            btnBack.Location = new Point(12, 15);
             btnBack.Name = "btnBack";
             btnBack.PressedColor = Color.FromArgb(226, 232, 240);
             btnBack.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnBack.Size = new Size(150, 38);
+            btnBack.Size = new Size(131, 28);
             btnBack.TabIndex = 0;
             btnBack.Text = "← Back";
             btnBack.Click += BtnBack_Click;
@@ -139,11 +137,10 @@
             btnAvatar.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             btnAvatar.ForeColor = Color.FromArgb(5, 150, 105);
             btnAvatar.HoverState.BorderColor = Color.Transparent;
-            btnAvatar.Location = new Point(119, 76);
-            btnAvatar.Margin = new Padding(3, 4, 3, 4);
+            btnAvatar.Location = new Point(104, 57);
             btnAvatar.Name = "btnAvatar";
             btnAvatar.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnAvatar.Size = new Size(90, 90);
+            btnAvatar.Size = new Size(79, 68);
             btnAvatar.TabIndex = 1;
             btnAvatar.Text = "?";
             // 
@@ -152,9 +149,9 @@
             lblCustomerName.BackColor = Color.Transparent;
             lblCustomerName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblCustomerName.ForeColor = Color.FromArgb(15, 23, 42);
-            lblCustomerName.Location = new Point(14, 178);
+            lblCustomerName.Location = new Point(12, 134);
             lblCustomerName.Name = "lblCustomerName";
-            lblCustomerName.Size = new Size(310, 30);
+            lblCustomerName.Size = new Size(271, 22);
             lblCustomerName.TabIndex = 2;
             lblCustomerName.Text = "Customer Name";
             lblCustomerName.TextAlign = ContentAlignment.TopCenter;
@@ -164,9 +161,9 @@
             lblCustomerSubtitle.BackColor = Color.Transparent;
             lblCustomerSubtitle.Font = new Font("Segoe UI", 9F);
             lblCustomerSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
-            lblCustomerSubtitle.Location = new Point(14, 210);
+            lblCustomerSubtitle.Location = new Point(12, 158);
             lblCustomerSubtitle.Name = "lblCustomerSubtitle";
-            lblCustomerSubtitle.Size = new Size(310, 24);
+            lblCustomerSubtitle.Size = new Size(271, 18);
             lblCustomerSubtitle.TabIndex = 3;
             lblCustomerSubtitle.Text = "Full Cash Purchase";
             lblCustomerSubtitle.TextAlign = ContentAlignment.TopCenter;
@@ -183,11 +180,10 @@
             pnlBreakdownCard.Controls.Add(lblTotalDueValue);
             pnlBreakdownCard.CustomizableEdges = customizableEdges5;
             pnlBreakdownCard.FillColor = Color.White;
-            pnlBreakdownCard.Location = new Point(18, 248);
-            pnlBreakdownCard.Margin = new Padding(3, 4, 3, 4);
+            pnlBreakdownCard.Location = new Point(16, 186);
             pnlBreakdownCard.Name = "pnlBreakdownCard";
             pnlBreakdownCard.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            pnlBreakdownCard.Size = new Size(345, 400);
+            pnlBreakdownCard.Size = new Size(329, 300);
             pnlBreakdownCard.TabIndex = 4;
             // 
             // lblBreakdownTitle
@@ -195,9 +191,9 @@
             lblBreakdownTitle.BackColor = Color.Transparent;
             lblBreakdownTitle.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             lblBreakdownTitle.ForeColor = Color.FromArgb(100, 116, 139);
-            lblBreakdownTitle.Location = new Point(18, 16);
+            lblBreakdownTitle.Location = new Point(16, 12);
             lblBreakdownTitle.Name = "lblBreakdownTitle";
-            lblBreakdownTitle.Size = new Size(266, 22);
+            lblBreakdownTitle.Size = new Size(233, 16);
             lblBreakdownTitle.TabIndex = 0;
             lblBreakdownTitle.Text = "CHARGES BREAKDOWN";
             // 
@@ -205,18 +201,20 @@
             // 
             sep1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             sep1.FillColor = Color.FromArgb(226, 232, 240);
-            sep1.Location = new Point(0, 46);
+            sep1.Location = new Point(0, 34);
+            sep1.Margin = new Padding(3, 2, 3, 2);
             sep1.Name = "sep1";
-            sep1.Size = new Size(345, 1);
+            sep1.Size = new Size(329, 1);
             sep1.TabIndex = 1;
             // 
             // sep2
             // 
             sep2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             sep2.FillColor = Color.FromArgb(226, 232, 240);
-            sep2.Location = new Point(0, 160);
+            sep2.Location = new Point(0, 120);
+            sep2.Margin = new Padding(3, 2, 3, 2);
             sep2.Name = "sep2";
-            sep2.Size = new Size(345, 1);
+            sep2.Size = new Size(329, 1);
             sep2.TabIndex = 2;
             // 
             // lblTotalDueKey
@@ -224,9 +222,9 @@
             lblTotalDueKey.BackColor = Color.Transparent;
             lblTotalDueKey.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTotalDueKey.ForeColor = Color.FromArgb(71, 85, 105);
-            lblTotalDueKey.Location = new Point(18, 174);
+            lblTotalDueKey.Location = new Point(16, 130);
             lblTotalDueKey.Name = "lblTotalDueKey";
-            lblTotalDueKey.Size = new Size(190, 24);
+            lblTotalDueKey.Size = new Size(166, 18);
             lblTotalDueKey.TabIndex = 6;
             lblTotalDueKey.Text = "Total Due";
             // 
@@ -235,9 +233,9 @@
             lblTotalDueValue.BackColor = Color.Transparent;
             lblTotalDueValue.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             lblTotalDueValue.ForeColor = Color.FromArgb(5, 150, 105);
-            lblTotalDueValue.Location = new Point(18, 198);
+            lblTotalDueValue.Location = new Point(16, 148);
             lblTotalDueValue.Name = "lblTotalDueValue";
-            lblTotalDueValue.Size = new Size(266, 30);
+            lblTotalDueValue.Size = new Size(233, 22);
             lblTotalDueValue.TabIndex = 7;
             lblTotalDueValue.Text = "₱0";
             lblTotalDueValue.TextAlign = ContentAlignment.TopRight;
@@ -254,10 +252,11 @@
             pnlRight.Controls.Add(pnlChangeDue);
             pnlRight.Controls.Add(btnProcess);
             pnlRight.CustomizableEdges = customizableEdges23;
-            pnlRight.Location = new Point(338, 0);
+            pnlRight.Location = new Point(296, 0);
+            pnlRight.Margin = new Padding(3, 2, 3, 2);
             pnlRight.Name = "pnlRight";
             pnlRight.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            pnlRight.Size = new Size(683, 750);
+            pnlRight.Size = new Size(598, 562);
             pnlRight.TabIndex = 1;
             // 
             // lblAmountReceivedTitle
@@ -265,9 +264,9 @@
             lblAmountReceivedTitle.BackColor = Color.Transparent;
             lblAmountReceivedTitle.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             lblAmountReceivedTitle.ForeColor = Color.FromArgb(100, 116, 139);
-            lblAmountReceivedTitle.Location = new Point(90, 60);
+            lblAmountReceivedTitle.Location = new Point(79, 45);
             lblAmountReceivedTitle.Name = "lblAmountReceivedTitle";
-            lblAmountReceivedTitle.Size = new Size(480, 22);
+            lblAmountReceivedTitle.Size = new Size(420, 16);
             lblAmountReceivedTitle.TabIndex = 0;
             lblAmountReceivedTitle.Text = "AMOUNT RECEIVED";
             lblAmountReceivedTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -281,10 +280,11 @@
             pnlAmountInput.Controls.Add(txtAmountReceived);
             pnlAmountInput.CustomizableEdges = customizableEdges11;
             pnlAmountInput.FillColor = Color.White;
-            pnlAmountInput.Location = new Point(90, 88);
+            pnlAmountInput.Location = new Point(79, 66);
+            pnlAmountInput.Margin = new Padding(3, 2, 3, 2);
             pnlAmountInput.Name = "pnlAmountInput";
             pnlAmountInput.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            pnlAmountInput.Size = new Size(480, 90);
+            pnlAmountInput.Size = new Size(420, 68);
             pnlAmountInput.TabIndex = 1;
             // 
             // lblPesoSign
@@ -292,9 +292,9 @@
             lblPesoSign.BackColor = Color.Transparent;
             lblPesoSign.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             lblPesoSign.ForeColor = Color.FromArgb(148, 163, 184);
-            lblPesoSign.Location = new Point(14, 20);
+            lblPesoSign.Location = new Point(12, 15);
             lblPesoSign.Name = "lblPesoSign";
-            lblPesoSign.Size = new Size(30, 48);
+            lblPesoSign.Size = new Size(26, 36);
             lblPesoSign.TabIndex = 0;
             lblPesoSign.Text = "₱";
             // 
@@ -307,14 +307,13 @@
             txtAmountReceived.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
             txtAmountReceived.ForeColor = Color.FromArgb(15, 23, 42);
             txtAmountReceived.HoverState.BorderColor = Color.Transparent;
-            txtAmountReceived.Location = new Point(48, 10);
-            txtAmountReceived.Margin = new Padding(3, 4, 3, 4);
+            txtAmountReceived.Location = new Point(42, 8);
             txtAmountReceived.Name = "txtAmountReceived";
             txtAmountReceived.PlaceholderForeColor = Color.FromArgb(203, 213, 225);
             txtAmountReceived.PlaceholderText = "0.00";
             txtAmountReceived.SelectedText = "";
             txtAmountReceived.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtAmountReceived.Size = new Size(410, 70);
+            txtAmountReceived.Size = new Size(359, 52);
             txtAmountReceived.TabIndex = 1;
             txtAmountReceived.TextAlign = HorizontalAlignment.Right;
             txtAmountReceived.TextChanged += TxtAmountReceived_TextChanged;
@@ -331,11 +330,10 @@
             btnAdd100.ForeColor = Color.FromArgb(71, 85, 105);
             btnAdd100.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnAdd100.HoverState.FillColor = Color.FromArgb(241, 245, 249);
-            btnAdd100.Location = new Point(90, 200);
-            btnAdd100.Margin = new Padding(3, 4, 3, 4);
+            btnAdd100.Location = new Point(79, 150);
             btnAdd100.Name = "btnAdd100";
             btnAdd100.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            btnAdd100.Size = new Size(108, 65);
+            btnAdd100.Size = new Size(94, 49);
             btnAdd100.TabIndex = 2;
             btnAdd100.Text = "+ ₱100";
             btnAdd100.Click += BtnAdd100_Click;
@@ -352,11 +350,10 @@
             btnAdd500.ForeColor = Color.FromArgb(71, 85, 105);
             btnAdd500.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnAdd500.HoverState.FillColor = Color.FromArgb(241, 245, 249);
-            btnAdd500.Location = new Point(210, 200);
-            btnAdd500.Margin = new Padding(3, 4, 3, 4);
+            btnAdd500.Location = new Point(184, 150);
             btnAdd500.Name = "btnAdd500";
             btnAdd500.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            btnAdd500.Size = new Size(108, 65);
+            btnAdd500.Size = new Size(94, 49);
             btnAdd500.TabIndex = 3;
             btnAdd500.Text = "+ ₱500";
             btnAdd500.Click += BtnAdd500_Click;
@@ -373,11 +370,10 @@
             btnAdd1000.ForeColor = Color.FromArgb(71, 85, 105);
             btnAdd1000.HoverState.BorderColor = Color.FromArgb(203, 213, 225);
             btnAdd1000.HoverState.FillColor = Color.FromArgb(241, 245, 249);
-            btnAdd1000.Location = new Point(330, 200);
-            btnAdd1000.Margin = new Padding(3, 4, 3, 4);
+            btnAdd1000.Location = new Point(289, 150);
             btnAdd1000.Name = "btnAdd1000";
             btnAdd1000.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            btnAdd1000.Size = new Size(108, 65);
+            btnAdd1000.Size = new Size(94, 49);
             btnAdd1000.TabIndex = 4;
             btnAdd1000.Text = "+ ₱1000";
             btnAdd1000.Click += BtnAdd1000_Click;
@@ -395,11 +391,10 @@
             btnExact.HoverState.BorderColor = Color.FromArgb(52, 211, 153);
             btnExact.HoverState.FillColor = Color.FromArgb(209, 250, 229);
             btnExact.HoverState.ForeColor = Color.FromArgb(4, 120, 87);
-            btnExact.Location = new Point(450, 200);
-            btnExact.Margin = new Padding(3, 4, 3, 4);
+            btnExact.Location = new Point(394, 150);
             btnExact.Name = "btnExact";
             btnExact.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            btnExact.Size = new Size(120, 65);
+            btnExact.Size = new Size(105, 49);
             btnExact.TabIndex = 5;
             btnExact.Text = "Exact";
             btnExact.Click += BtnExact_Click;
@@ -411,11 +406,10 @@
             pnlChangeDue.Controls.Add(lblChangeDueValue);
             pnlChangeDue.CustomizableEdges = customizableEdges21;
             pnlChangeDue.FillColor = Color.FromArgb(15, 23, 42);
-            pnlChangeDue.Location = new Point(90, 295);
-            pnlChangeDue.Margin = new Padding(3, 4, 3, 4);
+            pnlChangeDue.Location = new Point(79, 221);
             pnlChangeDue.Name = "pnlChangeDue";
             pnlChangeDue.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            pnlChangeDue.Size = new Size(480, 90);
+            pnlChangeDue.Size = new Size(420, 68);
             pnlChangeDue.TabIndex = 6;
             // 
             // lblChangeDueTitle
@@ -423,9 +417,9 @@
             lblChangeDueTitle.BackColor = Color.FromArgb(15, 23, 42);
             lblChangeDueTitle.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             lblChangeDueTitle.ForeColor = Color.FromArgb(100, 116, 139);
-            lblChangeDueTitle.Location = new Point(24, 28);
+            lblChangeDueTitle.Location = new Point(21, 21);
             lblChangeDueTitle.Name = "lblChangeDueTitle";
-            lblChangeDueTitle.Size = new Size(160, 28);
+            lblChangeDueTitle.Size = new Size(140, 21);
             lblChangeDueTitle.TabIndex = 0;
             lblChangeDueTitle.Text = "CHANGE DUE";
             lblChangeDueTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -435,9 +429,9 @@
             lblChangeDueValue.BackColor = Color.FromArgb(15, 23, 42);
             lblChangeDueValue.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
             lblChangeDueValue.ForeColor = Color.FromArgb(71, 85, 105);
-            lblChangeDueValue.Location = new Point(220, 14);
+            lblChangeDueValue.Location = new Point(192, 10);
             lblChangeDueValue.Name = "lblChangeDueValue";
-            lblChangeDueValue.Size = new Size(240, 62);
+            lblChangeDueValue.Size = new Size(210, 46);
             lblChangeDueValue.TabIndex = 1;
             lblChangeDueValue.Text = "₱0";
             lblChangeDueValue.TextAlign = ContentAlignment.MiddleRight;
@@ -455,25 +449,23 @@
             btnProcess.HoverState.BorderColor = Color.Transparent;
             btnProcess.HoverState.FillColor = Color.FromArgb(4, 120, 87);
             btnProcess.HoverState.ForeColor = Color.White;
-            btnProcess.Location = new Point(90, 415);
-            btnProcess.Margin = new Padding(3, 4, 3, 4);
+            btnProcess.Location = new Point(79, 311);
             btnProcess.Name = "btnProcess";
             btnProcess.PressedColor = Color.FromArgb(6, 95, 70);
             btnProcess.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            btnProcess.Size = new Size(480, 75);
+            btnProcess.Size = new Size(420, 56);
             btnProcess.TabIndex = 7;
             btnProcess.Text = "✓  Process Transaction";
             btnProcess.Click += BtnProcess_Click;
             // 
             // CollectionForm5
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 245, 249);
             Controls.Add(pnlRoot);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "CollectionForm5";
-            Size = new Size(1021, 750);
+            Size = new Size(893, 562);
             Load += CollectionForm5_Load;
             pnlRoot.ResumeLayout(false);
             pnlSidebar.ResumeLayout(false);

@@ -22,10 +22,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -57,11 +53,6 @@
             pnlBackground = new Guna.UI2.WinForms.Guna2Panel();
             pnlNoTransactions = new Guna.UI2.WinForms.Guna2Panel();
             lblNoTransactions = new Label();
-            pnlOtherServices = new Guna.UI2.WinForms.Guna2Panel();
-            pnlOtherServicesIcon = new Guna.UI2.WinForms.Guna2Panel();
-            lblOtherServicesIcon = new Label();
-            lblOtherServices = new Label();
-            lblOtherServicesDesc = new Label();
             pnlFullSettlement = new Guna.UI2.WinForms.Guna2Panel();
             pnlFullSettlementIcon = new Guna.UI2.WinForms.Guna2Panel();
             lblFullSettlementIcon = new Label();
@@ -104,8 +95,6 @@
             guna2CirclePictureBox3 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             pnlBackground.SuspendLayout();
             pnlNoTransactions.SuspendLayout();
-            pnlOtherServices.SuspendLayout();
-            pnlOtherServicesIcon.SuspendLayout();
             pnlFullSettlement.SuspendLayout();
             pnlFullSettlementIcon.SuspendLayout();
             pnlFullCash.SuspendLayout();
@@ -136,7 +125,6 @@
             // 
             pnlBackground.BackColor = Color.FromArgb(248, 250, 251);
             pnlBackground.Controls.Add(pnlNoTransactions);
-            pnlBackground.Controls.Add(pnlOtherServices);
             pnlBackground.Controls.Add(pnlFullSettlement);
             pnlBackground.Controls.Add(pnlFullCash);
             pnlBackground.Controls.Add(lblViewAll);
@@ -183,85 +171,6 @@
             lblNoTransactions.TabIndex = 0;
             lblNoTransactions.Text = "No transactions yet today.";
             lblNoTransactions.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // pnlOtherServices
-            // 
-            pnlOtherServices.BackColor = Color.Transparent;
-            pnlOtherServices.BorderColor = Color.FromArgb(224, 224, 224);
-            pnlOtherServices.BorderRadius = 15;
-            pnlOtherServices.BorderThickness = 1;
-            pnlOtherServices.Controls.Add(pnlOtherServicesIcon);
-            pnlOtherServices.Controls.Add(lblOtherServices);
-            pnlOtherServices.Controls.Add(lblOtherServicesDesc);
-            pnlOtherServices.CustomizableEdges = customizableEdges12;
-            pnlOtherServices.FillColor = Color.White;
-            pnlOtherServices.Location = new Point(593, 381);
-            pnlOtherServices.Margin = new Padding(4, 5, 4, 5);
-            pnlOtherServices.Name = "pnlOtherServices";
-            pnlOtherServices.ShadowDecoration.BorderRadius = 15;
-            pnlOtherServices.ShadowDecoration.Color = Color.FromArgb(200, 200, 200);
-            pnlOtherServices.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            pnlOtherServices.ShadowDecoration.Depth = 10;
-            pnlOtherServices.ShadowDecoration.Enabled = true;
-            pnlOtherServices.ShadowDecoration.Shadow = new Padding(0, 2, 6, 6);
-            pnlOtherServices.Size = new Size(467, 262);
-            pnlOtherServices.TabIndex = 10;
-            pnlOtherServices.Click += PnlOtherServices_Click;
-            // 
-            // pnlOtherServicesIcon
-            // 
-            pnlOtherServicesIcon.BackColor = Color.FromArgb(255, 245, 235);
-            pnlOtherServicesIcon.BorderRadius = 10;
-            pnlOtherServicesIcon.Controls.Add(lblOtherServicesIcon);
-            pnlOtherServicesIcon.CustomizableEdges = customizableEdges10;
-            pnlOtherServicesIcon.Location = new Point(27, 31);
-            pnlOtherServicesIcon.Margin = new Padding(4, 5, 4, 5);
-            pnlOtherServicesIcon.Name = "pnlOtherServicesIcon";
-            pnlOtherServicesIcon.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            pnlOtherServicesIcon.Size = new Size(53, 62);
-            pnlOtherServicesIcon.TabIndex = 0;
-            pnlOtherServicesIcon.Click += PnlOtherServices_Click;
-            // 
-            // lblOtherServicesIcon
-            // 
-            lblOtherServicesIcon.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblOtherServicesIcon.ForeColor = Color.FromArgb(255, 186, 115);
-            lblOtherServicesIcon.Location = new Point(0, 0);
-            lblOtherServicesIcon.Margin = new Padding(4, 0, 4, 0);
-            lblOtherServicesIcon.Name = "lblOtherServicesIcon";
-            lblOtherServicesIcon.Size = new Size(53, 62);
-            lblOtherServicesIcon.TabIndex = 0;
-            lblOtherServicesIcon.Text = "⚙";
-            lblOtherServicesIcon.TextAlign = ContentAlignment.MiddleCenter;
-            lblOtherServicesIcon.Click += PnlOtherServices_Click;
-            // 
-            // lblOtherServices
-            // 
-            lblOtherServices.AutoSize = true;
-            lblOtherServices.BackColor = Color.Transparent;
-            lblOtherServices.Font = new Font("Segoe UI Semibold", 13F, FontStyle.Bold);
-            lblOtherServices.ForeColor = Color.FromArgb(64, 64, 64);
-            lblOtherServices.Location = new Point(27, 123);
-            lblOtherServices.Margin = new Padding(4, 0, 4, 0);
-            lblOtherServices.Name = "lblOtherServices";
-            lblOtherServices.Size = new Size(158, 30);
-            lblOtherServices.TabIndex = 1;
-            lblOtherServices.Text = "Other Services";
-            lblOtherServices.Click += PnlOtherServices_Click;
-            // 
-            // lblOtherServicesDesc
-            // 
-            lblOtherServicesDesc.AutoSize = true;
-            lblOtherServicesDesc.BackColor = Color.Transparent;
-            lblOtherServicesDesc.Font = new Font("Segoe UI", 8.75F);
-            lblOtherServicesDesc.ForeColor = Color.FromArgb(120, 120, 120);
-            lblOtherServicesDesc.Location = new Point(27, 166);
-            lblOtherServicesDesc.Margin = new Padding(4, 0, 4, 0);
-            lblOtherServicesDesc.Name = "lblOtherServicesDesc";
-            lblOtherServicesDesc.Size = new Size(217, 20);
-            lblOtherServicesDesc.TabIndex = 2;
-            lblOtherServicesDesc.Text = "Parts, Service, Registration Fees.";
-            lblOtherServicesDesc.Click += PnlOtherServices_Click;
             // 
             // pnlFullSettlement
             // 
@@ -323,7 +232,7 @@
             lblFullSettlement.Location = new Point(27, 123);
             lblFullSettlement.Margin = new Padding(4, 0, 4, 0);
             lblFullSettlement.Name = "lblFullSettlement";
-            lblFullSettlement.Size = new Size(165, 30);
+            lblFullSettlement.Size = new Size(140, 25);
             lblFullSettlement.TabIndex = 1;
             lblFullSettlement.Text = "Full Settlement";
             lblFullSettlement.Click += PnlFullSettlement_Click;
@@ -337,7 +246,7 @@
             lblFullSettlementDesc.Location = new Point(27, 166);
             lblFullSettlementDesc.Margin = new Padding(4, 0, 4, 0);
             lblFullSettlementDesc.Name = "lblFullSettlementDesc";
-            lblFullSettlementDesc.Size = new Size(211, 20);
+            lblFullSettlementDesc.Size = new Size(168, 15);
             lblFullSettlementDesc.TabIndex = 2;
             lblFullSettlementDesc.Text = "Pay off entire loan with rebate.";
             lblFullSettlementDesc.Click += PnlFullSettlement_Click;
@@ -353,7 +262,7 @@
             pnlFullCash.Controls.Add(lblFullCashDesc);
             pnlFullCash.CustomizableEdges = customizableEdges20;
             pnlFullCash.FillColor = Color.White;
-            pnlFullCash.Location = new Point(80, 381);
+            pnlFullCash.Location = new Point(363, 381);
             pnlFullCash.Margin = new Padding(4, 5, 4, 5);
             pnlFullCash.Name = "pnlFullCash";
             pnlFullCash.ShadowDecoration.BorderRadius = 15;
@@ -402,7 +311,7 @@
             lblFullCash.Location = new Point(27, 123);
             lblFullCash.Margin = new Padding(4, 0, 4, 0);
             lblFullCash.Name = "lblFullCash";
-            lblFullCash.Size = new Size(197, 30);
+            lblFullCash.Size = new Size(164, 25);
             lblFullCash.TabIndex = 1;
             lblFullCash.Text = "Full Cash Purchase";
             lblFullCash.Click += PnlFullCash_Click;
@@ -416,7 +325,7 @@
             lblFullCashDesc.Location = new Point(27, 166);
             lblFullCashDesc.Margin = new Padding(4, 0, 4, 0);
             lblFullCashDesc.Name = "lblFullCashDesc";
-            lblFullCashDesc.Size = new Size(252, 20);
+            lblFullCashDesc.Size = new Size(204, 15);
             lblFullCashDesc.TabIndex = 2;
             lblFullCashDesc.Text = "One-time payment for unit purchase.";
             lblFullCashDesc.Click += PnlFullCash_Click;
@@ -431,7 +340,7 @@
             lblViewAll.Location = new Point(1750, 28);
             lblViewAll.Margin = new Padding(4, 0, 4, 0);
             lblViewAll.Name = "lblViewAll";
-            lblViewAll.Size = new Size(64, 20);
+            lblViewAll.Size = new Size(50, 15);
             lblViewAll.TabIndex = 3;
             lblViewAll.Text = "View All";
             lblViewAll.Click += LblViewAll_Click;
@@ -496,7 +405,7 @@
             lblAdvancePayment.Location = new Point(27, 123);
             lblAdvancePayment.Margin = new Padding(4, 0, 4, 0);
             lblAdvancePayment.Name = "lblAdvancePayment";
-            lblAdvancePayment.Size = new Size(190, 30);
+            lblAdvancePayment.Size = new Size(159, 25);
             lblAdvancePayment.TabIndex = 1;
             lblAdvancePayment.Text = "Advance Payment";
             lblAdvancePayment.Click += PnlAdvancePayment_Click;
@@ -510,7 +419,7 @@
             lblAdvancePaymentDesc.Location = new Point(27, 166);
             lblAdvancePaymentDesc.Margin = new Padding(4, 0, 4, 0);
             lblAdvancePaymentDesc.Name = "lblAdvancePaymentDesc";
-            lblAdvancePaymentDesc.Size = new Size(283, 20);
+            lblAdvancePaymentDesc.Size = new Size(230, 15);
             lblAdvancePaymentDesc.TabIndex = 2;
             lblAdvancePaymentDesc.Text = "Pay multiple months ahead with discount.";
             lblAdvancePaymentDesc.Click += PnlAdvancePayment_Click;
@@ -524,7 +433,7 @@
             lblRecentTransactions.Location = new Point(1386, 23);
             lblRecentTransactions.Margin = new Padding(4, 0, 4, 0);
             lblRecentTransactions.Name = "lblRecentTransactions";
-            lblRecentTransactions.Size = new Size(180, 25);
+            lblRecentTransactions.Size = new Size(143, 20);
             lblRecentTransactions.TabIndex = 2;
             lblRecentTransactions.Text = "Recent Transactions";
             // 
@@ -588,7 +497,7 @@
             lblMonthlyPayment.Location = new Point(27, 123);
             lblMonthlyPayment.Margin = new Padding(4, 0, 4, 0);
             lblMonthlyPayment.Name = "lblMonthlyPayment";
-            lblMonthlyPayment.Size = new Size(189, 30);
+            lblMonthlyPayment.Size = new Size(159, 25);
             lblMonthlyPayment.TabIndex = 1;
             lblMonthlyPayment.Text = "Monthly Payment";
             lblMonthlyPayment.Click += PnlMonthlyPayment_Click;
@@ -602,7 +511,7 @@
             lblMonthlyPaymentDesc.Location = new Point(27, 166);
             lblMonthlyPaymentDesc.Margin = new Padding(4, 0, 4, 0);
             lblMonthlyPaymentDesc.Name = "lblMonthlyPaymentDesc";
-            lblMonthlyPaymentDesc.Size = new Size(209, 20);
+            lblMonthlyPaymentDesc.Size = new Size(167, 15);
             lblMonthlyPaymentDesc.TabIndex = 2;
             lblMonthlyPaymentDesc.Text = "Regular installment collection.";
             lblMonthlyPaymentDesc.Click += PnlMonthlyPayment_Click;
@@ -667,7 +576,7 @@
             lblDownPayment.Location = new Point(27, 123);
             lblDownPayment.Margin = new Padding(4, 0, 4, 0);
             lblDownPayment.Name = "lblDownPayment";
-            lblDownPayment.Size = new Size(164, 30);
+            lblDownPayment.Size = new Size(138, 25);
             lblDownPayment.TabIndex = 1;
             lblDownPayment.Text = "Down Payment";
             lblDownPayment.Click += PnlDownPayment_Click;
@@ -681,7 +590,7 @@
             lblDownPaymentDesc.Location = new Point(27, 166);
             lblDownPaymentDesc.Margin = new Padding(4, 0, 4, 0);
             lblDownPaymentDesc.Name = "lblDownPaymentDesc";
-            lblDownPaymentDesc.Size = new Size(272, 20);
+            lblDownPaymentDesc.Size = new Size(216, 15);
             lblDownPaymentDesc.TabIndex = 2;
             lblDownPaymentDesc.Text = "Initial payment for new approved loans.";
             lblDownPaymentDesc.Click += PnlDownPayment_Click;
@@ -732,7 +641,7 @@
             lblTotalCollected.Location = new Point(1441, 92);
             lblTotalCollected.Margin = new Padding(4, 0, 4, 0);
             lblTotalCollected.Name = "lblTotalCollected";
-            lblTotalCollected.Size = new Size(125, 19);
+            lblTotalCollected.Size = new Size(100, 13);
             lblTotalCollected.TabIndex = 8;
             lblTotalCollected.Text = "TOTAL COLLECTED";
             // 
@@ -744,7 +653,7 @@
             lblTotalAmount.Location = new Point(1437, 43);
             lblTotalAmount.Margin = new Padding(4, 0, 4, 0);
             lblTotalAmount.Name = "lblTotalAmount";
-            lblTotalAmount.Size = new Size(54, 41);
+            lblTotalAmount.Size = new Size(43, 32);
             lblTotalAmount.TabIndex = 7;
             lblTotalAmount.Text = "₱0";
             // 
@@ -756,7 +665,7 @@
             lblSystemOnline.Location = new Point(1215, 51);
             lblSystemOnline.Margin = new Padding(4, 0, 4, 0);
             lblSystemOnline.Name = "lblSystemOnline";
-            lblSystemOnline.Size = new Size(138, 23);
+            lblSystemOnline.Size = new Size(107, 17);
             lblSystemOnline.TabIndex = 6;
             lblSystemOnline.Text = "SYSTEM ONLINE";
             // 
@@ -782,7 +691,7 @@
             lblExpires.Location = new Point(1215, 80);
             lblExpires.Margin = new Padding(4, 0, 4, 0);
             lblExpires.Name = "lblExpires";
-            lblExpires.Size = new Size(93, 19);
+            lblExpires.Size = new Size(76, 13);
             lblExpires.TabIndex = 4;
             lblExpires.Text = "Expires: 13:45";
             // 
@@ -794,7 +703,7 @@
             lblStaffName.Location = new Point(113, 85);
             lblStaffName.Margin = new Padding(4, 0, 4, 0);
             lblStaffName.Name = "lblStaffName";
-            lblStaffName.Size = new Size(89, 19);
+            lblStaffName.Size = new Size(74, 13);
             lblStaffName.TabIndex = 3;
             lblStaffName.Text = "Maria Santos";
             // 
@@ -806,7 +715,7 @@
             lblStationStatus.Location = new Point(113, 58);
             lblStationStatus.Margin = new Padding(4, 0, 4, 0);
             lblStationStatus.Name = "lblStationStatus";
-            lblStationStatus.Size = new Size(49, 20);
+            lblStationStatus.Size = new Size(38, 15);
             lblStationStatus.TabIndex = 2;
             lblStationStatus.Text = "OPEN";
             // 
@@ -818,7 +727,7 @@
             lblStationTitle.Location = new Point(112, 31);
             lblStationTitle.Margin = new Padding(4, 0, 4, 0);
             lblStationTitle.Name = "lblStationTitle";
-            lblStationTitle.Size = new Size(112, 25);
+            lblStationTitle.Size = new Size(89, 20);
             lblStationTitle.TabIndex = 1;
             lblStationTitle.Text = "POS Station";
             // 
@@ -845,7 +754,7 @@
             lblNewTransaction.Location = new Point(101, 195);
             lblNewTransaction.Margin = new Padding(4, 0, 4, 0);
             lblNewTransaction.Name = "lblNewTransaction";
-            lblNewTransaction.Size = new Size(153, 25);
+            lblNewTransaction.Size = new Size(122, 20);
             lblNewTransaction.TabIndex = 4;
             lblNewTransaction.Text = "New Transaction";
             // 
@@ -867,7 +776,7 @@
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(248, 250, 251);
-            ClientSize = new Size(1867, 1102);
+            ClientSize = new Size(1867, 1100);
             Controls.Add(guna2CirclePictureBox3);
             Controls.Add(lblNewTransaction);
             Controls.Add(pnlTop);
@@ -882,9 +791,6 @@
             pnlBackground.ResumeLayout(false);
             pnlBackground.PerformLayout();
             pnlNoTransactions.ResumeLayout(false);
-            pnlOtherServices.ResumeLayout(false);
-            pnlOtherServices.PerformLayout();
-            pnlOtherServicesIcon.ResumeLayout(false);
             pnlFullSettlement.ResumeLayout(false);
             pnlFullSettlement.PerformLayout();
             pnlFullSettlementIcon.ResumeLayout(false);
@@ -945,11 +851,6 @@
         private System.Windows.Forms.Label lblFullCashIcon;
         private System.Windows.Forms.Label lblFullCash;
         private System.Windows.Forms.Label lblFullCashDesc;
-        private Guna.UI2.WinForms.Guna2Panel pnlOtherServices;
-        private Guna.UI2.WinForms.Guna2Panel pnlOtherServicesIcon;
-        private System.Windows.Forms.Label lblOtherServicesIcon;
-        private System.Windows.Forms.Label lblOtherServices;
-        private System.Windows.Forms.Label lblOtherServicesDesc;
         private Guna.UI2.WinForms.Guna2Panel pnlAdvancePayment;
         private Guna.UI2.WinForms.Guna2Panel pnlAdvancePaymentIcon;
         private System.Windows.Forms.Label lblAdvancePaymentIcon;
