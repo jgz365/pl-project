@@ -104,17 +104,14 @@ namespace inventory_ni_Percie
         {
             pnlMainContainer.Controls.Clear();
 
-            // 2. Ensure the panel itself is solid white
             // Uses your existing DisplayPage() switcher — no layout jump guaranteed
             DisplayPage(new UC_Users());
         }
 
         private void btnRepo_Click(object sender, EventArgs e)
         {
-            pnlMainContainer.Controls.Clear();
-
-            // 2. Ensure the panel itself is solid white
-            pnlMainContainer.BackColor = Color.White;
+            // Load the Repossessions Overview screen
+            DisplayPage(new MotoDealerShop.UC_Overview());
         }
 
         private void btnCollec_Click(object sender, EventArgs e)
@@ -196,8 +193,8 @@ namespace inventory_ni_Percie
         {
 
         }
-        
-        
+
+
     }
 
 }

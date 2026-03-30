@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +8,16 @@ using System.Windows.Forms;
 
 namespace MotoDealerShop
 {
-    public partial class UserPanel8 : Form
+    public partial class Repossessions2Form : Form
     {
-        public UserPanel8()
+        public Repossessions2Form()
         {
             InitializeComponent();
+        }
+
+        private void Repossessions2Form_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

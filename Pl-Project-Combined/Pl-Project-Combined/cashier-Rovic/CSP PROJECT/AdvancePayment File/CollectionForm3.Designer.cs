@@ -127,7 +127,7 @@
             btnBackToConfig.Size = new System.Drawing.Size(150, 38);
             btnBackToConfig.TabIndex = 0;
             btnBackToConfig.Text = "← Back";
-            btnBackToConfig.Click += BtnBackToConfig_Click;
+            btnBackToConfig.Click += BtnBack_Click;
 
             // ─── btnAvatar ────────────────────────────────────────────────────
             btnAvatar.BackColor = System.Drawing.Color.Transparent;

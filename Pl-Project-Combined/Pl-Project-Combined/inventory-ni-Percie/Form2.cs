@@ -69,8 +69,8 @@ namespace inventory_ni_Percie
 
         private void btnRepo_Click(object sender, EventArgs e)
         {
-            pnlMainContainer.Controls.Clear();
-            pnlMainContainer.BackColor = System.Drawing.Color.White;
+            // Load the Repossessions Overview screen
+            DisplayPage(new MotoDealerShop.UC_Overview());
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
