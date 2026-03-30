@@ -6,12 +6,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Pl_Project_Combined.Databases;
 
 namespace customer_kiosk
 {
     public partial class redirect_application : UserControl
     {
         private const int RequiredDocumentCount = 3;
+        private const string QueueCharacters = "0123456789";
         private static readonly HttpClient ProductImageClient = new();
 
         private enum WizardStep
@@ -108,6 +110,19 @@ namespace customer_kiosk
             btnNext.Click += BtnNext_Click;
             btnBack.Click += BtnBack_Click;
             Disposed += RedirectApplication_Disposed;
+
+            try
+            {
+                KioskLoanApplicationDatabase.Initialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Kiosk database initialization failed.\n\n{ex.Message}",
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         public void SetSelectedProduct(string? title, string? sub, string? price, string? imageUrl)
@@ -780,14 +795,22 @@ namespace customer_kiosk
 
             if (currentStep == WizardStep.Loan)
             {
-                ShowLoanReceipt();
+                string queueNumber = GenerateQueueNumber();
+
+                if (!SaveLoanApplication(queueNumber, out string saveError))
+                {
+                    ShowValidationMessage(saveError);
+                    return;
+                }
+
+                ShowLoanReceipt(queueNumber);
                 return;
             }
 
             SetStep((WizardStep)((int)currentStep + 1));
         }
 
-        private void ShowLoanReceipt()
+        private void ShowLoanReceipt(string queueNumber)
         {
             onScreenKeyboard.Visible = false;
 
@@ -797,7 +820,7 @@ namespace customer_kiosk
                 return;
             }
 
-            var receipt = new user_receipt_loan
+            var receipt = new user_receipt_loan(queueNumber)
             {
                 Dock = DockStyle.Fill
             };
@@ -1340,6 +1363,114 @@ namespace customer_kiosk
             if (onScreenKeyboard.Visible)
             {
                 onScreenKeyboard.BringToFront();
+            }
+        }
+
+        private static string GenerateQueueNumber()
+        {
+            Span<char> code = stackalloc char[4];
+            for (int i = 0; i < code.Length; i++)
+            {
+                code[i] = QueueCharacters[Random.Shared.Next(QueueCharacters.Length)];
+            }
+
+            return new string(code);
+        }
+
+        private bool SaveLoanApplication(string queueNumber, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            try
+            {
+                decimal basePrice = ParsePeso(productPrice.Text);
+                if (basePrice <= 0)
+                {
+                    basePrice = DefaultBasePrice;
+                }
+
+                int downPercent = trkDownPayment.Value;
+                decimal downPayment = basePrice * downPercent / 100m;
+                decimal financed = basePrice - downPayment;
+
+                bool hasSelectedTerm = annualRateByTerm.TryGetValue(selectedTermMonths, out decimal annualRate);
+                decimal interest = hasSelectedTerm ? financed * annualRate * (selectedTermMonths / 12m) : 0m;
+                decimal totalPayable = financed + interest;
+                decimal monthlySelected = hasSelectedTerm && selectedTermMonths > 0 ? totalPayable / selectedTermMonths : 0m;
+
+                int? years = int.TryParse(employmentYears, NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsedYears)
+                    ? parsedYears
+                    : null;
+
+                string city = personalCityIndex > 0 && personalCityIndex < cbCity.Items.Count
+                    ? Convert.ToString(cbCity.Items[personalCityIndex]) ?? string.Empty
+                    : string.Empty;
+
+                string province = personalProvinceIndex > 0 && personalProvinceIndex < cbProvince.Items.Count
+                    ? Convert.ToString(cbProvince.Items[personalProvinceIndex]) ?? string.Empty
+                    : string.Empty;
+
+                var record = new KioskLoanApplicationRecord
+                {
+                    QueueNumber = queueNumber,
+
+                    FullName = personalFullName,
+                    Email = personalEmail,
+                    Mobile = personalMobile,
+                    DateOfBirth = personalDob,
+                    Address = personalAddress,
+                    City = city,
+                    Province = province,
+
+                    EmploymentStatus = rbEmployed.Checked ? "Employed"
+                        : rbSelfEmployed.Checked ? "Self-Employed"
+                        : rbBusinessOwner.Checked ? "Business Owner"
+                        : "Unspecified",
+                    CompanyOrBusinessName = employmentCompanyName,
+                    PositionTitle = employmentPositionTitle,
+                    YearsEmployed = years,
+
+                    GrossIncome = ParseNumeric(financialGrossIncome),
+                    OtherIncome = ParseNumeric(financialOtherIncome),
+                    TotalObligations = ParseNumeric(financialTotalObligations),
+                    HasHomeLoan = chkHomeLoan.Checked,
+                    HasCarLoan = chkCarLoan.Checked,
+                    HasPersonalLoan = chkPersonalLoan.Checked,
+                    HasCreditCard = chkCreditCard.Checked,
+
+                    ProductName = productName.Text.Trim(),
+                    ProductYear = productYear.Text.Trim(),
+                    ProductPrice = basePrice,
+                    DownPaymentPercent = downPercent,
+                    DownPaymentAmount = downPayment,
+                    FinancedAmount = financed,
+                    SelectedTermMonths = selectedTermMonths,
+                    AnnualInterestRate = hasSelectedTerm ? annualRate : 0m,
+                    InterestAmount = interest,
+                    TotalPayable = totalPayable,
+                    MonthlyAmortization = monthlySelected,
+
+                    DocValidGovernmentId = chkDocValidId.Checked,
+                    DocProofOfAddress = chkDocProofAddress.Checked,
+                    DocEmploymentOrBusinessProof = chkDocEmploymentCert.Checked,
+                    DocPayslips = chkDocPayslips.Checked,
+                    DocProofOfIncome = chkDocProofIncome.Checked,
+                    SelectedDocumentCount = CountSelectedDocuments(),
+                    AgreedToTerms = chkAgreeTerms.Checked
+                };
+
+                if (!KioskLoanApplicationDatabase.SaveApplication(record))
+                {
+                    errorMessage = "Unable to save application. Please try again.";
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Unable to save application: {ex.Message}";
+                return false;
             }
         }
     }

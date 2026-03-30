@@ -1,6 +1,6 @@
-﻿namespace Assessor_Eddion
+﻿namespace AssessorDesk
 {
-    partial class Assessordeskeddion
+    partial class AssessorEddionism
     {
         /// <summary>
         /// Required designer variable.
@@ -39,9 +39,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssessorEddionism));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Assessordeskeddion));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -831,13 +831,13 @@
             guna2Button1.FillColor = Color.White;
             guna2Button1.Font = new Font("Segoe UI", 10F);
             guna2Button1.ForeColor = Color.FromArgb(64, 64, 64);
+            guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
             guna2Button1.Location = new Point(406, 3);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2Button1.Size = new Size(95, 60);
             guna2Button1.TabIndex = 0;
             guna2Button1.Text = "Logout";
-            guna2Button1.Click += guna2Button1_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -4686,6 +4686,7 @@
             guna2Button14.FillColor = Color.White;
             guna2Button14.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2Button14.ForeColor = Color.FromArgb(128, 64, 0);
+            guna2Button14.Image = (Image)resources.GetObject("guna2Button14.Image");
             guna2Button14.ImageAlign = HorizontalAlignment.Left;
             guna2Button14.Location = new Point(197, 10);
             guna2Button14.Margin = new Padding(10);
@@ -4709,6 +4710,7 @@
             guna2Button13.FillColor = Color.White;
             guna2Button13.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2Button13.ForeColor = Color.Maroon;
+            guna2Button13.Image = (Image)resources.GetObject("guna2Button13.Image");
             guna2Button13.ImageAlign = HorizontalAlignment.Left;
             guna2Button13.Location = new Point(10, 10);
             guna2Button13.Margin = new Padding(10);
@@ -4730,6 +4732,7 @@
             guna2Button15.FillColor = Color.Black;
             guna2Button15.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2Button15.ForeColor = Color.White;
+            guna2Button15.Image = (Image)resources.GetObject("guna2Button15.Image");
             guna2Button15.ImageAlign = HorizontalAlignment.Right;
             guna2Button15.Location = new Point(384, 10);
             guna2Button15.Margin = new Padding(10);
@@ -4775,7 +4778,7 @@
             guna2HtmlLabel16.TabIndex = 4;
             guna2HtmlLabel16.Text = "Applicant Name";
             // 
-            // Assessordeskeddion
+            // AssessorEddionism
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -4784,9 +4787,9 @@
             Controls.Add(tableLayoutPanel4);
             Controls.Add(guna2Panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Assessordeskeddion";
+            Name = "AssessorEddionism";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Assessordeskeddion";
+            Text = "AssessorEddionism";
             WindowState = FormWindowState.Maximized;
             guna2Panel1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);

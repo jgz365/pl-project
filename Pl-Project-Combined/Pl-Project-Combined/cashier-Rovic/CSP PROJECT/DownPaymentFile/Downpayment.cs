@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using Newtonsoft.Json;
+using Pl_Project_Combined.Databases;
 
 namespace POSCashierSystem
 {
@@ -39,6 +40,22 @@ namespace POSCashierSystem
         // ── Load ALL customer data from customers.json ─────────────────────────
         private void LoadCustomerData()
         {
+            try
+            {
+                KioskLoanApplicationDatabase.Initialize();
+                var cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("DownPayment");
+                if (cashierReady.Count > 0)
+                {
+                    customers = cashierReady.Select(MapCashierReadyToSummary).ToList();
+                    filteredCustomers = new List<CustomerSummary>(customers);
+                    return;
+                }
+            }
+            catch
+            {
+                // Fall back to JSON seed path below if DB fetch fails.
+            }
+
             if (File.Exists(_customersJsonPath))
             {
                 try
@@ -59,6 +76,32 @@ namespace POSCashierSystem
             }
 
             filteredCustomers = new List<CustomerSummary>(customers);
+        }
+
+        private static CustomerSummary MapCashierReadyToSummary(KioskLoanAssessorItem row)
+        {
+            decimal downPaymentDue = row.ApprovedDownPayment ?? row.DownPaymentAmount;
+
+            return new CustomerSummary
+            {
+                Name = row.FullName,
+                QueueTicket = row.QueueNumber,
+                Location = $"{row.City}, {row.Province}",
+                TransactionType = string.IsNullOrWhiteSpace(row.ApprovedPaymentMode) ? "DownPayment" : row.ApprovedPaymentMode,
+                UnitDetails = new UnitDetailsData
+                {
+                    Model = row.ProductName,
+                    Color = string.Empty,
+                    EngineNo = string.Empty
+                },
+                FinancialStatus = new FinancialStatusData
+                {
+                    DownPaymentDue = downPaymentDue,
+                    CurrentBalance = row.FinancedAmount,
+                    MonthlyAmortization = row.ApprovedMonthlyDue ?? row.MonthlyAmortization,
+                    NextDueDate = row.AssessorDecidedAt?.ToString("MMM dd, yyyy") ?? row.SubmittedAt.ToString("MMM dd, yyyy")
+                }
+            };
         }
 
         // ── Fallback in case customers.json is missing ─────────────────────────

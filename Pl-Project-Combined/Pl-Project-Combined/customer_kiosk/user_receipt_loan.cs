@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -12,12 +13,19 @@ namespace customer_kiosk
         private const float BaseHeight = 1080f;
 
         private readonly System.Windows.Forms.Timer returnTimer = new();
+        private readonly string? providedQueueNumber;
         private ResponsiveScaler? responsiveScaler;
         private int secondsRemaining;
 
-        public user_receipt_loan()
+        public user_receipt_loan() : this(null)
+        {
+        }
+
+        public user_receipt_loan(string? queueNumber)
         {
             InitializeComponent();
+
+            providedQueueNumber = string.IsNullOrWhiteSpace(queueNumber) ? null : queueNumber.Trim();
 
             Load += UserReceiptLoan_Load;
             SizeChanged += UserReceiptLoan_SizeChanged;
@@ -32,7 +40,7 @@ namespace customer_kiosk
         {
             guna2HtmlLabel2.Visible = false;
             ApplyResponsiveScaling();
-            GenerateQueueCode();
+            SetQueueCode();
             StartAutoReturnCountdown();
             CenterReceiptComponents();
         }
@@ -49,7 +57,13 @@ namespace customer_kiosk
             responsiveScaler.Apply(this.ClientSize);
         }
 
-        private void GenerateQueueCode()
+        private void SetQueueCode()
+        {
+            q_random.Text = providedQueueNumber ?? GenerateQueueCode();
+            CenterControlHorizontally(q_random, guna2ShadowPanel2);
+        }
+
+        private static string GenerateQueueCode()
         {
             Span<char> code = stackalloc char[4];
 
@@ -58,8 +72,7 @@ namespace customer_kiosk
                 code[i] = QueueCharacters[Random.Shared.Next(QueueCharacters.Length)];
             }
 
-            q_random.Text = new string(code);
-            CenterControlHorizontally(q_random, guna2ShadowPanel2);
+            return new string(code);
         }
 
         private void StartAutoReturnCountdown()

@@ -146,44 +146,86 @@ namespace customer_kiosk
             webCatalog.CoreWebView2.WebMessageReceived += WebCatalog_WebMessageReceived;
         }
 
+        // ─────────────────────────────────────────────────────────────────────
+        // WebView2 message handler — VERSION 2
+        //
+        // ROOT CAUSE OF THE ORIGINAL BUG:
+        //   CatalogHtmlProvider.cs line 383 sends a plain JS *object*:
+        //       window.chrome?.webview?.postMessage(payload)
+        //   not a string. When JS sends an object, WebView2's
+        //   TryGetWebMessageAsString() throws InvalidOperationException, which
+        //   was silently swallowed in the catch block → nothing happened.
+        //
+        // FIX:
+        //   Read e.WebMessageAsJson instead. WebMessageAsJson always gives a
+        //   JSON string regardless of whether JS sent a string or an object.
+        //   This does NOT touch original main_menu.cs at all.
+        // ─────────────────────────────────────────────────────────────────────
         private void WebCatalog_WebMessageReceived(
             object? sender,
             Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
         {
-            string message = e.TryGetWebMessageAsString();
+            // WebMessageAsJson works for BOTH postMessage(object) and
+            // postMessage(JSON.stringify(object)) — it always returns a JSON string.
+            string rawJson = e.WebMessageAsJson;
 
-            // Plain string signal — open confirm payment with no product data
-            if (string.Equals(message, "open_redirect_application", StringComparison.Ordinal))
+            void Handle()
             {
-                ShowConfirmPayment();
-                return;
+                if (IsDisposed || string.IsNullOrWhiteSpace(rawJson)) return;
+
+                // If JS sent a plain string message (e.g. "open_redirect_application"),
+                // WebMessageAsJson wraps it in quotes: "\"open_redirect_application\""
+                // Unwrap and handle that case first.
+                if (rawJson.Length >= 2 && rawJson[0] == '"' && rawJson[^1] == '"')
+                {
+                    string plainString = JsonSerializer.Deserialize<string>(rawJson) ?? string.Empty;
+                    if (string.Equals(plainString, "open_redirect_application", StringComparison.Ordinal))
+                    {
+                        ShowConfirmPayment();
+                        return;
+                    }
+                    // Plain string but not a recognised command — ignore.
+                    return;
+                }
+
+                // JS sent an object → parse the JSON directly.
+                if (!TryParseApplyPayload(rawJson, out SelectedProductPayload? product))
+                    return;
+
+                ShowConfirmPayment(product);
             }
 
-            // JSON payload with product details
-            if (!TryParseOpenRedirectPayload(message, out SelectedProductPayload? selectedProduct))
-                return;
-
-            ShowConfirmPayment(selectedProduct);
+            if (InvokeRequired)
+                BeginInvoke(Handle);
+            else
+                Handle();
         }
 
-        private static bool TryParseOpenRedirectPayload(string message, out SelectedProductPayload? payload)
+        // ─────────────────────────────────────────────────────────────────────
+        // Parse the JSON object that the Apply button posts:
+        //   { action: "open_redirect_application", product: { title, sub, price, imageUrl } }
+        // ─────────────────────────────────────────────────────────────────────
+        private static bool TryParseApplyPayload(string json, out SelectedProductPayload? payload)
         {
             payload = null;
-
-            if (string.IsNullOrWhiteSpace(message) || !message.TrimStart().StartsWith('{'))
-                return false;
+            if (string.IsNullOrWhiteSpace(json)) return false;
 
             try
             {
-                using var json = JsonDocument.Parse(message);
-                var root = json.RootElement;
+                using var doc = JsonDocument.Parse(json);
+                var root = doc.RootElement;
 
-                if (!root.TryGetProperty("action", out var actionElement) ||
-                    !string.Equals(actionElement.GetString(), "open_redirect_application", StringComparison.Ordinal))
+                // Must be an object with action == "open_redirect_application"
+                if (root.ValueKind != JsonValueKind.Object) return false;
+
+                if (!root.TryGetProperty("action", out var actionEl) ||
+                    !string.Equals(actionEl.GetString(), "open_redirect_application",
+                                   StringComparison.Ordinal))
                     return false;
 
-                if (!root.TryGetProperty("product", out var productElement) ||
-                    productElement.ValueKind != JsonValueKind.Object)
+                // product may be null → open confirm with no pre-filled data
+                if (!root.TryGetProperty("product", out var productEl) ||
+                    productEl.ValueKind != JsonValueKind.Object)
                 {
                     payload = new SelectedProductPayload();
                     return true;
@@ -191,10 +233,10 @@ namespace customer_kiosk
 
                 payload = new SelectedProductPayload
                 {
-                    Title = productElement.TryGetProperty("title", out var t) ? t.GetString() ?? string.Empty : string.Empty,
-                    Sub = productElement.TryGetProperty("sub", out var s) ? s.GetString() ?? string.Empty : string.Empty,
-                    Price = productElement.TryGetProperty("price", out var p) ? p.GetString() ?? string.Empty : string.Empty,
-                    ImageUrl = productElement.TryGetProperty("imageUrl", out var i) ? i.GetString() ?? string.Empty : string.Empty
+                    Title = productEl.TryGetProperty("title", out var t) ? t.GetString() ?? string.Empty : string.Empty,
+                    Sub = productEl.TryGetProperty("sub", out var s) ? s.GetString() ?? string.Empty : string.Empty,
+                    Price = productEl.TryGetProperty("price", out var p) ? p.GetString() ?? string.Empty : string.Empty,
+                    ImageUrl = productEl.TryGetProperty("imageUrl", out var i) ? i.GetString() ?? string.Empty : string.Empty
                 };
 
                 return true;
@@ -206,17 +248,21 @@ namespace customer_kiosk
         }
 
         // ─────────────────────────────────────────────────────────────────────
-        // Navigate to ck_confirm_payment (replaces ShowRedirectApplication)
+        // Navigate to ck_confirm_payment inside this UC's own panel.
+        // Keeps the navigation entirely self-contained — no dependency on
+        // whatever parent POSCashier happens to have at the moment.
         // ─────────────────────────────────────────────────────────────────────
         private void ShowConfirmPayment(SelectedProductPayload? selectedProduct = null)
         {
-            if (this.Parent == null) return;
-            var parent = this.Parent;
-
-            // Remove any stale instance
-            for (int i = parent.Controls.Count - 1; i >= 0; i--)
-                if (parent.Controls[i] is CSP_PROJECT.ck_confirm_payment)
-                    parent.Controls.RemoveAt(i);
+            // Remove any stale instance (e.g. user double-taps Apply)
+            for (int i = main_menu_gunapanel.Controls.Count - 1; i >= 0; i--)
+            {
+                if (main_menu_gunapanel.Controls[i] is CSP_PROJECT.ck_confirm_payment stale)
+                {
+                    main_menu_gunapanel.Controls.RemoveAt(i);
+                    stale.Dispose();
+                }
+            }
 
             var confirmPayment = new CSP_PROJECT.ck_confirm_payment
             {
@@ -233,19 +279,24 @@ namespace customer_kiosk
                     selectedProduct.ImageUrl);
             }
 
-            // When ck_confirm_payment back button fires, restore this UC
+            // Back button inside ck_confirm_payment → remove it and reveal the
+            // web catalog that is still sitting underneath in gunapanel.
             confirmPayment.CloseRequested += (s, args) =>
             {
-                parent.Controls.Remove(confirmPayment);
+                main_menu_gunapanel.Controls.Remove(confirmPayment);
                 confirmPayment.Dispose();
-                this.Visible = true;
-                this.BringToFront();
-                this.Focus();
+
+                // Restore z-order: catalog visible, header + back btn on top.
+                webCatalog?.BringToFront();
+                main_menu_gunagradpanel.BringToFront();
+                uc_btn_back.BringToFront();
             };
 
-            this.Visible = false;
-            parent.Controls.Add(confirmPayment);
+            main_menu_gunapanel.Controls.Add(confirmPayment);
             confirmPayment.BringToFront();
+            // Keep the AsensoMoto header and Back button always visible on top.
+            main_menu_gunagradpanel.BringToFront();
+            uc_btn_back.BringToFront();
             confirmPayment.Focus();
         }
 
@@ -273,7 +324,7 @@ namespace customer_kiosk
         // ─────────────────────────────────────────────────────────────────────
         private static string BuildCatalogHtml()
         {
-            return CatalogHtmlProvider.GetHtml();
+            return UC_CatalogHtmlProvider.GetHtml();
         }
     }
 }
