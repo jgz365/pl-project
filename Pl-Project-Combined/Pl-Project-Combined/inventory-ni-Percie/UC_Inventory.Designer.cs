@@ -61,28 +61,16 @@ namespace inventory_ni_Percie
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges51 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges52 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblTotalVal = new Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
@@ -126,30 +114,6 @@ namespace inventory_ni_Percie
             guna2Button15 = new Guna2Button();
             guna2Button14 = new Guna2Button();
             guna2HtmlLabel29 = new Guna2HtmlLabel();
-            incomingdelPnl = new Guna2Panel();
-            guna2CircleButton2 = new Guna2CircleButton();
-            guna2Button13 = new Guna2Button();
-            guna2HtmlLabel23 = new Guna2HtmlLabel();
-            guna2HtmlLabel24 = new Guna2HtmlLabel();
-            guna2HtmlLabel25 = new Guna2HtmlLabel();
-            guna2HtmlLabel26 = new Guna2HtmlLabel();
-            guna2HtmlLabel27 = new Guna2HtmlLabel();
-            guna2HtmlLabel28 = new Guna2HtmlLabel();
-            guna2Separator2 = new Guna2Separator();
-            guna2Separator3 = new Guna2Separator();
-            guna2Button12 = new Guna2Button();
-            guna2HtmlLabel22 = new Guna2HtmlLabel();
-            guna2HtmlLabel21 = new Guna2HtmlLabel();
-            guna2HtmlLabel20 = new Guna2HtmlLabel();
-            guna2HtmlLabel19 = new Guna2HtmlLabel();
-            guna2HtmlLabel18 = new Guna2HtmlLabel();
-            guna2HtmlLabel17 = new Guna2HtmlLabel();
-            guna2CircleButton1 = new Guna2CircleButton();
-            guna2PictureBox1 = new Guna2PictureBox();
-            guna2Button11 = new Guna2Button();
-            guna2HtmlLabel16 = new Guna2HtmlLabel();
-            guna2Separator1 = new Guna2Separator();
-            sepTransitLine = new Guna2Separator();
             mockpnl = new Guna2Panel();
             search_inventory_pnl.SuspendLayout();
             pnlHeaderGroup.SuspendLayout();
@@ -161,8 +125,6 @@ namespace inventory_ni_Percie
             pnlGridContainer.SuspendLayout();
             pnlSidebarMaster.SuspendLayout();
             guna2Panel1.SuspendLayout();
-            incomingdelPnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblTotalVal
@@ -518,7 +480,7 @@ namespace inventory_ni_Percie
             guna2HtmlLabel15.ForeColor = SystemColors.AppWorkspace;
             guna2HtmlLabel15.Location = new Point(27, 17);
             guna2HtmlLabel15.Name = "guna2HtmlLabel15";
-            guna2HtmlLabel15.Size = new Size(65, 15);
+            guna2HtmlLabel15.Size = new Size(64, 15);
             guna2HtmlLabel15.TabIndex = 6;
             guna2HtmlLabel15.Text = "LOW STOCK";
             // 
@@ -575,7 +537,7 @@ namespace inventory_ni_Percie
             guna2HtmlLabel13.ForeColor = SystemColors.AppWorkspace;
             guna2HtmlLabel13.Location = new Point(19, 17);
             guna2HtmlLabel13.Name = "guna2HtmlLabel13";
-            guna2HtmlLabel13.Size = new Size(56, 15);
+            guna2HtmlLabel13.Size = new Size(57, 15);
             guna2HtmlLabel13.TabIndex = 4;
             guna2HtmlLabel13.Text = "AVAILABLE";
             // 
@@ -631,7 +593,7 @@ namespace inventory_ni_Percie
             guna2HtmlLabel9.ForeColor = SystemColors.AppWorkspace;
             guna2HtmlLabel9.Location = new Point(23, 17);
             guna2HtmlLabel9.Name = "guna2HtmlLabel9";
-            guna2HtmlLabel9.Size = new Size(72, 15);
+            guna2HtmlLabel9.Size = new Size(70, 15);
             guna2HtmlLabel9.TabIndex = 3;
             guna2HtmlLabel9.Text = "TOTAL VALUE";
             // 
@@ -748,12 +710,11 @@ namespace inventory_ni_Percie
             // 
             pnlSidebarMaster.BackColor = Color.Gainsboro;
             pnlSidebarMaster.Controls.Add(guna2Panel1);
-            pnlSidebarMaster.Controls.Add(incomingdelPnl);
-            pnlSidebarMaster.CustomizableEdges = customizableEdges49;
+            pnlSidebarMaster.CustomizableEdges = customizableEdges37;
             pnlSidebarMaster.Dock = DockStyle.Right;
             pnlSidebarMaster.Location = new Point(851, 159);
             pnlSidebarMaster.Name = "pnlSidebarMaster";
-            pnlSidebarMaster.ShadowDecoration.CustomizableEdges = customizableEdges50;
+            pnlSidebarMaster.ShadowDecoration.CustomizableEdges = customizableEdges38;
             pnlSidebarMaster.Size = new Size(249, 541);
             pnlSidebarMaster.TabIndex = 0;
             pnlSidebarMaster.Paint += pnlSidebarMaster_Paint;
@@ -825,332 +786,14 @@ namespace inventory_ni_Percie
             guna2HtmlLabel29.TabIndex = 0;
             guna2HtmlLabel29.Text = "Quick Actions";
             // 
-            // incomingdelPnl
-            // 
-            incomingdelPnl.BackColor = Color.Transparent;
-            incomingdelPnl.BorderRadius = 20;
-            incomingdelPnl.Controls.Add(guna2CircleButton2);
-            incomingdelPnl.Controls.Add(guna2Button13);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel23);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel24);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel25);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel26);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel27);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel28);
-            incomingdelPnl.Controls.Add(guna2Separator2);
-            incomingdelPnl.Controls.Add(guna2Separator3);
-            incomingdelPnl.Controls.Add(guna2Button12);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel22);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel21);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel20);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel19);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel18);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel17);
-            incomingdelPnl.Controls.Add(guna2CircleButton1);
-            incomingdelPnl.Controls.Add(guna2PictureBox1);
-            incomingdelPnl.Controls.Add(guna2Button11);
-            incomingdelPnl.Controls.Add(guna2HtmlLabel16);
-            incomingdelPnl.Controls.Add(guna2Separator1);
-            incomingdelPnl.Controls.Add(sepTransitLine);
-            incomingdelPnl.CustomizableEdges = customizableEdges47;
-            incomingdelPnl.FillColor = Color.White;
-            incomingdelPnl.Location = new Point(13, 65);
-            incomingdelPnl.Name = "incomingdelPnl";
-            incomingdelPnl.ShadowDecoration.BorderRadius = 1;
-            incomingdelPnl.ShadowDecoration.Color = Color.Transparent;
-            incomingdelPnl.ShadowDecoration.CustomizableEdges = customizableEdges48;
-            incomingdelPnl.ShadowDecoration.Enabled = true;
-            incomingdelPnl.Size = new Size(230, 249);
-            incomingdelPnl.TabIndex = 0;
-            // 
-            // guna2CircleButton2
-            // 
-            guna2CircleButton2.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton2.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton2.ForeColor = Color.White;
-            guna2CircleButton2.Location = new Point(112, 189);
-            guna2CircleButton2.Name = "guna2CircleButton2";
-            guna2CircleButton2.ShadowDecoration.CustomizableEdges = customizableEdges37;
-            guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton2.Size = new Size(12, 12);
-            guna2CircleButton2.TabIndex = 22;
-            guna2CircleButton2.Text = "guna2CircleButton2";
-            // 
-            // guna2Button13
-            // 
-            guna2Button13.BorderRadius = 5;
-            guna2Button13.CustomizableEdges = customizableEdges38;
-            guna2Button13.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button13.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button13.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button13.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button13.FillColor = SystemColors.Control;
-            guna2Button13.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button13.ForeColor = Color.DimGray;
-            guna2Button13.Location = new Point(158, 162);
-            guna2Button13.Name = "guna2Button13";
-            guna2Button13.ShadowDecoration.CustomizableEdges = customizableEdges39;
-            guna2Button13.Size = new Size(60, 20);
-            guna2Button13.TabIndex = 21;
-            guna2Button13.Text = "Pending";
-            // 
-            // guna2HtmlLabel23
-            // 
-            guna2HtmlLabel23.BackColor = Color.Transparent;
-            guna2HtmlLabel23.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold);
-            guna2HtmlLabel23.ForeColor = Color.Gray;
-            guna2HtmlLabel23.Location = new Point(16, 169);
-            guna2HtmlLabel23.Name = "guna2HtmlLabel23";
-            guna2HtmlLabel23.Size = new Size(108, 14);
-            guna2HtmlLabel23.TabIndex = 20;
-            guna2HtmlLabel23.Text = "PO: PO-9928 - ETA Feb 28";
-            // 
-            // guna2HtmlLabel24
-            // 
-            guna2HtmlLabel24.BackColor = Color.Transparent;
-            guna2HtmlLabel24.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel24.Location = new Point(16, 153);
-            guna2HtmlLabel24.Name = "guna2HtmlLabel24";
-            guna2HtmlLabel24.Size = new Size(110, 15);
-            guna2HtmlLabel24.TabIndex = 19;
-            guna2HtmlLabel24.Text = "Yamaha Mio Gear (5)";
-            // 
-            // guna2HtmlLabel25
-            // 
-            guna2HtmlLabel25.BackColor = Color.Transparent;
-            guna2HtmlLabel25.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel25.ForeColor = Color.FromArgb(193, 200, 207);
-            guna2HtmlLabel25.Location = new Point(164, 204);
-            guna2HtmlLabel25.Name = "guna2HtmlLabel25";
-            guna2HtmlLabel25.Size = new Size(44, 14);
-            guna2HtmlLabel25.TabIndex = 18;
-            guna2HtmlLabel25.Text = "STOCKED";
-            // 
-            // guna2HtmlLabel26
-            // 
-            guna2HtmlLabel26.BackColor = Color.Transparent;
-            guna2HtmlLabel26.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel26.ForeColor = Color.FromArgb(193, 200, 207);
-            guna2HtmlLabel26.Location = new Point(118, 204);
-            guna2HtmlLabel26.Name = "guna2HtmlLabel26";
-            guna2HtmlLabel26.Size = new Size(47, 14);
-            guna2HtmlLabel26.TabIndex = 17;
-            guna2HtmlLabel26.Text = "CUSTOMS";
-            // 
-            // guna2HtmlLabel27
-            // 
-            guna2HtmlLabel27.BackColor = Color.Transparent;
-            guna2HtmlLabel27.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel27.ForeColor = Color.FromArgb(94, 148, 255);
-            guna2HtmlLabel27.Location = new Point(63, 204);
-            guna2HtmlLabel27.Name = "guna2HtmlLabel27";
-            guna2HtmlLabel27.Size = new Size(54, 14);
-            guna2HtmlLabel27.TabIndex = 16;
-            guna2HtmlLabel27.Text = "IN-TRANSIT";
-            // 
-            // guna2HtmlLabel28
-            // 
-            guna2HtmlLabel28.BackColor = Color.Transparent;
-            guna2HtmlLabel28.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel28.ForeColor = Color.FromArgb(94, 148, 255);
-            guna2HtmlLabel28.Location = new Point(16, 204);
-            guna2HtmlLabel28.Name = "guna2HtmlLabel28";
-            guna2HtmlLabel28.Size = new Size(46, 14);
-            guna2HtmlLabel28.TabIndex = 15;
-            guna2HtmlLabel28.Text = "ORDERED";
-            // 
-            // guna2Separator2
-            // 
-            guna2Separator2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            guna2Separator2.FillColor = Color.FromArgb(94, 148, 255);
-            guna2Separator2.FillThickness = 3;
-            guna2Separator2.Location = new Point(16, 188);
-            guna2Separator2.Name = "guna2Separator2";
-            guna2Separator2.Size = new Size(97, 14);
-            guna2Separator2.TabIndex = 14;
-            // 
-            // guna2Separator3
-            // 
-            guna2Separator3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            guna2Separator3.FillThickness = 3;
-            guna2Separator3.Location = new Point(54, 188);
-            guna2Separator3.Name = "guna2Separator3";
-            guna2Separator3.Size = new Size(147, 14);
-            guna2Separator3.TabIndex = 13;
-            // 
-            // guna2Button12
-            // 
-            guna2Button12.BorderRadius = 5;
-            guna2Button12.CustomizableEdges = customizableEdges40;
-            guna2Button12.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button12.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button12.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button12.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button12.FillColor = SystemColors.Control;
-            guna2Button12.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button12.ForeColor = Color.DimGray;
-            guna2Button12.Location = new Point(158, 73);
-            guna2Button12.Name = "guna2Button12";
-            guna2Button12.ShadowDecoration.CustomizableEdges = customizableEdges41;
-            guna2Button12.Size = new Size(60, 20);
-            guna2Button12.TabIndex = 12;
-            guna2Button12.Text = "Pending";
-            // 
-            // guna2HtmlLabel22
-            // 
-            guna2HtmlLabel22.BackColor = Color.Transparent;
-            guna2HtmlLabel22.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold);
-            guna2HtmlLabel22.ForeColor = Color.Gray;
-            guna2HtmlLabel22.Location = new Point(17, 90);
-            guna2HtmlLabel22.Name = "guna2HtmlLabel22";
-            guna2HtmlLabel22.Size = new Size(107, 14);
-            guna2HtmlLabel22.TabIndex = 11;
-            guna2HtmlLabel22.Text = "PO: PO-9921 - ETA Feb 22";
-            // 
-            // guna2HtmlLabel21
-            // 
-            guna2HtmlLabel21.BackColor = Color.Transparent;
-            guna2HtmlLabel21.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel21.Location = new Point(17, 73);
-            guna2HtmlLabel21.Name = "guna2HtmlLabel21";
-            guna2HtmlLabel21.Size = new Size(96, 15);
-            guna2HtmlLabel21.TabIndex = 10;
-            guna2HtmlLabel21.Text = "Honda PCX 160 (5)";
-            // 
-            // guna2HtmlLabel20
-            // 
-            guna2HtmlLabel20.BackColor = Color.Transparent;
-            guna2HtmlLabel20.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel20.ForeColor = Color.FromArgb(193, 200, 207);
-            guna2HtmlLabel20.Location = new Point(165, 125);
-            guna2HtmlLabel20.Name = "guna2HtmlLabel20";
-            guna2HtmlLabel20.Size = new Size(44, 14);
-            guna2HtmlLabel20.TabIndex = 9;
-            guna2HtmlLabel20.Text = "STOCKED";
-            // 
-            // guna2HtmlLabel19
-            // 
-            guna2HtmlLabel19.BackColor = Color.Transparent;
-            guna2HtmlLabel19.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel19.ForeColor = Color.FromArgb(193, 200, 207);
-            guna2HtmlLabel19.Location = new Point(118, 125);
-            guna2HtmlLabel19.Name = "guna2HtmlLabel19";
-            guna2HtmlLabel19.Size = new Size(47, 14);
-            guna2HtmlLabel19.TabIndex = 8;
-            guna2HtmlLabel19.Text = "CUSTOMS";
-            // 
-            // guna2HtmlLabel18
-            // 
-            guna2HtmlLabel18.BackColor = Color.Transparent;
-            guna2HtmlLabel18.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel18.ForeColor = Color.FromArgb(193, 200, 207);
-            guna2HtmlLabel18.Location = new Point(63, 125);
-            guna2HtmlLabel18.Name = "guna2HtmlLabel18";
-            guna2HtmlLabel18.Size = new Size(54, 14);
-            guna2HtmlLabel18.TabIndex = 7;
-            guna2HtmlLabel18.Text = "IN-TRANSIT";
-            guna2HtmlLabel18.Click += guna2HtmlLabel18_Click;
-            // 
-            // guna2HtmlLabel17
-            // 
-            guna2HtmlLabel17.BackColor = Color.Transparent;
-            guna2HtmlLabel17.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            guna2HtmlLabel17.ForeColor = Color.FromArgb(94, 148, 255);
-            guna2HtmlLabel17.Location = new Point(17, 125);
-            guna2HtmlLabel17.Name = "guna2HtmlLabel17";
-            guna2HtmlLabel17.Size = new Size(46, 14);
-            guna2HtmlLabel17.TabIndex = 6;
-            guna2HtmlLabel17.Text = "ORDERED";
-            // 
-            // guna2CircleButton1
-            // 
-            guna2CircleButton1.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton1.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton1.ForeColor = Color.White;
-            guna2CircleButton1.Location = new Point(59, 110);
-            guna2CircleButton1.Name = "guna2CircleButton1";
-            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton1.Size = new Size(12, 12);
-            guna2CircleButton1.TabIndex = 4;
-            guna2CircleButton1.Text = "guna2CircleButton1";
-            // 
-            // guna2PictureBox1
-            // 
-            guna2PictureBox1.CustomizableEdges = customizableEdges43;
-            guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");
-            guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.Location = new Point(9, 19);
-            guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges44;
-            guna2PictureBox1.Size = new Size(30, 25);
-            guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            guna2PictureBox1.TabIndex = 2;
-            guna2PictureBox1.TabStop = false;
-            // 
-            // guna2Button11
-            // 
-            guna2Button11.BorderRadius = 5;
-            guna2Button11.CustomizableEdges = customizableEdges45;
-            guna2Button11.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button11.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button11.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button11.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button11.FillColor = SystemColors.Control;
-            guna2Button11.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button11.ForeColor = Color.FromArgb(37, 99, 235);
-            guna2Button11.Location = new Point(156, 24);
-            guna2Button11.Name = "guna2Button11";
-            guna2Button11.ShadowDecoration.CustomizableEdges = customizableEdges46;
-            guna2Button11.Size = new Size(60, 20);
-            guna2Button11.TabIndex = 1;
-            guna2Button11.Text = "View All";
-            // 
-            // guna2HtmlLabel16
-            // 
-            guna2HtmlLabel16.BackColor = Color.Transparent;
-            guna2HtmlLabel16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel16.Location = new Point(42, 24);
-            guna2HtmlLabel16.Name = "guna2HtmlLabel16";
-            guna2HtmlLabel16.Size = new Size(114, 17);
-            guna2HtmlLabel16.TabIndex = 0;
-            guna2HtmlLabel16.Text = "Incoming Deliveries";
-            // 
-            // guna2Separator1
-            // 
-            guna2Separator1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            guna2Separator1.FillColor = Color.FromArgb(94, 148, 255);
-            guna2Separator1.FillThickness = 3;
-            guna2Separator1.Location = new Point(17, 109);
-            guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(43, 14);
-            guna2Separator1.TabIndex = 5;
-            guna2Separator1.Click += guna2Separator1_Click_1;
-            // 
-            // sepTransitLine
-            // 
-            sepTransitLine.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            sepTransitLine.FillThickness = 3;
-            sepTransitLine.Location = new Point(55, 109);
-            sepTransitLine.Name = "sepTransitLine";
-            sepTransitLine.Size = new Size(146, 14);
-            sepTransitLine.TabIndex = 3;
-            sepTransitLine.Click += guna2Separator1_Click;
-            // 
             // mockpnl
             // 
             mockpnl.BackColor = Color.FromArgb(15, 23, 42);
-            mockpnl.CustomizableEdges = customizableEdges51;
+            mockpnl.CustomizableEdges = customizableEdges39;
             mockpnl.Dock = DockStyle.Left;
             mockpnl.Location = new Point(0, 0);
             mockpnl.Name = "mockpnl";
-            mockpnl.ShadowDecoration.CustomizableEdges = customizableEdges52;
+            mockpnl.ShadowDecoration.CustomizableEdges = customizableEdges40;
             mockpnl.Size = new Size(164, 700);
             mockpnl.TabIndex = 8;
             // 
@@ -1184,9 +827,6 @@ namespace inventory_ni_Percie
             pnlSidebarMaster.ResumeLayout(false);
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
-            incomingdelPnl.ResumeLayout(false);
-            incomingdelPnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -1234,30 +874,6 @@ namespace inventory_ni_Percie
         private Guna2HtmlLabel guna2HtmlLabel13;
         private Guna2HtmlLabel guna2HtmlLabel10;
         private Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna2Panel incomingdelPnl;
-        private Guna2HtmlLabel guna2HtmlLabel16;
-        private Guna2Button guna2Button11;
-        private Guna2Separator sepTransitLine;
-        private Guna2PictureBox guna2PictureBox1;
-        private Guna2Separator guna2Separator1;
-        private Guna2CircleButton guna2CircleButton1;
-        private Guna2HtmlLabel guna2HtmlLabel17;
-        private Guna2HtmlLabel guna2HtmlLabel20;
-        private Guna2HtmlLabel guna2HtmlLabel19;
-        private Guna2HtmlLabel guna2HtmlLabel18;
-        private Guna2HtmlLabel guna2HtmlLabel21;
-        private Guna2Button guna2Button12;
-        private Guna2HtmlLabel guna2HtmlLabel22;
-        private Guna2CircleButton guna2CircleButton2;
-        private Guna2Button guna2Button13;
-        private Guna2HtmlLabel guna2HtmlLabel23;
-        private Guna2HtmlLabel guna2HtmlLabel24;
-        private Guna2HtmlLabel guna2HtmlLabel25;
-        private Guna2HtmlLabel guna2HtmlLabel26;
-        private Guna2HtmlLabel guna2HtmlLabel27;
-        private Guna2HtmlLabel guna2HtmlLabel28;
-        private Guna2Separator guna2Separator2;
-        private Guna2Separator guna2Separator3;
         private Guna2Panel guna2Panel1;
         private Guna2HtmlLabel guna2HtmlLabel29;
         private Guna2Button guna2Button14;
