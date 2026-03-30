@@ -1,5 +1,10 @@
 using System;
 using System.Drawing;
+<<<<<<< Updated upstream
+=======
+using System.Linq;
+using System.Runtime.InteropServices;
+>>>>>>> Stashed changes
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 
@@ -26,6 +31,271 @@ namespace POSCashierSystem
             InitializeCardHoverEffects();
         }
 
+<<<<<<< Updated upstream
+=======
+        // ═════════════════════════════════════════════════════════════
+        //  LOAD
+        // ═════════════════════════════════════════════════════════════
+        private void POSCashier_Load(object sender, EventArgs e)
+        {
+            _sessionExpiry = DateTime.Now.AddMinutes(SESSION_MINUTES);
+            _idleWarningShown = false;
+
+            _masterTimer = new System.Windows.Forms.Timer { Interval = 1000 };
+            _masterTimer.Tick += MasterTimer_Tick;
+            _masterTimer.Start();
+
+            ApplyResponsiveLayout();
+            RefreshExpiresLabel(TimeSpan.FromMinutes(SESSION_MINUTES));
+            RefreshRecentTransactionsPreview();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            _masterTimer?.Stop();
+            _masterTimer?.Dispose();
+            base.OnFormClosed(e);
+        }
+
+        // ═════════════════════════════════════════════════════════════
+        //  MASTER TIMER
+        // ═════════════════════════════════════════════════════════════
+        private void MasterTimer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan remaining = _sessionExpiry - DateTime.Now;
+
+            if (remaining.TotalSeconds <= 0)
+            {
+                _masterTimer.Stop();
+                MessageBox.Show(
+                    "Your session has expired. The register will now close.",
+                    "Session Expired",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
+            RefreshExpiresLabel(remaining);
+            RefreshRecentTransactionsPreview();
+
+            double idleSecs = GetSystemIdleSeconds();
+
+            if (idleSecs >= IDLE_LOCK_SECS)
+            {
+                _masterTimer.Stop();
+                MessageBox.Show(
+                    "The register has been locked due to inactivity.",
+                    "Auto-Locked",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
+            if (idleSecs >= IDLE_WARN_SECS && !_idleWarningShown)
+            {
+                _idleWarningShown = true;
+                int secsLeft = IDLE_LOCK_SECS - (int)idleSecs;
+                lblSystemOnline.Text = $"⚠ IDLE — locks in {secsLeft}s";
+                lblSystemOnline.ForeColor = Color.FromArgb(255, 186, 115);
+            }
+            else if (idleSecs < IDLE_WARN_SECS)
+            {
+                if (_idleWarningShown)
+                {
+                    _idleWarningShown = false;
+                    lblSystemOnline.Text = "SYSTEM ONLINE";
+                    lblSystemOnline.ForeColor = Color.FromArgb(102, 217, 189);
+                }
+
+                if (idleSecs >= IDLE_WARN_SECS)
+                {
+                    int secsLeft = IDLE_LOCK_SECS - (int)idleSecs;
+                    lblSystemOnline.Text = $"⚠ IDLE — locks in {secsLeft}s";
+                }
+            }
+        }
+
+        private void RefreshExpiresLabel(TimeSpan remaining)
+        {
+            string display;
+            Color textColor;
+
+            if (remaining.TotalSeconds <= 0)
+            {
+                display = "Expires: --:--";
+                textColor = Color.FromArgb(255, 138, 138);
+            }
+            else if (remaining.TotalMinutes < 10)
+            {
+                display = $"Expires: {(int)remaining.TotalMinutes:D2}:{remaining.Seconds:D2}";
+                textColor = remaining.TotalMinutes < 5
+                            ? Color.FromArgb(255, 100, 100)
+                            : Color.FromArgb(255, 186, 115);
+            }
+            else
+            {
+                display = $"Expires: {_sessionExpiry:HH:mm}";
+                textColor = Color.FromArgb(120, 120, 120);
+            }
+
+            lblExpires.Text = display;
+            lblExpires.ForeColor = textColor;
+        }
+
+        // ═════════════════════════════════════════════════════════════
+        //  RESPONSIVE LAYOUT
+        // ═════════════════════════════════════════════════════════════
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            ApplyResponsiveLayout();
+        }
+
+        private void ApplyResponsiveLayout()
+        {
+            if (ClientSize.Width < 100 || ClientSize.Height < 100) return;
+
+            float w = ClientSize.Width;
+            float h = ClientSize.Height;
+            float sx = w / REF_W;
+            float sy = h / REF_H;
+            float s = Math.Min(sx, sy);
+
+            // ── TOP BAR ──────────────────────────────────────────────
+            int topH = S(REF_TH, sy);
+            pnlTop.SetBounds(0, 0, (int)w, topH);
+
+            int avSz = S(53, s);
+            int avX = S(44, sx);
+            int avY = (topH - avSz) / 2;
+            guna2CirclePictureBox2.SetBounds(avX, avY, avSz, avSz);
+
+            int txX = avX + avSz + S(15, sx);
+            lblStationTitle.Location = new Point(txX, S(31, sy));
+            lblStationStatus.Location = new Point(txX, S(57, sy));
+            lblStaffName.Location = new Point(txX, S(83, sy));
+
+            int sysBaseX = (int)(w * 0.62f);
+            int dotSz = S(14, s);
+            int dotY = S(57, sy);
+            guna2CirclePictureBox1.SetBounds(sysBaseX, dotY, dotSz, dotSz);
+            int sysLblX = sysBaseX + dotSz + S(6, sx);
+            lblSystemOnline.Location = new Point(sysLblX, S(51, sy));
+            lblExpires.Location = new Point(sysLblX, S(78, sy));
+
+            int totX = (int)(w * 0.75f);
+            lblTotalAmount.Location = new Point(totX, S(42, sy));
+            lblTotalCollected.Location = new Point(totX, S(88, sy));
+
+            int btnW = S(187, sx);
+            int btnH = S(65, sy);
+            int btnX = (int)(w - btnW - w * 0.02f);
+            int btnY = (topH - btnH) / 2;
+            btnCloseRegister.SetBounds(btnX, btnY, btnW, btnH);
+
+            // ── BACKGROUND PANEL ─────────────────────────────────────
+            pnlBackground.SetBounds(0, topH, (int)w, (int)h - topH);
+
+            float bgW = w;
+            float bgH = h - topH;
+            float bsx = bgW / REF_W;
+            float bsy = bgH / (REF_H - REF_TH);
+            float bs = Math.Min(bsx, bsy);
+
+            int ntDotSz = S(27, bs);
+            int ntDotH = S(31, bs);
+            int ntDotX = S(64, bsx);
+            int ntY = topH + S(41, bsy);
+            guna2CirclePictureBox3.SetBounds(ntDotX, ntY, ntDotSz, ntDotH);
+            lblNewTransaction.Location = new Point(ntDotX + ntDotSz + S(10, bsx), ntY + 3);
+
+            // ── CARD GRID ─────────────────────────────────────────────
+            //
+            //  Row 1 │ Down Payment    │ Monthly Payment  │
+            //  Row 2 │    Full Cash Purchase (centred)    │
+            //  Row 3 │ Advance Payment │ Full Settlement  │
+            //
+            int margin = S(80, bsx);
+            int colGap = S(46, bsx);
+            int rowGap = S(27, bsy);
+            int rtW = S(467, bsx);
+
+            int gridW = (int)(bgW - margin * 2 - colGap - rtW - S(46, bsx));
+            int cardW = (gridW - colGap) / 2;
+            int cardH = S(262, bsy);
+            int cardTopY = S(92, bsy);
+
+            int col1X = margin;
+            int col2X = margin + cardW + colGap;
+
+            int row1Y = cardTopY;
+            int row2Y = cardTopY + cardH + rowGap;
+            int row3Y = cardTopY + (cardH + rowGap) * 2;
+
+            // Row 1
+            SetCardBounds(pnlDownPayment, col1X, row1Y, cardW, cardH);
+            SetCardBounds(pnlMonthlyPayment, col2X, row1Y, cardW, cardH);
+
+            // Row 2 — Full Cash centred
+            int centredCardX = margin + (gridW - cardW) / 2;
+            SetCardBounds(pnlFullCash, centredCardX, row2Y, cardW, cardH);
+
+            // Row 3
+            SetCardBounds(pnlAdvancePayment, col1X, row3Y, cardW, cardH);
+            SetCardBounds(pnlFullSettlement, col2X, row3Y, cardW, cardH);
+
+            ScaleCardInterior(pnlDownPaymentIcon, lblDownPayment, lblDownPaymentDesc, bs, cardH);
+            ScaleCardInterior(pnlMonthlyPaymentIcon, lblMonthlyPayment, lblMonthlyPaymentDesc, bs, cardH);
+            ScaleCardInterior(pnlFullCashIcon, lblFullCash, lblFullCashDesc, bs, cardH);
+            ScaleCardInterior(pnlAdvancePaymentIcon, lblAdvancePayment, lblAdvancePaymentDesc, bs, cardH);
+            ScaleCardInterior(pnlFullSettlementIcon, lblFullSettlement, lblFullSettlementDesc, bs, cardH);
+
+            // ── RECENT TRANSACTIONS panel ─────────────────────────────
+            int rtX = (int)(bgW - rtW - S(46, bsx));
+            int rtY = cardTopY;
+            int rtH = row3Y + cardH - cardTopY;
+            pnlNoTransactions.SetBounds(rtX, rtY, rtW, rtH);
+
+            lblNoTransactions.SetBounds(0, (rtH - lblNoTransactions.Height) / 2,
+                                        rtW, lblNoTransactions.Height);
+
+            int hdrY = S(50, bsy);
+            lblRecentTransactions.Location = new Point(rtX, hdrY);
+            lblViewAll.Location = new Point(rtX + rtW - lblViewAll.Width - S(4, bsx), hdrY);
+        }
+
+        private static int S(float value, float factor) => (int)Math.Round(value * factor);
+
+        private static void SetCardBounds(Guna2Panel card, int x, int y, int w, int h)
+            => card.SetBounds(x, y, w, h);
+
+        private static void ScaleCardInterior(
+            Guna2Panel iconPanel, Label titleLbl, Label descLbl,
+            float s, int cardH)
+        {
+            int pad = S(27, s);
+            int icoSz = S(53, s);
+            int icoH = S(62, s);
+            int icoTop = S(31, s);
+
+            iconPanel.SetBounds(pad, icoTop, icoSz, icoH);
+
+            if (iconPanel.Controls.Count > 0 && iconPanel.Controls[0] is Label icoLbl)
+                icoLbl.SetBounds(0, 0, icoSz, icoH);
+
+            int titleY = icoTop + icoH + S(28, s);
+            titleLbl.Location = new Point(pad, titleY);
+
+            int descY = titleY + titleLbl.PreferredHeight + S(6, s);
+            descLbl.Location = new Point(pad, Math.Min(descY, cardH - S(30, s)));
+        }
+
+        // ═════════════════════════════════════════════════════════════
+        //  HOVER EFFECTS
+        // ═════════════════════════════════════════════════════════════
+>>>>>>> Stashed changes
         private void InitializeCardHoverEffects()
         {
             AttachHoverEffect(pnlDownPayment, downPaymentAccent);
@@ -256,6 +526,7 @@ namespace POSCashierSystem
             lblViewAll.Visible = visible;
         }
 
+<<<<<<< Updated upstream
         // ─────────────────────────────────────────────────────────────────────
         // Other card clicks (stubbed)
         // ─────────────────────────────────────────────────────────────────────
@@ -266,6 +537,117 @@ namespace POSCashierSystem
                 "Other Services", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+=======
+        private void RefreshRecentTransactionsPreview()
+        {
+            TransactionStore.Refresh();
+            var recent = TransactionStore.All.Take(3).ToList();
+
+            pnlNoTransactions.SuspendLayout();
+            pnlNoTransactions.Controls.Clear();
+
+            if (recent.Count == 0)
+            {
+                lblNoTransactions.Text = "No recent transactions.";
+                lblNoTransactions.Dock = DockStyle.Fill;
+                lblNoTransactions.TextAlign = ContentAlignment.MiddleCenter;
+                lblNoTransactions.Visible = true;
+                pnlNoTransactions.Controls.Add(lblNoTransactions);
+                lblTotalCollected.Text = "₱0.00";
+                pnlNoTransactions.ResumeLayout();
+                return;
+            }
+
+            lblNoTransactions.Visible = false;
+            int y = 12;
+            foreach (var tx in recent)
+            {
+                var row = new Panel
+                {
+                    Width = pnlNoTransactions.ClientSize.Width - 24,
+                    Height = 62,
+                    Left = 12,
+                    Top = y,
+                    BackColor = Color.Transparent
+                };
+
+                var name = new Label
+                {
+                    Text = tx.CustomerName,
+                    Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(30, 40, 55),
+                    AutoSize = false,
+                    Width = row.Width - 180,
+                    Height = 20,
+                    Left = 0,
+                    Top = 2
+                };
+
+                var meta = new Label
+                {
+                    Text = $"{tx.TransactionId} • {tx.PaymentType}",
+                    Font = new Font("Segoe UI", 8F, FontStyle.Regular),
+                    ForeColor = Color.FromArgb(120, 132, 152),
+                    AutoSize = false,
+                    Width = row.Width - 180,
+                    Height = 18,
+                    Left = 0,
+                    Top = 24
+                };
+
+                var amount = new Label
+                {
+                    Text = $"₱{tx.Amount:N2}",
+                    Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(5, 150, 105),
+                    AutoSize = false,
+                    Width = 160,
+                    Height = 20,
+                    Left = row.Width - 160,
+                    Top = 2,
+                    TextAlign = ContentAlignment.MiddleRight
+                };
+
+                var time = new Label
+                {
+                    Text = tx.DateTime.ToString("hh:mm tt"),
+                    Font = new Font("Segoe UI", 8F, FontStyle.Regular),
+                    ForeColor = Color.FromArgb(120, 132, 152),
+                    AutoSize = false,
+                    Width = 160,
+                    Height = 18,
+                    Left = row.Width - 160,
+                    Top = 24,
+                    TextAlign = ContentAlignment.MiddleRight
+                };
+
+                var divider = new Panel
+                {
+                    Left = 0,
+                    Top = row.Height - 1,
+                    Width = row.Width,
+                    Height = 1,
+                    BackColor = Color.FromArgb(232, 236, 241)
+                };
+
+                row.Controls.Add(name);
+                row.Controls.Add(meta);
+                row.Controls.Add(amount);
+                row.Controls.Add(time);
+                row.Controls.Add(divider);
+                pnlNoTransactions.Controls.Add(row);
+
+                y += row.Height + 4;
+            }
+
+            lblTotalCollected.Text = "₱" + TransactionStore.All.Sum(t => t.Amount).ToString("N2");
+            pnlNoTransactions.ResumeLayout();
+        }
+
+        // ═════════════════════════════════════════════════════════════
+        //  STUBS
+        // ═════════════════════════════════════════════════════════════
+>>>>>>> Stashed changes
         private void BtnCloseRegister_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(

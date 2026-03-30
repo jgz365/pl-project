@@ -1,9 +1,7 @@
 ﻿using Guna.UI2.WinForms;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -21,14 +19,10 @@ namespace POSCashierSystem
         private readonly Color cardDefaultBackColor = Color.White;
         private readonly Color cardHoverBackColor = Color.FromArgb(250, 252, 253);
 
-        // ── Path to the shared JSON ───────────────────────────────────────────
-        private readonly string _customersJsonPath;
-
         // ─────────────────────────────────────────────────────────────────────
         public AdvancePaymentForm()
         {
             InitializeComponent();
-            _customersJsonPath = Path.Combine(Application.StartupPath, "customers.json");
             LoadCustomerData();
             DisplayCustomers(customers ?? new());
         }
@@ -36,6 +30,7 @@ namespace POSCashierSystem
         // ── Load ALL customer data from customers.json ─────────────────────────
         private void LoadCustomerData()
         {
+<<<<<<< Updated upstream
             if (File.Exists(_customersJsonPath))
             {
                 try
@@ -131,6 +126,50 @@ namespace POSCashierSystem
                 }
             }
         };
+=======
+            customers = new List<CustomerSummary>();
+            filteredCustomers = new List<CustomerSummary>();
+
+            try
+            {
+                KioskLoanApplicationDatabase.Initialize();
+                var cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("AdvancePayment");
+                customers = cashierReady.Select(MapCashierReadyToSummary).ToList();
+                filteredCustomers = new List<CustomerSummary>(customers);
+            }
+            catch
+            {
+                customers = new List<CustomerSummary>();
+                filteredCustomers = new List<CustomerSummary>();
+            }
+        }
+
+        private static CustomerSummary MapCashierReadyToSummary(KioskLoanAssessorItem row)
+        {
+            decimal advanceDue = row.ApprovedAdvancePayment ?? row.MonthlyAmortization;
+
+            return new CustomerSummary
+            {
+                Name = row.FullName,
+                QueueTicket = row.QueueNumber,
+                Location = $"{row.City}, {row.Province}",
+                TransactionType = string.IsNullOrWhiteSpace(row.ApprovedPaymentMode) ? "AdvancePayment" : row.ApprovedPaymentMode,
+                UnitDetails = new UnitDetailsData
+                {
+                    Model = row.ProductName,
+                    Color = string.Empty,
+                    EngineNo = string.Empty
+                },
+                FinancialStatus = new FinancialStatusData
+                {
+                    DownPaymentDue = row.ApprovedDownPayment ?? row.DownPaymentAmount,
+                    CurrentBalance = row.FinancedAmount,
+                    MonthlyAmortization = advanceDue,
+                    NextDueDate = row.AssessorDecidedAt?.ToString("MMM dd, yyyy") ?? row.SubmittedAt.ToString("MMM dd, yyyy")
+                }
+            };
+        }
+>>>>>>> Stashed changes
 
         // ─────────────────────────────────────────────────────────────────────
         // Card display

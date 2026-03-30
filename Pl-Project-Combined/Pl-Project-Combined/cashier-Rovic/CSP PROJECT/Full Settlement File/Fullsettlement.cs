@@ -1,11 +1,10 @@
 ﻿using Guna.UI2.WinForms;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Pl_Project_Combined.Databases;
 
 namespace POSCashierSystem
 {
@@ -21,14 +20,10 @@ namespace POSCashierSystem
         private readonly Color cardDefaultBackColor = Color.White;
         private readonly Color cardHoverBackColor = Color.FromArgb(250, 252, 253);
 
-        // ── Path to the shared JSON ───────────────────────────────────────────
-        private readonly string _customersJsonPath;
-
         // ─────────────────────────────────────────────────────────────────────
         public FullSettlementForm()
         {
             InitializeComponent();
-            _customersJsonPath = Path.Combine(Application.StartupPath, "customers.json");
             LoadCustomerData();
             DisplayCustomers(customers ?? new());
         }
@@ -36,101 +31,48 @@ namespace POSCashierSystem
         // ── Load ALL customer data from customers.json ─────────────────────────
         private void LoadCustomerData()
         {
-            if (File.Exists(_customersJsonPath))
-            {
-                try
-                {
-                    string json = File.ReadAllText(_customersJsonPath);
-                    customers = JsonConvert.DeserializeObject<List<CustomerSummary>>(json)
-                                ?? new List<CustomerSummary>();
-                }
-                catch
-                {
-                    customers = GetFallbackCustomers();
-                }
-            }
-            else
-            {
-                customers = GetFallbackCustomers();
-            }
+            customers = new List<CustomerSummary>();
+            filteredCustomers = new List<CustomerSummary>();
 
-            filteredCustomers = new List<CustomerSummary>(customers);
+            try
+            {
+                KioskLoanApplicationDatabase.Initialize();
+                var cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("FullSettlement");
+                customers = cashierReady.Select(MapCashierReadyToSummary).ToList();
+                filteredCustomers = new List<CustomerSummary>(customers);
+            }
+            catch
+            {
+                customers = new List<CustomerSummary>();
+                filteredCustomers = new List<CustomerSummary>();
+            }
         }
 
-        // ── Fallback in case customers.json is missing ─────────────────────────
-        private static List<CustomerSummary> GetFallbackCustomers() => new List<CustomerSummary>
+        private static CustomerSummary MapCashierReadyToSummary(KioskLoanAssessorItem row)
         {
-            new CustomerSummary
+            decimal settlementBalance = row.TotalPayable > 0m ? row.TotalPayable : row.FinancedAmount;
+
+            return new CustomerSummary
             {
-                Name = "Juan Dela Cruz", QueueTicket = "LA-2026-0001",
-                Location        = "Quezon City",
-                TransactionType = "SETTLEMENT",
-                UnitDetails     = new UnitDetailsData { Model = "Honda ADV 160",   Color = "Matte Black", EngineNo = "K1Z-998877" },
+                Name = row.FullName,
+                QueueTicket = row.QueueNumber,
+                Location = $"{row.City}, {row.Province}",
+                TransactionType = string.IsNullOrWhiteSpace(row.ApprovedPaymentMode) ? "FullSettlement" : row.ApprovedPaymentMode,
+                UnitDetails = new UnitDetailsData
+                {
+                    Model = row.ProductName,
+                    Color = string.Empty,
+                    EngineNo = string.Empty
+                },
                 FinancialStatus = new FinancialStatusData
                 {
-                    DownPaymentDue      = 53400,
-                    CurrentBalance      = 134118.08m,
-                    MonthlyAmortization = 5364.72m,
-                    NextDueDate         = "Feb 1, 2026"
+                    DownPaymentDue = row.ApprovedDownPayment ?? row.DownPaymentAmount,
+                    CurrentBalance = settlementBalance,
+                    MonthlyAmortization = row.ApprovedMonthlyDue ?? row.MonthlyAmortization,
+                    NextDueDate = row.AssessorDecidedAt?.ToString("MMM dd, yyyy") ?? row.SubmittedAt.ToString("MMM dd, yyyy")
                 }
-            },
-            new CustomerSummary
-            {
-                Name = "Maria Garcia", QueueTicket = "LA-2026-0002",
-                Location        = "Caloocan City",
-                TransactionType = "SETTLEMENT",
-                UnitDetails     = new UnitDetailsData { Model = "Yamaha NMAX 155", Color = "Matte Blue",  EngineNo = "YM2-447612" },
-                FinancialStatus = new FinancialStatusData
-                {
-                    DownPaymentDue      = 45570,
-                    CurrentBalance      = 95400.00m,
-                    MonthlyAmortization = 3797.50m,
-                    NextDueDate         = "Feb 5, 2026"
-                }
-            },
-            new CustomerSummary
-            {
-                Name = "Pedro Santos", QueueTicket = "LA-2026-0003",
-                Location        = "Marikina City",
-                TransactionType = "SETTLEMENT",
-                UnitDetails     = new UnitDetailsData { Model = "Honda Click 160", Color = "Pearl White", EngineNo = "HC1-003341" },
-                FinancialStatus = new FinancialStatusData
-                {
-                    DownPaymentDue      = 38900,
-                    CurrentBalance      = 77800.00m,
-                    MonthlyAmortization = 3241.67m,
-                    NextDueDate         = "Feb 10, 2026"
-                }
-            },
-            new CustomerSummary
-            {
-                Name = "Ana Reyes", QueueTicket = "LA-2026-0004",
-                Location        = "Pasig City",
-                TransactionType = "SETTLEMENT",
-                UnitDetails     = new UnitDetailsData { Model = "Suzuki Raider R150", Color = "Candy Red", EngineNo = "SR1-772209" },
-                FinancialStatus = new FinancialStatusData
-                {
-                    DownPaymentDue      = 42300,
-                    CurrentBalance      = 84600.00m,
-                    MonthlyAmortization = 3525.00m,
-                    NextDueDate         = "Feb 12, 2026"
-                }
-            },
-            new CustomerSummary
-            {
-                Name = "Carlos Mendoza", QueueTicket = "LA-2026-0005",
-                Location        = "Mandaluyong City",
-                TransactionType = "SETTLEMENT",
-                UnitDetails     = new UnitDetailsData { Model = "Kawasaki Ninja 400", Color = "Lime Green", EngineNo = "KN4-118854" },
-                FinancialStatus = new FinancialStatusData
-                {
-                    DownPaymentDue      = 89500,
-                    CurrentBalance      = 268500.00m,
-                    MonthlyAmortization = 7458.33m,
-                    NextDueDate         = "Feb 15, 2026"
-                }
-            }
-        };
+            };
+        }
 
         // ─────────────────────────────────────────────────────────────────────
         // Card display

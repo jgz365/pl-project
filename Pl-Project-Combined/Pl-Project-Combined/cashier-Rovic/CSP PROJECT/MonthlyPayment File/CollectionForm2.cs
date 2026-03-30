@@ -175,6 +175,17 @@ namespace CSP_PROJECT.POSCashier.MonthlyPayment_File
                 ProcessedAt = DateTime.Now
             };
 
+            TransactionStore.Add(new Transaction
+            {
+                TransactionId = $"OR-{result.ProcessedAt:yyyy}-{result.ProcessedAt:HHmmss}",
+                DateTime = result.ProcessedAt,
+                PaymentType = "Monthly Payment",
+                CustomerName = result.Customer.Name ?? "Walk-in Customer",
+                UnitModel = result.Customer.UnitDetails?.Model ?? "N/A",
+                Amount = result.TotalDue,
+                Status = "Paid"
+            });
+
             TransactionComplete?.Invoke(this, result);
 
             var host = this.Parent;

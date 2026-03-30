@@ -244,6 +244,17 @@ namespace CSP_PROJECT
                 ProcessedAt = DateTime.Now
             };
 
+            POSCashierSystem.TransactionStore.Add(new POSCashierSystem.Transaction
+            {
+                TransactionId = $"OR-{result.ProcessedAt:yyyy}-{result.ProcessedAt:HHmmss}",
+                DateTime = result.ProcessedAt,
+                PaymentType = "Full Cash",
+                CustomerName = result.CustomerName,
+                UnitModel = result.Charges.Count > 0 ? result.Charges[0].Label : "Unit Purchase",
+                Amount = result.TotalDue,
+                Status = "Paid"
+            });
+
             var host = this.Parent;
             if (host == null) return;
 
