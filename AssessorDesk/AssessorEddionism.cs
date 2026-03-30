@@ -196,5 +196,10 @@ namespace AssessorDesk
         {
 
         }
+
+        private void guna2Panel43_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
