@@ -239,7 +239,26 @@ namespace customer_kiosk
 
         private void WebCatalog_WebMessageReceived(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
         {
-            string message = e.TryGetWebMessageAsString();
+            string? message = null;
+            string? jsonMessage = null;
+
+            try
+            {
+                message = e.TryGetWebMessageAsString();
+            }
+            catch
+            {
+                // Non-string payloads are handled via JSON branch below.
+            }
+
+            try
+            {
+                jsonMessage = e.WebMessageAsJson;
+            }
+            catch
+            {
+                // Keep null when payload is not exposed as JSON.
+            }
 
             if (string.Equals(message, "open_redirect_application", StringComparison.Ordinal))
             {
@@ -247,7 +266,7 @@ namespace customer_kiosk
                 return;
             }
 
-            if (!TryParseOpenRedirectPayload(message, out SelectedProductPayload? selectedProduct))
+            if (!TryParseOpenRedirectPayload(message, jsonMessage, out SelectedProductPayload? selectedProduct))
             {
                 return;
             }
@@ -255,18 +274,28 @@ namespace customer_kiosk
             ShowRedirectApplication(selectedProduct);
         }
 
-        private static bool TryParseOpenRedirectPayload(string message, out SelectedProductPayload? payload)
+        private static bool TryParseOpenRedirectPayload(string? message, string? jsonMessage, out SelectedProductPayload? payload)
         {
             payload = null;
 
-            if (string.IsNullOrWhiteSpace(message) || !message.TrimStart().StartsWith('{'))
+            string? effectiveJson = null;
+
+            if (!string.IsNullOrWhiteSpace(message) && message.TrimStart().StartsWith('{'))
+            {
+                effectiveJson = message;
+            }
+            else if (!string.IsNullOrWhiteSpace(jsonMessage) && jsonMessage.TrimStart().StartsWith('{'))
+            {
+                effectiveJson = jsonMessage;
+            }
+            else
             {
                 return false;
             }
 
             try
             {
-                using var json = JsonDocument.Parse(message);
+                using var json = JsonDocument.Parse(effectiveJson);
                 var root = json.RootElement;
 
                 if (!root.TryGetProperty("action", out var actionElement) ||
