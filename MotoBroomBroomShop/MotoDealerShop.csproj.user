@@ -1,28 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="UserPanel8.cs">
+    <Compile Update="Repossessions 2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UserPanel7.cs">
+    <Compile Update="UC_Candidates.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UserPanel6.cs">
+    <Compile Update="UC_RecoveryOps.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UserPanel5.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UserPanel4.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UserPanel3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UserPanel2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UserPanel.cs">
+    <Compile Update="UC_Overview.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
