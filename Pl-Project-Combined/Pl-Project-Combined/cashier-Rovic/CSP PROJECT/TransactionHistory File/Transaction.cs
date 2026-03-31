@@ -4,6 +4,7 @@ namespace POSCashierSystem
     public class Transaction
     {
         public string TransactionId { get; set; }
+        public string QueueNumber { get; set; }
         public System.DateTime DateTime { get; set; }
         public string PaymentType { get; set; }   // "Down Payment", "Full Cash", etc.
         public string CustomerName { get; set; }

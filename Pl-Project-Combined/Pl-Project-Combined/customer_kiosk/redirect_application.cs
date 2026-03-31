@@ -1459,9 +1459,11 @@ namespace customer_kiosk
                     AgreedToTerms = chkAgreeTerms.Checked
                 };
 
-                if (!KioskLoanApplicationDatabase.SaveApplication(record))
+                if (!KioskLoanApplicationDatabase.SaveApplication(record, out string dbError))
                 {
-                    errorMessage = "Unable to save application. Please try again.";
+                    errorMessage = string.IsNullOrWhiteSpace(dbError)
+                        ? "Unable to save application. Please try again."
+                        : dbError;
                     return false;
                 }
 

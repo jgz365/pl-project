@@ -1,8 +1,10 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Pl_Project_Combined.Databases;
 
 namespace POSCashierSystem
 {
@@ -46,6 +48,7 @@ namespace POSCashierSystem
         private DateTime _sessionExpiry;
         private bool _idleWarningShown;
         private System.Windows.Forms.Timer _masterTimer;
+        private FlowLayoutPanel _recentTransactionsList;
 
         // ── Reference design geometry (1920×1080 @ 125 % DPI) ────────
         private const float REF_W = 1867f;
@@ -67,19 +70,46 @@ namespace POSCashierSystem
             _sessionExpiry = DateTime.Now.AddMinutes(SESSION_MINUTES);
             _idleWarningShown = false;
 
+            TransactionStore.TransactionsChanged += TransactionStore_TransactionsChanged;
+
             _masterTimer = new System.Windows.Forms.Timer { Interval = 1000 };
             _masterTimer.Tick += MasterTimer_Tick;
             _masterTimer.Start();
 
             ApplyResponsiveLayout();
             RefreshExpiresLabel(TimeSpan.FromMinutes(SESSION_MINUTES));
+            InitializeRecentTransactionsPanel();
+            RefreshRecentTransactionsPanel();
+            RefreshCashCollectedCounter();
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
+            TransactionStore.TransactionsChanged -= TransactionStore_TransactionsChanged;
             _masterTimer?.Stop();
             _masterTimer?.Dispose();
             base.OnFormClosed(e);
+        }
+
+        private void TransactionStore_TransactionsChanged(object? sender, EventArgs e)
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    RefreshRecentTransactionsPanel();
+                    RefreshCashCollectedCounter();
+                }));
+                return;
+            }
+
+            RefreshRecentTransactionsPanel();
+            RefreshCashCollectedCounter();
         }
 
         // ═════════════════════════════════════════════════════════════
@@ -288,6 +318,167 @@ namespace POSCashierSystem
             int hdrY = S(50, bsy);
             lblRecentTransactions.Location = new Point(rtX, hdrY);
             lblViewAll.Location = new Point(rtX + rtW - lblViewAll.Width - S(4, bsx), hdrY);
+
+            RefreshRecentTransactionsPanel();
+        }
+
+        private void InitializeRecentTransactionsPanel()
+        {
+            if (_recentTransactionsList != null) return;
+
+            _recentTransactionsList = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true,
+                WrapContents = false,
+                FlowDirection = FlowDirection.TopDown,
+                BackColor = Color.Transparent,
+                Padding = new Padding(10, 10, 10, 10)
+            };
+
+            pnlNoTransactions.Controls.Add(_recentTransactionsList);
+            _recentTransactionsList.BringToFront();
+        }
+
+        private void RefreshRecentTransactionsPanel()
+        {
+            if (_recentTransactionsList == null) return;
+
+            _recentTransactionsList.SuspendLayout();
+            _recentTransactionsList.Controls.Clear();
+
+            var all = GetUnifiedTransactions();
+            int take = Math.Min(6, all.Count);
+
+            if (take == 0)
+            {
+                lblNoTransactions.Visible = true;
+                _recentTransactionsList.ResumeLayout(true);
+                return;
+            }
+
+            lblNoTransactions.Visible = false;
+
+            int cardWidth = Math.Max(240, pnlNoTransactions.ClientSize.Width - 28);
+            for (int i = 0; i < take; i++)
+            {
+                _recentTransactionsList.Controls.Add(CreateRecentTransactionCard(all[i], cardWidth));
+            }
+
+            _recentTransactionsList.ResumeLayout(true);
+        }
+
+        private void RefreshCashCollectedCounter()
+        {
+            var all = GetUnifiedTransactions();
+            decimal total = all
+                .Where(x => string.Equals(x.Status, "Paid", StringComparison.OrdinalIgnoreCase))
+                .Sum(x => x.Amount);
+
+            lblTotalAmount.Text = $"₱{total:N2}";
+        }
+
+        private static System.Collections.Generic.List<Transaction> GetUnifiedTransactions()
+        {
+            var fromDb = KioskLoanApplicationDatabase.GetCashierPaymentTransactions(500)
+                .Select(x => new Transaction
+                {
+                    TransactionId = x.TransactionId,
+                    QueueNumber = x.QueueNumber,
+                    DateTime = x.ProcessedAt,
+                    PaymentType = x.PaymentType,
+                    CustomerName = x.CustomerName,
+                    UnitModel = x.UnitModel,
+                    Amount = x.Amount,
+                    Status = x.Status
+                });
+
+            return fromDb
+                .Concat(TransactionStore.All)
+                .Where(x => !string.IsNullOrWhiteSpace(x.TransactionId))
+                .GroupBy(x => x.TransactionId, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderByDescending(t => t.DateTime).First())
+                .OrderByDescending(t => t.DateTime)
+                .ToList();
+        }
+
+        private Guna2Panel CreateRecentTransactionCard(Transaction tx, int cardWidth)
+        {
+            var card = new Guna2Panel
+            {
+                Width = cardWidth,
+                Height = 74,
+                BorderRadius = 10,
+                BorderThickness = 1,
+                BorderColor = Color.FromArgb(232, 236, 241),
+                FillColor = Color.White,
+                Margin = new Padding(0, 0, 0, 8),
+                Cursor = Cursors.Hand
+            };
+
+            var lblType = new Label
+            {
+                Text = tx.PaymentType,
+                Font = new Font("Segoe UI", 8f, FontStyle.Bold),
+                ForeColor = TypeAccentColor(tx.PaymentType),
+                AutoSize = false,
+                Location = new Point(12, 8),
+                Size = new Size(cardWidth - 24, 16)
+            };
+
+            var lblCustomer = new Label
+            {
+                Text = tx.CustomerName,
+                Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold),
+                ForeColor = Color.FromArgb(40, 40, 40),
+                AutoSize = false,
+                Location = new Point(12, 26),
+                Size = new Size(cardWidth - 124, 20)
+            };
+
+            var lblAmount = new Label
+            {
+                Text = $"₱{tx.Amount:N2}",
+                Font = new Font("Segoe UI Semibold", 10f, FontStyle.Bold),
+                ForeColor = Color.FromArgb(30, 40, 55),
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleRight,
+                Location = new Point(cardWidth - 132, 26),
+                Size = new Size(120, 20)
+            };
+
+            var lblTime = new Label
+            {
+                Text = tx.DateTime.ToString("hh:mm tt"),
+                Font = new Font("Segoe UI", 8f),
+                ForeColor = Color.FromArgb(120, 132, 152),
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleRight,
+                Location = new Point(cardWidth - 132, 48),
+                Size = new Size(120, 16)
+            };
+
+            card.Controls.Add(lblType);
+            card.Controls.Add(lblCustomer);
+            card.Controls.Add(lblAmount);
+            card.Controls.Add(lblTime);
+
+            card.Click += LblViewAll_Click;
+            foreach (Control c in card.Controls) c.Click += LblViewAll_Click;
+
+            return card;
+        }
+
+        private static Color TypeAccentColor(string paymentType)
+        {
+            if (string.IsNullOrWhiteSpace(paymentType)) return Color.FromArgb(120, 132, 152);
+            string compact = paymentType.Replace(" ", string.Empty).ToLowerInvariant();
+            if (compact.Contains("down")) return Color.FromArgb(5, 150, 105);
+            if (compact.Contains("monthly")) return Color.FromArgb(59, 130, 246);
+            if (compact.Contains("advance")) return Color.FromArgb(16, 185, 129);
+            if (compact.Contains("settlement")) return Color.FromArgb(220, 38, 38);
+            if (compact.Contains("cash")) return Color.FromArgb(147, 51, 234);
+            return Color.FromArgb(120, 132, 152);
         }
 
         private static int S(float value, float factor) => (int)Math.Round(value * factor);
@@ -456,6 +647,8 @@ namespace POSCashierSystem
                 ctrl.Dispose();
             }
             SetMainViewVisible(true);
+            RefreshRecentTransactionsPanel();
+            RefreshCashCollectedCounter();
         }
 
         private void SetMainViewVisible(bool visible)

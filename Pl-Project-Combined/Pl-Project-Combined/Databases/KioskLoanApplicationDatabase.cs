@@ -121,6 +121,18 @@ namespace Pl_Project_Combined.Databases
         public string AssessorBy { get; set; } = string.Empty;
     }
 
+    internal sealed class KioskPaymentTransactionItem
+    {
+        public string TransactionId { get; set; } = string.Empty;
+        public string QueueNumber { get; set; } = string.Empty;
+        public DateTime ProcessedAt { get; set; }
+        public string PaymentType { get; set; } = string.Empty;
+        public string CustomerName { get; set; } = string.Empty;
+        public string UnitModel { get; set; } = string.Empty;
+        public decimal Amount { get; set; }
+        public string Status { get; set; } = "Paid";
+    }
+
     internal static class KioskLoanApplicationDatabase
     {
         private static readonly object SyncRoot = new();
@@ -135,6 +147,7 @@ namespace Pl_Project_Combined.Databases
                 if (initialized) return;
                 CreateTableIfMissing();
                 EnsureAssessorFlowColumns();
+                CreateCashierTransactionsTableIfMissing();
                 initialized = true;
             }
         }
@@ -385,11 +398,18 @@ ORDER BY assessor_decided_at ASC, id ASC;";
 
         public static bool SaveApplication(KioskLoanApplicationRecord record)
         {
+            return SaveApplication(record, out _);
+        }
+
+        public static bool SaveApplication(KioskLoanApplicationRecord record, out string errorMessage)
+        {
             Initialize();
+            errorMessage = string.Empty;
 
             try
             {
                 using var conn = DatabaseManager.GetConnection();
+                using var tx = conn.BeginTransaction();
 
                 const string sql = @"
 INSERT INTO kiosk_loan_applications
@@ -415,7 +435,7 @@ VALUES
     @selected_document_count, @agreed_to_terms
 );";
 
-                using var cmd = new MySqlCommand(sql, conn);
+                using var cmd = new MySqlCommand(sql, conn, tx);
                 cmd.Parameters.AddWithValue("@queue_number", record.QueueNumber);
 
                 cmd.Parameters.AddWithValue("@full_name", record.FullName);
@@ -459,13 +479,136 @@ VALUES
                 cmd.Parameters.AddWithValue("@selected_document_count", record.SelectedDocumentCount);
                 cmd.Parameters.AddWithValue("@agreed_to_terms", record.AgreedToTerms);
 
-                return cmd.ExecuteNonQuery() > 0;
+                bool inserted = cmd.ExecuteNonQuery() > 0;
+                if (!inserted)
+                {
+                    tx.Rollback();
+                    errorMessage = "Unable to save application.";
+                    return false;
+                }
+
+                bool stockReserved = TryReserveProductStock(conn, tx, record.ProductName, record.ProductYear);
+                if (!stockReserved)
+                {
+                    tx.Rollback();
+                    errorMessage = "Selected motorcycle is out of stock.";
+                    return false;
+                }
+
+                tx.Commit();
+                return true;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[KioskLoanApplicationDatabase] SaveApplication error: {ex.Message}");
+                errorMessage = ex.Message;
                 return false;
             }
+        }
+
+        public static bool SaveCashierPaymentTransaction(KioskPaymentTransactionItem transaction)
+        {
+            Initialize();
+
+            try
+            {
+                using var conn = DatabaseManager.GetConnection();
+                using var tx = conn.BeginTransaction();
+
+                const string insertSql = @"
+INSERT INTO kiosk_payment_transactions
+(
+    transaction_id, queue_number, processed_at,
+    payment_type, customer_name, unit_model,
+    amount, payment_status
+)
+VALUES
+(
+    @transaction_id, @queue_number, @processed_at,
+    @payment_type, @customer_name, @unit_model,
+    @amount, @payment_status
+);";
+
+                using var insertCmd = new MySqlCommand(insertSql, conn, tx);
+                insertCmd.Parameters.AddWithValue("@transaction_id", transaction.TransactionId);
+                insertCmd.Parameters.AddWithValue("@queue_number", string.IsNullOrWhiteSpace(transaction.QueueNumber) ? DBNull.Value : transaction.QueueNumber);
+                insertCmd.Parameters.AddWithValue("@processed_at", transaction.ProcessedAt);
+                insertCmd.Parameters.AddWithValue("@payment_type", transaction.PaymentType);
+                insertCmd.Parameters.AddWithValue("@customer_name", transaction.CustomerName);
+                insertCmd.Parameters.AddWithValue("@unit_model", transaction.UnitModel);
+                insertCmd.Parameters.AddWithValue("@amount", transaction.Amount);
+                insertCmd.Parameters.AddWithValue("@payment_status", transaction.Status);
+                insertCmd.ExecuteNonQuery();
+
+                if (!string.IsNullOrWhiteSpace(transaction.QueueNumber) &&
+                    string.Equals(transaction.Status, "Paid", StringComparison.OrdinalIgnoreCase))
+                {
+                    const string markCompleteSql = @"
+UPDATE kiosk_loan_applications
+SET cashier_status = 'Completed'
+WHERE queue_number = @queue
+  AND application_status = 'Approved'
+ORDER BY submitted_at DESC, id DESC
+LIMIT 1;";
+
+                    using var updateCmd = new MySqlCommand(markCompleteSql, conn, tx);
+                    updateCmd.Parameters.AddWithValue("@queue", transaction.QueueNumber);
+                    updateCmd.ExecuteNonQuery();
+                }
+
+                tx.Commit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KioskLoanApplicationDatabase] SaveCashierPaymentTransaction error: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static List<KioskPaymentTransactionItem> GetCashierPaymentTransactions(int maxRows = 500)
+        {
+            Initialize();
+
+            var items = new List<KioskPaymentTransactionItem>();
+            int safeMaxRows = Math.Max(1, maxRows);
+
+            try
+            {
+                using var conn = DatabaseManager.GetConnection();
+                const string sql = @"
+SELECT transaction_id, queue_number, processed_at,
+       payment_type, customer_name, unit_model,
+       amount, payment_status
+FROM kiosk_payment_transactions
+ORDER BY processed_at DESC, id DESC
+LIMIT @max_rows;";
+
+                using var cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@max_rows", safeMaxRows);
+
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(new KioskPaymentTransactionItem
+                    {
+                        TransactionId = reader.GetString("transaction_id"),
+                        QueueNumber = reader.IsDBNull(reader.GetOrdinal("queue_number")) ? string.Empty : reader.GetString("queue_number"),
+                        ProcessedAt = reader.GetDateTime("processed_at"),
+                        PaymentType = reader.GetString("payment_type"),
+                        CustomerName = reader.GetString("customer_name"),
+                        UnitModel = reader.GetString("unit_model"),
+                        Amount = reader.GetDecimal("amount"),
+                        Status = reader.GetString("payment_status")
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KioskLoanApplicationDatabase] GetCashierPaymentTransactions error: {ex.Message}");
+            }
+
+            return items;
         }
 
         private static void CreateTableIfMissing()
@@ -565,6 +708,77 @@ CREATE TABLE `kiosk_loan_applications` (
             EnsureColumn(conn, "assessor_by", "ALTER TABLE kiosk_loan_applications ADD COLUMN assessor_by VARCHAR(80) NULL AFTER assessor_notes;");
             EnsureColumn(conn, "assessor_decided_at", "ALTER TABLE kiosk_loan_applications ADD COLUMN assessor_decided_at DATETIME NULL AFTER assessor_by;");
             EnsureColumn(conn, "cashier_status", "ALTER TABLE kiosk_loan_applications ADD COLUMN cashier_status ENUM('Waiting','InProgress','Completed','Voided') NOT NULL DEFAULT 'Waiting' AFTER assessor_decided_at;");
+        }
+
+        private static void CreateCashierTransactionsTableIfMissing()
+        {
+            using var conn = DatabaseManager.GetConnection();
+
+            using var checkCmd = new MySqlCommand(
+                "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = @db AND table_name = 'kiosk_payment_transactions';",
+                conn);
+            checkCmd.Parameters.AddWithValue("@db", DatabaseManager.DATABASE_NAME);
+
+            long exists = Convert.ToInt64(checkCmd.ExecuteScalar());
+            if (exists > 0)
+            {
+                return;
+            }
+
+            const string createSql = @"
+CREATE TABLE `kiosk_payment_transactions` (
+    `id`                  BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `transaction_id`      VARCHAR(40) NOT NULL,
+    `queue_number`        VARCHAR(20) NULL,
+    `processed_at`        DATETIME NOT NULL,
+    `payment_type`        VARCHAR(40) NOT NULL,
+    `customer_name`       VARCHAR(150) NOT NULL,
+    `unit_model`          VARCHAR(150) NOT NULL,
+    `amount`              DECIMAL(12,2) NOT NULL DEFAULT 0,
+    `payment_status`      VARCHAR(20) NOT NULL DEFAULT 'Paid',
+    `created_at`          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY `uq_kiosk_payment_txid` (`transaction_id`),
+    INDEX `idx_kiosk_payment_queue` (`queue_number`),
+    INDEX `idx_kiosk_payment_processed` (`processed_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+
+            using var createCmd = new MySqlCommand(createSql, conn);
+            createCmd.ExecuteNonQuery();
+        }
+
+        private static bool TryReserveProductStock(MySqlConnection conn, MySqlTransaction tx, string productName, string productYear)
+        {
+            const string sqlByNameAndYear = @"
+UPDATE products
+SET stock = stock - 1
+WHERE title = @title
+  AND model_year = @model_year
+  AND is_active = 1
+  AND stock > 0
+LIMIT 1;";
+
+            using (var cmd = new MySqlCommand(sqlByNameAndYear, conn, tx))
+            {
+                cmd.Parameters.AddWithValue("@title", productName.Trim());
+                cmd.Parameters.AddWithValue("@model_year", productYear.Trim());
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+            }
+
+            const string sqlByNameOnly = @"
+UPDATE products
+SET stock = stock - 1
+WHERE title = @title
+  AND is_active = 1
+  AND stock > 0
+LIMIT 1;";
+
+            using var fallbackCmd = new MySqlCommand(sqlByNameOnly, conn, tx);
+            fallbackCmd.Parameters.AddWithValue("@title", productName.Trim());
+            return fallbackCmd.ExecuteNonQuery() > 0;
         }
 
         private static void EnsureColumn(MySqlConnection conn, string columnName, string alterSql)
