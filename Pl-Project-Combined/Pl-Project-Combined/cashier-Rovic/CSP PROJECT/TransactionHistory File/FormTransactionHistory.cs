@@ -17,6 +17,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Pl_Project_Combined.Databases;
 
 namespace POSCashierSystem
 {
@@ -27,6 +28,7 @@ namespace POSCashierSystem
     public static class TransactionStore
     {
         private static readonly List<Transaction> _store = new List<Transaction>();
+        public static event EventHandler? TransactionsChanged;
 
         /// <summary>All transactions recorded this session (newest first).</summary>
         public static IReadOnlyList<Transaction> All => _store.AsReadOnly();
@@ -34,11 +36,34 @@ namespace POSCashierSystem
         /// <summary>Add a completed transaction (call from payment sub-forms).</summary>
         public static void Add(Transaction tx)
         {
-            if (tx != null) _store.Insert(0, tx);  // newest at top
+            if (tx == null)
+            {
+                return;
+            }
+
+            _store.Insert(0, tx);  // newest at top
+
+            _ = KioskLoanApplicationDatabase.SaveCashierPaymentTransaction(new KioskPaymentTransactionItem
+            {
+                TransactionId = tx.TransactionId ?? string.Empty,
+                QueueNumber = tx.QueueNumber ?? string.Empty,
+                ProcessedAt = tx.DateTime,
+                PaymentType = tx.PaymentType ?? string.Empty,
+                CustomerName = tx.CustomerName ?? string.Empty,
+                UnitModel = tx.UnitModel ?? string.Empty,
+                Amount = tx.Amount,
+                Status = tx.Status ?? "Paid"
+            });
+
+            TransactionsChanged?.Invoke(null, EventArgs.Empty);
         }
 
         /// <summary>Clear — useful for unit-tests / session reset.</summary>
-        public static void Clear() => _store.Clear();
+        public static void Clear()
+        {
+            _store.Clear();
+            TransactionsChanged?.Invoke(null, EventArgs.Empty);
+        }
     }
 
     // ════════════════════════════════════════════════════════════════════════
@@ -75,8 +100,27 @@ namespace POSCashierSystem
         {
             InitializeComponent();
 
-            // Pull from the shared store (no hardcoded data)
-            _all = new List<Transaction>(TransactionStore.All);
+            var fromDb = KioskLoanApplicationDatabase.GetCashierPaymentTransactions(500)
+                .Select(x => new Transaction
+                {
+                    TransactionId = x.TransactionId,
+                    QueueNumber = x.QueueNumber,
+                    DateTime = x.ProcessedAt,
+                    PaymentType = x.PaymentType,
+                    CustomerName = x.CustomerName,
+                    UnitModel = x.UnitModel,
+                    Amount = x.Amount,
+                    Status = x.Status
+                });
+
+            _all = fromDb
+                .Concat(TransactionStore.All)
+                .Where(x => !string.IsNullOrWhiteSpace(x.TransactionId))
+                .GroupBy(x => x.TransactionId, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderByDescending(t => t.DateTime).First())
+                .OrderByDescending(t => t.DateTime)
+                .ToList();
+
             _filtered = new List<Transaction>(_all);
 
             BuildPillButtons();

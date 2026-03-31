@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using POSCashierSystem;
 
 namespace CSP_PROJECT
 {
@@ -407,6 +408,17 @@ namespace CSP_PROJECT
                 ChangeDue = _amountReceived - _totalDue,
                 ProcessedAt = DateTime.Now
             };
+
+            TransactionStore.Add(new Transaction
+            {
+                TransactionId = $"TX-{result.ProcessedAt:yyyyMMddHHmmssfff}",
+                DateTime = result.ProcessedAt,
+                PaymentType = "Full Cash",
+                CustomerName = string.IsNullOrWhiteSpace(result.CustomerName) ? "Unknown Customer" : result.CustomerName,
+                UnitModel = "Cash Purchase",
+                Amount = result.TotalDue,
+                Status = "Paid"
+            });
 
             var host = this.Parent;
             if (host == null) return;

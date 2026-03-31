@@ -266,6 +266,18 @@ namespace POSCashierSystem
                 ProcessedAt = DateTime.Now
             };
 
+            TransactionStore.Add(new Transaction
+            {
+                TransactionId = $"TX-{result.ProcessedAt:yyyyMMddHHmmssfff}",
+                QueueNumber = result.Customer?.QueueTicket ?? string.Empty,
+                DateTime = result.ProcessedAt,
+                PaymentType = "Down Payment",
+                CustomerName = result.Customer?.Name ?? "Unknown Customer",
+                UnitModel = result.Customer?.UnitDetails?.Model ?? "-",
+                Amount = result.TotalDue,
+                Status = "Paid"
+            });
+
             TransactionComplete?.Invoke(this, result);
 
             var host = this.Parent;
