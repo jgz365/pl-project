@@ -37,20 +37,29 @@ namespace POSCashierSystem
         // ── Load ALL customer data from customers.json ─────────────────────────
         private void LoadCustomerData()
         {
+            bool loadedFromDatabase = false;
+
             try
             {
                 KioskLoanApplicationDatabase.Initialize();
                 var cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("AdvancePayment");
-                if (cashierReady.Count > 0)
+                if (cashierReady.Count == 0)
                 {
-                    customers = cashierReady.Select(MapCashierReadyToSummary).ToList();
-                    filteredCustomers = new List<CustomerSummary>(customers);
-                    return;
+                    cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("DownPayment");
                 }
+
+                customers = cashierReady.Select(MapCashierReadyToSummary).ToList();
+                filteredCustomers = new List<CustomerSummary>(customers);
+                loadedFromDatabase = true;
             }
             catch
             {
                 // Fall back to JSON seed path below if DB fetch fails.
+            }
+
+            if (loadedFromDatabase)
+            {
+                return;
             }
 
             if (File.Exists(_customersJsonPath))
