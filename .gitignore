@@ -416,3 +416,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+/Pl-Project-Combined/Pl-Project-Combined/bin/Debug/net10.0-windows/Pl-Project-Combined.dll
+/Pl-Project-Combined/Pl-Project-Combined/bin/Debug/net10.0-windows/Pl-Project-Combined.exe
+/Pl-Project-Combined/Pl-Project-Combined/bin/Debug/net10.0-windows/Pl-Project-Combined.pdb

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
@@ -13,8 +14,13 @@ namespace inventory_ni_Percie
         public UC_MotorcycleCard()
         {
             InitializeComponent();
+            btnOptions.Click += BtnOptions_Click;
         }
         public event EventHandler? OnCardClick;
+        public event EventHandler? OnOptionsClick;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int ProductId { get; set; }
 
         // The "Automation" Method
         public void SetMotorcycleData(string model, string yearType, string price, string stock, Image? bikeImg, string status)
@@ -125,6 +131,11 @@ namespace inventory_ni_Percie
         private void pnlMainBody_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void BtnOptions_Click(object? sender, EventArgs e)
+        {
+            OnOptionsClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

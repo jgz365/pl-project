@@ -471,7 +471,9 @@ namespace inventory_ni_Percie
 
         private void guna2Button3_Click(object sender, EventArgs e)
         {
-            UC_EditMotorcycle editPage = new UC_EditMotorcycle();
+            UC_EditMotorcycle editPage = product != null
+                ? new UC_EditMotorcycle(product)
+                : new UC_EditMotorcycle();
 
             // 2. Access the Main Form (where your pnl_Container is located)
             // We assume your main container is on Form1 or MainForm
@@ -479,6 +481,12 @@ namespace inventory_ni_Percie
             {
                 // Use the switcher method we discussed earlier
                 main.DisplayPage(editPage);
+                return;
+            }
+
+            if (this.FindForm() is Form2 manager)
+            {
+                manager.DisplayPage(editPage);
             }
 
         }

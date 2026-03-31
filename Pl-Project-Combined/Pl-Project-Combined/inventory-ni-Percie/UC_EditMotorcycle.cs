@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,56 +12,181 @@ namespace inventory_ni_Percie
 {
     public partial class UC_EditMotorcycle : UserControl
     {
-        // FIX: Using 'default!' or ensuring these match your Designer names exactly
         private Guna.UI2.WinForms.Guna2TextBox txt_Description = default!;
         private Guna.UI2.WinForms.Guna2TextBox color_Moto_Box = default!;
         private Guna.UI2.WinForms.Guna2TextBox motoYeartxt_Description = default!;
 
+        private int currentProductId;
+        private string currentProductTitle = string.Empty;
+
         public UC_EditMotorcycle()
         {
             InitializeComponent();
+            SizeChanged += UC_EditMotorcycle_SizeChanged;
+            ConfigureInventoryFocusedEditing();
+            ApplyCompactInventoryLayout();
         }
 
-        public void LoadMotorcycleData(Motorcycle moto)
+        public UC_EditMotorcycle(DatabaseManager.CatalogProduct product) : this()
         {
-            // Null check to prevent "Possible null reference" warning
-            if (moto == null) return;
+            LoadMotorcycleData(product);
+        }
 
-            // These names must match the (Name) property in your Designer
-            if (motorNameTxtBox != null) motorNameTxtBox.Text = moto.Brand ?? "";
-            if (motoModelNameTxtBox != null) motoModelNameTxtBox.Text = moto.Model ?? "";
-            if (txt_Description != null) txt_Description.Text = moto.Description ?? "";
-            if (color_Moto_Box != null) color_Moto_Box.Text = moto.Color ?? "";
+        public void LoadMotorcycleData(DatabaseManager.CatalogProduct product)
+        {
+            if (product == null)
+            {
+                return;
+            }
+
+            currentProductId = product.Id;
+            currentProductTitle = product.Title;
+
+            string[] titleParts = product.Title.Split(' ', 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            string brand = titleParts.Length > 0 ? titleParts[0] : product.Title;
+            string model = titleParts.Length > 1 ? titleParts[1] : product.Title;
+
+            motorNameTxtBox.Text = brand;
+            motoModelNameTxtBox.Text = model;
+
+            var subParts = product.Sub.Split('•', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            motoCateg.Text = subParts.Length > 1 ? subParts[1] : string.Empty;
+
+            initialStockNumUpDown.Value = TryParseStock(product.Stock);
+            guna2NumericUpDown7.Value = TryParsePrice(product.Price);
+
+            guna2HtmlLabel3.Text = $"Inventory update for {product.Title}";
+        }
+
+        private void ConfigureInventoryFocusedEditing()
+        {
+            guna2HtmlLabel4.Text = "Update Inventory";
+            guna2HtmlLabel3.Text = "Stock and price maintenance";
+            update_moto_Btn.Text = "Save Stock Update";
+
+            tabControl.SelectedTab = tabPage1;
+            tabPage2.Enabled = false;
+            tabPage2.Parent = null;
+
+            pic_Motorcycle.Visible = false;
+            motorNameTxtBox.Visible = false;
+            motoModelNameTxtBox.Visible = false;
+            txt_Description.Visible = false;
+            color_Moto_Box.Visible = false;
+            motoYeartxt_Description.Visible = false;
+            motoCateg.Visible = false;
+
+            guna2HtmlLabel5.Visible = false;
+            guna2HtmlLabel6.Visible = false;
+            guna2HtmlLabel7.Visible = false;
+            guna2HtmlLabel8.Visible = false;
+            guna2HtmlLabel9.Visible = false;
+            guna2HtmlLabel11.Visible = false;
+            guna2HtmlLabel12.Visible = false;
+
+            motorNameTxtBox.ReadOnly = true;
+            motoModelNameTxtBox.ReadOnly = true;
+            motoCateg.Enabled = false;
+
+            initialStockNumUpDown.Enabled = true;
+            guna2NumericUpDown7.Enabled = true;
+
+            cancel_Btn.Visible = false;
+            lblStatus.Visible = false;
+
+            guna2HtmlLabel10.Text = "PRICE (₱)";
+            guna2HtmlLabel13.Text = "INITIAL STOCK";
+            guna2HtmlLabel10.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            guna2HtmlLabel13.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            guna2NumericUpDown7.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            initialStockNumUpDown.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            guna2NumericUpDown7.BorderRadius = 12;
+            initialStockNumUpDown.BorderRadius = 12;
+        }
+
+        private void UC_EditMotorcycle_SizeChanged(object? sender, EventArgs e)
+        {
+            ApplyCompactInventoryLayout();
+        }
+
+        private void ApplyCompactInventoryLayout()
+        {
+            if (Width <= 0 || Height <= 0)
+            {
+                return;
+            }
+
+            int leftOffset = GetHostSidebarOffset();
+            int contentWidth = Math.Max(420, Width - leftOffset);
+
+            guna2Panel1.Dock = DockStyle.None;
+            guna2Panel1.Location = new Point(leftOffset, 0);
+            guna2Panel1.Size = new Size(contentWidth, Height);
+
+            guna2Panel2.Height = 92;
+            guna2Panel3.Height = 92;
+            tabControl.ItemSize = new Size(220, 44);
+
+            int headerRight = guna2Panel3.ClientSize.Width - 18;
+            close_Btn_EditMoto.Top = 47;
+            close_Btn_EditMoto.Left = headerRight - close_Btn_EditMoto.Width;
+            update_moto_Btn.Top = 47;
+            update_moto_Btn.Left = close_Btn_EditMoto.Left - update_moto_Btn.Width - 10;
+
+            tabPage1.Padding = new Padding(16, 12, 16, 12);
+            guna2Panel4.Dock = DockStyle.Fill;
+
+            int bodyWidth = guna2Panel4.ClientSize.Width;
+            int fieldWidth = Math.Clamp((int)Math.Round(bodyWidth * 0.42), 280, 520);
+            int fieldLeft = Math.Max(24, (bodyWidth - fieldWidth) / 2);
+
+            guna2HtmlLabel10.Location = new Point(fieldLeft, 64);
+            guna2NumericUpDown7.Location = new Point(fieldLeft, 90);
+            guna2NumericUpDown7.Size = new Size(fieldWidth, 52);
+
+            guna2HtmlLabel13.Location = new Point(fieldLeft, 178);
+            initialStockNumUpDown.Location = new Point(fieldLeft, 204);
+            initialStockNumUpDown.Size = new Size(fieldWidth, 52);
+        }
+
+        private int GetHostSidebarOffset()
+        {
+            Control? form = FindForm();
+            if (form == null)
+            {
+                return 0;
+            }
+
+            Control? sidebar = form.Controls["pnlSidebar"];
+            if (sidebar != null && sidebar.Visible)
+            {
+                return sidebar.Width;
+            }
+
+            return 0;
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            Control? firstEmpty = FindFirstEmptyField(this);
-
-            if (firstEmpty == null)
+            if (currentProductId <= 0)
             {
-                try
-                {
-                    SaveToDatabase();
-                    MessageBox.Show("Motorcycle Specs Updated Successfully!", "Success",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Manually calling the close logic
-                    close_Btn_EditMoto_Click(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
+                MessageBox.Show("No product selected for update.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            bool updated = DatabaseManager.UpdateProductInventory(
+                currentProductId,
+                (int)initialStockNumUpDown.Value,
+                guna2NumericUpDown7.Value);
+
+            if (!updated)
             {
-                MessageBox.Show("Please fill all fields or boxes.", "Incomplete Information",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                EnsureControlVisible(firstEmpty);
-                firstEmpty.Focus();
+                MessageBox.Show("Failed to update inventory. Please check DB connection.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            MessageBox.Show("Inventory values updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            close_Btn_EditMoto_Click(sender, e);
         }
 
         // FIX: Added '?' to Control to allow null return safely
@@ -99,15 +226,23 @@ namespace inventory_ni_Percie
         // FIX: Ensure this method is actually linked to the button in the Designer
         private void close_Btn_EditMoto_Click(object sender, EventArgs e)
         {
+            DatabaseManager.CatalogProduct? selected = null;
+            if (currentProductId > 0)
+            {
+                selected = DatabaseManager.GetCatalogProducts().FirstOrDefault(p => p.Id == currentProductId);
+            }
+
             if (this.FindForm() is Form1 main)
             {
-                // Navigate back to the main Specs Container
-                pnlSpecsContainer specsView = new pnlSpecsContainer();
-                main.DisplayPage(specsView);
+                main.DisplayPage(selected != null ? new pnlSpecsContainer(selected) : new UC_Inventory());
+                return;
+            }
+
+            if (this.FindForm() is Form2 manager)
+            {
+                manager.DisplayPage(selected != null ? new pnlSpecsContainer(selected) : new UC_Inventory());
             }
         }
-
-        private void SaveToDatabase() => Console.WriteLine("Save successful.");
 
         private void cancel_Btn_Click(object sender, EventArgs e)
         {
@@ -115,6 +250,32 @@ namespace inventory_ni_Percie
             {
                 ResetAllFields(this);
             }
+        }
+
+        private static decimal TryParsePrice(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return 0m;
+            }
+
+            string cleaned = new string(value.Where(ch => char.IsDigit(ch) || ch == '.' || ch == '-').ToArray());
+            return decimal.TryParse(cleaned, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal parsed)
+                ? parsed
+                : 0m;
+        }
+
+        private static decimal TryParseStock(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return 0m;
+            }
+
+            string digits = new string(value.TakeWhile(char.IsDigit).ToArray());
+            return decimal.TryParse(digits, NumberStyles.Integer, CultureInfo.InvariantCulture, out decimal parsed)
+                ? parsed
+                : 0m;
         }
 
         private void ResetAllFields(Control container)
