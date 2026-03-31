@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,6 +12,9 @@ namespace inventory_ni_Percie
 {
     public partial class UC_Inventory : UserControl
     {
+        private bool showArchivedProducts;
+        private string searchQuery = string.Empty;
+
         public UC_Inventory()
         {
             InitializeComponent();
@@ -37,12 +41,26 @@ namespace inventory_ni_Percie
             // 1. Clear existing items
             flpInventory.Controls.Clear();
 
-            var products = DatabaseManager.GetCatalogProducts();
+            var products = DatabaseManager.GetCatalogProducts(showArchivedProducts);
+
+            if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                string q = searchQuery.Trim();
+                products = products
+                    .Where(p => p.Title.Contains(q, StringComparison.OrdinalIgnoreCase)
+                             || p.Sub.Contains(q, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
             UpdateSummaryCards(products);
 
             foreach (var p in products)
             {
-                var card = new UC_MotorcycleCard { Margin = new Padding(5) };
+                var card = new UC_MotorcycleCard
+                {
+                    Margin = new Padding(5),
+                    ProductId = p.Id
+                };
                 card.SetMotorcycleData(
                     p.Title,
                     p.Sub,
@@ -58,10 +76,34 @@ namespace inventory_ni_Percie
                     if (this.FindForm() is Form2 manager) manager.DisplayPage(new pnlSpecsContainer(p));
                 };
 
+                card.OnOptionsClick += (s, ev) => ShowProductOptions(card, p);
+
                 flpInventory.Controls.Add(card);
             }
 
             ApplyInventoryLayout();
+        }
+
+        private void ShowProductOptions(Control anchor, DatabaseManager.CatalogProduct product)
+        {
+            var menu = new ContextMenuStrip();
+            bool archiveAction = !showArchivedProducts;
+
+            var archiveItem = new ToolStripMenuItem(archiveAction ? "Archive Product" : "Restore Product");
+            archiveItem.Click += (_, __) =>
+            {
+                bool ok = DatabaseManager.SetProductArchived(product.Id, archiveAction);
+                if (!ok)
+                {
+                    MessageBox.Show("Unable to update product archive status.", "Archive", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                PopulateInventory();
+            };
+
+            menu.Items.Add(archiveItem);
+            menu.Show(anchor, new Point(anchor.Width - 8, 30));
         }
 
         private static string ParseStockLabel(string stockText)
@@ -169,7 +211,6 @@ namespace inventory_ni_Percie
 
             bool isFullHdLike = Width >= 1800 && Height >= 950;
 
-            pnlSidebarMaster.Width = Math.Clamp((int)Math.Round(Width * (isFullHdLike ? 0.23 : 0.22)), 249, 360);
             pnlHeaderGroup.Height = isFullHdLike ? 185 : 159;
             search_inventory_pnl.Height = isFullHdLike ? 108 : 101;
 
@@ -195,11 +236,6 @@ namespace inventory_ni_Percie
 
             txt_Search.Left = 24;
             txt_Search.Width = Math.Max(280, guna2Button8.Left - txt_Search.Left - 12);
-
-            int sidebarInnerWidth = Math.Max(210, pnlSidebarMaster.ClientSize.Width - 24);
-            guna2Panel1.Left = 12;
-            guna2Panel1.Width = sidebarInnerWidth;
-            guna2Panel1.Top = 20;
 
             flpInventory.AutoSize = false;
             flpInventory.WrapContents = true;
@@ -258,8 +294,15 @@ namespace inventory_ni_Percie
             pnlHeaderGroup.BackColor = BackColor;
             search_inventory_pnl.BackColor = BackColor;
             flpInventory.BackColor = BackColor;
-            pnlSidebarMaster.BackColor = BackColor;
             pnlGridContainer.FillColor = BackColor;
+
+            pnlSidebarMaster.Visible = false;
+            pnlSidebarMaster.Width = 0;
+
+            invenBtn.Visible = false;
+            guna2Button3.Visible = false;
+            guna2Button7.Visible = false;
+            guna2Button10.Text = showArchivedProducts ? "Back to Inventory" : "Archive";
         }
 
         // Keep these only if you plan to add logic later; 
@@ -336,7 +379,8 @@ namespace inventory_ni_Percie
 
         private void txt_Search_TextChanged(object sender, EventArgs e)
         {
-
+            searchQuery = txt_Search.Text;
+            PopulateInventory();
         }
 
         private void guna2Button8_Click(object sender, EventArgs e)
@@ -354,6 +398,12 @@ namespace inventory_ni_Percie
                 // 2. Open the ADD form (the one you duplicated and renamed)
                 // Ensure you fixed the class name inside UC_AddMotorcycle.cs first!
                 main.DisplayPage(new UC_AddMotorcycle());
+                return;
+            }
+
+            if (this.FindForm() is Form2 manager)
+            {
+                manager.DisplayPage(new UC_AddMotorcycle());
             }
         }
 
@@ -371,12 +421,16 @@ namespace inventory_ni_Percie
 
         private void guna2Button10_Click(object sender, EventArgs e)
         {
-
+            showArchivedProducts = !showArchivedProducts;
+            ApplyInventoryVisualPolish();
+            PopulateInventory();
         }
 
         private void invenBtn_Click(object sender, EventArgs e)
         {
-
+            showArchivedProducts = false;
+            ApplyInventoryVisualPolish();
+            PopulateInventory();
         }
 
         private void guna2ShadowPanel3_Paint(object sender, PaintEventArgs e)

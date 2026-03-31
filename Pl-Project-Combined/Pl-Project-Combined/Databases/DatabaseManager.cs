@@ -14,6 +14,7 @@ namespace inventory_ni_Percie
     {
         public sealed class CatalogProduct
         {
+            public int Id { get; set; }
             public string Title { get; set; } = string.Empty;
             public string Sub { get; set; } = string.Empty;
             public string ImageUrl { get; set; } = string.Empty;
@@ -890,22 +891,23 @@ namespace inventory_ni_Percie
             }
         }
 
-        public static List<CatalogProduct> GetCatalogProducts()
+        public static List<CatalogProduct> GetCatalogProducts(bool archivedOnly = false)
         {
             var list = new List<CatalogProduct>();
             try
             {
                 using var conn = GetConnection();
                 const string sql = @"
-                    SELECT title, model_year, category, image_url, price, stock, description,
+                    SELECT id, title, model_year, category, image_url, price, stock, description,
                            max_power, max_torque, transmission, fuel_system, cooling,
                            fuel_capacity, seat_height, curb_weight, ground_clearance,
                            wheelbase, brake_system, suspension, colors, features
                     FROM products
-                    WHERE is_active = 1
+                    WHERE is_active = @isActive
                     ORDER BY id;";
 
                 using var cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@isActive", archivedOnly ? 0 : 1);
                 using var r = cmd.ExecuteReader();
                 while (r.Read())
                 {
@@ -916,6 +918,7 @@ namespace inventory_ni_Percie
 
                     list.Add(new CatalogProduct
                     {
+                        Id = r.GetInt32("id"),
                         Title = title,
                         Sub = $"{r.GetString("model_year")} • {r.GetString("category")}",
                         // Always return a URL so card rendering can load immediately.
@@ -947,6 +950,54 @@ namespace inventory_ni_Percie
             }
 
             return list;
+        }
+
+        public static bool SetProductArchived(int productId, bool archived)
+        {
+            try
+            {
+                using var conn = GetConnection();
+                const string sql = @"
+                    UPDATE products
+                    SET is_active = @isActive
+                    WHERE id = @id;";
+
+                using var cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@isActive", archived ? 0 : 1);
+                cmd.Parameters.AddWithValue("@id", productId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[DatabaseManager] SetProductArchived error: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static bool UpdateProductInventory(int productId, int stock, decimal price)
+        {
+            try
+            {
+                using var conn = GetConnection();
+                const string sql = @"
+                    UPDATE products
+                    SET stock = @stock,
+                        price = @price
+                    WHERE id = @id;";
+
+                using var cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@stock", Math.Max(0, stock));
+                cmd.Parameters.AddWithValue("@price", Math.Max(0m, price));
+                cmd.Parameters.AddWithValue("@id", productId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[DatabaseManager] UpdateProductInventory error: {ex.Message}");
+                return false;
+            }
         }
 
         public static bool AddProduct(ProductInput input)
