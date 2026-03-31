@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using Newtonsoft.Json;
+using Pl_Project_Combined.Databases;
 
 namespace POSCashierSystem
 {
@@ -154,6 +155,30 @@ namespace POSCashierSystem
         // ═════════════════════════════════════════════════════════════════
         private void LoadCustomerData()
         {
+            bool loadedFromDatabase = false;
+
+            try
+            {
+                KioskLoanApplicationDatabase.Initialize();
+                var cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("MonthlyPayment");
+                if (cashierReady.Count == 0)
+                {
+                    cashierReady = KioskLoanApplicationDatabase.GetCashierReadyByMode("DownPayment");
+                }
+                customers = cashierReady.Select(MapCashierReadyToSummary).ToList();
+                filteredCustomers = new List<CustomerSummary>(customers);
+                loadedFromDatabase = true;
+            }
+            catch
+            {
+                // Fall back to JSON seed path below if DB fetch fails.
+            }
+
+            if (loadedFromDatabase)
+            {
+                return;
+            }
+
             if (File.Exists(_customersJsonPath))
             {
                 try
@@ -169,6 +194,32 @@ namespace POSCashierSystem
                 customers = GetFallbackCustomers();
             }
             filteredCustomers = new List<CustomerSummary>(customers);
+        }
+
+        private static CustomerSummary MapCashierReadyToSummary(KioskLoanAssessorItem row)
+        {
+            decimal monthlyDue = row.ApprovedMonthlyDue ?? row.MonthlyAmortization;
+
+            return new CustomerSummary
+            {
+                Name = row.FullName,
+                QueueTicket = row.QueueNumber,
+                Location = $"{row.City}, {row.Province}",
+                TransactionType = string.IsNullOrWhiteSpace(row.ApprovedPaymentMode) ? "MONTHLY" : row.ApprovedPaymentMode,
+                UnitDetails = new UnitDetailsData
+                {
+                    Model = row.ProductName,
+                    Color = string.Empty,
+                    EngineNo = string.Empty
+                },
+                FinancialStatus = new FinancialStatusData
+                {
+                    DownPaymentDue = row.ApprovedDownPayment ?? row.DownPaymentAmount,
+                    CurrentBalance = row.FinancedAmount,
+                    MonthlyAmortization = monthlyDue,
+                    NextDueDate = row.AssessorDecidedAt?.ToString("MMM dd, yyyy") ?? row.SubmittedAt.ToString("MMM dd, yyyy")
+                }
+            };
         }
 
         private static List<CustomerSummary> GetFallbackCustomers() => new List<CustomerSummary>

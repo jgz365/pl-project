@@ -304,11 +304,19 @@ SELECT
 FROM kiosk_loan_applications
 WHERE application_status = 'Approved'
   AND cashier_status = 'Waiting'
-  AND approved_payment_mode = @mode
+  AND (
+      REPLACE(REPLACE(LOWER(approved_payment_mode), ' ', ''), '-', '') = @mode_compact
+      OR (@mode_compact = 'monthlypayment' AND REPLACE(REPLACE(LOWER(approved_payment_mode), ' ', ''), '-', '') IN ('monthly', 'month'))
+      OR (@mode_compact = 'downpayment' AND REPLACE(REPLACE(LOWER(approved_payment_mode), ' ', ''), '-', '') IN ('down', 'dp'))
+  )
 ORDER BY assessor_decided_at ASC, id ASC;";
 
                 using var cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@mode", NormalizePaymentMode(paymentMode));
+                string normalizedMode = NormalizePaymentMode(paymentMode);
+                string compactMode = normalizedMode.Replace(" ", string.Empty)
+                                                   .Replace("-", string.Empty)
+                                                   .ToLowerInvariant();
+                cmd.Parameters.AddWithValue("@mode_compact", compactMode);
 
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
